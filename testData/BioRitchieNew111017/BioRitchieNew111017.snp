@@ -1,0 +1,17 @@
+********************************************************************************
+***                       SNR SIMULATION PARAMETERS
+***
+***    SNRType             = Type of SNR computations performed
+***    EnergyStart         = Starting energy value
+***    EnergyEnd           = Ending energy value
+***    EnergyStepNbr       = Energy number of step
+***    BackEnergyWinSiz    = Size of background energy windows
+***    SpectraEnergyWinSiz = Size of spectra energy window
+***
+********************************************************************************
+SNRType=0
+EnergyStart=1.000000e+000
+EnergyEnd=2.000000e+001
+EnergyStepNbr=100
+BackEnergyWinSiz=5.000000e-003
+SpectraEnergyWinSiz=4.000000e+001

@@ -1,0 +1,23 @@
+********************************************************************************
+***                           SIMULATION PARAMETERS
+***
+***    BaseFileName         = All output files will be named using this term
+***    ElectronNbr          = Total number of electrons to simulate
+***    PhotonNbr            = Total number of photons to simulate in EDS
+***    WindowNbr            = Number of energy windows in PhiRo computations
+***    FilmNbrX             = Number of X layers in PhiRo computations
+***    FilmNbrY             = Number of Y layers in PhiRo computations
+***    FilmNbrZ             = Number of Z layers in PhiRo computations
+***    SpectraChannel       = Number of channels in spectraa
+***    SpectraInterpolation = Interpolation type for spectras
+***
+********************************************************************************
+BaseFileName=Results\AuBC cyl Low Count
+ElectronNbr=20
+PhotonNbr=500
+WindowNbr=32
+FilmNbrX=64
+FilmNbrY=64
+FilmNbrZ=64
+SpectraChannel=1024
+SpectraInterpolation=2

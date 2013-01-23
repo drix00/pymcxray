@@ -1,0 +1,42 @@
+********************************************************************************
+***                                  SPECIMEN
+***
+***    First Entry is:
+***        number of region (integer)
+***
+***    then region by region:
+***        number of elements in region
+***        first element atomic number (integer)   mass concentration (double)
+***        ...
+***        last element atomic number (integer)    mass concentration (double)
+***        user's elements mass density if any (double)
+***        region volume type: BOX, SPHERE or CYLINDER
+***        region extents (all doubles):
+***            BOX:      minX maxX minY maxY minZ maxZ
+***            SPHERE:   posX posY posZ radius
+***            CYLINDER: posX posY posZ dirX dirY dirZ lenght radius
+***                      the position is the center of the base of the cylinder
+***
+********************************************************************************
+4
+
+1
+6 1.000000000000000
+BOX
+-10000000000.000000 10000000000.000000 -10000000000.000000 10000000000.000000 0.000000 20000000000.000000
+
+1
+79 1.000000000000000
+BOX
+0.000000 10000000000.000000 -10000000000.000000 10000000000.000000 0.000000 20000000000.000000
+
+1
+5 1.000000000000000
+CYLINDER
+-500.000000 -500.000000 300.000000 0.000000 1.000000 0.350000 1000.000000 300.000000
+
+1
+5 1.000000000000000
+CYLINDER
+500.000000 500.000000 300.000000 0.000000 -1.000000 0.350000 1000.000000 300.000000
+
