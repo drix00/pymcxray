@@ -1,0 +1,21 @@
+********************************************************************************
+***                       MAP SIMULATION PARAMETERS
+***
+***    MapType          = 0 use full spectra for mapping
+***                       1 use background spectra for mapping
+***                       2 use EDS spectra for mapping
+***    BeamPosXStart    = Starting beam position in X
+***    BeamPosXEnd      = Ending beam position in X
+***    BeamPosXStep     = Number of positions scanned in X
+***    BeamPosYStart    = Starting beam position in Y
+***    BeamPosYEnd      = Ending beam position in Y
+***    BeamPosYStep     = Number of positions scanned in Y
+***
+********************************************************************************
+MapType=0
+BeamPosXStart=-1.500000e+004
+BeamPosXEnd=1.500000e+004
+BeamPosXStep=16
+BeamPosYStart=-1.400000e+004
+BeamPosYEnd=1.400000e+004
+BeamPosYStep=17

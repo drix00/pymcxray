@@ -1,0 +1,24 @@
+********************************************************************************
+***                           SIMULATION PARAMETERS
+***
+***    BaseFileName         = All output files will be named using this term
+***    ElectronNbr          = Total number of electrons to simulate
+***    PhotonNbr            = Total number of photons to simulate in EDS
+***    WindowNbr            = Number of energy windows in Spectrum computations
+***    FilmNbrX             = Number of X layers in Spectrum computations
+***    FilmNbrY             = Number of Y layers in Spectrum computations
+***    FilmNbrZ             = Number of Z layers in Spectrum computations
+***    EnergyChannelWidth in eV
+***    SpectraInterpolation = Interpolation type for spectra
+***
+********************************************************************************
+Version=1.2.0
+BaseFileName=Results\AlMgBulk5keV_1_2_0
+ElectronNbr=10000
+PhotonNbr=1000
+WindowNbr=128
+FilmNbrX=64
+FilmNbrY=66
+FilmNbrZ=70
+EnergyChannelWidth=5
+SpectraInterpolation=1
