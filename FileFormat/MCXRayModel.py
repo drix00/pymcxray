@@ -142,13 +142,16 @@ class AtomElectronRangeModel(MCXRayModel):
         self.setModel(self.TYPE_KANAYA_OKAYAMA)
 
 class XRayCSCharacteristicModel(MCXRayModel):
-    TYPE_CASTANI = 0
+    TYPE_CASTANI1982 = 0
+    TYPE_BOTE2009 = 1
 
     def _initModel(self):
-        self._models.append(self.TYPE_CASTANI)
-        self._modelNames[self.TYPE_CASTANI] = "Castani"
+        self._models.append(self.TYPE_CASTANI1982)
+        self._models.append(self.TYPE_BOTE2009)
+        self._modelNames[self.TYPE_CASTANI1982] = "Castani"
+        self._modelNames[self.TYPE_BOTE2009] = "Bote (2009)"
 
-        self.setModel(self.TYPE_CASTANI)
+        self.setModel(self.TYPE_BOTE2009)
 
 class XRayCSBremsstrahlungModel(MCXRayModel):
     TYPE_BETHE_HEITLER = 0
@@ -168,12 +171,51 @@ class XRayCSBremsstrahlungModel(MCXRayModel):
 
         self.setModel(self.TYPE_KIRKPATRICK_WIEDMAN)
 
+class MassAbsorptionCoefficientModel(MCXRayModel):
+    TYPE_HENKE = 0
+    TYPE_HEINRICH_DATA = 1
+    TYPE_HEINRICH_PARAMETERIZATION = 2
+    TYPE_CHANTLER2005 = 3
+
+    def _initModel(self):
+        self._models.append(self.TYPE_HENKE)
+        self._models.append(self.TYPE_HEINRICH_DATA)
+        self._models.append(self.TYPE_HEINRICH_PARAMETERIZATION)
+        self._models.append(self.TYPE_CHANTLER2005)
+        self._modelNames[self.TYPE_HENKE] = "Henke"
+        self._modelNames[self.TYPE_HEINRICH_DATA] = "Heinrich Data (1966)"
+        self._modelNames[self.TYPE_HEINRICH_PARAMETERIZATION] = "Heinrich Parameters (1987)"
+        self._modelNames[self.TYPE_CHANTLER2005] = "Chantler (2005)"
+
+        self.setModel(self.TYPE_CHANTLER2005)
+
 class SampleEnergyLossModel(MCXRayModel):
     TYPE_BETHE_JOY_LUO = 0
 
     def _initModel(self):
         self._models.append(self.TYPE_BETHE_JOY_LUO)
         self._modelNames[self.TYPE_BETHE_JOY_LUO] = "Bethe & Joy & Luo"
+
+        self.setModel(self.TYPE_BETHE_JOY_LUO)
+
+class RegionEnergyLossModel(MCXRayModel):
+    TYPE_BETHE_JOY_LUO = 0
+    TYPE_BETHE = 1
+    TYPE_BETHE_RELATIVISTIC = 2
+    TYPE_JOY_LUO_KGAUVIN = 3
+    TYPE_JOY_LUO_MONSEL = 4
+
+    def _initModel(self):
+        self._models.append(self.TYPE_BETHE_JOY_LUO)
+        self._models.append(self.TYPE_BETHE)
+        self._models.append(self.TYPE_BETHE_RELATIVISTIC)
+        self._models.append(self.TYPE_JOY_LUO_KGAUVIN)
+        self._models.append(self.TYPE_JOY_LUO_MONSEL)
+        self._modelNames[self.TYPE_BETHE_JOY_LUO] = "Bethe & Joy & Luo"
+        self._modelNames[self.TYPE_BETHE] = "Bethe"
+        self._modelNames[self.TYPE_BETHE_RELATIVISTIC] = "Bethe Relativistic"
+        self._modelNames[self.TYPE_JOY_LUO_KGAUVIN] = "Joy & Luo & Gauvin"
+        self._modelNames[self.TYPE_JOY_LUO_MONSEL] = "Joy & Luo & Monsel"
 
         self.setModel(self.TYPE_BETHE_JOY_LUO)
 

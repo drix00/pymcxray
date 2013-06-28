@@ -40,6 +40,8 @@ KEY_NUMBER_CHANNELS = "SpectraChannel"
 KEY_ENERGY_CHANNEL_WIDTH = "EnergyChannelWidth"
 KEY_SPECTRA_INTERPOLATION_MODEL = "SpectraInterpolation"
 KEY_VOXEL_SIMPLIFICATION = "VoxelSimplification"
+KEY_ELASTIC_CROSS_SECTION_SCALING_FACTOR = "ElasticCrossSectionScalingFactor"
+KEY_ENERGY_LOSS_SCALING_FACTOR = "EnergyLossScalingFactor"
 
 class SimulationParameters(object):
     def __init__(self):
@@ -67,6 +69,9 @@ class SimulationParameters(object):
             keys.append(KEY_ENERGY_CHANNEL_WIDTH)
         keys.append(KEY_SPECTRA_INTERPOLATION_MODEL)
         keys.append(KEY_VOXEL_SIMPLIFICATION)
+        if self.version >= Version.VERSION_1_4_4:
+            keys.append(KEY_ELASTIC_CROSS_SECTION_SCALING_FACTOR)
+            keys.append(KEY_ENERGY_LOSS_SCALING_FACTOR)
 
         return keys
 
@@ -83,6 +88,8 @@ class SimulationParameters(object):
         self.energyChannelWidth_eV = 5.0
         self.spectrumInterpolationModel = MCXRayModel.SpectrumInterpolationModel.TYPE_LINEAR_DOUBLE
         self.voxelSimplification = None
+        self.elasticCrossSectionScalingFactor = 1.0
+        self.energyLossScalingFactor = 1.0
 
     def _createExtractMethod(self):
         extractMethods = {}
@@ -98,8 +105,29 @@ class SimulationParameters(object):
         extractMethods[KEY_ENERGY_CHANNEL_WIDTH] = float
         extractMethods[KEY_SPECTRA_INTERPOLATION_MODEL] = self._extractSpectrumInterpolationModel
         extractMethods[KEY_VOXEL_SIMPLIFICATION] = bool
+        extractMethods[KEY_ELASTIC_CROSS_SECTION_SCALING_FACTOR] = float
+        extractMethods[KEY_ENERGY_LOSS_SCALING_FACTOR] = float
 
         return extractMethods
+
+    def _createFormatMethod(self):
+        fromatMethods = {}
+
+        fromatMethods[KEY_BASE_FILENAME] = "%s"
+        fromatMethods[KEY_NUMBER_ELECTRONS] = "%i"
+        fromatMethods[KEY_NUMBER_PHOTONS] = "%i"
+        fromatMethods[KEY_NUMBER_WINDOWS] = "%i"
+        fromatMethods[KEY_NUMBER_FILMS_X] = "%i"
+        fromatMethods[KEY_NUMBER_FILMS_Y] = "%i"
+        fromatMethods[KEY_NUMBER_FILMS_Z] = "%i"
+        fromatMethods[KEY_NUMBER_CHANNELS] = "%i"
+        fromatMethods[KEY_ENERGY_CHANNEL_WIDTH] = "%s"
+        fromatMethods[KEY_SPECTRA_INTERPOLATION_MODEL] = "%s"
+        fromatMethods[KEY_VOXEL_SIMPLIFICATION] = "%s"
+        fromatMethods[KEY_ELASTIC_CROSS_SECTION_SCALING_FACTOR] = "%.5f"
+        fromatMethods[KEY_ENERGY_LOSS_SCALING_FACTOR] = "%.5f"
+
+        return fromatMethods
 
     def _extractSpectrumInterpolationModel(self, text):
         model = MCXRayModel.SpectrumInterpolationModel(int(text))
@@ -127,12 +155,14 @@ class SimulationParameters(object):
 
         self.version.writeLine(outputFile)
 
-        for key in self._createKeys():
+        formatMethods = self._createFormatMethod()
+        keys = self._createKeys()
+        for key in keys:
             if key == KEY_SPECTRA_INTERPOLATION_MODEL:
-                value = self._parameters[key].getModel()
+                value = formatMethods[key] % (self._parameters[key].getModel())
             else:
-                value = self._parameters[key]
-            if value is not None:
+                value = formatMethods[key] % (self._parameters[key])
+            if value is not None and value != "None":
                 line = "%s=%s\r\n" % (key, value)
                 outputFile.write(line)
 
@@ -166,6 +196,23 @@ class SimulationParameters(object):
                             "***    FilmNbrZ             = Number of Z layers in PhiRo computations",
                             "***    SpectraChannel       = Number of channels in spectraa",
                             "***    SpectraInterpolation = Interpolation type for spectras",
+                            "***",
+                            "********************************************************************************"]
+        elif self.version >= Version.VERSION_1_4_4:
+            headerLines = [ "********************************************************************************",
+                            "***                           SIMULATION PARAMETERS",
+                            "***",
+                            "***    BaseFileName         = All output files will be named using this term",
+                            "***    ElectronNbr          = Total number of electrons to simulate",
+                            "***    PhotonNbr            = Total number of photons to simulate in EDS",
+                            "***    WindowNbr            = Number of energy windows in Spectrum computations",
+                            "***    FilmNbrX             = Number of X layers in Spectrum computations",
+                            "***    FilmNbrY             = Number of Y layers in Spectrum computations",
+                            "***    FilmNbrZ             = Number of Z layers in Spectrum computations",
+                            "***    EnergyChannelWidth in eV",
+                            "***    SpectraInterpolation = Interpolation type for spectra",
+                            "***    ElasticCrossSectionScalingFactor",
+                            "***    EnergyLossScalingFactor",
                             "***",
                             "********************************************************************************"]
         else:
@@ -270,6 +317,20 @@ class SimulationParameters(object):
     @voxelSimplification.setter
     def voxelSimplification(self, voxelSimplification):
         self._parameters[KEY_VOXEL_SIMPLIFICATION] = voxelSimplification
+
+    @property
+    def elasticCrossSectionScalingFactor(self):
+        return self._parameters[KEY_ELASTIC_CROSS_SECTION_SCALING_FACTOR]
+    @elasticCrossSectionScalingFactor.setter
+    def elasticCrossSectionScalingFactor(self, elasticCrossSectionScalingFactor):
+        self._parameters[KEY_ELASTIC_CROSS_SECTION_SCALING_FACTOR] = elasticCrossSectionScalingFactor
+
+    @property
+    def energyLossScalingFactor(self):
+        return self._parameters[KEY_ENERGY_LOSS_SCALING_FACTOR]
+    @energyLossScalingFactor.setter
+    def energyLossScalingFactor(self, energyLossScalingFactor):
+        self._parameters[KEY_ENERGY_LOSS_SCALING_FACTOR] = energyLossScalingFactor
 
 if __name__ == '__main__': #pragma: no cover
     import DrixUtilities.Runner as Runner

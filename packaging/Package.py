@@ -190,9 +190,10 @@ class Package(object):
     def _copyData(self, temporaryPath):
         dataPath = os.path.join(self._developmentPath, FOLDER_DATA)
 
-        shutil.copytree(dataPath, temporaryPath)
+        temporaryDataPath = os.path.join(temporaryPath, "data")
+        shutil.copytree(dataPath, temporaryDataPath)
 
-        self._removeCvs(temporaryPath)
+        self._removeCvs(temporaryDataPath)
 
     def _removeCvs(self, path):
         for (dirPath, dummyDirNames, dummyFilenames) in os.walk(path):

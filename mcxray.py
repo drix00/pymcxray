@@ -477,8 +477,10 @@ class _Simulations(object):
     def createSpecimen(self, parameters): #pragma: no cover
         raise NotImplementedError
 
-    def readResultsFiles(self): #pragma: no cover
-        raise NotImplementedError
+    def readResultsFiles(self):
+        logging.info("readResultsFiles")
+
+        self.readResults()
 
     def analyzeResultsFiles(self): #pragma: no cover
         raise NotImplementedError
@@ -487,7 +489,14 @@ class _Simulations(object):
         raise NotImplementedError
 
     def generateResultsKey(self, simulation):
-        raise NotImplementedError
+        variedParameterLabels = self.getVariedParameterLabels()
+
+        simulation.createSimulationFiles(self.getInputPath(), self.getSimulationsPath())
+
+        key = self._createKey(variedParameterLabels, simulation)
+
+        return tuple(key)
+
 
     def run(self, batchFile):
         options = _getOptions()

@@ -1,0 +1,21 @@
+Version=1.4.3
+Electrons Parameters and Results:
+   Total simulated electrons         = 100000
+   Number of internal electrons      = 0
+   Number of backscattered electrons = 43
+   Number of transmitted electrons   = 99956
+   Number of skirted electrons       = 0
+   Number of electron collisions     = 458571
+   Internal coefficient              = 0
+   Backscattering coefficient        = 0.00043
+   Transmitted coefficient           = 0.99956
+   Skirted coefficient               = 0
+   Total electron path length (A)    = 1.00306e+009
+   Maximum reached position Z (A)    = 10000
+   Mean number of collisions per electron  = 4.58571
+   Mean distance between collisions (A)    = 1795.76
+   Total polar angle of collision  (deg)    = 402906
+   Total azimuthal angle of collision (deg) = 8.25569e+007
+   Mean polar angle of collision  (deg)    = 0.878612
+   Mean azimuthal angle of collision (deg) = 180.031
+   Absorbed energy ratio per electron      = 0.0015828

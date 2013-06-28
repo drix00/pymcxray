@@ -31,7 +31,7 @@ from FileReaderWriterTools import reduceAfterDot
 # Globals and constants variables.
 KEY_BEAM_ENERGY_keV = "BeamEnergy"
 KEY_BEAM_CURRENT_A = "BeamCurrent"
-KEY_BEAM_TIME_s = "BeamTime"
+KEY_BEAM_TIME_s = "AcquisitionTime"
 KEY_BEAM_DIAMETER_A = "BeamDiameter"
 KEY_BEAM_POSITION_X_A = "BeamPosX"
 KEY_BEAM_POSITION_Y_A = "BeamPosY"
@@ -85,7 +85,7 @@ class MicroscopeParameters(object):
         keys.append(KEY_DETECTOR_SURFACE_QUALITY)
         keys.append(KEY_DETECTOR_NOISE_eV)
         keys.append(KEY_DETECTOR_TOA_deg)
-        keys.append(KEY_DETECTOR_CHANNEL_WIDTH_eV)
+        #keys.append(KEY_DETECTOR_CHANNEL_WIDTH_eV)
         keys.append(KEY_DETECTOR_PITCH_deg)
         keys.append(KEY_DETECTOR_BF_LOW_rad)
         keys.append(KEY_DETECTOR_BF_HIGH_RAD)
