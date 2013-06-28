@@ -41,6 +41,8 @@ KEY_ATOM_ELECTRON_RANGE_MODEL = "AtomElectronRangeModel"
 KEY_XRAY_CS_CHARACTERISTIC_MODEL = "XRayCSCharacteristicModel"
 KEY_XRAY_CS_BREMSSTRAHLUNG_MODEL = "XRayCSBremsstrahlungModel"
 KEY_SAMPLE_ENERGY_LOSS_MODEL = "SampleEnergyLossModel"
+KEY_REGION_ENERGY_LOSS_MODEL = "RegionEnergyLossModel"
+KEY_MASS_ABSORPTION_COEFFICIENT_MODEL = "XRayMassAbsorptionCoefficientMode"
 
 
 class Models(object):
@@ -65,6 +67,8 @@ class Models(object):
         keys.append(KEY_XRAY_CS_CHARACTERISTIC_MODEL)
         keys.append(KEY_XRAY_CS_BREMSSTRAHLUNG_MODEL)
         keys.append(KEY_SAMPLE_ENERGY_LOSS_MODEL)
+        keys.append(KEY_REGION_ENERGY_LOSS_MODEL)
+        keys.append(KEY_MASS_ABSORPTION_COEFFICIENT_MODEL)
 
         return keys
 
@@ -82,6 +86,8 @@ class Models(object):
         modelList[KEY_XRAY_CS_CHARACTERISTIC_MODEL] = MCXRayModel.XRayCSCharacteristicModel()
         modelList[KEY_XRAY_CS_BREMSSTRAHLUNG_MODEL] = MCXRayModel.XRayCSBremsstrahlungModel()
         modelList[KEY_SAMPLE_ENERGY_LOSS_MODEL] = MCXRayModel.SampleEnergyLossModel()
+        modelList[KEY_REGION_ENERGY_LOSS_MODEL] = MCXRayModel.RegionEnergyLossModel()
+        modelList[KEY_MASS_ABSORPTION_COEFFICIENT_MODEL] = MCXRayModel.MassAbsorptionCoefficientModel()
 
         return modelList
 
@@ -108,33 +114,57 @@ class Models(object):
 
         self.version.writeLine(outputFile)
 
-        for key in self._createKeys():
+        keys = self._createKeys()
+
+        if self.version >= Version.VERSION_1_4_1:
+            keys.remove(KEY_SAMPLE_ENERGY_LOSS_MODEL)
+        else:
+            keys.remove(KEY_REGION_ENERGY_LOSS_MODEL)
+            keys.remove(KEY_MASS_ABSORPTION_COEFFICIENT_MODEL)
+
+        for key in keys:
             line = "%s=%s\r\n" % (key, self._modelList[key].getModel())
             outputFile.write(line)
 
     def _writeHeader(self, outputFile):
-        headerLines = [ "********************************************************************************",
-                        "***                               PHYSICAL MODEL",
-                        "***",
-                        "***    AtomMeanIonizationPotentialModel    = 0 Joy & Luo",
-                        "***    AtomEnergyLossModel                 = 0 Bethe",
-                        "***    AtomScreeningModel                  = 0 Henoc & Maurice",
-                        "***    AtomCrossSectionModel               = 0 Browning",
-                        "***                                          1 Gauvin & Drouin",
-                        "***    AtomCrossSectionScreeningModel      = 0 Henoc & Maurice",
-                        "***    AtomCollisionModel                  = 0 Rutherford",
-                        "***                                          1 Browning",
-                        "***                                          2 Gauvin",
-                        "***    AtomCollisionScreeningModel         = 0 Henoc & Maurice",
-                        "***    AtomElectronRangeModel              = 0 Kanaya & Okayama",
-                        "***    XRayCSCharacteristicModel           = 0 Castani",
-                        "***    XRayCSBremsstrahlungModel           = 0 Bethe & Heitler",
-                        "***                                          1 Kirkpatrick & Wiedman",
-                        "***                                          2 Ding",
-                        "***                                          3 Gauvin",
-                        "***    SampleEnergyLossModel               = 0 Bethe & Joy & Luo",
-                        "***",
-                        "********************************************************************************"]
+        headerLines = []
+        headerLines.append("********************************************************************************")
+        headerLines.append("***                               PHYSICAL MODEL")
+        headerLines.append("***")
+        headerLines.append("***    AtomMeanIonizationPotentialModel    = 0 Joy & Luo")
+        headerLines.append("***    AtomEnergyLossModel                 = 0 Bethe")
+        headerLines.append("***    AtomScreeningModel                  = 0 Henoc & Maurice")
+        headerLines.append("***    AtomCrossSectionModel               = 0 Browning")
+        headerLines.append("***                                          1 Gauvin & Drouin")
+        headerLines.append("***    AtomCrossSectionScreeningModel      = 0 Henoc & Maurice")
+        headerLines.append("***    AtomCollisionModel                  = 0 Rutherford")
+        headerLines.append("***                                          1 Browning")
+        headerLines.append("***                                          2 Gauvin")
+        headerLines.append("***    AtomCollisionScreeningModel         = 0 Henoc & Maurice")
+        headerLines.append("***    AtomElectronRangeModel              = 0 Kanaya & Okayama")
+        if self.version >= Version.VERSION_1_2_2:
+            headerLines.append("***    XRayCSCharacteristicModel           = 0 Casnati")
+        else:
+            headerLines.append("***    XRayCSCharacteristicModel           = 0 Castani")
+        headerLines.append("***    XRayCSBremsstrahlungModel           = 0 Bethe & Heitler")
+        headerLines.append("***                                          1 Kirkpatrick & Wiedman")
+        headerLines.append("***                                          2 Ding")
+        headerLines.append("***                                          3 Gauvin")
+        if self.version >= Version.VERSION_1_4_1:
+            headerLines.append("***    RegionEnergyLossModel               = 0 Bethe & Joy & Luo")
+            headerLines.append("***                                          1 Bethe")
+            headerLines.append("***                                          2 Bethe Relativistic")
+            headerLines.append("***                                          3 Joy & Luo & Gauvin")
+            headerLines.append("***                                          4 Joy & Luo & Monsel")
+            headerLines.append("***    MAC                                 = 0 Henke")
+            headerLines.append("***                                          1 Heinrich Data (1966)")
+            headerLines.append("***                                          2 Heinrich Parameters (1987)")
+            headerLines.append("***                                          3 Chantler (2005)")
+        else:
+            headerLines.append("***    SampleEnergyLossModel               = 0 Bethe & Joy & Luo")
+        headerLines.append("***")
+        headerLines.append("********************************************************************************")
+
         for line in headerLines:
             outputFile.write(line+'\r\n')
 

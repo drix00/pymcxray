@@ -52,7 +52,7 @@ class TestModels(unittest.TestCase):
 
         self.tempDataPath = testUtilities.createTempDataPath(self.testDataPath)
 
-        self.numberModels = 11
+        self.numberModels = 13
 
     def tearDown(self):
         """
@@ -96,6 +96,8 @@ class TestModels(unittest.TestCase):
             self.assertEquals(MCXRayModel.XRayCSCharacteristicModel.TYPE_CASTANI, modelList[Models.KEY_XRAY_CS_CHARACTERISTIC_MODEL].getModel())
             self.assertEquals(MCXRayModel.XRayCSBremsstrahlungModel.TYPE_DING, modelList[Models.KEY_XRAY_CS_BREMSSTRAHLUNG_MODEL].getModel())
             self.assertEquals(MCXRayModel.SampleEnergyLossModel.TYPE_BETHE_JOY_LUO, modelList[Models.KEY_SAMPLE_ENERGY_LOSS_MODEL].getModel())
+            self.assertEquals(MCXRayModel.RegionEnergyLossModel.TYPE_BETHE_JOY_LUO, modelList[Models.KEY_REGION_ENERGY_LOSS_MODEL].getModel())
+            self.assertEquals(MCXRayModel.MassAbsorptionCoefficientModel.TYPE_CHANTLER2005, modelList[Models.KEY_MASS_ABSORPTION_COEFFICIENT_MODEL].getModel())
 
         #self.fail("Test if the testcase is working.")
 
@@ -198,6 +200,41 @@ class TestModels(unittest.TestCase):
 
         #self.fail("Test if the testcase is working.")
 
+    def test_read_1_4_1(self):
+        """
+        Tests for method `read`.
+        """
+
+        models = Models.Models()
+
+        title = "AlMgBulk5keV_version_1_4_1"
+        filepath = os.path.abspath(os.path.join(self.testDataPath, "inputs", "%s.mdl" % (title)))
+        models.read(filepath)
+
+        self.assertEquals(Version.VERSION_1_4_1.major, models.version.major)
+        self.assertEquals(Version.VERSION_1_4_1.minor, models.version.minor)
+        self.assertEquals(Version.VERSION_1_4_1.revision, models.version.revision)
+        self.assertEquals(Version.VERSION_1_4_1, models.version)
+
+        modelList = models.getModelList()
+        self.assertEquals(self.numberModels, len(modelList))
+
+        self.assertEquals(MCXRayModel.AtomMeanIonizationPotentialModel.TYPE_JOY_LUO, modelList[Models.KEY_ATOM_MEAN_IONIZATION_POTENTIAL_MODEL].getModel())
+        self.assertEquals(MCXRayModel.AtomEnergyLossModel.TYPE_BETHE, modelList[Models.KEY_ATOM_ENERGY_LOSS_MODEL].getModel())
+        self.assertEquals(MCXRayModel.AtomScreeningModel.TYPE_HENOC_MAURICE, modelList[Models.KEY_ATOM_SCREENING_MODEL].getModel())
+        self.assertEquals(MCXRayModel.AtomCrossSectionModel.TYPE_GAUVIN_DROUIN, modelList[Models.KEY_ATOM_CROSS_SECTION_MODEL].getModel())
+        self.assertEquals(MCXRayModel.AtomCrossSectionScreeningModel.TYPE_HENOC_MAURICE, modelList[Models.KEY_ATOM_CROSS_SECTION_SCREENING_MODEL].getModel())
+        self.assertEquals(MCXRayModel.AtomCollisionModel.TYPE_RUTHERFORD, modelList[Models.KEY_ATOM_COLLISION_MODEL].getModel())
+        self.assertEquals(MCXRayModel.AtomCollisionScreeningModel.TYPE_HENOC_MAURICE, modelList[Models.KEY_ATOM_COLLISION_SCREENING_MODEL].getModel())
+        self.assertEquals(MCXRayModel.AtomElectronRangeModel.TYPE_KANAYA_OKAYAMA, modelList[Models.KEY_ATOM_ELECTRON_RANGE_MODEL].getModel())
+        self.assertEquals(MCXRayModel.XRayCSCharacteristicModel.TYPE_CASTANI, modelList[Models.KEY_XRAY_CS_CHARACTERISTIC_MODEL].getModel())
+        self.assertEquals(MCXRayModel.XRayCSBremsstrahlungModel.TYPE_DING, modelList[Models.KEY_XRAY_CS_BREMSSTRAHLUNG_MODEL].getModel())
+        self.assertEquals(MCXRayModel.SampleEnergyLossModel.TYPE_BETHE_JOY_LUO, modelList[Models.KEY_SAMPLE_ENERGY_LOSS_MODEL].getModel())
+        self.assertEquals(MCXRayModel.RegionEnergyLossModel.TYPE_BETHE_JOY_LUO, modelList[Models.KEY_REGION_ENERGY_LOSS_MODEL].getModel())
+        self.assertEquals(MCXRayModel.MassAbsorptionCoefficientModel.TYPE_CHANTLER2005, modelList[Models.KEY_MASS_ABSORPTION_COEFFICIENT_MODEL].getModel())
+
+        #self.fail("Test if the testcase is working.")
+
     def test__createKeys(self):
         """
         Tests for method `_createKeys`.
@@ -280,7 +317,6 @@ class TestModels(unittest.TestCase):
 
         self.fail("Test if the testcase is working.")
 
-    @ignore()
     def test_write_1_2_0(self):
         """
         Tests for method `write`.
@@ -293,6 +329,7 @@ class TestModels(unittest.TestCase):
 
         filepath = os.path.join(self.tempDataPath, "%s.par" % (title))
         models = Models.Models()
+        models.version = Version.VERSION_1_2_0
         models._modelList[Models.KEY_XRAY_CS_BREMSSTRAHLUNG_MODEL].setModel(MCXRayModel.XRayCSBremsstrahlungModel.TYPE_DING)
         models._modelList[Models.KEY_ATOM_CROSS_SECTION_MODEL].setModel(MCXRayModel.AtomCrossSectionModel.TYPE_GAUVIN_DROUIN)
         models._modelList[Models.KEY_ATOM_COLLISION_MODEL].setModel(MCXRayModel.AtomCollisionModel.TYPE_RUTHERFORD)
@@ -304,7 +341,7 @@ class TestModels(unittest.TestCase):
 
         self.assertListEqual(linesRef, lines)
 
-        self.fail("Test if the testcase is working.")
+        #self.fail("Test if the testcase is working.")
 
     def test_write_1_2_1(self):
         """
@@ -318,6 +355,33 @@ class TestModels(unittest.TestCase):
 
         filepath = os.path.join(self.tempDataPath, "%s.par" % (title))
         models = Models.Models()
+        models.version = Version.VERSION_1_2_1
+        models._modelList[Models.KEY_XRAY_CS_BREMSSTRAHLUNG_MODEL].setModel(MCXRayModel.XRayCSBremsstrahlungModel.TYPE_DING)
+        models._modelList[Models.KEY_ATOM_CROSS_SECTION_MODEL].setModel(MCXRayModel.AtomCrossSectionModel.TYPE_GAUVIN_DROUIN)
+        models._modelList[Models.KEY_ATOM_COLLISION_MODEL].setModel(MCXRayModel.AtomCollisionModel.TYPE_RUTHERFORD)
+
+        models.write(filepath)
+
+        linesRef = open(filepathReference, 'rb').readlines()
+        lines = open(filepath, 'rb').readlines()
+
+        self.assertListEqual(linesRef, lines)
+
+        #self.fail("Test if the testcase is working.")
+
+    def test_write_1_4_1(self):
+        """
+        Tests for method `write`.
+        """
+        self.maxDiff = None
+
+        title = "AlMgBulk5keV_version_1_4_1"
+
+        filepathReference = os.path.abspath(os.path.join(self.testDataPath, "inputs", "%s.mdl" % (title)))
+
+        filepath = os.path.join(self.tempDataPath, "%s.par" % (title))
+        models = Models.Models()
+        models.version = Version.VERSION_1_4_1
         models._modelList[Models.KEY_XRAY_CS_BREMSSTRAHLUNG_MODEL].setModel(MCXRayModel.XRayCSBremsstrahlungModel.TYPE_DING)
         models._modelList[Models.KEY_ATOM_CROSS_SECTION_MODEL].setModel(MCXRayModel.AtomCrossSectionModel.TYPE_GAUVIN_DROUIN)
         models._modelList[Models.KEY_ATOM_COLLISION_MODEL].setModel(MCXRayModel.AtomCollisionModel.TYPE_RUTHERFORD)

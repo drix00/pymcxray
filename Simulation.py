@@ -33,11 +33,13 @@ import pymcxray.FileFormat.Element as Element
 import pymcxray.FileFormat.Models as Models
 import pymcxray.FileFormat.MicroscopeParameters as MicroscopeParameters
 import pymcxray.FileFormat.SimulationParameters as SimulationParameters
+import pymcxray.FileFormat.ResultsParameters as ResultsParameters
 
 from pymcxray.SimulationsParameters import PARAMETER_INCIDENT_ENERGY_keV, PARAMETER_NUMBER_ELECTRONS, \
 PARAMETER_NUMBER_XRAYS, PARAMETER_TIME_s, PARAMETER_CURRENT_nA, PARAMETER_BEAM_DIAMETER_nm, PARAMETER_BEAM_TILT_deg, PARAMETER_BEAM_POSITION_nm, \
 PARAMETER_DETECTOR_DISTANCE_cm, PARAMETER_DETECTOR_RADIUS_cm, PARAMETER_DETECTOR_THICKNESS_cm, \
-PARAMETER_DETECTOR_NOISE_eV, PARAMETER_DETECTOR_CHANNEL_WIDTH_eV, PARAMETER_TOA_deg, PARAMETER_NUMBER_WINDOWS
+PARAMETER_DETECTOR_NOISE_eV, PARAMETER_DETECTOR_CHANNEL_WIDTH_eV, PARAMETER_TOA_deg, PARAMETER_NUMBER_WINDOWS, \
+PARAMETER_ELASTIC_CROSS_SECTION_SCALING_FACTOR, PARAMETER_ENERGY_LOSS_SCALING_FACTOR
 
 
 # Globals and constants variables.
@@ -59,7 +61,7 @@ def createPureBulkSample(atomicNumber):
 
     return specimen
 
-def createAlloyBulkSample(elements):
+def createAlloyBulkSample(elements, sampleName=None):
     specimen = Specimen.Specimen()
 
     specimen.numberRegions = 1
@@ -72,7 +74,11 @@ def createAlloyBulkSample(elements):
         element = Element.Element(atomicNumber, massFraction=weightFraction)
         region.elements.append(element)
 
-    specimen.name = name
+    if sampleName is None:
+        specimen.name = name
+    else:
+        specimen.name = sampleName
+
     region.regionType = RegionType.REGION_TYPE_BOX
     parameters = [-10000000000.0, 10000000000.0, -10000000000.0, 10000000000.0, 0.0, 20000000000.0]
     region.regionDimensions = RegionDimensions.RegionDimensionsBox(parameters)
@@ -472,7 +478,7 @@ def createAlloyMultiVerticalLayer(elementsLayers, layerWidths_nm):
             region.elements.append(element)
 
         region.regionType = RegionType.REGION_TYPE_BOX
-        parameters = [previousWidth_A, previousWidth_A+layerWidth_A, -10000000000.0, 10000000000.0, 0.0, 20000000000.0]
+        parameters = [previousWidth_A+1, previousWidth_A+layerWidth_A-1, -10000000000.0, 10000000000.0, 0.0+1, 20000000000.0]
         region.regionDimensions = RegionDimensions.RegionDimensionsBox(parameters)
         specimen.regions.append(region)
 
@@ -488,7 +494,7 @@ def createAlloyMultiVerticalLayer(elementsLayers, layerWidths_nm):
         region.elements.append(element)
 
     region.regionType = RegionType.REGION_TYPE_BOX
-    parameters = [previousWidth_A, 10000000000.0, -10000000000.0, 10000000000.0, 0.0, 20000000000.0]
+    parameters = [previousWidth_A+1, 10000000000.0, -10000000000.0, 10000000000.0, 0.0+1, 20000000000.0]
     region.regionDimensions = RegionDimensions.RegionDimensionsBox(parameters)
     specimen.regions.append(region)
 
@@ -501,6 +507,7 @@ class Simulation(object):
         self._models = Models.Models()
         self._microscopeParameters = MicroscopeParameters.MicroscopeParameters()
         self._simulationParameters = SimulationParameters.SimulationParameters()
+        self._resultParameters = ResultsParameters.ResultsParameters()
 
         self._overwrite = overwrite
 
@@ -518,6 +525,7 @@ class Simulation(object):
         self._simulationInputs.microsopeFilename = self.name + ".mic"
         self._simulationInputs.simulationParametersFilename = self.name + ".par"
         self._simulationInputs.mapFilename = None
+        self._simulationInputs.resultParametersFilename = self.name + ".rp"
         self._simulationInputs.snrFilename = None
 
         self._path = path
@@ -528,6 +536,7 @@ class Simulation(object):
             self._createModelsInputFile()
             self._createMicroscopeInputFile()
             self._createSimulationParametersInputFile()
+            self._createResultParametersInputFile()
         elif self.isDone(simulationPath):
             self.removeInputsFiles()
 
@@ -549,6 +558,8 @@ class Simulation(object):
         filepaths.append(filepath)
         filepath = os.path.join(self._path, self._simulationInputs.simulationParametersFilename)
         filepaths.append(filepath)
+        filepath = os.path.join(self._path, self._simulationInputs.resultParametersFilename)
+        filepaths.append(filepath)
 
         for filepath in filepaths:
             if os.path.exists(filepath):
@@ -569,6 +580,10 @@ class Simulation(object):
     def _createSimulationParametersInputFile(self):
         filepath = os.path.join(self._path, self._simulationInputs.simulationParametersFilename)
         self._simulationParameters.write(filepath)
+
+    def _createResultParametersInputFile(self):
+        filepath = os.path.join(self._path, self._simulationInputs.resultParametersFilename)
+        self._resultParameters.write(filepath)
 
     def isDone(self, simulationPath):
         _isDone = True
@@ -681,6 +696,10 @@ _XrayIntensitiesFromPhirhoz.csv""".splitlines()
             self.takeOffAngle_deg = parameters[PARAMETER_TOA_deg]
         if PARAMETER_NUMBER_WINDOWS in parameters:
             self.numberContinuumWindows = parameters[PARAMETER_NUMBER_WINDOWS]
+        if PARAMETER_ELASTIC_CROSS_SECTION_SCALING_FACTOR in parameters:
+            self.elasticCrossSectionScalingFactor = parameters[PARAMETER_ELASTIC_CROSS_SECTION_SCALING_FACTOR]
+        if PARAMETER_ENERGY_LOSS_SCALING_FACTOR in parameters:
+            self.energyLossScalingFactor = parameters[PARAMETER_ENERGY_LOSS_SCALING_FACTOR]
 
     def getParameters(self):
         return self._parameters
@@ -727,10 +746,10 @@ _XrayIntensitiesFromPhirhoz.csv""".splitlines()
 
     @property
     def detectorChannelWidth_eV(self):
-        return self._microscopeParameters.detectorChannelWidth_eV
+        return self._simulationParameters.energyChannelWidth_eV
     @detectorChannelWidth_eV.setter
     def detectorChannelWidth_eV(self, detectorChannelWidth_eV):
-        self._microscopeParameters.detectorChannelWidth_eV = detectorChannelWidth_eV
+        self._simulationParameters.energyChannelWidth_eV = detectorChannelWidth_eV
 
     @property
     def takeOffAngle_deg(self):
@@ -741,10 +760,10 @@ _XrayIntensitiesFromPhirhoz.csv""".splitlines()
 
     @property
     def numberContinuumWindows(self):
-        return self._microscopeParameters.numberWindows
+        return self._simulationParameters.numberWindows
     @numberContinuumWindows.setter
     def numberContinuumWindows(self, numberContinuumWindows):
-        self._microscopeParameters.numberWindows = numberContinuumWindows
+        self._simulationParameters.numberWindows = numberContinuumWindows
 
     @property
     def solidAngle_sr(self):
@@ -836,6 +855,12 @@ _XrayIntensitiesFromPhirhoz.csv""".splitlines()
         if PARAMETER_NUMBER_WINDOWS in self._parameters:
             name += "_N%iW" % (self._parameters[PARAMETER_NUMBER_WINDOWS])
 
+        if PARAMETER_ELASTIC_CROSS_SECTION_SCALING_FACTOR in self._parameters:
+            name += "_ECSF%f" % (self._parameters[PARAMETER_ELASTIC_CROSS_SECTION_SCALING_FACTOR])
+
+        if PARAMETER_ENERGY_LOSS_SCALING_FACTOR in self._parameters:
+            name += "_ELF%f" % (self._parameters[PARAMETER_ENERGY_LOSS_SCALING_FACTOR])
+
         if self._useOldVersion:
             name += "_E%.1fkeV" % (self.energy_keV)
 
@@ -885,6 +910,20 @@ _XrayIntensitiesFromPhirhoz.csv""".splitlines()
     @spectrumInterpolationModel.setter
     def spectrumInterpolationModel(self, spectrumInterpolationModel):
         self._simulationParameters.spectrumInterpolationModel = spectrumInterpolationModel
+
+    @property
+    def elasticCrossSectionScalingFactor(self):
+        return self._simulationParameters.elasticCrossSectionScalingFactor
+    @elasticCrossSectionScalingFactor.setter
+    def elasticCrossSectionScalingFactor(self, elasticCrossSectionScalingFactor):
+        self._simulationParameters.elasticCrossSectionScalingFactor = elasticCrossSectionScalingFactor
+
+    @property
+    def energyLossScalingFactor(self):
+        return self._simulationParameters.energyLossScalingFactor
+    @energyLossScalingFactor.setter
+    def energyLossScalingFactor(self, energyLossScalingFactor):
+        self._simulationParameters.energyLossScalingFactor = energyLossScalingFactor
 
 if __name__ == '__main__': #pragma: no cover
     import DrixUtilities.Runner as Runner

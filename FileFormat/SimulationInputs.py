@@ -31,6 +31,7 @@ KEY_MICROSCOPE = "microscope"
 KEY_PARAMETERS = "parameters"
 KEY_MAP = "map"
 KEY_SNR = "snr"
+KEY_RESULTS = "results"
 
 class SimulationInputs(object):
     def __init__(self):
@@ -49,6 +50,7 @@ class SimulationInputs(object):
         keys.append(KEY_MICROSCOPE)
         keys.append(KEY_PARAMETERS)
         keys.append(KEY_MAP)
+        keys.append(KEY_RESULTS)
         #keys.append(KEY_SNR)
 
         return keys
@@ -75,7 +77,11 @@ class SimulationInputs(object):
 
         self.version.writeLine(outputFile)
 
-        for key in self._createKeys():
+        keys = self._createKeys()
+        if self.version < Version.VERSION_1_4_0:
+            keys.remove(KEY_RESULTS)
+
+        for key in keys:
             if key not in self._filenames:
                 extension = self.getExtension(key)
                 filename = "%s.%s" % (title, extension)
@@ -102,6 +108,8 @@ class SimulationInputs(object):
             return "par"
         elif key == KEY_MAP:
             return "mpp"
+        elif key == KEY_RESULTS:
+            return "rp"
         elif key == KEY_SNR:
             return "snp"
 
@@ -160,6 +168,13 @@ class SimulationInputs(object):
     @snrFilename.setter
     def snrFilename(self, snrFilename):
         self._filenames[KEY_SNR] = snrFilename
+
+    @property
+    def resultParametersFilename(self):
+        return self._filenames[KEY_RESULTS]
+    @resultParametersFilename.setter
+    def resultParametersFilename(self, resultParametersFilename):
+        self._filenames[KEY_RESULTS] = resultParametersFilename
 
 if __name__ == '__main__': #pragma: no cover
     import DrixUtilities.Runner as Runner

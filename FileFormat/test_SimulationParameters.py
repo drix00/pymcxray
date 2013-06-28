@@ -201,6 +201,80 @@ class TestSimulationParameters(unittest.TestCase):
 
         #self.fail("Test if the testcase is working.")
 
+    def test_read_1_4_1(self):
+        """
+        Tests for method `read`.
+        """
+
+        simulationParameters = SimulationParameters.SimulationParameters()
+
+        title = "AlMgBulk5keV_version_1_4_1"
+        filepath = os.path.abspath(os.path.join(self.testDataPath, "inputs", "%s.par" % (title)))
+        simulationParameters.read(filepath)
+
+        self.assertEquals(Version.VERSION_1_4_1.major, simulationParameters.version.major)
+        self.assertEquals(Version.VERSION_1_4_1.minor, simulationParameters.version.minor)
+        self.assertEquals(Version.VERSION_1_4_1.revision, simulationParameters.version.revision)
+        self.assertEquals(Version.VERSION_1_4_1, simulationParameters.version)
+
+        simulationParametersRef = self.getSimulationParametersReference(title)
+        self.assertEquals(simulationParametersRef.version.major, simulationParameters.version.major)
+        self.assertEquals(simulationParametersRef.version.minor, simulationParameters.version.minor)
+        self.assertEquals(simulationParametersRef.version.revision, simulationParameters.version.revision)
+        self.assertEquals(simulationParametersRef.version, simulationParameters.version)
+
+        self.assertEquals(simulationParametersRef.baseFilename, simulationParameters.baseFilename)
+        self.assertEquals(simulationParametersRef.numberElectrons, simulationParameters.numberElectrons)
+        self.assertEquals(simulationParametersRef.numberPhotons, simulationParameters.numberPhotons)
+        self.assertEquals(simulationParametersRef.numberWindows, simulationParameters.numberWindows)
+        self.assertEquals(simulationParametersRef.numberFilmsX, simulationParameters.numberFilmsX)
+        self.assertEquals(simulationParametersRef.numberFilmsY, simulationParameters.numberFilmsY)
+        self.assertEquals(simulationParametersRef.numberFilmsZ, simulationParameters.numberFilmsZ)
+        self.assertEquals(simulationParametersRef.numberChannels, simulationParameters.numberChannels)
+        self.assertEquals(simulationParametersRef.energyChannelWidth_eV, simulationParameters.energyChannelWidth_eV)
+        self.assertEquals(simulationParametersRef.spectrumInterpolationModel, simulationParameters.spectrumInterpolationModel)
+        self.assertEquals(simulationParametersRef.voxelSimplification, simulationParameters.voxelSimplification, title)
+
+        #self.fail("Test if the testcase is working.")
+
+    def test_read_1_4_4(self):
+        """
+        Tests for method `read`.
+        """
+
+        simulationParameters = SimulationParameters.SimulationParameters()
+
+        title = "AlMgBulk5keV_version_1_4_4"
+        filepath = os.path.abspath(os.path.join(self.testDataPath, "inputs", "%s.par" % (title)))
+        simulationParameters.read(filepath)
+
+        self.assertEquals(Version.VERSION_1_4_4.major, simulationParameters.version.major)
+        self.assertEquals(Version.VERSION_1_4_4.minor, simulationParameters.version.minor)
+        self.assertEquals(Version.VERSION_1_4_4.revision, simulationParameters.version.revision)
+        self.assertEquals(Version.VERSION_1_4_4, simulationParameters.version)
+
+        simulationParametersRef = self.getSimulationParametersReference(title)
+        self.assertEquals(simulationParametersRef.version.major, simulationParameters.version.major)
+        self.assertEquals(simulationParametersRef.version.minor, simulationParameters.version.minor)
+        self.assertEquals(simulationParametersRef.version.revision, simulationParameters.version.revision)
+        self.assertEquals(simulationParametersRef.version, simulationParameters.version)
+
+        self.assertEquals(simulationParametersRef.baseFilename, simulationParameters.baseFilename)
+        self.assertEquals(simulationParametersRef.numberElectrons, simulationParameters.numberElectrons)
+        self.assertEquals(simulationParametersRef.numberPhotons, simulationParameters.numberPhotons)
+        self.assertEquals(simulationParametersRef.numberWindows, simulationParameters.numberWindows)
+        self.assertEquals(simulationParametersRef.numberFilmsX, simulationParameters.numberFilmsX)
+        self.assertEquals(simulationParametersRef.numberFilmsY, simulationParameters.numberFilmsY)
+        self.assertEquals(simulationParametersRef.numberFilmsZ, simulationParameters.numberFilmsZ)
+        self.assertEquals(simulationParametersRef.numberChannels, simulationParameters.numberChannels)
+        self.assertEquals(simulationParametersRef.energyChannelWidth_eV, simulationParameters.energyChannelWidth_eV)
+        self.assertEquals(simulationParametersRef.spectrumInterpolationModel, simulationParameters.spectrumInterpolationModel)
+        self.assertEquals(simulationParametersRef.voxelSimplification, simulationParameters.voxelSimplification, title)
+        self.assertEquals(simulationParametersRef.elasticCrossSectionScalingFactor, simulationParameters.elasticCrossSectionScalingFactor)
+        self.assertEquals(simulationParametersRef.energyLossScalingFactor, simulationParameters.energyLossScalingFactor)
+
+        #self.fail("Test if the testcase is working.")
+
     def getSimulationParametersReference(self, title):
         simulationParameters = SimulationParameters.SimulationParameters()
 
@@ -288,6 +362,32 @@ class TestSimulationParameters(unittest.TestCase):
             simulationParameters.energyChannelWidth_eV = 5
             simulationParameters.spectrumInterpolationModel = 1
             simulationParameters.voxelSimplification = None
+        elif title == "AlMgBulk5keV_version_1_4_1":
+            baseFilenameRef = r"Results\%s" % ("AlMgBulk5keV_1_4_1")
+            simulationParameters.baseFilename = baseFilenameRef
+            simulationParameters.numberElectrons = 10000
+            simulationParameters.numberPhotons = 1000
+            simulationParameters.numberWindows = 128
+            simulationParameters.numberFilmsX = 64
+            simulationParameters.numberFilmsY = 66
+            simulationParameters.numberFilmsZ = 70
+            simulationParameters.energyChannelWidth_eV = 5
+            simulationParameters.spectrumInterpolationModel = 1
+            simulationParameters.voxelSimplification = None
+        elif title == "AlMgBulk5keV_version_1_4_4":
+            baseFilenameRef = r"Results\%s" % ("AlMgBulk5keV_1_4_4")
+            simulationParameters.baseFilename = baseFilenameRef
+            simulationParameters.numberElectrons = 10000
+            simulationParameters.numberPhotons = 1000
+            simulationParameters.numberWindows = 128
+            simulationParameters.numberFilmsX = 64
+            simulationParameters.numberFilmsY = 66
+            simulationParameters.numberFilmsZ = 70
+            simulationParameters.energyChannelWidth_eV = 5
+            simulationParameters.spectrumInterpolationModel = 1
+            simulationParameters.voxelSimplification = None
+            simulationParameters.elasticCrossSectionScalingFactor = 1.3
+            simulationParameters.energyLossScalingFactor = 0.7
 
         return simulationParameters
 
@@ -296,9 +396,16 @@ class TestSimulationParameters(unittest.TestCase):
         Tests for method `_createKeys`.
         """
 
-        numberKeys = 10
+        simulationParameters = SimulationParameters.SimulationParameters()
 
-        keys = SimulationParameters.SimulationParameters()._createKeys()
+        simulationParameters.version = Version.VERSION_1_4_3
+        numberKeys = 10
+        keys = simulationParameters._createKeys()
+        self.assertEquals(numberKeys, len(keys))
+
+        simulationParameters.version = Version.VERSION_1_4_4
+        numberKeys = 12
+        keys = simulationParameters._createKeys()
         self.assertEquals(numberKeys, len(keys))
 
         #self.fail("Test if the testcase is working.")
@@ -382,7 +489,6 @@ class TestSimulationParameters(unittest.TestCase):
 
         self.fail("Test if the testcase is working.")
 
-    @ignore()
     def test_write_1_2_0(self):
         """
         Tests for method `write`.
@@ -397,6 +503,48 @@ class TestSimulationParameters(unittest.TestCase):
         filepath = os.path.join(self.tempDataPath, "%s.par" % (title))
         simulationParameters = SimulationParameters.SimulationParameters()
         simulationParameters = simulationParametersRef
+        simulationParameters.version = Version.VERSION_1_2_0
+        simulationParameters.write(filepath)
+
+        self.assertEquals(simulationParametersRef.baseFilename, simulationParameters.baseFilename)
+        self.assertEquals(simulationParametersRef.numberElectrons, simulationParameters.numberElectrons)
+        self.assertEquals(simulationParametersRef.numberPhotons, simulationParameters.numberPhotons)
+        self.assertEquals(simulationParametersRef.numberWindows, simulationParameters.numberWindows)
+        self.assertEquals(simulationParametersRef.numberFilmsX, simulationParameters.numberFilmsX)
+        self.assertEquals(simulationParametersRef.numberFilmsY, simulationParameters.numberFilmsY)
+        self.assertEquals(simulationParametersRef.numberFilmsZ, simulationParameters.numberFilmsZ)
+        self.assertEquals(simulationParametersRef.numberChannels, simulationParameters.numberChannels)
+        self.assertEquals(simulationParametersRef.energyChannelWidth_eV, simulationParameters.energyChannelWidth_eV)
+        self.assertEquals(simulationParametersRef.spectrumInterpolationModel, simulationParameters.spectrumInterpolationModel)
+        self.assertEquals(simulationParametersRef.voxelSimplification, simulationParameters.voxelSimplification, title)
+
+        self.assertEquals(simulationParametersRef.version.major, simulationParameters.version.major)
+        self.assertEquals(simulationParametersRef.version.minor, simulationParameters.version.minor)
+        self.assertEquals(simulationParametersRef.version.revision, simulationParameters.version.revision)
+        self.assertEquals(simulationParametersRef.version, simulationParameters.version)
+
+        linesRef = open(filepathReference, 'rb').readlines()
+        lines = open(filepath, 'rb').readlines()
+
+        self.assertListEqual(linesRef, lines)
+
+        #self.fail("Test if the testcase is working.")
+
+    def test_write_1_2_1(self):
+        """
+        Tests for method `write`.
+        """
+        self.maxDiff = None
+
+        title = "AlMgBulk5keV_version_1_2_1"
+        simulationParametersRef = self.getSimulationParametersReference(title)
+
+        filepathReference = os.path.abspath(os.path.join(self.testDataPath, "inputs", "%s.par" % (title)))
+
+        filepath = os.path.join(self.tempDataPath, "%s.par" % (title))
+        simulationParameters = SimulationParameters.SimulationParameters()
+        simulationParameters = simulationParametersRef
+        simulationParameters.version = Version.VERSION_1_2_1
 
         simulationParameters.write(filepath)
 
@@ -422,15 +570,15 @@ class TestSimulationParameters(unittest.TestCase):
 
         self.assertListEqual(linesRef, lines)
 
-        self.fail("Test if the testcase is working.")
+        #self.fail("Test if the testcase is working.")
 
-    def test_write_1_2_1(self):
+    def test_write_1_4_1(self):
         """
         Tests for method `write`.
         """
         self.maxDiff = None
 
-        title = "AlMgBulk5keV_version_1_2_1"
+        title = "AlMgBulk5keV_version_1_4_1"
         simulationParametersRef = self.getSimulationParametersReference(title)
 
         filepathReference = os.path.abspath(os.path.join(self.testDataPath, "inputs", "%s.par" % (title)))
@@ -438,6 +586,7 @@ class TestSimulationParameters(unittest.TestCase):
         filepath = os.path.join(self.tempDataPath, "%s.par" % (title))
         simulationParameters = SimulationParameters.SimulationParameters()
         simulationParameters = simulationParametersRef
+        simulationParameters.version = Version.VERSION_1_4_1
 
         simulationParameters.write(filepath)
 
@@ -452,6 +601,50 @@ class TestSimulationParameters(unittest.TestCase):
         self.assertEquals(simulationParametersRef.energyChannelWidth_eV, simulationParameters.energyChannelWidth_eV)
         self.assertEquals(simulationParametersRef.spectrumInterpolationModel, simulationParameters.spectrumInterpolationModel)
         self.assertEquals(simulationParametersRef.voxelSimplification, simulationParameters.voxelSimplification, title)
+
+        self.assertEquals(simulationParametersRef.version.major, simulationParameters.version.major)
+        self.assertEquals(simulationParametersRef.version.minor, simulationParameters.version.minor)
+        self.assertEquals(simulationParametersRef.version.revision, simulationParameters.version.revision)
+        self.assertEquals(simulationParametersRef.version, simulationParameters.version)
+
+        linesRef = open(filepathReference, 'rb').readlines()
+        lines = open(filepath, 'rb').readlines()
+
+        self.assertListEqual(linesRef, lines)
+
+        #self.fail("Test if the testcase is working.")
+
+    def test_write_1_4_4(self):
+        """
+        Tests for method `write`.
+        """
+        self.maxDiff = None
+
+        title = "AlMgBulk5keV_version_1_4_4"
+        simulationParametersRef = self.getSimulationParametersReference(title)
+
+        filepathReference = os.path.abspath(os.path.join(self.testDataPath, "inputs", "%s.par" % (title)))
+
+        filepath = os.path.join(self.tempDataPath, "%s.par" % (title))
+        simulationParameters = SimulationParameters.SimulationParameters()
+        simulationParameters = simulationParametersRef
+        simulationParameters.version = Version.VERSION_1_4_4
+
+        simulationParameters.write(filepath)
+
+        self.assertEquals(simulationParametersRef.baseFilename, simulationParameters.baseFilename)
+        self.assertEquals(simulationParametersRef.numberElectrons, simulationParameters.numberElectrons)
+        self.assertEquals(simulationParametersRef.numberPhotons, simulationParameters.numberPhotons)
+        self.assertEquals(simulationParametersRef.numberWindows, simulationParameters.numberWindows)
+        self.assertEquals(simulationParametersRef.numberFilmsX, simulationParameters.numberFilmsX)
+        self.assertEquals(simulationParametersRef.numberFilmsY, simulationParameters.numberFilmsY)
+        self.assertEquals(simulationParametersRef.numberFilmsZ, simulationParameters.numberFilmsZ)
+        self.assertEquals(simulationParametersRef.numberChannels, simulationParameters.numberChannels)
+        self.assertEquals(simulationParametersRef.energyChannelWidth_eV, simulationParameters.energyChannelWidth_eV)
+        self.assertEquals(simulationParametersRef.spectrumInterpolationModel, simulationParameters.spectrumInterpolationModel)
+        self.assertEquals(simulationParametersRef.voxelSimplification, simulationParameters.voxelSimplification, title)
+        self.assertEquals(simulationParametersRef.elasticCrossSectionScalingFactor, simulationParameters.elasticCrossSectionScalingFactor)
+        self.assertEquals(simulationParametersRef.energyLossScalingFactor, simulationParameters.energyLossScalingFactor)
 
         self.assertEquals(simulationParametersRef.version.major, simulationParameters.version.major)
         self.assertEquals(simulationParametersRef.version.minor, simulationParameters.version.minor)

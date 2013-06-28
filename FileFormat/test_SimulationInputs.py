@@ -159,6 +159,34 @@ class TestSimulationInputs(unittest.TestCase):
         self.assertEquals("%s.mdl" % (title), simulationInputs.modelFilename)
         self.assertEquals("%s.mic" % (title), simulationInputs.microsopeFilename)
         self.assertEquals("%s.par" % (title), simulationInputs.simulationParametersFilename)
+        self.assertEquals("%s.mpp" % (title), simulationInputs.mapFilename)
+
+        #self.fail("Test if the testcase is working.")
+
+    def test_read_1_4_1(self):
+        """
+        Tests for method `read`.
+        """
+
+        simulationInputs = SimulationInputs.SimulationInputs()
+
+        title = "AlMgBulk5keV_version_1_4_1"
+        filepath = os.path.abspath(os.path.join(self.testDataPath, "inputs", "%s.sim" % (title)))
+        simulationInputs.read(filepath)
+
+        self.assertEquals(title, simulationInputs.title)
+
+        self.assertEquals(Version.VERSION_1_4_1.major, simulationInputs.version.major)
+        self.assertEquals(Version.VERSION_1_4_1.minor, simulationInputs.version.minor)
+        self.assertEquals(Version.VERSION_1_4_1.revision, simulationInputs.version.revision)
+        self.assertEquals(Version.VERSION_1_4_1, simulationInputs.version)
+
+        self.assertEquals("%s.sam" % (title), simulationInputs.specimenFilename)
+        self.assertEquals("%s.mdl" % (title), simulationInputs.modelFilename)
+        self.assertEquals("%s.mic" % (title), simulationInputs.microsopeFilename)
+        self.assertEquals("%s.par" % (title), simulationInputs.simulationParametersFilename)
+        self.assertEquals("%s.mpp" % (title), simulationInputs.mapFilename)
+        self.assertEquals("%s.rp" % (title), simulationInputs.resultParametersFilename)
 
         #self.fail("Test if the testcase is working.")
 
@@ -167,7 +195,7 @@ class TestSimulationInputs(unittest.TestCase):
         Tests for method `_createKeys`.
         """
 
-        numberKeys = 5
+        numberKeys = 6
 
         keys = SimulationInputs.SimulationInputs()._createKeys()
         self.assertEquals(numberKeys, len(keys))
@@ -219,6 +247,7 @@ class TestSimulationInputs(unittest.TestCase):
 
         filepath = os.path.join(self.tempDataPath, "%s.sim" % (title))
         simulationInputs = SimulationInputs.SimulationInputs()
+        simulationInputs.version = Version.VERSION_1_1_1
         simulationInputs.write(filepath)
 
         self.assertEquals("%s.sam" % (title), simulationInputs.specimenFilename)
@@ -238,7 +267,6 @@ class TestSimulationInputs(unittest.TestCase):
 
         self.fail("Test if the testcase is working.")
 
-    @ignore()
     def test_write_1_2_0(self):
         """
         Tests for method `write`.
@@ -256,6 +284,7 @@ class TestSimulationInputs(unittest.TestCase):
 
         filepath = os.path.join(self.tempDataPath, "%s.sim" % (title))
         simulationInputs = SimulationInputs.SimulationInputs()
+        simulationInputs.version = Version.VERSION_1_2_0
         simulationInputs.write(filepath)
 
         self.assertEquals("%s.sam" % (title), simulationInputs.specimenFilename)
@@ -273,7 +302,7 @@ class TestSimulationInputs(unittest.TestCase):
 
         self.assertListEqual(linesRef, lines)
 
-        self.fail("Test if the testcase is working.")
+        #self.fail("Test if the testcase is working.")
 
     def test_write_1_2_1(self):
         """
@@ -292,12 +321,51 @@ class TestSimulationInputs(unittest.TestCase):
 
         filepath = os.path.join(self.tempDataPath, "%s.sim" % (title))
         simulationInputs = SimulationInputs.SimulationInputs()
+        simulationInputs.version = Version.VERSION_1_2_1
         simulationInputs.write(filepath)
 
         self.assertEquals("%s.sam" % (title), simulationInputs.specimenFilename)
         self.assertEquals("%s.mdl" % (title), simulationInputs.modelFilename)
         self.assertEquals("%s.mic" % (title), simulationInputs.microsopeFilename)
         self.assertEquals("%s.par" % (title), simulationInputs.simulationParametersFilename)
+
+        self.assertEquals(simulationInputsRef.version.major, simulationInputs.version.major)
+        self.assertEquals(simulationInputsRef.version.minor, simulationInputs.version.minor)
+        self.assertEquals(simulationInputsRef.version.revision, simulationInputs.version.revision)
+        self.assertEquals(simulationInputsRef.version, simulationInputs.version)
+
+        linesRef = open(filepathReference, 'rb').readlines()
+        lines = open(filepath, 'rb').readlines()
+
+        self.assertListEqual(linesRef, lines)
+
+        #self.fail("Test if the testcase is working.")
+
+    def test_write_1_4_1(self):
+        """
+        Tests for method `write`.
+        """
+        self.maxDiff = None
+
+        simulationInputsRef = SimulationInputs.SimulationInputs()
+        simulationInputsRef.version = Version.VERSION_1_4_1
+
+        title = "AlMgBulk5keV_version_1_4_1"
+        filepathReference = os.path.abspath(os.path.join(self.testDataPath, "inputs", "%s.sim" % (title)))
+        simulationInputsRef.read(filepathReference)
+
+        self.assertEquals(title, simulationInputsRef.title)
+
+        filepath = os.path.join(self.tempDataPath, "%s.sim" % (title))
+        simulationInputs = SimulationInputs.SimulationInputs()
+        simulationInputs.write(filepath)
+
+        self.assertEquals("%s.sam" % (title), simulationInputs.specimenFilename)
+        self.assertEquals("%s.mdl" % (title), simulationInputs.modelFilename)
+        self.assertEquals("%s.mic" % (title), simulationInputs.microsopeFilename)
+        self.assertEquals("%s.par" % (title), simulationInputs.simulationParametersFilename)
+        self.assertEquals("%s.mpp" % (title), simulationInputs.mapFilename)
+        self.assertEquals("%s.rp" % (title), simulationInputs.resultParametersFilename)
 
         self.assertEquals(simulationInputsRef.version.major, simulationInputs.version.major)
         self.assertEquals(simulationInputsRef.version.minor, simulationInputs.version.minor)
@@ -329,4 +397,4 @@ class TestSimulationInputs(unittest.TestCase):
 if __name__ == '__main__':  #pragma: no cover
     logging.getLogger().setLevel(logging.DEBUG)
     from DrixUtilities.Testings import runTestModuleWithCoverage
-    runTestModuleWithCoverage(__file__)
+    runTestModuleWithCoverage(__file__, withCoverage=False)

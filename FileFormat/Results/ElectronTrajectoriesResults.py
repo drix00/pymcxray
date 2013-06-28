@@ -21,6 +21,7 @@ import math
 
 # Third party modules.
 import matplotlib.pyplot as plt
+import numpy as np
 
 # Local modules.
 import DrixUtilities.Files as Files
@@ -28,6 +29,16 @@ import DrixUtilities.Files as Files
 # Project modules
 
 # Globals and constants variables.
+COLOR_TRAJECTORY_TYPE = "colorTrajectoryType"
+COLOR_REGION = "colorRegion"
+
+COLLISION_TYPE_UNKNOWN = 0
+COLLISION_TYPE_ELECTRON_GUN = 1
+COLLISION_TYPE_REGION = 2
+COLLISION_TYPE_OUT = 3
+COLLISION_TYPE_EMPTY_REGION = 4
+COLLISION_TYPE_ELASTIC = 5
+
 class Collission(object):
 
     @property
@@ -171,7 +182,20 @@ class ElectronTrajectoriesResults(object):
 
         logging.info("Number trajectories: %i", len(self._trajectories))
 
-    def drawXZ(self, title="", corrected=False, theta_deg=0.0):
+    def getElectronGunPositions_nm(self):
+        positions_nm = []
+
+        for trajectory in self._trajectories:
+            for collision in trajectory.collisions:
+                if collision.collisionType == COLLISION_TYPE_ELECTRON_GUN:
+                    position_nm = (collision.x_A*0.1, collision.y_A*0.1, collision.z_A*0.1)
+                    positions_nm.append(position_nm)
+
+        assert len(positions_nm) == len(self._trajectories)
+
+        return positions_nm
+
+    def drawXZ(self, title="", corrected=False, theta_deg=0.0, colorType=COLOR_TRAJECTORY_TYPE, trajectoryIndexes=None):
         theta_rad = math.radians(theta_deg)
         sinTheta = math.sin(theta_rad)
         cosTheta = math.cos(theta_rad)
@@ -179,22 +203,56 @@ class ElectronTrajectoriesResults(object):
         plt.figure()
         plt.title(title)
 
-        for trajectory in self._trajectories:
-            color = self._getColor(trajectory.trajectoryType)
+        indexUniqueRegionsAllTrajectories = set()
+        if trajectoryIndexes is None:
+            trajectoryIndexes = xrange(1, len(self._trajectories)+1)
 
-            x = []
-            z = []
-            for collision in trajectory.collisions:
-                if corrected:
-                    x.append(collision.correctedX_A/10.0)
-                    z.append(collision.correctedZ_A/10.0)
-                else:
-                    xx = collision.x_A/10.0
-                    zz = collision.z_A/10.0
-                    x.append(cosTheta*xx + sinTheta*zz)
-                    z.append(-sinTheta*xx + cosTheta*zz)
+        for trajectoryIndex in trajectoryIndexes:
+            trajectory = self._trajectories[trajectoryIndex-1]
+            if colorType == COLOR_TRAJECTORY_TYPE:
+                color = self._getColor(trajectory.trajectoryType)
 
-            plt.plot(x, z, '-', color=color)
+                x = []
+                z = []
+                for collision in trajectory.collisions:
+                    if corrected:
+                        x.append(collision.correctedX_A/10.0)
+                        z.append(collision.correctedZ_A/10.0)
+                    else:
+                        xx = collision.x_A/10.0
+                        zz = collision.z_A/10.0
+                        x.append(cosTheta*xx + sinTheta*zz)
+                        z.append(-sinTheta*xx + cosTheta*zz)
+
+                plt.plot(x, z, '-', color=color)
+            elif colorType == COLOR_REGION:
+                color = self._getColor(trajectory.trajectoryType)
+
+                x = []
+                z = []
+                indexRegions = []
+                indexUniqueRegions = set()
+                for collision in trajectory.collisions:
+                    indexRegions.append(collision.indexRegion)
+                    indexUniqueRegions.add(collision.indexRegion)
+                    indexUniqueRegionsAllTrajectories.add(collision.indexRegion)
+
+                    if corrected:
+                        x.append(collision.correctedX_A/10.0)
+                        z.append(collision.correctedZ_A/10.0)
+                    else:
+                        xx = collision.x_A/10.0
+                        zz = collision.z_A/10.0
+                        x.append(cosTheta*xx + sinTheta*zz)
+                        z.append(-sinTheta*xx + cosTheta*zz)
+
+                x = np.array(x)
+                z = np.array(z)
+                indexRegions = np.array(indexRegions)
+                for indexRegion in sorted(indexUniqueRegions):
+                    zz = np.ma.masked_where(indexRegions != indexRegion, z)
+                    color = self._getColorRegion(indexRegion)
+                    plt.plot(x, zz, '.', color=color)
 
         plt.xlabel('X (nm)')
         plt.ylabel('Z (nm)')
@@ -202,6 +260,8 @@ class ElectronTrajectoriesResults(object):
         plt.grid(True)
         yMin, yMax = plt.ylim()
         plt.ylim((yMax, yMin))
+
+        print sorted(indexUniqueRegionsAllTrajectories)
 
     def drawXY(self, title="", corrected=False):
         plt.figure()
@@ -263,6 +323,11 @@ class ElectronTrajectoriesResults(object):
         elif trajectoryType == 4:
             color = 'm'
 
+        return color
+
+    def _getColorRegion(self, indexRegion):
+        colors = ["blue", "green", "red", "black", "magenta", "yellow", "cyan"]
+        color = colors[indexRegion]
         return color
 
 def run():

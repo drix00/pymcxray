@@ -145,12 +145,216 @@ class ComparisonModels(object):
 
                 pdf.close()
 
+    def graphicsXrayMassAbsorptionCoefficient(self):
+        basename = "CompareModels_XrayMassAbsorptionCoefficient"
+
+        graphicFilename = "%s.pdf" % (basename)
+        graphicFilepath = os.path.join(self._dataPath, "Graphics")
+        graphicFilepath = Files.createPath(graphicFilepath)
+        graphicFilepath = os.path.join(graphicFilepath, graphicFilename)
+        pdf = PdfPages(graphicFilepath)
+
+        for filepath in Files.findAllFiles(self._dataPath, "CompareModels_XrayMassAbsorptionCoefficient*.csv", single_level=True):
+            logging.debug(filepath)
+
+            filename = os.path.basename(filepath)
+            name, _extension = os.path.splitext(filename)
+            items = name.split('_')
+            logging.debug(items[2])
+            atomicNumber = int(items[2][1:])
+            logging.debug(atomicNumber)
+
+            reader = csv.DictReader(open(filepath, 'rb'))
+
+            fieldnames = reader.fieldnames
+            logging.debug(fieldnames)
+            fieldnames = fieldnames[:-1]
+
+            data = {}
+            for fieldname in fieldnames:
+                data[fieldname] = []
+
+            for row in reader:
+                for fieldname in fieldnames:
+                    try:
+                        data[fieldname].append(float(row[fieldname]))
+                    except ValueError:
+                        data[fieldname].append(0.0)
+
+            plt.figure()
+            title = "Z = %i" % (atomicNumber)
+            plt.title(title)
+
+            x = data["X-ray Energy (keV)"]
+            for fieldname in fieldnames[1:]:
+                y = data[fieldname]
+                plt.loglog(x, y, label=fieldname)
+
+            plt.xlabel(r"Photon Energy (keV)")
+            plt.ylabel(r"MAC (cm$^2$/g)")
+
+            plt.legend(loc='best')
+
+            pdf.savefig()
+            #plt.close()
+
+        pdf.close()
+
+    def graphicsEnergyLoss(self):
+        basename = "CompareModels_EnergyLoss"
+
+        graphicFilename = "%s.pdf" % (basename)
+        graphicFilepath = os.path.join(self._dataPath, "Graphics")
+        graphicFilepath = Files.createPath(graphicFilepath)
+        graphicFilepath = os.path.join(graphicFilepath, graphicFilename)
+        pdf = PdfPages(graphicFilepath)
+
+        for filepath in Files.findAllFiles(self._dataPath, "CompareModels_RegionEnergyLoss_*.csv", single_level=True):
+            logging.debug(filepath)
+
+            filename = os.path.basename(filepath)
+            name, _extension = os.path.splitext(filename)
+            items = name.split('_')
+            logging.debug(items[2])
+            atomicNumber = int(items[2][1:])
+            logging.debug(atomicNumber)
+            energy_keV = int(items[3][1:-3])
+            logging.debug(energy_keV)
+
+            reader = csv.DictReader(open(filepath, 'rb'))
+
+            fieldnames = reader.fieldnames
+            fieldnames = fieldnames[:-1]
+            logging.debug(fieldnames)
+
+            data = {}
+            for fieldname in fieldnames:
+                data[fieldname] = []
+
+            for row in reader:
+                for fieldname in fieldnames:
+                    try:
+                        data[fieldname].append(1.0e3*float(row[fieldname]))
+                    except ValueError:
+                        data[fieldname].append(0.0)
+
+            plt.figure()
+            title = r"Z = %i, $E_{0} = %.1f$ keV" % (atomicNumber, energy_keV)
+            plt.title(title)
+
+            yMin = 0.0
+            x = data["Energy (keV)"]
+            for fieldname in fieldnames[1:]:
+                y = data[fieldname]
+                yMin = min(yMin, np.min(y))
+                plt.semilogx(x, y, label=fieldname)
+
+            plt.xlabel(r"Energy (keV)")
+            plt.ylabel(r"Energy Loss (eV/A)")
+            plt.ylim(ymax=0.0, ymin=yMin)
+            plt.legend(loc='best')
+
+            pdf.savefig()
+            plt.close()
+
+        pdf.close()
+
+    def graphicsIonizationCrossSection(self):
+        basename = "CompareModels_IonizationCrossSection"
+
+        graphicFilename = "%s.pdf" % (basename)
+        graphicFilepath = os.path.join(self._dataPath, "Graphics")
+        graphicFilepath = Files.createPath(graphicFilepath)
+        graphicFilepath = os.path.join(graphicFilepath, graphicFilename)
+        pdf = PdfPages(graphicFilepath)
+
+        for filepath in Files.findAllFiles(self._dataPath, "CompareModels_XrayCrossSectionCharacteristic_*.csv", single_level=True):
+            logging.debug(filepath)
+
+            filename = os.path.basename(filepath)
+            name, _extension = os.path.splitext(filename)
+            items = name.split('_')
+            atomicNumber = int(items[2][1:])
+            logging.debug(atomicNumber)
+            subshell = items[3]
+            logging.debug(subshell)
+
+            reader = csv.DictReader(open(filepath, 'rb'))
+
+            fieldnames = reader.fieldnames
+            fieldnames = fieldnames[:-1]
+            logging.debug(fieldnames)
+
+            data = {}
+            for fieldname in fieldnames:
+                data[fieldname] = []
+
+            for row in reader:
+                for fieldname in fieldnames:
+                    try:
+                        data[fieldname].append(float(row[fieldname]))
+                    except ValueError:
+                        data[fieldname].append(0.0)
+
+            plt.figure()
+            title = r"Z = %i, %s" % (atomicNumber, subshell)
+            plt.title(title)
+
+            x = data["Electron Energy (keV)"]
+            #x = data["Overvoltage"]
+            for fieldname in fieldnames[2:]:
+                y = data[fieldname]
+                plt.semilogx(x, y, label=fieldname)
+
+            plt.xlabel(r"Energy (keV)")
+            plt.ylabel(r"$\sigma$ (A$^{2}$)")
+            plt.legend(loc='best')
+
+            pdf.savefig()
+            plt.close()
+
+#             plt.figure()
+#             title = r"Z = %i, %s" % (atomicNumber, subshell)
+#             plt.title(title)
+#
+#             #x = data["Electron Energy (keV)"]
+#             x = data["Overvoltage"]
+#             for fieldname in fieldnames[2:]:
+#                 y = data[fieldname]
+#                 plt.semilogx(x, y, label=fieldname)
+#
+#             plt.xlabel(r"Energy (keV)")
+#             plt.ylabel(r"$\sigma$ (A$^{2}$)")
+#             plt.legend(loc='best')
+#
+#             pdf.savefig()
+#             plt.close()
+
+        pdf.close()
+
 def runVersion1_2_3():
-    dataPath = r"J:\hdemers\work\mcgill2012\results\simulations\McXRay\ComparisonModels\2012-09-19_10h52m55s_MCXRay_v1.2.3.0\Results\CompareModelsData"
+    dataPath = r"J:\hdemers\work\results\simulations\McXRay\ComparisonModels\2012-09-19_10h52m55s_MCXRay_v1.2.3.0\Results\CompareModelsData"
     comparisonModels = ComparisonModels(dataPath)
 
-    comparisonModels.graphicsXrayCrossSectionBremstrahlung()
+    #comparisonModels.graphicsXrayCrossSectionBremstrahlung()
+    comparisonModels.graphicsXrayMassAbsorptionCoefficient()
+
+def runVersion1_4_0():
+    dataPath = r"J:\hdemers\work\results\simulations\McXRay\ComparisonModels\2013-04-11_16h37m42s_MCXRay_v1.4.0.0\Results\CompareModelsData"
+    comparisonModels = ComparisonModels(dataPath)
+
+    #comparisonModels.graphicsXrayCrossSectionBremstrahlung()
+    comparisonModels.graphicsXrayMassAbsorptionCoefficient()
+
+def runVersion1_4_1():
+    dataPath = r"J:\hdemers\work\results\simulations\McXRay\ComparisonModels\2013-04-20_09h31m36s_MCXRay_v1.4.1.0\Results\CompareModelsData"
+    comparisonModels = ComparisonModels(dataPath)
+
+    #comparisonModels.graphicsXrayCrossSectionBremstrahlung()
+    #comparisonModels.graphicsXrayMassAbsorptionCoefficient()
+    #comparisonModels.graphicsEnergyLoss()
+    comparisonModels.graphicsIonizationCrossSection()
 
 if __name__ == '__main__': #pragma: no cover
     import DrixUtilities.Runner as Runner
-    Runner.Runner().run(runFunction=runVersion1_2_3)
+    Runner.Runner().run(runFunction=runVersion1_4_1)

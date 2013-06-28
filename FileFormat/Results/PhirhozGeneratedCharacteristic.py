@@ -35,7 +35,7 @@ class PhirhozGeneratedCharacteristic(BaseResults.BaseResults):
         self.depth_A = []
         self.phirhozs = {}
 
-    def read(self, regionID):
+    def read(self, regionID=0):
         suffix = "_PhirhozGeneratedCharacteristic_Region%i.csv" % (regionID)
         filename = self.basename + suffix
         filepath = os.path.join(self.path, filename)

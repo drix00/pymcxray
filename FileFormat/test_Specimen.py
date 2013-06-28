@@ -310,6 +310,76 @@ class TestSpecimen(unittest.TestCase):
 
         #self.fail("Test if the testcase is working.")
 
+    def test_read_1_4_1(self):
+        """
+        Tests for method `read`.
+        """
+
+        specimen = Specimen.Specimen()
+
+        title = "AlMgBulk5keV_version_1_4_1"
+        filepath = os.path.abspath(os.path.join(self.testDataPath, "inputs", "%s.sam" % (title)))
+        specimen.read(filepath)
+
+        self.assertEquals(Version.VERSION_1_4_1.major, specimen.version.major)
+        self.assertEquals(Version.VERSION_1_4_1.minor, specimen.version.minor)
+        self.assertEquals(Version.VERSION_1_4_1.revision, specimen.version.revision)
+        self.assertEquals(Version.VERSION_1_4_1, specimen.version)
+
+        specimenRef = self.getSpecimenReference(title)
+        self.assertEquals(specimenRef.version.major, specimen.version.major)
+        self.assertEquals(specimenRef.version.minor, specimen.version.minor)
+        self.assertEquals(specimenRef.version.revision, specimen.version.revision)
+        self.assertEquals(specimenRef.version, specimen.version)
+
+        self.assertEquals(specimenRef.numberRegions, specimen.numberRegions)
+
+        indexRegion = 0
+        region = specimen.regions[indexRegion]
+        regionRef = specimenRef.regions[indexRegion]
+        self.assertEquals(regionRef.numberElements, region.numberElements)
+        self.assertEquals(regionRef.regionMassDensity_g_cm3, region.regionMassDensity_g_cm3)
+        self.assertEquals(regionRef.regionType, region.regionType)
+        self.assertEquals(regionRef.regionDimensions, region.regionDimensions)
+        indexElement = 0
+        element = region.elements[indexElement]
+        elementRef = regionRef.elements[indexElement]
+        self.assertEquals(elementRef.atomicNumber, element.atomicNumber)
+        self.assertEquals(elementRef.massFraction, element.massFraction)
+        indexElement = 1
+        element = region.elements[indexElement]
+        elementRef = regionRef.elements[indexElement]
+        self.assertEquals(elementRef.atomicNumber, element.atomicNumber)
+        self.assertEquals(elementRef.massFraction, element.massFraction)
+
+        indexRegion = 1
+        region = specimen.regions[indexRegion]
+        regionRef = specimenRef.regions[indexRegion]
+        self.assertEquals(regionRef.numberElements, region.numberElements)
+        self.assertEquals(regionRef.regionMassDensity_g_cm3, region.regionMassDensity_g_cm3)
+        self.assertEquals(regionRef.regionType, region.regionType)
+        self.assertEquals(regionRef.regionDimensions, region.regionDimensions)
+        indexElement = 0
+        element = region.elements[indexElement]
+        elementRef = regionRef.elements[indexElement]
+        self.assertEquals(elementRef.atomicNumber, element.atomicNumber)
+        self.assertEquals(elementRef.massFraction, element.massFraction)
+
+        indexRegion = 2
+        region = specimen.regions[indexRegion]
+        regionRef = specimenRef.regions[indexRegion]
+        self.assertEquals(regionRef.numberElements, region.numberElements)
+        self.assertEquals(regionRef.regionMassDensity_g_cm3, region.regionMassDensity_g_cm3)
+        self.assertEquals(regionRef.regionType, region.regionType)
+        self.assertEquals(regionRef.regionDimensions, region.regionDimensions)
+        indexElement = 0
+        element = region.elements[indexElement]
+        elementRef = regionRef.elements[indexElement]
+        self.assertEquals(elementRef.atomicNumber, element.atomicNumber)
+        self.assertEquals(elementRef.massFraction, element.massFraction)
+
+        #self.fail("Test if the testcase is working.")
+
     @ignore
     def test_write(self):
         """
@@ -374,7 +444,6 @@ class TestSpecimen(unittest.TestCase):
 
         self.fail("Test if the testcase is working.")
 
-    @ignore
     def test_write_1_2_0(self):
         """
         Tests for method `write`.
@@ -389,7 +458,7 @@ class TestSpecimen(unittest.TestCase):
         filepath = os.path.join(self.tempDataPath, "%s.sam" % (title))
 
         specimen = specimenRef
-
+        specimen.version = Version.VERSION_1_2_0
         specimen.write(filepath)
 
         linesRef = open(filepathReference, 'rb').readlines()
@@ -403,7 +472,7 @@ class TestSpecimen(unittest.TestCase):
 
         self.assertListEqual(linesRef, lines)
 
-        self.fail("Test if the testcase is working.")
+        #self.fail("Test if the testcase is working.")
 
     def test_write_1_2_1(self):
         """
@@ -412,6 +481,36 @@ class TestSpecimen(unittest.TestCase):
         self.maxDiff = None
 
         title = "AlMgBulk5keV_version_1_2_1"
+
+        specimenRef = self.getSpecimenReference(title)
+        filepathReference = os.path.abspath(os.path.join(self.testDataPath, "inputs", "%s.sam" % (title)))
+
+        filepath = os.path.join(self.tempDataPath, "%s.sam" % (title))
+
+        specimen = specimenRef
+        specimen.version = Version.VERSION_1_2_1
+        specimen.write(filepath)
+
+        linesRef = open(filepathReference, 'rb').readlines()
+        lines = open(filepath, 'rb').readlines()
+
+        for index in xrange(len(linesRef)):
+            lineRef = linesRef[index]
+            line = lines[index]
+            message = "%i:\n%s\n%s" % (index, lineRef, line)
+            self.assertEquals(lineRef, line, message)
+
+        self.assertListEqual(linesRef, lines)
+
+        #self.fail("Test if the testcase is working.")
+
+    def test_write_1_4_1(self):
+        """
+        Tests for method `write`.
+        """
+        self.maxDiff = None
+
+        title = "AlMgBulk5keV_version_1_4_1"
 
         specimenRef = self.getSpecimenReference(title)
         filepathReference = os.path.abspath(os.path.join(self.testDataPath, "inputs", "%s.sam" % (title)))
@@ -696,6 +795,39 @@ class TestSpecimen(unittest.TestCase):
             specimen.regions.append(region)
 
         elif title == "AlMgBulk5keV_version_1_2_1":
+            specimen.numberRegions = 3
+
+            region = Region.Region()
+            region.numberElements = 2
+            element = Element.Element(14, 0.4)
+            region.elements.append(element)
+            element = Element.Element(15, 0.6)
+            region.elements.append(element)
+            region.regionMassDensity_g_cm3 = 23.0
+            region.regionType = RegionType.REGION_TYPE_BOX
+            parameters = [-2000000000.0, 6000000000.0, -4000000000.0, 5000000000.0, 0.8, 70000.0]
+            region.regionDimensions = RegionDimensions.RegionDimensionsBox(parameters)
+            specimen.regions.append(region)
+
+            region = Region.Region()
+            region.numberElements = 1
+            element = Element.Element(7)
+            region.elements.append(element)
+            region.regionType = RegionType.REGION_TYPE_CYLINDER
+            parameters = [0.4, -8000.0, 0.9, 0.1, 0.6, -0.8, 50000.0, 700.0]
+            region.regionDimensions = RegionDimensions.RegionDimensionsCylinder(parameters)
+            specimen.regions.append(region)
+
+            region = Region.Region()
+            region.numberElements = 1
+            element = Element.Element(56)
+            region.elements.append(element)
+            region.regionType = RegionType.REGION_TYPE_SPHERE
+            parameters = [0.5, 0.6, 102.0, 101.0]
+            region.regionDimensions = RegionDimensions.RegionDimensionsSphere(parameters)
+            specimen.regions.append(region)
+
+        elif title == "AlMgBulk5keV_version_1_4_1":
             specimen.numberRegions = 3
 
             region = Region.Region()

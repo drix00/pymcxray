@@ -1,0 +1,10 @@
+********************************************************************************
+***                           Results Parameters
+***
+***
+********************************************************************************
+Version=1.4.4
+ComputeXrayCharacteristic=1
+ComputeXrayBremsstrahlung=1
+ComputeXrayPhirhoz=1
+ComputeXraySimulatedSpectrum=1

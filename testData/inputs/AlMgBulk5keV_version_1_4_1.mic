@@ -1,0 +1,53 @@
+********************************************************************************
+***                                MICROSCOPE
+***
+***    BeamEnergy                  = Tension of the collimated electrons
+***    BeamCurrent                 = Current of the electron beam
+***    BeamDiameter                = Diameter at 90% of the electron beam
+***    BeamPosX                    = Position in X of the electron beam
+***    BeamPosY                    = Position in Y of the electron beam
+***    BeamTilt                    = Theta angle of the electron beam (deg)
+***    BeamStandardDeviation       = Standard deviation of the Gaussian distribution of the electrons in the beam
+***    DetectorCrystalAtom         = Atomic symbol, name or number of the detector crystal
+***    DetectorCrystalThickness    = Thickness of the detector crystal
+***    DetectorCrystalRadius       = Radius of the detector crystal
+***    DetectorCrystalDistance     = Distance of the detector crystal to the sample
+***    DetectorDeadLayer           = Thickness of the detector dead layer
+***    DetectorDiffusionLenght     = Diffusion lenght of the detector
+***    DetectorSurfaceQuality      = Surface quality of the detector
+***    DetectorNoise               = Noise at EDS
+***    DetectorTOA                 = Take off angle of the detector (deg)
+***    DetectorPitch               = Phi angle of the detector (deg)
+***    DetectorBFLow               = Bright Field low angle (rad)
+***    DetectorBFHigh              = Bright Field high angle (rad)
+***    DetectorDFLow               = Dark Field low angle (rad)
+***    DetectorDFHigh              = Dark Field high angle (rad)
+***    DetectorHAADFLow            = High Angle Annular Dark Field low angle (rad)
+***    DetectorHAADFHigh           = High Angle Annular Dark Field high angle (rad)
+***
+********************************************************************************
+Version=1.4.1
+BeamEnergy=4.000000
+BeamCurrent=2.0000000000000011e-010
+AcquisitionTime=100
+BeamDiameter=1.7458717472684776e-007
+BeamPosX=1
+BeamPosY=2
+BeamTilt=3.000000
+BeamStandardDeviation=1
+DetectorCrystalAtom=Si
+DetectorCrystalThickness=0.400000
+DetectorCrystalRadius=0.5
+DetectorCrystalDistance=8
+DetectorDeadLayer=150
+DetectorDiffusionLenght=50
+DetectorSurfaceQuality=0.900000
+DetectorNoise=49
+DetectorTOA=35.000000
+DetectorPitch=80.000000
+DetectorBFLow=0.001000
+DetectorBFHigh=0.020000
+DetectorDFLow=0.030000
+DetectorDFHigh=0.400000
+DetectorHAADFLow=0.160000
+DetectorHAADFHigh=0.600000

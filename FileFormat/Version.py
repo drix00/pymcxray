@@ -87,14 +87,34 @@ class Version(object):
     def revision(self, revision):
         self._revision = int(revision)
 
-VERSION_1_1_1 = Version(1, 1, 1);
+VERSION_1_1_1 = Version(1, 1, 1)
 
-VERSION_1_2_0 = Version(1, 2, 0);
+VERSION_1_2_0 = Version(1, 2, 0)
 
-VERSION_1_2_1 = Version(1, 2, 1);
+VERSION_1_2_1 = Version(1, 2, 1)
 
-BEFORE_VERSION = VERSION_1_1_1;
-CURRENT_VERSION = VERSION_1_2_1;
+VERSION_1_2_2 = Version(1, 2, 2)
+
+VERSION_1_2_3 = Version(1, 2, 3)
+
+VERSION_1_2_4 = Version(1, 2, 4)
+
+VERSION_1_2_5 = Version(1, 2, 5)
+
+VERSION_1_3_0 = Version(1, 3, 0)
+
+VERSION_1_4_0 = Version(1, 4, 0)
+
+VERSION_1_4_1 = Version(1, 4, 1)
+
+VERSION_1_4_2 = Version(1, 4, 2)
+
+VERSION_1_4_3 = Version(1, 4, 3)
+
+VERSION_1_4_4 = Version(1, 4, 4)
+
+BEFORE_VERSION = VERSION_1_1_1
+CURRENT_VERSION = VERSION_1_4_4
 
 
 if __name__ == '__main__': #pragma: no cover
