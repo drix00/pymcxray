@@ -38,7 +38,7 @@ import pymcxray.FileFormat.ResultsParameters as ResultsParameters
 from pymcxray.SimulationsParameters import PARAMETER_INCIDENT_ENERGY_keV, PARAMETER_NUMBER_ELECTRONS, \
 PARAMETER_NUMBER_XRAYS, PARAMETER_TIME_s, PARAMETER_CURRENT_nA, PARAMETER_BEAM_DIAMETER_nm, PARAMETER_BEAM_TILT_deg, PARAMETER_BEAM_POSITION_nm, \
 PARAMETER_DETECTOR_DISTANCE_cm, PARAMETER_DETECTOR_RADIUS_cm, PARAMETER_DETECTOR_THICKNESS_cm, \
-PARAMETER_DETECTOR_NOISE_eV, PARAMETER_DETECTOR_CHANNEL_WIDTH_eV, PARAMETER_TOA_deg, PARAMETER_NUMBER_WINDOWS, \
+PARAMETER_DETECTOR_NOISE_eV, PARAMETER_DETECTOR_CHANNEL_WIDTH_eV, PARAMETER_TOA_deg, PARAMETER_DETECTOR_AZIMUTHAL_ANGLE_deg, PARAMETER_NUMBER_WINDOWS, \
 PARAMETER_ELASTIC_CROSS_SECTION_SCALING_FACTOR, PARAMETER_ENERGY_LOSS_SCALING_FACTOR
 
 
@@ -694,6 +694,8 @@ _XrayIntensitiesFromPhirhoz.csv""".splitlines()
             self.detectorChannelWidth_eV = parameters[PARAMETER_DETECTOR_CHANNEL_WIDTH_eV]
         if PARAMETER_TOA_deg in parameters:
             self.takeOffAngle_deg = parameters[PARAMETER_TOA_deg]
+        if PARAMETER_DETECTOR_AZIMUTHAL_ANGLE_deg in parameters:
+            self.detectorAzimuthalAngle_deg = parameters[PARAMETER_DETECTOR_AZIMUTHAL_ANGLE_deg]
         if PARAMETER_NUMBER_WINDOWS in parameters:
             self.numberContinuumWindows = parameters[PARAMETER_NUMBER_WINDOWS]
         if PARAMETER_ELASTIC_CROSS_SECTION_SCALING_FACTOR in parameters:
@@ -757,6 +759,13 @@ _XrayIntensitiesFromPhirhoz.csv""".splitlines()
     @takeOffAngle_deg.setter
     def takeOffAngle_deg(self, takeOffAngle_deg):
         self._microscopeParameters.detectorTOA_deg = takeOffAngle_deg
+
+    @property
+    def detectorAzimuthalAngle_deg(self):
+        return self._microscopeParameters.detectorAzimuthalAngle_deg
+    @detectorAzimuthalAngle_deg.setter
+    def detectorAzimuthalAngle_deg(self, detectorAzimuthalAngle_deg):
+        self._microscopeParameters.detectorAzimuthalAngle_deg = detectorAzimuthalAngle_deg
 
     @property
     def numberContinuumWindows(self):
@@ -852,6 +861,8 @@ _XrayIntensitiesFromPhirhoz.csv""".splitlines()
             name += "_w%ieV" % (self._parameters[PARAMETER_DETECTOR_CHANNEL_WIDTH_eV])
         if PARAMETER_TOA_deg in self._parameters:
             name += "_TOA%.1fdeg" % (self._parameters[PARAMETER_TOA_deg])
+        if PARAMETER_DETECTOR_AZIMUTHAL_ANGLE_deg in self._parameters:
+            name += "_AA%.1fdeg" % (self._parameters[PARAMETER_DETECTOR_AZIMUTHAL_ANGLE_deg])
         if PARAMETER_NUMBER_WINDOWS in self._parameters:
             name += "_N%iW" % (self._parameters[PARAMETER_NUMBER_WINDOWS])
 
