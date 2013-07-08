@@ -379,6 +379,13 @@ class MicroscopeParameters(object):
         self._parameters[KEY_DETECTOR_TOA_deg] = detectorTOA_deg
 
     @property
+    def detectorAzimuthalAngle_deg(self):
+        return self._parameters[KEY_DETECTOR_PITCH_deg]
+    @detectorAzimuthalAngle_deg.setter
+    def detectorAzimuthalAngle_deg(self, detectorAzimuthalAngle_deg):
+        self._parameters[KEY_DETECTOR_PITCH_deg] = detectorAzimuthalAngle_deg
+
+    @property
     def detectorChannelWidth_eV(self):
         return self._parameters[KEY_DETECTOR_CHANNEL_WIDTH_eV]
     @detectorChannelWidth_eV.setter

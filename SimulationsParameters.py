@@ -53,6 +53,7 @@ PARAMETER_DETECTOR_THICKNESS_cm = "detectorThickness"
 PARAMETER_DETECTOR_NOISE_eV = "detectorNoise"
 PARAMETER_DETECTOR_CHANNEL_WIDTH_eV = "detectorChannelWidth"
 PARAMETER_TOA_deg = "detectorTOA"
+PARAMETER_DETECTOR_AZIMUTHAL_ANGLE_deg = "azimuthalAngle_deg"
 PARAMETER_NUMBER_WINDOWS = "numberBackgroundWindows"
 
 PARAMETER_WEIGHT_FRACTION = "weightFraction"
