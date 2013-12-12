@@ -22,6 +22,10 @@ __license__ = ""
 # Project modules
 
 # Globals and constants variables.
+SHELL_K = "K"
+SHELL_L3 = "L3"
+SHELL_M5 = "M5"
+
 _NUMBER_SHELLS = 5
 _NUMBER_LINES = 9
 _NUMBER_ATOMS = 96
@@ -222,6 +226,10 @@ ATOM_XRAY_ENERGY_Ma_keV = [0.0,        0.0,        0.0,        0.0,        0.0, 
     2.271,        2.346,        2.423,        2.996,        3.082,        3.171,        0.0,        0.0,        0.0,        0.0,
     0.0,        0.0,        0.0,        0.0,        0.0,        0.0]
 
+def getShellList():
+    shells = [SHELL_K, SHELL_L3, SHELL_M5]
+    return shells
+
 def getAtomicNumber(symbol):
     atomicNumber = ATOM_SYMBOLS.index(symbol)+1
 
@@ -234,6 +242,30 @@ def getMassDensity_g_cm3(symbol):
     atomicNumber = getAtomicNumber(symbol)
 
     return ATOM_MASS_DENSITY_g_cm3[atomicNumber-1]
+
+def getIonizationEnergy_keV(shell, element):
+    atomicNumber = getAtomicNumber(element)
+
+    if shell == SHELL_K:
+        return ATOM_ION_ENERGY_SHELL_K_keV[atomicNumber-1]
+    elif shell == SHELL_L3:
+        return ATOM_ION_ENERGY_SHELL_L3_keV[atomicNumber-1]
+    elif shell == SHELL_M5:
+        return ATOM_ION_ENERGY_SHELL_M5_keV[atomicNumber-1]
+
+    return 0.0
+
+def getXRayEnergy_keV(line, element):
+    atomicNumber = getAtomicNumber(element)
+
+    if line == SHELL_K:
+        return ATOM_XRAY_ENERGY_Ka1_keV[atomicNumber-1]
+    elif line == SHELL_L3:
+        return ATOM_XRAY_ENERGY_La_keV[atomicNumber-1]
+    elif line == ATOM_XRAY_ENERGY_Ma_keV:
+        return ATOM_ION_ENERGY_SHELL_M5_keV[atomicNumber-1]
+
+    return 0.0
 
 def run():
     print getMassDensity_g_cm3('Cr')

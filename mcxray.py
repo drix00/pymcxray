@@ -216,6 +216,24 @@ class _Simulations(object):
         except WindowsError, message:
             logging.error(message)
 
+    def logNumberSimulations(self):
+        numberSimulations = 0
+        numberSimulationsTodo = 0
+        numberSimulationsDone = 0
+
+        for simulation in self.getAllSimulationParameters():
+            if simulation.isDone(self.getSimulationsPath()):
+                numberSimulationsDone += 1
+            else:
+                numberSimulationsTodo += 1
+
+            numberSimulations += 1
+
+        percentage = 100.0*float(numberSimulationsDone)/float(numberSimulations)
+        logging.info("Number of done: %4i/%i (%5.2f%%)", numberSimulationsDone, numberSimulations, percentage)
+        percentage = 100.0*float(numberSimulationsTodo)/float(numberSimulations)
+        logging.info("Number of todo: %4i/%i (%5.2f%%)", numberSimulationsTodo, numberSimulations, percentage)
+
     def generateInputFiles(self, batchFile):
         logging.info("generateInputFiles for analysis: %s", self.getAnalysisName())
 
