@@ -29,6 +29,8 @@ PARAMETER_INCIDENT_ENERGY_keV = "incidentEnergy"
 PARAMETER_NUMBER_ELECTRONS = "numberElectrons"
 PARAMETER_NUMBER_XRAYS = "numberXrays"
 
+PARAMETER_REPETITION = "Repetition"
+
 PARAMETER_SPHERE_DIAMETER_nm = "sphereDiameter"
 PARAMETER_SPHERE_DEPTH_FRACTION_RADIUS = "sphereDepthFractionRadius"
 PARAMETER_BOX_SIDE_nm = "boxSide"
@@ -57,6 +59,7 @@ PARAMETER_DETECTOR_AZIMUTHAL_ANGLE_deg = "azimuthalAngle_deg"
 PARAMETER_NUMBER_WINDOWS = "numberBackgroundWindows"
 
 PARAMETER_WEIGHT_FRACTION = "weightFraction"
+PARAMETER_ATOMIC_FRACTION = "atomicFraction"
 
 PARAMETER_TRACER_ATOMIC_NUMBER = "tracerAtomicNumber"
 PARAMETER_TRACER_THICKNESS_nm = "tracerThickness"

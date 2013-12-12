@@ -39,7 +39,7 @@ from pymcxray.SimulationsParameters import PARAMETER_INCIDENT_ENERGY_keV, PARAME
 PARAMETER_NUMBER_XRAYS, PARAMETER_TIME_s, PARAMETER_CURRENT_nA, PARAMETER_BEAM_DIAMETER_nm, PARAMETER_BEAM_TILT_deg, PARAMETER_BEAM_POSITION_nm, \
 PARAMETER_DETECTOR_DISTANCE_cm, PARAMETER_DETECTOR_RADIUS_cm, PARAMETER_DETECTOR_THICKNESS_cm, \
 PARAMETER_DETECTOR_NOISE_eV, PARAMETER_DETECTOR_CHANNEL_WIDTH_eV, PARAMETER_TOA_deg, PARAMETER_DETECTOR_AZIMUTHAL_ANGLE_deg, PARAMETER_NUMBER_WINDOWS, \
-PARAMETER_ELASTIC_CROSS_SECTION_SCALING_FACTOR, PARAMETER_ENERGY_LOSS_SCALING_FACTOR
+PARAMETER_ELASTIC_CROSS_SECTION_SCALING_FACTOR, PARAMETER_ENERGY_LOSS_SCALING_FACTOR, PARAMETER_REPETITION
 
 
 # Globals and constants variables.
@@ -267,6 +267,51 @@ def createParticleOnSubstrate(atomicNumberParticle, atomicNumberSubstrate, parti
     region.elements.append(element)
     region.regionType = RegionType.REGION_TYPE_BOX
     parameters = [-10000000000.0, 10000000000.0, -10000000000.0, 10000000000.0, particleDiameter_A, 20000000000.0]
+    region.regionDimensions = RegionDimensions.RegionDimensionsBox(parameters)
+    specimen.regions.append(region)
+
+    return specimen
+
+def createParticleOnFilm(atomicNumberParticle, atomicNumberSubstrate, particleDiameter_nm, filmThiskness_nm):
+    particleDiameter_A = particleDiameter_nm*10.0
+    filmThiskness_A = filmThiskness_nm*10.0
+    specimen = Specimen.Specimen()
+
+    symbolParticle = AtomData.getAtomSymbol(atomicNumberParticle)
+    symbolSubstrate = AtomData.getAtomSymbol(atomicNumberSubstrate)
+    name = "%s_d%iA_%s" % (symbolParticle, int(particleDiameter_A), symbolSubstrate)
+    specimen.name = name
+
+    specimen.numberRegions = 3
+
+    region = Region.Region()
+    region.numberElements = 0
+    region.regionType = RegionType.REGION_TYPE_BOX
+    parameters = [-10000000000.0, 10000000000.0, -10000000000.0, 10000000000.0, 0.0, particleDiameter_A]
+    region.regionDimensions = RegionDimensions.RegionDimensionsBox(parameters)
+    specimen.regions.append(region)
+
+    region = Region.Region()
+    region.numberElements = 1
+    element = Element.Element(atomicNumberParticle)
+    region.elements.append(element)
+    region.regionType = RegionType.REGION_TYPE_SPHERE
+
+    particleRadius_A = particleDiameter_A/2.0
+    particlePositionX_A = 0.0
+    particlePositionY_A = 0.0
+    particlePositionZ_A = particleRadius_A
+
+    parameters = [particlePositionX_A, particlePositionY_A, particlePositionZ_A, particleRadius_A]
+    region.regionDimensions = RegionDimensions.RegionDimensionsSphere(parameters)
+    specimen.regions.append(region)
+
+    region = Region.Region()
+    region.numberElements = 1
+    element = Element.Element(atomicNumberSubstrate)
+    region.elements.append(element)
+    region.regionType = RegionType.REGION_TYPE_BOX
+    parameters = [-10000000000.0, 10000000000.0, -10000000000.0, 10000000000.0, particleDiameter_A, filmThiskness_A]
     region.regionDimensions = RegionDimensions.RegionDimensionsBox(parameters)
     specimen.regions.append(region)
 
@@ -833,6 +878,9 @@ _XrayIntensitiesFromPhirhoz.csv""".splitlines()
 
         if PARAMETER_NUMBER_XRAYS in self._parameters:
             name += "_N%iX" % (self._parameters[PARAMETER_NUMBER_XRAYS])
+
+        if PARAMETER_REPETITION in self._parameters:
+            name += "_R%0i" % (self._parameters[PARAMETER_REPETITION])
 
         if PARAMETER_BEAM_DIAMETER_nm in self._parameters:
             name += "_dB%.1fnm" % (self._parameters[PARAMETER_BEAM_DIAMETER_nm])
