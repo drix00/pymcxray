@@ -21,6 +21,7 @@ import os.path
 import numpy as np
 
 # Local modules.
+from DatabasesTools.ElementProperties import getAtomicMass_g_mol
 
 # Project modules
 import pymcxray.AtomData as AtomData
@@ -479,6 +480,33 @@ def createAlloyBoxInThinFilm(elementsParticle, atomicNumberSubstrate, boxParamet
 
     return specimen
 
+def createAlloyBoxInVaccuum(elements, boxParameters_nm):
+    specimen = Specimen.Specimen()
+
+    nameParticle = ""
+    for atomicNumber, weightFraction in elements:
+        nameParticle += "%s%i" % (AtomData.getAtomSymbol(atomicNumber), weightFraction*100)
+
+    specimen.numberRegions = 2
+    region = Region.Region()
+    region.numberElements = 0
+    region.regionType = RegionType.REGION_TYPE_BOX
+    parameters = [-10000000000.0, 10000000000.0, -10000000000.0, 10000000000.0, 0.0, 20000000000.0]
+    region.regionDimensions = RegionDimensions.RegionDimensionsBox(parameters)
+    specimen.regions.append(region)
+
+    region = Region.Region()
+    region.numberElements = len(elements)
+    for atomicNumber, weightFraction in elements:
+        element = Element.Element(atomicNumber, massFraction=weightFraction)
+        region.elements.append(element)
+    region.regionType = RegionType.REGION_TYPE_BOX
+    parameters_A = [value_nm*10.0 for value_nm in boxParameters_nm]
+    region.regionDimensions = RegionDimensions.RegionDimensionsBox(parameters_A)
+    specimen.regions.append(region)
+
+    return specimen
+
 def createAlloyMultiVerticalLayer(elementsLayers, layerWidths_nm):
     assert(len(elementsLayers) == len(layerWidths_nm))
 
@@ -544,6 +572,15 @@ def createAlloyMultiVerticalLayer(elementsLayers, layerWidths_nm):
     specimen.regions.append(region)
 
     return specimen
+
+def computeWeightFraction(atomicNumberRef, atomicWeights):
+    nominator = atomicWeights[atomicNumberRef] * getAtomicMass_g_mol(atomicNumberRef)
+    denominator = 0.0
+    for atomicNumber in atomicWeights:
+        denominator += atomicWeights[atomicNumber] * getAtomicMass_g_mol(atomicNumber)
+
+    weightFraction = nominator/denominator
+    return weightFraction
 
 class Simulation(object):
     def __init__(self, overwrite=True):

@@ -97,8 +97,6 @@ class _Simulations(object):
         self._simulationResultsList = {}
         self._serializationExtension = '.ser'
 
-        self._initData()
-
     def getSimulationPath(self):
         try:
             if self._simulationPath is not None:
@@ -517,6 +515,8 @@ class _Simulations(object):
 
 
     def run(self, batchFile):
+        self._initData()
+
         options = _getOptions()
 
         if options == ANALYZE_TYPE_GENERATE_INPUT_FILE:
