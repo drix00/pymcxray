@@ -412,22 +412,29 @@ def createAlloyParticleInThinFilm(elementsParticle, atomicNumberSubstrate, parti
 
     return specimen
 
-def createAlloyBoxInSubstrate(elementsParticle, atomicNumberSubstrate, boxParameters_nm):
+def createAlloyBoxInSubstrate(elementsParticle, elementsSubstrate, boxParameters_nm):
+    if isinstance(elementsSubstrate, int):
+        elementsSubstrate = [(elementsSubstrate, 1.0)]
+
     specimen = Specimen.Specimen()
 
     nameParticle = ""
     for atomicNumber, weightFraction in elementsParticle:
         nameParticle += "%s%i" % (AtomData.getAtomSymbol(atomicNumber), weightFraction*100)
 
-    symbolSubstrate = AtomData.getAtomSymbol(atomicNumberSubstrate)
-    name = "%s_%s" % (nameParticle, symbolSubstrate)
+    substrateName = ""
+    for atomicNumber, weightFraction in elementsParticle:
+        substrateName += "%s%i" % (AtomData.getAtomSymbol(atomicNumber), weightFraction*100)
+
+    name = "%s_%s" % (nameParticle, substrateName)
     specimen.name = name
 
     specimen.numberRegions = 2
     region = Region.Region()
-    region.numberElements = 1
-    element = Element.Element(atomicNumberSubstrate)
-    region.elements.append(element)
+    region.numberElements = len(elementsSubstrate)
+    for atomicNumber, weightFraction in elementsSubstrate:
+        element = Element.Element(atomicNumber, massFraction=weightFraction)
+        region.elements.append(element)
     region.regionType = RegionType.REGION_TYPE_BOX
     parameters = [-10000000000.0, 10000000000.0, -10000000000.0, 10000000000.0, 0.0, 20000000000.0]
     region.regionDimensions = RegionDimensions.RegionDimensionsBox(parameters)
