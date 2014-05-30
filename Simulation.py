@@ -243,7 +243,7 @@ def createParticleOnSubstrate(atomicNumberParticle, atomicNumberSubstrate, parti
     region = Region.Region()
     region.numberElements = 0
     region.regionType = RegionType.REGION_TYPE_BOX
-    parameters = [-10000000000.0, 10000000000.0, -10000000000.0, 10000000000.0, 0.0, particleDiameter_A]
+    parameters = [-10000000000.0, 10000000000.0, -10000000000.0, 10000000000.0, 0.0, 20000000000.0]
     region.regionDimensions = RegionDimensions.RegionDimensionsBox(parameters)
     specimen.regions.append(region)
 
@@ -256,7 +256,7 @@ def createParticleOnSubstrate(atomicNumberParticle, atomicNumberSubstrate, parti
     particleRadius_A = particleDiameter_A/2.0
     particlePositionX_A = 0.0
     particlePositionY_A = 0.0
-    particlePositionZ_A = particleRadius_A
+    particlePositionZ_A = particleRadius_A + 1.0
 
     parameters = [particlePositionX_A, particlePositionY_A, particlePositionZ_A, particleRadius_A]
     region.regionDimensions = RegionDimensions.RegionDimensionsSphere(parameters)
@@ -267,7 +267,7 @@ def createParticleOnSubstrate(atomicNumberParticle, atomicNumberSubstrate, parti
     element = Element.Element(atomicNumberSubstrate)
     region.elements.append(element)
     region.regionType = RegionType.REGION_TYPE_BOX
-    parameters = [-10000000000.0, 10000000000.0, -10000000000.0, 10000000000.0, particleDiameter_A, 20000000000.0]
+    parameters = [-10000000000.0, 10000000000.0, -10000000000.0, 10000000000.0, particlePositionZ_A + 1.0, 20000000000.0]
     region.regionDimensions = RegionDimensions.RegionDimensionsBox(parameters)
     specimen.regions.append(region)
 
