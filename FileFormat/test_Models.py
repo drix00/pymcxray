@@ -93,7 +93,7 @@ class TestModels(unittest.TestCase):
             self.assertEquals(MCXRayModel.AtomCollisionModel.TYPE_BROWNING, modelList[Models.KEY_ATOM_COLLISION_MODEL].getModel())
             self.assertEquals(MCXRayModel.AtomCollisionScreeningModel.TYPE_HENOC_MAURICE, modelList[Models.KEY_ATOM_COLLISION_SCREENING_MODEL].getModel())
             self.assertEquals(MCXRayModel.AtomElectronRangeModel.TYPE_KANAYA_OKAYAMA, modelList[Models.KEY_ATOM_ELECTRON_RANGE_MODEL].getModel())
-            self.assertEquals(MCXRayModel.XRayCSCharacteristicModel.TYPE_CASTANI, modelList[Models.KEY_XRAY_CS_CHARACTERISTIC_MODEL].getModel())
+            self.assertEquals(MCXRayModel.XRayCSCharacteristicModel.TYPE_CASTANI1982, modelList[Models.KEY_XRAY_CS_CHARACTERISTIC_MODEL].getModel())
             self.assertEquals(MCXRayModel.XRayCSBremsstrahlungModel.TYPE_DING, modelList[Models.KEY_XRAY_CS_BREMSSTRAHLUNG_MODEL].getModel())
             self.assertEquals(MCXRayModel.SampleEnergyLossModel.TYPE_BETHE_JOY_LUO, modelList[Models.KEY_SAMPLE_ENERGY_LOSS_MODEL].getModel())
             self.assertEquals(MCXRayModel.RegionEnergyLossModel.TYPE_BETHE_JOY_LUO, modelList[Models.KEY_REGION_ENERGY_LOSS_MODEL].getModel())
@@ -128,7 +128,7 @@ class TestModels(unittest.TestCase):
         self.assertEquals(MCXRayModel.AtomCollisionModel.TYPE_BROWNING, modelList[Models.KEY_ATOM_COLLISION_MODEL].getModel())
         self.assertEquals(MCXRayModel.AtomCollisionScreeningModel.TYPE_HENOC_MAURICE, modelList[Models.KEY_ATOM_COLLISION_SCREENING_MODEL].getModel())
         self.assertEquals(MCXRayModel.AtomElectronRangeModel.TYPE_KANAYA_OKAYAMA, modelList[Models.KEY_ATOM_ELECTRON_RANGE_MODEL].getModel())
-        self.assertEquals(MCXRayModel.XRayCSCharacteristicModel.TYPE_CASTANI, modelList[Models.KEY_XRAY_CS_CHARACTERISTIC_MODEL].getModel())
+        self.assertEquals(MCXRayModel.XRayCSCharacteristicModel.TYPE_CASTANI1982, modelList[Models.KEY_XRAY_CS_CHARACTERISTIC_MODEL].getModel())
         self.assertEquals(MCXRayModel.XRayCSBremsstrahlungModel.TYPE_KIRKPATRICK_WIEDMAN, modelList[Models.KEY_XRAY_CS_BREMSSTRAHLUNG_MODEL].getModel())
         self.assertEquals(MCXRayModel.SampleEnergyLossModel.TYPE_BETHE_JOY_LUO, modelList[Models.KEY_SAMPLE_ENERGY_LOSS_MODEL].getModel())
 
@@ -161,7 +161,7 @@ class TestModels(unittest.TestCase):
         self.assertEquals(MCXRayModel.AtomCollisionModel.TYPE_RUTHERFORD, modelList[Models.KEY_ATOM_COLLISION_MODEL].getModel())
         self.assertEquals(MCXRayModel.AtomCollisionScreeningModel.TYPE_HENOC_MAURICE, modelList[Models.KEY_ATOM_COLLISION_SCREENING_MODEL].getModel())
         self.assertEquals(MCXRayModel.AtomElectronRangeModel.TYPE_KANAYA_OKAYAMA, modelList[Models.KEY_ATOM_ELECTRON_RANGE_MODEL].getModel())
-        self.assertEquals(MCXRayModel.XRayCSCharacteristicModel.TYPE_CASTANI, modelList[Models.KEY_XRAY_CS_CHARACTERISTIC_MODEL].getModel())
+        self.assertEquals(MCXRayModel.XRayCSCharacteristicModel.TYPE_CASTANI1982, modelList[Models.KEY_XRAY_CS_CHARACTERISTIC_MODEL].getModel())
         self.assertEquals(MCXRayModel.XRayCSBremsstrahlungModel.TYPE_DING, modelList[Models.KEY_XRAY_CS_BREMSSTRAHLUNG_MODEL].getModel())
         self.assertEquals(MCXRayModel.SampleEnergyLossModel.TYPE_BETHE_JOY_LUO, modelList[Models.KEY_SAMPLE_ENERGY_LOSS_MODEL].getModel())
 
@@ -194,7 +194,7 @@ class TestModels(unittest.TestCase):
         self.assertEquals(MCXRayModel.AtomCollisionModel.TYPE_RUTHERFORD, modelList[Models.KEY_ATOM_COLLISION_MODEL].getModel())
         self.assertEquals(MCXRayModel.AtomCollisionScreeningModel.TYPE_HENOC_MAURICE, modelList[Models.KEY_ATOM_COLLISION_SCREENING_MODEL].getModel())
         self.assertEquals(MCXRayModel.AtomElectronRangeModel.TYPE_KANAYA_OKAYAMA, modelList[Models.KEY_ATOM_ELECTRON_RANGE_MODEL].getModel())
-        self.assertEquals(MCXRayModel.XRayCSCharacteristicModel.TYPE_CASTANI, modelList[Models.KEY_XRAY_CS_CHARACTERISTIC_MODEL].getModel())
+        self.assertEquals(MCXRayModel.XRayCSCharacteristicModel.TYPE_CASTANI1982, modelList[Models.KEY_XRAY_CS_CHARACTERISTIC_MODEL].getModel())
         self.assertEquals(MCXRayModel.XRayCSBremsstrahlungModel.TYPE_DING, modelList[Models.KEY_XRAY_CS_BREMSSTRAHLUNG_MODEL].getModel())
         self.assertEquals(MCXRayModel.SampleEnergyLossModel.TYPE_BETHE_JOY_LUO, modelList[Models.KEY_SAMPLE_ENERGY_LOSS_MODEL].getModel())
 
@@ -227,7 +227,7 @@ class TestModels(unittest.TestCase):
         self.assertEquals(MCXRayModel.AtomCollisionModel.TYPE_RUTHERFORD, modelList[Models.KEY_ATOM_COLLISION_MODEL].getModel())
         self.assertEquals(MCXRayModel.AtomCollisionScreeningModel.TYPE_HENOC_MAURICE, modelList[Models.KEY_ATOM_COLLISION_SCREENING_MODEL].getModel())
         self.assertEquals(MCXRayModel.AtomElectronRangeModel.TYPE_KANAYA_OKAYAMA, modelList[Models.KEY_ATOM_ELECTRON_RANGE_MODEL].getModel())
-        self.assertEquals(MCXRayModel.XRayCSCharacteristicModel.TYPE_CASTANI, modelList[Models.KEY_XRAY_CS_CHARACTERISTIC_MODEL].getModel())
+        self.assertEquals(MCXRayModel.XRayCSCharacteristicModel.TYPE_CASTANI1982, modelList[Models.KEY_XRAY_CS_CHARACTERISTIC_MODEL].getModel())
         self.assertEquals(MCXRayModel.XRayCSBremsstrahlungModel.TYPE_DING, modelList[Models.KEY_XRAY_CS_BREMSSTRAHLUNG_MODEL].getModel())
         self.assertEquals(MCXRayModel.SampleEnergyLossModel.TYPE_BETHE_JOY_LUO, modelList[Models.KEY_SAMPLE_ENERGY_LOSS_MODEL].getModel())
         self.assertEquals(MCXRayModel.RegionEnergyLossModel.TYPE_BETHE_JOY_LUO, modelList[Models.KEY_REGION_ENERGY_LOSS_MODEL].getModel())
@@ -264,7 +264,7 @@ class TestModels(unittest.TestCase):
         self.assertEquals(MCXRayModel.AtomCollisionModel.TYPE_BROWNING, modelList[Models.KEY_ATOM_COLLISION_MODEL].getModel())
         self.assertEquals(MCXRayModel.AtomCollisionScreeningModel.TYPE_HENOC_MAURICE, modelList[Models.KEY_ATOM_COLLISION_SCREENING_MODEL].getModel())
         self.assertEquals(MCXRayModel.AtomElectronRangeModel.TYPE_KANAYA_OKAYAMA, modelList[Models.KEY_ATOM_ELECTRON_RANGE_MODEL].getModel())
-        self.assertEquals(MCXRayModel.XRayCSCharacteristicModel.TYPE_CASTANI, modelList[Models.KEY_XRAY_CS_CHARACTERISTIC_MODEL].getModel())
+        self.assertEquals(MCXRayModel.XRayCSCharacteristicModel.TYPE_CASTANI1982, modelList[Models.KEY_XRAY_CS_CHARACTERISTIC_MODEL].getModel())
         self.assertEquals(MCXRayModel.XRayCSBremsstrahlungModel.TYPE_KIRKPATRICK_WIEDMAN, modelList[Models.KEY_XRAY_CS_BREMSSTRAHLUNG_MODEL].getModel())
         self.assertEquals(MCXRayModel.SampleEnergyLossModel.TYPE_BETHE_JOY_LUO, modelList[Models.KEY_SAMPLE_ENERGY_LOSS_MODEL].getModel())
 

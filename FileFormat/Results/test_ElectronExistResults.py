@@ -97,6 +97,7 @@ class TestElectronExistResults(unittest.TestCase):
         self.assertEquals(10, len(histogram))
 
         self.assertEquals(0.00056368600000000074, energies_keV[0])
+        self.assertEquals(0.11154738755555554, energies_keV[1])
         self.assertEquals(0.99941699999999978, energies_keV[-1])
 
         self.assertEquals(71.0, histogram[0])
@@ -107,11 +108,12 @@ class TestElectronExistResults(unittest.TestCase):
         self.assertEquals(20, len(energies_keV))
         self.assertEquals(20, len(histogram))
 
-        self.assertEquals(0.8, energies_keV[0])
-        self.assertEquals(0.9, energies_keV[-1])
+        self.assertEquals(0.00056368600000000421, energies_keV[0])
+        self.assertEquals(0.053134913052631585, energies_keV[1])
+        self.assertEquals(0.999417, energies_keV[-1])
 
-        self.assertEquals(71.0, histogram[0])
-        self.assertEquals(502, histogram[-1])
+        self.assertEquals(32.0, histogram[0])
+        self.assertEquals(264.0, histogram[-1])
 
         #self.fail("Test if the testcase is working.")
 

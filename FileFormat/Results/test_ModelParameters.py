@@ -108,7 +108,7 @@ def getLinesAndReference():
     modelParametersRef.atomCollisionScreeningModel = MCXRayModel.AtomScreeningModel.TYPE_HENOC_MAURICE
     modelParametersRef.atomElectronRangeModel = MCXRayModel.AtomElectronRangeModel.TYPE_KANAYA_OKAYAMA
     modelParametersRef.regionEnergyLossModel = MCXRayModel.SampleEnergyLossModel.TYPE_BETHE_JOY_LUO
-    modelParametersRef.characterisitcCrossSectionModel = MCXRayModel.XRayCSCharacteristicModel.TYPE_CASTANI
+    modelParametersRef.characterisitcCrossSectionModel = MCXRayModel.XRayCSCharacteristicModel.TYPE_CASTANI1982
     modelParametersRef.bremsstrahlungCrossSectionModel = MCXRayModel.XRayCSBremsstrahlungModel.TYPE_KIRKPATRICK_WIEDMAN
 
     return lines, modelParametersRef
