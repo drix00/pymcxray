@@ -59,6 +59,7 @@ PARAMETER_DETECTOR_AZIMUTHAL_ANGLE_deg = "azimuthalAngle_deg"
 PARAMETER_NUMBER_WINDOWS = "numberBackgroundWindows"
 
 PARAMETER_WEIGHT_FRACTION = "weightFraction"
+PARAMETER_WEIGHT_FRACTIONS = "weightFractions"
 PARAMETER_ATOMIC_FRACTION = "atomicFraction"
 
 PARAMETER_TRACER_ATOMIC_NUMBER = "tracerAtomicNumber"
