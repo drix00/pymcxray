@@ -67,6 +67,10 @@ class PhirhozEmittedCharacteristic(BaseResults.BaseResults):
     @depth_A.setter
     def depth_A(self, depth_A):
         self._depth_A = depth_A
+    @property
+    def depth_nm(self):
+        depths_nm = [depth_A*0.1 for depth_A in self._depth_A]
+        return depths_nm
 
     @property
     def phirhozs(self):
