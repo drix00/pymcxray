@@ -58,12 +58,16 @@ class PhirhozGeneratedCharacteristicThinFilm(BaseResults.BaseResults):
 
                 self._intensities.append(intensity)
 
-    def getIntensity(self, regionID, atomicSymbol, subshell):
+    def getIntensity(self, regionID, atomicSymbol, xrayLine):
         intensity = 0.0
 
         for data in self.intensities:
             if data[INDEX_REGION] == str(regionID) and data[ATOM_SYMBOL] == atomicSymbol:
-                intensity = float(data[subshell])
+                if not xrayLine.startswith(" Shell"):
+                    subshellLabel = " Shell %s" % xrayLine
+                else:
+                    subshellLabel = xrayLine
+                intensity = float(data[subshellLabel])
                 break
 
         return intensity
