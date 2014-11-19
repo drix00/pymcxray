@@ -62,6 +62,24 @@ class XrayIntensities(BaseResults.BaseResults):
                 self._intensities.append(intensity)
 
     def getDetectedIntensity(self, atomicNumber, xrayLine):
+        return self.getIntensityEmittedDetected(atomicNumber, xrayLine)
+
+    def getIntensityEmitted(self, atomicNumber, xrayLine):
+        data = {}
+
+        for intensity in self.intensities:
+            indexRegion = intensity[INDEX_REGION]
+
+            xrayLineLabel = "Line %s" % (xrayLine)
+            if intensity[ATOMIC_NUMBER] == str(atomicNumber) and intensity[LINE].startswith(xrayLineLabel):
+                if indexRegion not in data:
+                    data[indexRegion] = 0.0
+
+                data[indexRegion] += float(intensity[INTENSITY_EMITTED])
+
+        return data
+
+    def getIntensityEmittedDetected(self, atomicNumber, xrayLine):
         data = {}
 
         for intensity in self.intensities:
@@ -73,6 +91,48 @@ class XrayIntensities(BaseResults.BaseResults):
                     data[indexRegion] = 0.0
 
                 data[indexRegion] += float(intensity[INTENSITY_EMITTED_DETECTED])
+
+        return data
+
+    def getIntensityGenerated(self, atomicNumber, xraySubshell):
+        data = {}
+
+        for intensity in self.intensities:
+            indexRegion = intensity[INDEX_REGION]
+
+            if xraySubshell == "K":
+                xrayLine = "Ka1"
+            elif xraySubshell == "L":
+                xrayLine = "Ka1"
+            elif xraySubshell == "M":
+                xrayLine = "Ma"
+            xrayLineLabel = "Line %s" % (xrayLine)
+            if intensity[ATOMIC_NUMBER] == str(atomicNumber) and intensity[LINE].startswith(xrayLineLabel):
+                if indexRegion not in data:
+                    data[indexRegion] = 0.0
+
+                data[indexRegion] += float(intensity[INTENSITY_GENERATED])
+
+        return data
+
+    def getIntensityGeneratedDetected(self, atomicNumber, xraySubshell):
+        data = {}
+
+        for intensity in self.intensities:
+            indexRegion = intensity[INDEX_REGION]
+
+            if xraySubshell == "K":
+                xrayLine = "Ka1"
+            elif xraySubshell == "L":
+                xrayLine = "Ka1"
+            elif xraySubshell == "M":
+                xrayLine = "Ma"
+            xrayLineLabel = "Line %s" % (xrayLine)
+            if intensity[ATOMIC_NUMBER] == str(atomicNumber) and intensity[LINE].startswith(xrayLineLabel):
+                if indexRegion not in data:
+                    data[indexRegion] = 0.0
+
+                data[indexRegion] += float(intensity[INTENSITY_GENERATED_DETECTED])
 
         return data
 
