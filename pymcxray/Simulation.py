@@ -21,7 +21,7 @@ import os.path
 import numpy as np
 
 # Local modules.
-from DatabasesTools.ElementProperties import getAtomicMass_g_mol
+from pySpecimenTools.ElementProperties import getAtomicMass_g_mol
 
 # Project modules
 import pymcxray.AtomData as AtomData
