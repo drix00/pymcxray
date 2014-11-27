@@ -25,7 +25,7 @@ __svnId__ = "$Id$"
 # Local modules.
 
 # Project modules
-import Intersections
+import pymcxray.FileFormat.Results.Intersections as Intersections
 
 # Globals and constants variables.
 
@@ -34,7 +34,7 @@ class Dump(object):
         pass
 
     def read(self, filepath):
-        lines = open(filepath, 'rb').readlines()
+        lines = open(filepath, 'r').readlines()
 
         lineIndex = 2
         intersections = Intersections.Intersections()

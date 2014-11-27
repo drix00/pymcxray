@@ -19,14 +19,15 @@ __svnDate__ = "$Date$"
 __svnId__ = "$Id$"
 
 # Standard library modules.
+import copy
 
 # Third party modules.
 
 # Local modules.
 
 # Project modules
-import Version
-from FileReaderWriterTools import reduceAfterDot
+import pymcxray.FileFormat.Version as Version
+from pymcxray.FileFormat.FileReaderWriterTools import reduceAfterDot
 
 # Globals and constants variables.
 KEY_BEAM_ENERGY_keV = "BeamEnergy"
@@ -57,7 +58,7 @@ KEY_DETECTOR_HAADF_HIGH_rad = "DetectorHAADFHigh"
 
 class MicroscopeParameters(object):
     def __init__(self):
-        self.version = Version.CURRENT_VERSION
+        self.version = copy.deepcopy(Version.CURRENT_VERSION)
 
         self._keys = self._createKeys()
 
@@ -157,7 +158,7 @@ class MicroscopeParameters(object):
     def read(self, filepath):
         self.version.readFromFile(filepath)
 
-        lines = open(filepath, 'rb').readlines()
+        lines = open(filepath, 'r').readlines()
 
         extractMethods = self._createExtractMethod()
 
@@ -170,7 +171,7 @@ class MicroscopeParameters(object):
                     self._parameters[key] = extractMethods[key](items[-1])
 
     def write(self, filepath):
-        outputFile = open(filepath, 'wb')
+        outputFile = open(filepath, 'w')
 
         self._writeHeader(outputFile)
 

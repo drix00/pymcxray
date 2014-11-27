@@ -58,7 +58,7 @@ class SpectrumEDS(object):
                         self.enegies_keV.append(float(value))
                     elif key == KEY_COUNTS:
                         self.countsList.append(float(value))
-            except ValueError, message:
+            except ValueError as message:
                 logging.info(message)
 
     @property

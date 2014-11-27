@@ -19,12 +19,13 @@ __svnDate__ = "$Date$"
 __svnId__ = "$Id$"
 
 # Standard library modules.
+import copy
 
 # Third party modules.
 
 # Local modules.
-import Region
-import Version
+import pymcxray.FileFormat.Region as Region
+import pymcxray.FileFormat.Version as Version
 
 # Project modules
 
@@ -35,7 +36,7 @@ KEY_REGIONS = "Regions"
 
 class Specimen(object):
     def __init__(self):
-        self.version = Version.CURRENT_VERSION
+        self.version = copy.deepcopy(Version.CURRENT_VERSION)
 
         self._keys = self._createKeys()
 
@@ -74,7 +75,7 @@ class Specimen(object):
             self._readWithVersion(filepath)
 
     def _readWithVersion(self, filepath):
-        lines = open(filepath, 'rb').readlines()
+        lines = open(filepath, 'r').readlines()
 
         indexLine = 0
         for line in lines:
@@ -88,7 +89,7 @@ class Specimen(object):
                 self.numberRegions = int(items[-1])
                 break
 
-        for _indexRegion in xrange(self.numberRegions):
+        for _indexRegion in range(self.numberRegions):
             while lines[indexLine].strip() == "":
                 indexLine += 1
 
@@ -97,7 +98,7 @@ class Specimen(object):
             indexLine += region.extractFromLinesWithVersion(lines[indexLine:])
 
     def _readOldVersion(self, filepath):
-        lines = open(filepath, 'rb').readlines()
+        lines = open(filepath, 'r').readlines()
 
         extractMethods = self._createExtractMethods()
 
@@ -110,7 +111,7 @@ class Specimen(object):
             if not line.startswith("***") and len(line) != 0:
                 self.numberRegions = extractMethods[KEY_NUMBER_REGIONS](line)
 
-                for _indexRegion in xrange(self.numberRegions):
+                for _indexRegion in range(self.numberRegions):
                     # Skip blank line.
                     indexLine += 1
                     region = Region.Region()
@@ -120,7 +121,7 @@ class Specimen(object):
     def write(self, filepath):
         assert self.numberRegions == len(self.regions)
 
-        outputFile = open(filepath, 'wb')
+        outputFile = open(filepath, 'w')
 
         self._writeHeader(outputFile)
 

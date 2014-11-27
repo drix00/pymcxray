@@ -23,8 +23,8 @@ import os.path
 # Local modules.
 
 # Project modules
-import Version
-import testUtilities
+import pymcxray.FileFormat.Version as Version
+import pymcxray.FileFormat.testUtilities as testUtilities
 
 # Globals and constants variables.
 
@@ -40,7 +40,7 @@ class TestVersion(unittest.TestCase):
 
         unittest.TestCase.setUp(self)
 
-        self.testDataPath = os.path.abspath(os.path.join(os.path.dirname(__file__), "../testData"))
+        self.testDataPath = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../testData"))
         self.tempDataPath = testUtilities.createTempDataPath(self.testDataPath)
 
     def tearDown(self):
@@ -67,8 +67,8 @@ class TestVersion(unittest.TestCase):
 
         version =  Version.Version(1, 2, 3)
         stringRef = "1.2.3"
-        string = version.toString()
-        self.assertEquals(stringRef, string)
+        versionString = version.toString()
+        self.assertEquals(stringRef, versionString)
 
         #self.fail("Test if the testcase is working.")
 
@@ -80,8 +80,8 @@ class TestVersion(unittest.TestCase):
         version =  Version.Version(1, 2, 3)
         stringRef = "4.5.6"
         version.fromString(stringRef)
-        string = version.toString()
-        self.assertEquals(stringRef, string)
+        versionString = version.toString()
+        self.assertEquals(stringRef, versionString)
 
         self.assertEquals(4, version.major)
         self.assertEquals(5, version.minor)
@@ -101,8 +101,8 @@ class TestVersion(unittest.TestCase):
         version.readFromFile(filepath)
 
         stringRef = "1.4.1"
-        string = version.toString()
-        self.assertEquals(stringRef, string)
+        versionString = version.toString()
+        self.assertEquals(stringRef, versionString)
 
         self.assertEquals(1, version.major)
         self.assertEquals(4, version.minor)
@@ -122,8 +122,8 @@ class TestVersion(unittest.TestCase):
         version.readFromFile(filepath)
 
         stringRef = "1.1.1"
-        string = version.toString()
-        self.assertEquals(stringRef, string)
+        versionString = version.toString()
+        self.assertEquals(stringRef, versionString)
         self.assertEquals(1, version.major)
         self.assertEquals(1, version.minor)
         self.assertEquals(1, version.revision)
@@ -136,85 +136,85 @@ class TestVersion(unittest.TestCase):
         """
 
         stringRef = "1.1.1"
-        string = Version.VERSION_1_1_1.toString()
-        self.assertEquals(stringRef, string)
+        versionString = Version.VERSION_1_1_1.toString()
+        self.assertEquals(stringRef, versionString)
         self.assertEquals(1, Version.VERSION_1_1_1.major)
         self.assertEquals(1, Version.VERSION_1_1_1.minor)
         self.assertEquals(1, Version.VERSION_1_1_1.revision)
 
         stringRef = "1.2.0"
-        string = Version.VERSION_1_2_0.toString()
-        self.assertEquals(stringRef, string)
+        versionString = Version.VERSION_1_2_0.toString()
+        self.assertEquals(stringRef, versionString)
         self.assertEquals(1, Version.VERSION_1_2_0.major)
         self.assertEquals(2, Version.VERSION_1_2_0.minor)
         self.assertEquals(0, Version.VERSION_1_2_0.revision)
 
         stringRef = "1.2.1"
-        string = Version.VERSION_1_2_1.toString()
-        self.assertEquals(stringRef, string)
+        versionString = Version.VERSION_1_2_1.toString()
+        self.assertEquals(stringRef, versionString)
         self.assertEquals(1, Version.VERSION_1_2_1.major)
         self.assertEquals(2, Version.VERSION_1_2_1.minor)
         self.assertEquals(1, Version.VERSION_1_2_1.revision)
 
         stringRef = "1.2.2"
-        string = Version.VERSION_1_2_2.toString()
-        self.assertEquals(stringRef, string)
+        versionString = Version.VERSION_1_2_2.toString()
+        self.assertEquals(stringRef, versionString)
         self.assertEquals(1, Version.VERSION_1_2_2.major)
         self.assertEquals(2, Version.VERSION_1_2_2.minor)
         self.assertEquals(2, Version.VERSION_1_2_2.revision)
 
         stringRef = "1.2.3"
-        string = Version.VERSION_1_2_3.toString()
-        self.assertEquals(stringRef, string)
+        versionString = Version.VERSION_1_2_3.toString()
+        self.assertEquals(stringRef, versionString)
         self.assertEquals(1, Version.VERSION_1_2_3.major)
         self.assertEquals(2, Version.VERSION_1_2_3.minor)
         self.assertEquals(3, Version.VERSION_1_2_3.revision)
 
         stringRef = "1.2.4"
-        string = Version.VERSION_1_2_4.toString()
-        self.assertEquals(stringRef, string)
+        versionString = Version.VERSION_1_2_4.toString()
+        self.assertEquals(stringRef, versionString)
         self.assertEquals(1, Version.VERSION_1_2_4.major)
         self.assertEquals(2, Version.VERSION_1_2_4.minor)
         self.assertEquals(4, Version.VERSION_1_2_4.revision)
 
         stringRef = "1.2.5"
-        string = Version.VERSION_1_2_5.toString()
-        self.assertEquals(stringRef, string)
+        versionString = Version.VERSION_1_2_5.toString()
+        self.assertEquals(stringRef, versionString)
         self.assertEquals(1, Version.VERSION_1_2_5.major)
         self.assertEquals(2, Version.VERSION_1_2_5.minor)
         self.assertEquals(5, Version.VERSION_1_2_5.revision)
 
         stringRef = "1.3.0"
-        string = Version.VERSION_1_3_0.toString()
-        self.assertEquals(stringRef, string)
+        versionString = Version.VERSION_1_3_0.toString()
+        self.assertEquals(stringRef, versionString)
         self.assertEquals(1, Version.VERSION_1_3_0.major)
         self.assertEquals(3, Version.VERSION_1_3_0.minor)
         self.assertEquals(0, Version.VERSION_1_3_0.revision)
 
         stringRef = "1.4.0"
-        string = Version.VERSION_1_4_0.toString()
-        self.assertEquals(stringRef, string)
+        versionString = Version.VERSION_1_4_0.toString()
+        self.assertEquals(stringRef, versionString)
         self.assertEquals(1, Version.VERSION_1_4_0.major)
         self.assertEquals(4, Version.VERSION_1_4_0.minor)
         self.assertEquals(0, Version.VERSION_1_4_0.revision)
 
         stringRef = "1.4.1"
-        string = Version.VERSION_1_4_1.toString()
-        self.assertEquals(stringRef, string)
+        versionString = Version.VERSION_1_4_1.toString()
+        self.assertEquals(stringRef, versionString)
         self.assertEquals(1, Version.VERSION_1_4_1.major)
         self.assertEquals(4, Version.VERSION_1_4_1.minor)
         self.assertEquals(1, Version.VERSION_1_4_1.revision)
 
         stringRef = "1.4.2"
-        string = Version.VERSION_1_4_2.toString()
-        self.assertEquals(stringRef, string)
+        versionString = Version.VERSION_1_4_2.toString()
+        self.assertEquals(stringRef, versionString)
         self.assertEquals(1, Version.VERSION_1_4_2.major)
         self.assertEquals(4, Version.VERSION_1_4_2.minor)
         self.assertEquals(2, Version.VERSION_1_4_2.revision)
 
         stringRef = "1.1.1"
-        string = Version.BEFORE_VERSION.toString()
-        self.assertEquals(stringRef, string)
+        versionString = Version.BEFORE_VERSION.toString()
+        self.assertEquals(stringRef, versionString)
         self.assertEquals(1, Version.BEFORE_VERSION.major)
         self.assertEquals(1, Version.BEFORE_VERSION.minor)
         self.assertEquals(1, Version.BEFORE_VERSION.revision)
@@ -222,16 +222,16 @@ class TestVersion(unittest.TestCase):
         self.assertEquals(Version.VERSION_1_1_1, Version.BEFORE_VERSION)
         self.assertNotEquals(Version.VERSION_1_1_1, Version.CURRENT_VERSION)
 
-        stringRef = "1.4.2"
-        string = Version.CURRENT_VERSION.toString()
-        self.assertEquals(stringRef, string)
+        stringRef = "1.5.2"
+        versionString = Version.CURRENT_VERSION.toString()
+        self.assertEquals(stringRef, versionString)
         self.assertEquals(1, Version.CURRENT_VERSION.major)
-        self.assertEquals(4, Version.CURRENT_VERSION.minor)
+        self.assertEquals(5, Version.CURRENT_VERSION.minor)
         self.assertEquals(2, Version.CURRENT_VERSION.revision)
 
-        self.assertEquals(Version.VERSION_1_4_2, Version.CURRENT_VERSION)
-        self.assertNotEquals(Version.VERSION_1_4_2, Version.BEFORE_VERSION)
-        self.assertFalse(Version.VERSION_1_4_2 == Version.BEFORE_VERSION)
+        self.assertEquals(Version.VERSION_1_5_2, Version.CURRENT_VERSION)
+        self.assertNotEquals(Version.VERSION_1_5_2, Version.BEFORE_VERSION)
+        self.assertFalse(Version.VERSION_1_5_2 == Version.BEFORE_VERSION)
 
         #self.fail("Test if the testcase is working.")
 
@@ -244,7 +244,7 @@ class TestVersion(unittest.TestCase):
         filepath = os.path.join(self.tempDataPath, "%s.sim" % (title))
         logging.info(filepath)
         version = Version.Version(3, 4, 5)
-        outputFile = open(filepath, 'wb')
+        outputFile = open(filepath, 'w')
         version.writeLine(outputFile)
         outputFile.close()
 
@@ -252,8 +252,8 @@ class TestVersion(unittest.TestCase):
         version.readFromFile(filepath)
 
         stringRef = "3.4.5"
-        string = version.toString()
-        self.assertEquals(stringRef, string)
+        versionString = version.toString()
+        self.assertEquals(stringRef, versionString)
 
         self.assertEquals(3, version.major)
         self.assertEquals(4, version.minor)
@@ -261,7 +261,30 @@ class TestVersion(unittest.TestCase):
 
         #self.fail("Test if the testcase is working.")
 
+    def test_comparison(self):
+        """
+        Test comparison operation on Version class.
+        """
+        self.assertTrue(Version.VERSION_1_2_0 == Version.VERSION_1_2_0)
+        self.assertFalse(Version.VERSION_1_2_0 == Version.VERSION_1_1_1)
+        self.assertFalse(Version.VERSION_1_2_0 == Version.VERSION_1_2_1)
+
+        self.assertFalse(Version.VERSION_1_2_0 != Version.VERSION_1_2_0)
+        self.assertTrue(Version.VERSION_1_2_0 != Version.VERSION_1_1_1)
+        self.assertTrue(Version.VERSION_1_2_0 != Version.VERSION_1_2_1)
+
+        self.assertTrue(Version.VERSION_1_2_0 > Version.VERSION_1_1_1)
+        self.assertTrue(Version.VERSION_1_2_0 < Version.VERSION_1_2_1)
+        self.assertTrue(Version.VERSION_1_1_1 < Version.VERSION_1_2_0)
+        self.assertTrue(Version.VERSION_1_2_1 > Version.VERSION_1_2_0)
+
+        self.assertTrue(Version.VERSION_1_2_0 >= Version.VERSION_1_1_1)
+        self.assertTrue(Version.VERSION_1_2_0 <= Version.VERSION_1_2_1)
+        self.assertTrue(Version.VERSION_1_1_1 <= Version.VERSION_1_2_0)
+        self.assertTrue(Version.VERSION_1_2_1 >= Version.VERSION_1_2_0)
+
+        #self.fail("Test if the testcase is working.")
+
 if __name__ == '__main__':  #pragma: no cover
-    logging.getLogger().setLevel(logging.DEBUG)
-    from pyHendrixDemersTools.Testings import runTestModuleWithCoverage
-    runTestModuleWithCoverage(__file__)
+    import nose
+    nose.runmodule()

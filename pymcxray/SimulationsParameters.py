@@ -18,7 +18,7 @@ import logging
 import csv
 
 # Third party modules.
-import scitools.multipleloop #@UnresolvedImport
+import pymcxray.multipleloop as multipleloop
 
 # Local modules.
 
@@ -101,7 +101,7 @@ class SimulationsParameters(dict):
         parametersList.update(self._variedParameters)
         parametersList.update(self._fixedParameters)
 
-        allValues, names, dummyVaried = scitools.multipleloop.combine(parametersList)
+        allValues, names, dummyVaried = multipleloop.combine(parametersList)
 
         experiments = []
 
@@ -118,9 +118,9 @@ class SimulationsParameters(dict):
         return experiments
 
     def computeNumberXrays(self, experiment):
-        reader = csv.reader(open(self.computeNumberXraysFilepath, 'rb'))
+        reader = csv.reader(open(self.computeNumberXraysFilepath, 'r'))
 
-        reader.next()
+        next(reader)
 
         for row in reader:
             if float(row[0]) == float(experiment[PARAMETER_INCIDENT_ENERGY_keV]) and float(row[1]) == float(experiment[PARAMETER_SPHERE_DIAMETER_nm]):

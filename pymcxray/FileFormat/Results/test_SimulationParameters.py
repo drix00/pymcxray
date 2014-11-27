@@ -27,7 +27,7 @@ import logging
 # Local modules.
 
 # Project modules
-import SimulationParameters
+import pymcxray.FileFormat.Results.SimulationParameters as SimulationParameters
 
 # Globals and constants variables.
 

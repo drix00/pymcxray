@@ -23,7 +23,7 @@ import os.path
 # Local modules.
 
 # Project modules
-import XrayIntensityXY
+import pymcxray.FileFormat.Results.exported.XrayIntensityXY as XrayIntensityXY
 
 # Globals and constants variables.
 

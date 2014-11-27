@@ -58,7 +58,7 @@ class MCXRayModel(object):
                 return
         else:
             message = "Model not found from the string: %s" % (text)
-            raise ValueError, message
+            raise ValueError(message)
 
 class AtomMeanIonizationPotentialModel(MCXRayModel):
     TYPE_JOY_LUO = 0

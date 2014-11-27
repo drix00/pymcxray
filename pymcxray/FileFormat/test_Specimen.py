@@ -22,20 +22,21 @@ __svnId__ = "$Id$"
 import unittest
 import logging
 import os.path
+import copy
 
 # Third party modules.
+from nose.plugins.skip import SkipTest
 
 # Local modules.
-from pyHendrixDemersTools.Testings import ignore
 
 # Project modules
-import Specimen
-import testUtilities
-import Region
-import Element
-import RegionType
-import RegionDimensions
-import Version
+import pymcxray.FileFormat.Specimen as Specimen
+import pymcxray.FileFormat.testUtilities as testUtilities
+import pymcxray.FileFormat.Region as Region
+import pymcxray.FileFormat.Element as Element
+import pymcxray.FileFormat.RegionType as RegionType
+import pymcxray.FileFormat.RegionDimensions as RegionDimensions
+import pymcxray.FileFormat.Version as Version
 
 # Globals and constants variables.
 
@@ -51,7 +52,7 @@ class TestSpecimen(unittest.TestCase):
 
         unittest.TestCase.setUp(self)
 
-        self.testDataPath = os.path.abspath(os.path.join(os.path.dirname(__file__), "../testData"))
+        self.testDataPath = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../testData"))
         self.tempDataPath = testUtilities.createTempDataPath(self.testDataPath)
 
     def tearDown(self):
@@ -92,7 +93,7 @@ class TestSpecimen(unittest.TestCase):
             specimenRef = self.getSpecimenReference(title)
 
             self.assertEquals(specimenRef.version.major, specimen.version.major)
-            self.assertEquals(specimenRef.version.minor, specimen.version.minor)
+            self.assertEquals(specimenRef.version.minor, specimen.version.minor, title)
             self.assertEquals(specimenRef.version.revision, specimen.version.revision)
             self.assertEquals(specimenRef.version, specimen.version)
 
@@ -380,11 +381,12 @@ class TestSpecimen(unittest.TestCase):
 
         #self.fail("Test if the testcase is working.")
 
-    @ignore
     def test_write(self):
         """
         Tests for method `write`.
         """
+        raise SkipTest
+
         self.maxDiff = None
 
         for title in testUtilities.getSimulationTitles():
@@ -400,10 +402,10 @@ class TestSpecimen(unittest.TestCase):
 
             specimen.write(filepath)
 
-            linesRef = open(filepathReference, 'rb').readlines()
-            lines = open(filepath, 'rb').readlines()
+            linesRef = open(filepathReference, 'r').readlines()
+            lines = open(filepath, 'r').readlines()
 
-            for index in xrange(len(linesRef)):
+            for index in range(len(linesRef)):
                 lineRef = linesRef[index]
                 line = lines[index]
                 message = "%i:\n%s\n%s" % (index, lineRef, line)
@@ -413,11 +415,12 @@ class TestSpecimen(unittest.TestCase):
 
         #self.fail("Test if the testcase is working.")
 
-    @ignore
     def test_write_1_1_1(self):
         """
         Tests for method `write`.
         """
+        raise SkipTest
+
         self.maxDiff = None
 
         title = "AlMgBulk5keV_version_1_1_1"
@@ -431,10 +434,10 @@ class TestSpecimen(unittest.TestCase):
 
         specimen.write(filepath)
 
-        linesRef = open(filepathReference, 'rb').readlines()
-        lines = open(filepath, 'rb').readlines()
+        linesRef = open(filepathReference, 'r').readlines()
+        lines = open(filepath, 'r').readlines()
 
-        for index in xrange(len(linesRef)):
+        for index in range(len(linesRef)):
             lineRef = linesRef[index]
             line = lines[index]
             message = "%i:\n%s\n%s" % (index, lineRef, line)
@@ -458,13 +461,13 @@ class TestSpecimen(unittest.TestCase):
         filepath = os.path.join(self.tempDataPath, "%s.sam" % (title))
 
         specimen = specimenRef
-        specimen.version = Version.VERSION_1_2_0
+        specimen.version = copy.deepcopy(Version.VERSION_1_2_0)
         specimen.write(filepath)
 
-        linesRef = open(filepathReference, 'rb').readlines()
-        lines = open(filepath, 'rb').readlines()
+        linesRef = open(filepathReference, 'r').readlines()
+        lines = open(filepath, 'r').readlines()
 
-        for index in xrange(len(linesRef)):
+        for index in range(len(linesRef)):
             lineRef = linesRef[index]
             line = lines[index]
             message = "%i:\n%s\n%s" % (index, lineRef, line)
@@ -488,13 +491,13 @@ class TestSpecimen(unittest.TestCase):
         filepath = os.path.join(self.tempDataPath, "%s.sam" % (title))
 
         specimen = specimenRef
-        specimen.version = Version.VERSION_1_2_1
+        specimen.version = copy.deepcopy(Version.VERSION_1_2_1)
         specimen.write(filepath)
 
-        linesRef = open(filepathReference, 'rb').readlines()
-        lines = open(filepath, 'rb').readlines()
+        linesRef = open(filepathReference, 'r').readlines()
+        lines = open(filepath, 'r').readlines()
 
-        for index in xrange(len(linesRef)):
+        for index in range(len(linesRef)):
             lineRef = linesRef[index]
             line = lines[index]
             message = "%i:\n%s\n%s" % (index, lineRef, line)
@@ -521,10 +524,10 @@ class TestSpecimen(unittest.TestCase):
 
         specimen.write(filepath)
 
-        linesRef = open(filepathReference, 'rb').readlines()
-        lines = open(filepath, 'rb').readlines()
+        linesRef = open(filepathReference, 'r').readlines()
+        lines = open(filepath, 'r').readlines()
 
-        for index in xrange(len(linesRef)):
+        for index in range(len(linesRef)):
             lineRef = linesRef[index]
             line = lines[index]
             message = "%i:\n%s\n%s" % (index, lineRef, line)
@@ -539,6 +542,7 @@ class TestSpecimen(unittest.TestCase):
 
         if title == "AuBC cyl":
             specimen.numberRegions = 4
+            specimen.version = Version.Version(1, 1, 1)
 
             region = Region.Region()
             region.numberElements = 1
@@ -578,6 +582,7 @@ class TestSpecimen(unittest.TestCase):
 
         elif title == "BioRitchieNew111017":
             specimen.numberRegions = 7
+            specimen.version = Version.Version(1, 1, 1)
 
             region = Region.Region()
             region.numberElements = 3
@@ -687,6 +692,7 @@ class TestSpecimen(unittest.TestCase):
 
         elif title == "Bug Al Zr Sphere":
             specimen.numberRegions = 2
+            specimen.version = Version.Version(1, 1, 1)
 
             region = Region.Region()
             region.numberElements = 1
@@ -708,6 +714,7 @@ class TestSpecimen(unittest.TestCase):
 
         elif title == "Mg2SiAlCube3kev":
             specimen.numberRegions = 2
+            specimen.version = Version.Version(1, 1, 1)
 
             region = Region.Region()
             region.numberElements = 2
@@ -731,6 +738,7 @@ class TestSpecimen(unittest.TestCase):
 
         elif title == "AlMgBulk5keV_version_1_1_1":
             specimen.numberRegions = 3
+            specimen.version = Version.Version(1, 1, 1)
 
             region = Region.Region()
             region.numberElements = 2
@@ -763,6 +771,7 @@ class TestSpecimen(unittest.TestCase):
 
         elif title == "AlMgBulk5keV_version_1_2_0":
             specimen.numberRegions = 3
+            specimen.version = Version.Version(1, 2, 0)
 
             region = Region.Region()
             region.numberElements = 2
@@ -796,6 +805,7 @@ class TestSpecimen(unittest.TestCase):
 
         elif title == "AlMgBulk5keV_version_1_2_1":
             specimen.numberRegions = 3
+            specimen.version = Version.Version(1, 2, 1)
 
             region = Region.Region()
             region.numberElements = 2
@@ -829,6 +839,7 @@ class TestSpecimen(unittest.TestCase):
 
         elif title == "AlMgBulk5keV_version_1_4_1":
             specimen.numberRegions = 3
+            specimen.version = Version.Version(1, 4, 1)
 
             region = Region.Region()
             region.numberElements = 2

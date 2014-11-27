@@ -52,13 +52,11 @@ class XraySimulatedSpectraRegion(BaseResults.BaseResults):
         filename = self.basename + suffix
         filepath = os.path.join(self.path, filename)
 
-        with open(filepath, 'rb') as csvFile:
+        with open(filepath, 'r') as csvFile:
             reader = csv.DictReader(csvFile)
-            #reader = csv.DictReader(csvFile, self.fieldNames)
             fieldNames = reader.fieldnames
 
             # Skip header row
-            #reader.next()
 
             for row in reader:
                 self.channelNumbers.append(float(row[CHANNEL_NUMBER]))

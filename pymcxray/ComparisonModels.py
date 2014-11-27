@@ -55,15 +55,12 @@ class ComparisonModels(object):
                 logging.info("Reading filepath: %s", filepath)
 
                 data = {}
-                reader = csv.DictReader(open(filepath, 'rb'))
+                reader = csv.DictReader(open(filepath, 'r'))
 
                 validFieldnames = []
                 for fieldname in reader.fieldnames:
                     if fieldname.strip() != "":
                         validFieldnames.append(fieldname)
-
-                # Skip header row
-                #reader.next()
 
                 for key in validFieldnames:
                     data.setdefault(key, [])
@@ -101,7 +98,7 @@ class ComparisonModels(object):
                             x = np.array(data[KEY_XRAY_ENERGY_keV])[~maskArray.mask]
                             y = np.array(data[modelName])[~maskArray.mask]
                             plt.semilogy(x, y, label=modelName)
-                        except ValueError, message:
+                        except ValueError as message:
                             logging.error(message)
 
                     plt.legend(loc='best')
@@ -132,7 +129,7 @@ class ComparisonModels(object):
                             x = np.degrees(x)
                             y = np.array(data[modelName])[~maskArray.mask]
                             plt.semilogy(x, y, label=modelName)
-                        except ValueError, message:
+                        except ValueError as message:
                             logging.error(message)
 
                     plt.legend(loc='best')
@@ -164,7 +161,7 @@ class ComparisonModels(object):
             atomicNumber = int(items[2][1:])
             logging.debug(atomicNumber)
 
-            reader = csv.DictReader(open(filepath, 'rb'))
+            reader = csv.DictReader(open(filepath, 'r'))
 
             fieldnames = reader.fieldnames
             logging.debug(fieldnames)
@@ -221,7 +218,7 @@ class ComparisonModels(object):
             energy_keV = int(items[3][1:-3])
             logging.debug(energy_keV)
 
-            reader = csv.DictReader(open(filepath, 'rb'))
+            reader = csv.DictReader(open(filepath, 'r'))
 
             fieldnames = reader.fieldnames
             fieldnames = fieldnames[:-1]
@@ -279,7 +276,7 @@ class ComparisonModels(object):
             subshell = items[3]
             logging.debug(subshell)
 
-            reader = csv.DictReader(open(filepath, 'rb'))
+            reader = csv.DictReader(open(filepath, 'r'))
 
             fieldnames = reader.fieldnames
             fieldnames = fieldnames[:-1]

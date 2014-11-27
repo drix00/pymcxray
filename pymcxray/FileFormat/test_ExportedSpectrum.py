@@ -29,7 +29,7 @@ import shutil
 # Local modules.
 
 # Project modules
-import ExportedSpectrum
+import pymcxray.FileFormat.ExportedSpectrum as ExportedSpectrum
 
 # Globals and constants variables.
 
@@ -45,7 +45,7 @@ class TestExportedSpectrum(unittest.TestCase):
 
         unittest.TestCase.setUp(self)
 
-        self.testDataPath = os.path.abspath(os.path.join(os.path.dirname(__file__), "../testData", "exportedFiles"))
+        self.testDataPath = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../testData", "exportedFiles"))
 
         self.tempDataPath = os.path.join(self.testDataPath, "tmp")
         if not os.path.isdir(self.tempDataPath):

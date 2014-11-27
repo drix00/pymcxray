@@ -27,7 +27,7 @@ import logging
 # Local modules.
 
 # Project modules
-import PhirhozElement
+import pymcxray.FileFormat.Results.PhirhozElement as PhirhozElement
 
 # Globals and constants variables.
 

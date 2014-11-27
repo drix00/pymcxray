@@ -23,11 +23,12 @@ import unittest
 import logging
 
 # Third party modules.
+import six
 
 # Local modules.
 
 # Project modules
-import MCXRayModel
+import pymcxray.FileFormat.MCXRayModel as MCXRayModel
 
 # Globals and constants variables.
 
@@ -63,7 +64,10 @@ class TestMCXRayModel(unittest.TestCase):
         Tests for method `MCXRayModel`.
         """
 
-        self.assertRaises(TypeError, MCXRayModel.MCXRayModel)
+        if six.PY3:
+            self.assertRaises(NotImplementedError, MCXRayModel.MCXRayModel)
+        else:
+            self.assertRaises(TypeError, MCXRayModel.MCXRayModel)
 
         #self.fail("Test if the testcase is working.")
 

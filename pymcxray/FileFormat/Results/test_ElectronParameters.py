@@ -27,7 +27,7 @@ import logging
 # Local modules.
 
 # Project modules
-import ElectronParameters
+import pymcxray.FileFormat.Results.ElectronParameters as ElectronParameters
 
 # Globals and constants variables.
 

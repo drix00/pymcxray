@@ -22,7 +22,7 @@ import logging
 # Local modules.
 
 # Project modules
-import mcxray
+import pymcxray.mcxray as mcxray
 
 # Globals and constants variables.
 

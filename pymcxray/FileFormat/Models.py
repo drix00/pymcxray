@@ -19,14 +19,15 @@ __svnDate__ = "$Date$"
 __svnId__ = "$Id$"
 
 # Standard library modules.
+import copy
 
 # Third party modules.
 
 # Local modules.
-import MCXRayModel
+import pymcxray.FileFormat.MCXRayModel as MCXRayModel
 
 # Project modules
-import Version
+import pymcxray.FileFormat.Version as Version
 
 # Globals and constants variables.
 
@@ -47,7 +48,7 @@ KEY_MASS_ABSORPTION_COEFFICIENT_MODEL = "XRayMassAbsorptionCoefficientMode"
 
 class Models(object):
     def __init__(self):
-        self.version = Version.CURRENT_VERSION
+        self.version = copy.deepcopy(Version.CURRENT_VERSION)
 
         self._keys = self._createKeys()
 
@@ -94,7 +95,7 @@ class Models(object):
     def read(self, filepath):
         self.version.readFromFile(filepath)
 
-        lines = open(filepath, 'rb').readlines()
+        lines = open(filepath, 'r').readlines()
 
         for line in lines:
             line = line.strip()
@@ -108,7 +109,7 @@ class Models(object):
         return self._modelList
 
     def write(self, filepath):
-        outputFile = open(filepath, 'wb')
+        outputFile = open(filepath, 'w')
 
         self._writeHeader(outputFile)
 

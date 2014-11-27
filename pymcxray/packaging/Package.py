@@ -94,7 +94,7 @@ class Package(object):
                 self._copyDocumentations(temporaryPath)
                 self._copyLicenses(temporaryPath)
                 self._copyVersionFile(zipFilepath, temporaryPath)
-            except IOError, message:
+            except IOError as message:
                 logging.error("Cannot copy all files, zip file not created.")
                 logging.error(message)
                 return
@@ -116,7 +116,7 @@ class Package(object):
 
             try:
                 shutil.rmtree(temporaryPath, ignore_errors=False, onerror=handleRemoveReadonly)
-            except WindowsError, message:
+            except WindowsError as message:
                 logging.warning(message)
 
     def _getProgramVersion(self):
@@ -124,7 +124,7 @@ class Package(object):
         wincasinoResourceFilepath = os.path.join(self._developmentPath, self.RESOURCE_FILEPATH)
         wincasinoResourceFilepath = os.path.normpath(wincasinoResourceFilepath)
 
-        lines = open(wincasinoResourceFilepath, 'rb').readlines()
+        lines = open(wincasinoResourceFilepath, 'r').readlines()
 
         for line in lines:
             line = line.strip()
@@ -250,7 +250,7 @@ class Package(object):
                     basename, dummyExtension = os.path.splitext(filename)
                     date = self._getDateFromBasename(basename)
                     archiveFiles[date] = filename
-                except ValueError, message:
+                except ValueError as message:
                     logging.warning(message)
 
         if len(archiveFiles) > 0:
@@ -275,7 +275,7 @@ class Package(object):
                 try:
                     self._createPath(path, name="last %i version" % (index+1))
                     self._extractZipfile(filename, path)
-                except WindowsError, message:
+                except WindowsError as message:
                     logging.error(message)
                     logging.error("Cannot create the path: %s", path)
 
@@ -334,7 +334,7 @@ class Package(object):
     def _createVersionFile(self, archiveFilename, destinationPath):
         versionFilepath = self._getVersionFilepath(archiveFilename, destinationPath)
 
-        fileVersion = open(versionFilepath, 'wb')
+        fileVersion = open(versionFilepath, 'w')
         versionBasename, dummyExtension = os.path.splitext(archiveFilename)
         fileVersion.write(versionBasename)
         fileVersion.close()
@@ -429,7 +429,7 @@ def runMCXRayLite():
     try:
         releaseBasePath = Files.getBinPath(configurationFilepath, "mcxray/MCXRayLite")
         developmentPath = Files.getMCXRayDevPath(configurationFilepath)
-    except IOError, message:
+    except IOError as message:
         logging.info(configurationFilepath)
         logging.error(message)
 
@@ -444,7 +444,7 @@ def runMCXRay(packageName=None):
     try:
         releaseBasePath = Files.getBinPath(configurationFilepath, "mcxray/MCXRay")
         developmentPath = Files.getMCXRayDevPath(configurationFilepath)
-    except IOError, message:
+    except IOError as message:
         logging.info(configurationFilepath)
         logging.error(message)
 

@@ -25,7 +25,7 @@ __svnId__ = "$Id$"
 # Local modules.
 
 # Project modules
-import RegionType
+import pymcxray.FileFormat.RegionType as RegionType
 
 # Globals and constants variables.
 REGION_DIMENSION_MINIMUM_X = "minimumX"

@@ -22,7 +22,7 @@ import logging
 # Local modules.
 
 # Project modules
-import ComparisonModels
+import pymcxray.ComparisonModels as ComparisonModels
 
 # Globals and constants variables.
 

@@ -27,7 +27,7 @@ import logging
 # Local modules.
 
 # Project modules
-import DetectorParameters
+import pymcxray.FileFormat.Results.DetectorParameters as DetectorParameters
 
 # Globals and constants variables.
 

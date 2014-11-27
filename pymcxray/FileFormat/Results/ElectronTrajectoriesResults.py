@@ -137,10 +137,10 @@ class ElectronTrajectoriesResults(object):
         self.read(filepath)
 
     def read(self, filepath):
-        reader = csv.reader(open(filepath, 'rb'))
+        reader = csv.reader(open(filepath, 'r'))
 
         #Skip header line
-        reader.next()
+        next(reader)
 
         self._trajectories = []
         currentTrajectoryIndex = -1
@@ -205,7 +205,7 @@ class ElectronTrajectoriesResults(object):
 
         indexUniqueRegionsAllTrajectories = set()
         if trajectoryIndexes is None:
-            trajectoryIndexes = xrange(1, len(self._trajectories)+1)
+            trajectoryIndexes = range(1, len(self._trajectories)+1)
 
         for trajectoryIndex in trajectoryIndexes:
             trajectory = self._trajectories[trajectoryIndex-1]
@@ -261,7 +261,7 @@ class ElectronTrajectoriesResults(object):
         yMin, yMax = plt.ylim()
         plt.ylim((yMax, yMin))
 
-        print sorted(indexUniqueRegionsAllTrajectories)
+        print(sorted(indexUniqueRegionsAllTrajectories))
 
     def drawXY(self, title="", corrected=False):
         plt.figure()

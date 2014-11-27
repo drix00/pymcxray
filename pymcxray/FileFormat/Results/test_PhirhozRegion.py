@@ -28,7 +28,7 @@ import os.path
 # Local modules.
 
 # Project modules
-import PhirhozRegion
+import pymcxray.FileFormat.Results.PhirhozRegion as PhirhozRegion
 
 # Globals and constants variables.
 
@@ -44,7 +44,7 @@ class TestPhirhozRegion(unittest.TestCase):
 
         unittest.TestCase.setUp(self)
 
-        self.testDataPath = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../testData"))
+        self.testDataPath = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../testData"))
 
     def tearDown(self):
         """
@@ -77,7 +77,7 @@ class TestPhirhozRegion(unittest.TestCase):
 
 def getLinesAndReference(path):
     filepath = os.path.join(path, "version1.1/autoSavedFiles/phirhozGenerated_region0.txt")
-    lines = open(filepath, 'rb').readlines()
+    lines = open(filepath, 'r').readlines()
 
     phirhozRegionRef = PhirhozRegion.PhirhozRegion(64, 128)
     phirhozRegionRef.regionID = 0

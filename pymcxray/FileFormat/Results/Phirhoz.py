@@ -54,7 +54,7 @@ class Phirhoz(object):
 
         self.depths_A = []
         self.values = []
-        for _index in xrange(len(lines[indexLine:])):
+        for _index in range(len(lines[indexLine:])):
             line = lines[indexLine]
             indexLine += 1
             try:

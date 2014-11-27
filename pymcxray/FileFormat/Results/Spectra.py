@@ -25,10 +25,10 @@ __svnId__ = "$Id$"
 # Local modules.
 
 # Project modules
-import Tags
-import Spectrum
-import RegionParameters
-import ElementParameters
+import pymcxray.FileFormat.Results.Tags as Tags
+import pymcxray.FileFormat.Results.Spectrum as Spectrum
+import pymcxray.FileFormat.Results.RegionParameters as RegionParameters
+import pymcxray.FileFormat.Results.ElementParameters as ElementParameters
 import pymcxray.FileFormat.Element as Element
 
 # Globals and constants variables.
@@ -43,7 +43,7 @@ class Spectra(object):
         self._elementSpectra = {}
 
     def read(self, filepath):
-        lines = open(filepath, 'rb').readlines()
+        lines = open(filepath, 'r').readlines()
 
         lineIndex = 0
 
@@ -224,7 +224,7 @@ class Spectra(object):
         regionParameters.elements = []
 
         #    Weight fraction of Carbon = 1.000000
-        for _indexElement in xrange(regionParameters.numberElements):
+        for _indexElement in range(regionParameters.numberElements):
             line = lines[lineIndex]
             lineIndex += 1
 

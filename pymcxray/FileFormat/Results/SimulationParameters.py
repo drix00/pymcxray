@@ -90,7 +90,7 @@ class SimulationParameters(object):
                 break
         else:
             message = "Cannot find the section header in the liens: %s" % (KEY_SIMULATION_PARAMETERS)
-            raise ValueError, message
+            raise ValueError(message)
 
         extractMethodList = self._createExtractMdethodList()
         for key in self._createKeys():

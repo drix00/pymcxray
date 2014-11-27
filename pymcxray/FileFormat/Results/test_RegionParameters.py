@@ -27,7 +27,7 @@ import logging
 # Local modules.
 
 # Project modules
-import RegionParameters
+import pymcxray.FileFormat.Results.RegionParameters as RegionParameters
 
 # Globals and constants variables.
 

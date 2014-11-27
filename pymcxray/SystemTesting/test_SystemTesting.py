@@ -22,7 +22,7 @@ import logging
 # Local modules.
 
 # Project modules
-import SystemTesting
+import pymcxray.SystemTesting.SystemTesting as SystemTesting
 
 # Globals and constants variables.
 

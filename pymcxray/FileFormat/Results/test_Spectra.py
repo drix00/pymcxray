@@ -28,7 +28,7 @@ import os.path
 # Local modules.
 
 # Project modules
-import Spectra
+import pymcxray.FileFormat.Results.Spectra as Spectra
 import pymcxray.FileFormat.testUtilities as testUtilities
 
 # Globals and constants variables.
@@ -45,7 +45,7 @@ class TestSpectra(unittest.TestCase):
 
         unittest.TestCase.setUp(self)
 
-        self.testDataPath = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../testData"))
+        self.testDataPath = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../testData"))
 
     def tearDown(self):
         """
@@ -136,7 +136,7 @@ class TestSpectra(unittest.TestCase):
         """
 
         filepath = os.path.join(self.testDataPath, "autoSavedFiles", "McXRayXABX.txt")
-        lines = open(filepath, 'rb').readlines()[:1070]
+        lines = open(filepath, 'r').readlines()[:1070]
         spectraFile = Spectra.Spectra()
         lineIndex = spectraFile.readSpecimen(lines)
         self.assertEquals(1067, lineIndex)
@@ -169,7 +169,7 @@ class TestSpectra(unittest.TestCase):
         """
 
         filepath = os.path.join(self.testDataPath, "autoSavedFiles", "McXRayXABX.txt")
-        lines = open(filepath, 'rb').readlines()[1069:3143]
+        lines = open(filepath, 'r').readlines()[1069:3143]
         spectraFile = Spectra.Spectra()
         spectraFile.readRegion(lines)
 

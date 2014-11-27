@@ -44,7 +44,7 @@ class PhirhozGenerated(object):
         self._parameters = {}
 
     def read(self, filepath):
-        lines = open(filepath, 'rb').readlines()
+        lines = open(filepath, 'r').readlines()
 
         lineIndex = 0
 
@@ -89,11 +89,11 @@ class PhirhozGenerated(object):
                 break
         else:
             message = "Cannot find the section header in the liens: %s" % (KEY_NUMBER_REGIONS)
-            raise ValueError, message
+            raise ValueError(message)
 
         self._regions = {}
 
-        for indexRegion in xrange(self.numberRegions):
+        for indexRegion in range(self.numberRegions):
             region = PhirhozRegion.PhirhozRegion(self.simulationParameters.numberEnergyWindows, self.simulationParameters.numberLayersZ)
             indexLine += region.readFromLines(lines[indexLine:])
 

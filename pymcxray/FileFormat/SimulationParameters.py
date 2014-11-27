@@ -19,14 +19,15 @@ __svnDate__ = "$Date$"
 __svnId__ = "$Id$"
 
 # Standard library modules.
+import copy
 
 # Third party modules.
 
 # Local modules.
 
 # Project modules
-import MCXRayModel
-import Version
+import pymcxray.FileFormat.MCXRayModel as MCXRayModel
+import pymcxray.FileFormat.Version as Version
 
 # Globals and constants variables.
 KEY_BASE_FILENAME = "BaseFileName"
@@ -45,7 +46,7 @@ KEY_ENERGY_LOSS_SCALING_FACTOR = "EnergyLossScalingFactor"
 
 class SimulationParameters(object):
     def __init__(self):
-        self.version = Version.CURRENT_VERSION
+        self.version = copy.deepcopy(Version.CURRENT_VERSION)
 
         self._keys = self._createKeys()
 
@@ -136,7 +137,7 @@ class SimulationParameters(object):
     def read(self, filepath):
         self.version.readFromFile(filepath)
 
-        lines = open(filepath, 'rb').readlines()
+        lines = open(filepath, 'r').readlines()
 
         extractMethods = self._createExtractMethod()
 
@@ -149,7 +150,7 @@ class SimulationParameters(object):
                     self._parameters[key] = extractMethods[key](items[-1])
 
     def write(self, filepath):
-        outputFile = open(filepath, 'wb')
+        outputFile = open(filepath, 'w')
 
         self._writeHeader(outputFile)
 

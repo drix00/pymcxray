@@ -201,17 +201,17 @@ class _Simulations(object):
         zipFile = zipfile.ZipFile(destinationFilepath, 'r')
         try:
             zipFile.extractall(destinationPath)
-        except IOError, message:
+        except IOError as message:
             logging.error(message)
         zipFile.close()
 
-        fileVersion = open(versionFilepath, 'wb')
+        fileVersion = open(versionFilepath, 'w')
         fileVersion.write(versionBasename)
         fileVersion.close()
 
         try:
             os.remove(destinationFilepath)
-        except WindowsError, message:
+        except WindowsError as message:
             logging.error(message)
 
     def logNumberSimulations(self):
@@ -406,16 +406,16 @@ class _Simulations(object):
                             simulationsResults.save(simulationResultsList)
                         else:
                             logging.warning("File not found: %s", filepath)
-                except UnboundLocalError, message:
+                except UnboundLocalError as message:
                     logging.error("UnboundLocalError in %s for %s", "_readAllResultsSerialization", filepath)
                     logging.error(message)
-                except ValueError, message:
+                except ValueError as message:
                     logging.error("ValueError in %s for %s", "_readAllResultsSerialization", filepath)
                     logging.error(message)
-                except AssertionError, message:
+                except AssertionError as message:
                     logging.error("AssertionError in %s for %s", "_readAllResultsSerialization", filepath)
                     logging.error(message)
-                except IOError, message:
+                except IOError as message:
                     logging.warning(message)
                     logging.warning(simulation.name)
                     _numberError += 1
@@ -455,16 +455,16 @@ class _Simulations(object):
                             simulationResultsList[key] = self.readOneResults(simulation)
                         else:
                             logging.warning("File not found: %s", filepath)
-                except UnboundLocalError, message:
+                except UnboundLocalError as message:
                     logging.error("UnboundLocalError in %s for %s", "_readAllResultsSerialization", filepath)
                     logging.error(message)
-                except ValueError, message:
+                except ValueError as message:
                     logging.error("ValueError in %s for %s", "_readAllResultsSerialization", filepath)
                     logging.error(message)
-                except AssertionError, message:
+                except AssertionError as message:
                     logging.error("AssertionError in %s for %s", "_readAllResultsSerialization", filepath)
                     logging.error(message)
-                except IOError, message:
+                except IOError as message:
                     logging.warning(message)
                     logging.warning(simulation.name)
                     _numberError += 1

@@ -17,7 +17,7 @@ __license__ = ""
 
 # Third party modules.
 import numpy as np
-import Image
+from PIL import Image
 
 # Local modules.
 
@@ -32,7 +32,7 @@ class DataMap(object):
         self.size = (0, 0)
 
     def read(self):
-        lines = open(self._filepath, 'rb').readlines()
+        lines = open(self._filepath, 'r').readlines()
 
         line = lines[0]
         index = line.rfind('(')

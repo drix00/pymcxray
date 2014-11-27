@@ -53,12 +53,12 @@ class BatchFile(object):
             indexStep = int(math.ceil(float(len(self._simulationFilenames))/float(self._numberFiles)))
 
             indexFilenames = 0
-            for indexFile in xrange(self._numberFiles):
+            for indexFile in range(self._numberFiles):
                 filename = self._name + "_%i" % (indexFile+1) + self._extension
                 filepath = os.path.join(path, filename)
 
                 logging.info("Write batch file: %s", filepath)
-                batchFile = open(filepath, 'wb')
+                batchFile = open(filepath, 'w')
 
                 for simulationFilename in self._simulationFilenames[indexFilenames:indexFilenames+indexStep]:
                     line = simulationFilename + "\n"
@@ -72,7 +72,7 @@ class BatchFile(object):
             filepath = os.path.join(path, filename)
 
             logging.info("Write batch file: %s", filepath)
-            batchFile = open(filepath, 'wb')
+            batchFile = open(filepath, 'w')
 
             for simulationFilename in self._simulationFilenames:
                 line = simulationFilename + "\n"

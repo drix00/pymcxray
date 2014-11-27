@@ -28,7 +28,7 @@ import os.path
 # Local modules.
 
 # Project modules
-import Phirhoz
+import pymcxray.FileFormat.Results.Phirhoz as Phirhoz
 from pymcxray.FileFormat.Results.PhirhozRegion import SHELL_L
 
 # Globals and constants variables.
@@ -45,7 +45,7 @@ class TestPhirhoz(unittest.TestCase):
 
         unittest.TestCase.setUp(self)
 
-        self.testDataPath = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../testData"))
+        self.testDataPath = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../testData"))
 
     def tearDown(self):
         """
@@ -89,7 +89,7 @@ class TestPhirhoz(unittest.TestCase):
 
 def getLinesAndReference(path):
     filepath = os.path.join(path, "version1.1/autoSavedFiles/phirhozGenerated_elementShell.txt")
-    lines = open(filepath, 'rb').readlines()
+    lines = open(filepath, 'r').readlines()
 
     phirhozRef = Phirhoz.Phirhoz('Au', SHELL_L)
     phirhozRef.intensity = 1.366974e+007

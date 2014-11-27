@@ -21,20 +21,18 @@ __svnId__ = "$Id$"
 # Standard library modules.
 import unittest
 import logging
-import os.path
 
 # Third party modules.
 
 # Local modules.
-from pyHendrixDemersTools.Testings import ignore
 
 # Project modules
-import Region
-import testUtilities
-import RegionType
-import Element
-import RegionDimensions
-import Version
+import pymcxray.FileFormat.Region as Region
+import pymcxray.FileFormat.testUtilities as testUtilities
+import pymcxray.FileFormat.RegionType as RegionType
+import pymcxray.FileFormat.Element as Element
+import pymcxray.FileFormat.RegionDimensions as RegionDimensions
+import pymcxray.FileFormat.Version as Version
 
 # Globals and constants variables.
 

@@ -5,8 +5,6 @@
 
 Tests for the module `AtomData`.
 """
-from ctypes.wintypes import ATOM
-
 # Script information for the file.
 __author__ = "Hendrix Demers (hendrix.demers@mail.mcgill.ca)"
 __version__ = ""
@@ -23,7 +21,7 @@ import logging
 # Local modules.
 
 # Project modules
-import AtomData
+import pymcxray.AtomData as AtomData
 
 # Globals and constants variables.
 

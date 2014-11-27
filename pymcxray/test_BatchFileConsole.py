@@ -22,7 +22,7 @@ import logging
 # Local modules.
 
 # Project modules
-import BatchFileConsole
+import pymcxray.BatchFileConsole as BatchFileConsole
 
 # Globals and constants variables.
 

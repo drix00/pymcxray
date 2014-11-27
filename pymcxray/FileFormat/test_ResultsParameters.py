@@ -19,14 +19,14 @@ import logging
 import os.path
 
 # Third party modules.
+from nose.plugins.skip import SkipTest
 
 # Local modules.
-from pyHendrixDemersTools.Testings import ignore
 
 # Project modules
-import ResultsParameters
-import testUtilities
-import Version
+import pymcxray.FileFormat.ResultsParameters as ResultsParameters
+import pymcxray.FileFormat.testUtilities as testUtilities
+import pymcxray.FileFormat.Version as Version
 
 # Globals and constants variables.
 
@@ -42,7 +42,7 @@ class TestResultsParameters(unittest.TestCase):
 
         unittest.TestCase.setUp(self)
 
-        self.testDataPath = os.path.abspath(os.path.join(os.path.dirname(__file__), "../testData"))
+        self.testDataPath = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../testData"))
         self.tempDataPath = testUtilities.createTempDataPath(self.testDataPath)
 
     def tearDown(self):
@@ -62,11 +62,11 @@ class TestResultsParameters(unittest.TestCase):
         #self.fail("Test if the testcase is working.")
         self.assert_(True)
 
-    @ignore()
     def test_read(self):
         """
         Tests for method `read`.
         """
+        raise SkipTest
 
         for title in testUtilities.getSimulationTitles():
             resultsParameters = ResultsParameters.ResultsParameters()
@@ -142,15 +142,17 @@ class TestResultsParameters(unittest.TestCase):
         resultsParameters = ResultsParameters.ResultsParameters()
 
         if title == "AlMgBulk5keV_version_1_2_1":
+            resultsParameters.version = Version.Version(1, 2, 1)
             resultsParameters.isComputeXrayCharacteristic = None
             resultsParameters.isComputeXrayBremsstrahlung = None
             resultsParameters.isComputeXrayPhirhoz = None
         elif title == "AlMgBulk5keV_version_1_4_1":
+            resultsParameters.version = Version.Version(1, 4, 1)
             resultsParameters.isComputeXrayCharacteristic = True
             resultsParameters.isComputeXrayBremsstrahlung = True
             resultsParameters.isComputeXrayPhirhoz = True
-
         elif title == "AlMgBulk5keV_version_1_4_3":
+            resultsParameters.version = Version.Version(1, 4, 3)
             resultsParameters.isComputeXrayCharacteristic = True
             resultsParameters.isComputeXrayBremsstrahlung = False
             resultsParameters.isComputeXrayPhirhoz = False
@@ -158,11 +160,12 @@ class TestResultsParameters(unittest.TestCase):
 
         return resultsParameters
 
-    @ignore()
     def test_write(self):
         """
         Tests for method `write`.
         """
+        raise SkipTest
+
         self.maxDiff = None
 
         for title in testUtilities.getSimulationTitles():
@@ -180,8 +183,8 @@ class TestResultsParameters(unittest.TestCase):
             self.assertEquals(resultsParametersRef.isComputeXrayBremsstrahlung, resultsParameters.isComputeXrayBremsstrahlung)
             self.assertEquals(resultsParametersRef.isComputeXrayPhirhoz, resultsParameters.isComputeXrayPhirhoz)
 
-            linesRef = open(filepathReference, 'rb').readlines()
-            lines = open(filepath, 'rb').readlines()
+            linesRef = open(filepathReference, 'r').readlines()
+            lines = open(filepath, 'r').readlines()
 
             self.assertListEqual(linesRef, lines)
 
@@ -214,8 +217,8 @@ class TestResultsParameters(unittest.TestCase):
         self.assertEquals(resultsParametersRef.version.revision, resultsParameters.version.revision)
         self.assertEquals(resultsParametersRef.version, resultsParameters.version)
 
-        linesRef = open(filepathReference, 'rb').readlines()
-        lines = open(filepath, 'rb').readlines()
+        linesRef = open(filepathReference, 'r').readlines()
+        lines = open(filepath, 'r').readlines()
 
         self.assertListEqual(linesRef, lines)
 
@@ -249,8 +252,8 @@ class TestResultsParameters(unittest.TestCase):
         self.assertEquals(resultsParametersRef.version.revision, resultsParameters.version.revision)
         self.assertEquals(resultsParametersRef.version, resultsParameters.version)
 
-        linesRef = open(filepathReference, 'rb').readlines()
-        lines = open(filepath, 'rb').readlines()
+        linesRef = open(filepathReference, 'r').readlines()
+        lines = open(filepath, 'r').readlines()
 
         self.assertListEqual(linesRef, lines)
 

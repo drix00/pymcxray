@@ -23,8 +23,8 @@ import os.path
 # Local modules.
 
 # Project modules
-import SnrParameters
-import testUtilities
+import pymcxray.FileFormat.SnrParameters as SnrParameters
+import pymcxray.FileFormat.testUtilities as testUtilities
 
 # Globals and constants variables.
 
@@ -40,7 +40,7 @@ class TestSnrParameters(unittest.TestCase):
 
         unittest.TestCase.setUp(self)
 
-        self.testDataPath = os.path.abspath(os.path.join(os.path.dirname(__file__), "../testData"))
+        self.testDataPath = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../testData"))
         self.tempDataPath = testUtilities.createTempDataPath(self.testDataPath)
 
     def tearDown(self):
@@ -130,8 +130,8 @@ class TestSnrParameters(unittest.TestCase):
             self.assertEquals(snrParametersRef.backgroundEnergyWindowsSize, snrParameters.backgroundEnergyWindowsSize)
             self.assertEquals(snrParametersRef.spectrumEnergyWindowsSize, snrParameters.spectrumEnergyWindowsSize)
 
-            linesRef = open(filepathReference, 'rb').readlines()
-            lines = open(filepath, 'rb').readlines()
+            linesRef = open(filepathReference, 'r').readlines()
+            lines = open(filepath, 'r').readlines()
 
             self.assertListEqual(linesRef, lines)
 

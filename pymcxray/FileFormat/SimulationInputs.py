@@ -15,13 +15,14 @@ __license__ = ""
 
 # Standard library modules.
 import os.path
+import copy
 
 # Third party modules.
 
 # Local modules.
 
 # Project modules
-import Version
+import pymcxray.FileFormat.Version as Version
 
 # Globals and constants variables.
 
@@ -40,7 +41,7 @@ class SimulationInputs(object):
 
         self._title = ""
 
-        self.version = Version.CURRENT_VERSION
+        self.version = copy.deepcopy(Version.CURRENT_VERSION)
 
     def _createKeys(self):
         keys = []
@@ -60,7 +61,7 @@ class SimulationInputs(object):
 
         self._title = self._extractTitleFromFilepath(filepath)
 
-        lines = open(filepath, 'rb').readlines()
+        lines = open(filepath, 'r').readlines()
 
         for line in lines:
             line = line.strip()
@@ -73,7 +74,7 @@ class SimulationInputs(object):
     def write(self, filepath):
         title = self._extractTitleFromFilepath(filepath)
 
-        outputFile = open(filepath, 'wb')
+        outputFile = open(filepath, 'w')
 
         self.version.writeLine(outputFile)
 
