@@ -22,7 +22,7 @@ import logging
 # Local modules.
 
 # Project modules
-import FileReaderWriterTools
+import pymcxray.FileFormat.FileReaderWriterTools as FileReaderWriterTools
 
 # Globals and constants variables.
 

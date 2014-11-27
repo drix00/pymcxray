@@ -89,7 +89,7 @@ class ModelParameters(object):
                 break
         else:
             message = "Cannot find the section header in the liens: %s" % (KEY_MODEL_PARAMETERS)
-            raise ValueError, message
+            raise ValueError(message)
 
         modelList = self._createModelList()
         for key in self._createKeys():

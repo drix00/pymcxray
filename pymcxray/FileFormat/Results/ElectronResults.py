@@ -46,7 +46,7 @@ class ElectronResults(BaseResults.BaseResults):
         filename = self.basename + suffix
         filepath = os.path.join(self.path, filename)
 
-        with open(filepath, 'rb') as inputFile:
+        with open(filepath, 'r') as inputFile:
             lines = inputFile.readlines()
 
             for line in lines:

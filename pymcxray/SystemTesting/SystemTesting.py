@@ -179,7 +179,7 @@ class SimulationsRepetitions(SimulationsBulk):
         inputPath = os.path.join(self.getSimulationsPath(), "input")
         inputPath = Files.createPath(inputPath)
 
-        for repetitionID in xrange(1, self._repetitions+1):
+        for repetitionID in range(1, self._repetitions+1):
             simulation = Simulation.Simulation(overwrite=self._overwrite)
             label = "_X%02i" % (repetitionID)
             simulation.basename = self.getAnalysisName() + label
@@ -216,7 +216,7 @@ class SimulationsRepetitions(SimulationsBulk):
         logging.info("readResultsFiles")
 
         results = {}
-        for repetitionID in xrange(1, self._repetitions+1):
+        for repetitionID in range(1, self._repetitions+1):
             simulation = Simulation.Simulation(overwrite=self._overwrite)
             label = "_X%02i" % (repetitionID)
             simulation.basename = self.getAnalysisName() + label
@@ -1333,7 +1333,7 @@ class SimulationsAlloy(SimulationsBulk):
         logging.info("readResultsFiles")
 
         results = {}
-        for repetitionID in xrange(1, self._repetitions+1):
+        for repetitionID in range(1, self._repetitions+1):
             simulation = Simulation.Simulation(overwrite=self._overwrite)
             label = "_X%02i" % (repetitionID)
             simulation.basename = self.getAnalysisName() + label
@@ -1865,7 +1865,7 @@ class SimulationsFilm(SimulationsBulk):
         logging.info("readResultsFiles")
 
         results = {}
-        for repetitionID in xrange(1, self._repetitions+1):
+        for repetitionID in range(1, self._repetitions+1):
             simulation = Simulation.Simulation(overwrite=self._overwrite)
             label = "_X%02i" % (repetitionID)
             simulation.basename = self.getAnalysisName() + label

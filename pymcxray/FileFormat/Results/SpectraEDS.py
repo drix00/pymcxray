@@ -63,7 +63,7 @@ class SpectraEDS(object):
         self._parameters = {}
 
     def readFilepath(self, filepath):
-        inputFile = open(filepath, 'rb')
+        inputFile = open(filepath, 'r')
 
         self.readFileObject(inputFile)
 
@@ -101,7 +101,7 @@ class SpectraEDS(object):
             return False
 
     def readTestInputSection(self, lines):
-        raise NotImplementedError
+        raise NotImplementedError()
 
     def readPartialSpectraReferenceSection(self, lines):
         indexLineStart = lines.index(PARTIAL_SPECTRA_REFERENCE_SECTION_ORIGINAL)
@@ -151,7 +151,7 @@ class SpectraEDS(object):
                 break
             indexLine += 1
         else:
-            raise ValueError
+            raise ValueError()
 
         line = lines[indexLine]
         key, value = line.split('=')
@@ -166,7 +166,7 @@ class SpectraEDS(object):
         indexLine += 1
 
         self._parameters[KEY_ELEMENTS] = {}
-        for _index in xrange(self.numberElements):
+        for _index in range(self.numberElements):
             line = lines[indexLine]
             symbol, value = line.split('=')
             symbol = symbol.replace(KEY_ELEMENT_WEIGHT_FRACTION, '').strip()
@@ -248,7 +248,7 @@ class SpectraEDS(object):
         numberChannelEds = len(self.iOutSpectrumEDS.channels)
 
         self.eNetSpectrumEDS = {}
-        for indexPeak in xrange(self.numberCharateristicPeaks):
+        for indexPeak in range(self.numberCharateristicPeaks):
             self.eNetSpectrumEDS[indexPeak] = SpectrumEDS.SpectrumEDS()
         indexLine = lines.index(SECTION_E_NET_PEAK_CHANNEL) + 1
         for line in lines[indexLine:]:
@@ -261,7 +261,7 @@ class SpectraEDS(object):
                 energy_keV = float(items[2][1:])
 
                 values = values.split()
-                for indexPeak in xrange(len(values)):
+                for indexPeak in range(len(values)):
                     counts = float(values[indexPeak])
                     self.eNetSpectrumEDS[indexPeak].channels.append(channel)
                     self.eNetSpectrumEDS[indexPeak].enegies_keV.append(energy_keV)
@@ -397,15 +397,15 @@ def runExample():
 
     plt.figure()
 
-    x = xrange(len(spectraEDSregion0.pCharacteristic))
+    x = range(len(spectraEDSregion0.pCharacteristic))
     y = spectraEDSregion0.pCharacteristic
     plt.plot(x, y, label="p Char")
 
-    x = xrange(len(spectraEDSregion0.pBackground))
+    x = range(len(spectraEDSregion0.pBackground))
     y = spectraEDSregion0.pBackground
     plt.plot(x, y, label="p Back")
 
-    x = xrange(len(spectraEDSregion0.continuumCumulativeEquiprobableChannels))
+    x = range(len(spectraEDSregion0.continuumCumulativeEquiprobableChannels))
     y = spectraEDSregion0.continuumCumulativeEquiprobableChannels
     plt.plot(x, y, label="p Back Equi")
 

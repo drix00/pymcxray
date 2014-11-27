@@ -27,7 +27,7 @@ import logging
 # Local modules.
 
 # Project modules
-import Element
+import pymcxray.FileFormat.Element as Element
 
 # Globals and constants variables.
 

@@ -23,7 +23,7 @@ import logging
 import pyHendrixDemersTools.Files as Files
 
 # Project modules
-import DataMap
+import pymcxray.FileFormat.Results.exported.DataMap as DataMap
 
 # Globals and constants variables.
 
@@ -39,7 +39,7 @@ class TestDataMap(unittest.TestCase):
 
         unittest.TestCase.setUp(self)
 
-        self.filepath = Files.getCurrentModulePath(__file__, "../../../testData/exportedFiles/CNTsFePt_30keV_100e_100pixels_BF.txt")
+        self.filepath = Files.getCurrentModulePath(__file__, "../../../../testData/exportedFiles/CNTsFePt_30keV_100e_100pixels_BF.txt")
 
     def tearDown(self):
         """

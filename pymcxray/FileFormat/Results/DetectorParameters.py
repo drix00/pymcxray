@@ -91,7 +91,7 @@ class DetectorParameters(object):
                 break
         else:
             message = "Cannot find the section header in the liens: %s" % (KEY_DETECTOR_PARAMETERS)
-            raise ValueError, message
+            raise ValueError(message)
 
         for key in self._createKeys():
             line = lines[indexLine]

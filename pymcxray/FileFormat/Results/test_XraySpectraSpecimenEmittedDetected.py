@@ -23,7 +23,7 @@ import logging
 import pyHendrixDemersTools.Files as Files
 
 # Project modules
-import XraySpectraSpecimenEmittedDetected
+import pymcxray.FileFormat.Results.XraySpectraSpecimenEmittedDetected as XraySpectraSpecimenEmittedDetected
 
 # Globals and constants variables.
 #SimulationsAuNPonC_Au_d100A_C_E10d0keV_N10000e_N1000000X_SpectraSpecimenEmittedDetected.csv
@@ -61,7 +61,7 @@ class TestXraySpectraSpecimenEmittedDetected(unittest.TestCase):
         """
 
         spectrumFile = XraySpectraSpecimenEmittedDetected.XraySpectraSpecimenEmittedDetected()
-        spectrumFile.path = Files.getCurrentModulePath(__file__, "../../testData/results")
+        spectrumFile.path = Files.getCurrentModulePath(__file__, "../../../testData/results")
         spectrumFile.basename = "SimulationsAuNPonC_Au_d100A_C_E10d0keV_N10000e_N1000000X"
 
         spectrumFile.read()

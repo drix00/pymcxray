@@ -30,7 +30,7 @@ class BaseResults(object):
         self.basename = basename
 
     def _createFilename(self):
-        raise NotImplementedError
+        raise NotImplementedError()
 
     @property
     def path(self):

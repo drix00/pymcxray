@@ -130,7 +130,7 @@ class ElectronExistResults(BaseResults.BaseResults):
         return filename
 
     def read(self):
-        reader = csv.DictReader(open(self.filepath, 'rb'))
+        reader = csv.DictReader(open(self.filepath, 'r'))
         data = {}
         for fieldname in reader.fieldnames:
             data.setdefault(fieldname.strip(), [])

@@ -27,8 +27,8 @@ import logging
 # Local modules.
 
 # Project modules
-import RegionDimensions
-import RegionType
+import pymcxray.FileFormat.RegionDimensions as RegionDimensions
+import pymcxray.FileFormat.RegionType as RegionType
 
 # Globals and constants variables.
 

@@ -20,7 +20,7 @@ import logging
 # Third party modules.
 
 # Local modules.
-import Package
+import pymcxray.packaging.Package as Package
 
 # Globals and constants variables.
 

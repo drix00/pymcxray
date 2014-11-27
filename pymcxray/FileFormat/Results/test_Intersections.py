@@ -27,7 +27,7 @@ import logging
 # Local modules.
 
 # Project modules
-import Intersections
+import pymcxray.FileFormat.Results.Intersections as Intersections
 
 # Globals and constants variables.
 
@@ -69,7 +69,7 @@ class TestIntersections(unittest.TestCase):
 -10000000000.000000 10000000000.000000 -10000000000.000000 10000000000.000000 0.000000 20000000000.000000
 
 """.splitlines()
-        print lines
+        print(lines)
 
         #self.fail("Test if the testcase is working.")
 

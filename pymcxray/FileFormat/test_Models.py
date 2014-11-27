@@ -24,15 +24,15 @@ import logging
 import os.path
 
 # Third party modules.
+from nose.plugins.skip import SkipTest
 
 # Local modules.
-from pyHendrixDemersTools.Testings import ignore
 
 # Project modules
-import Models
-import MCXRayModel
-import testUtilities
-import Version
+import pymcxray.FileFormat.Models as Models
+import pymcxray.FileFormat.MCXRayModel as MCXRayModel
+import pymcxray.FileFormat.testUtilities as testUtilities
+import pymcxray.FileFormat.Version as Version
 
 # Globals and constants variables.
 
@@ -48,7 +48,7 @@ class TestModels(unittest.TestCase):
 
         unittest.TestCase.setUp(self)
 
-        self.testDataPath = os.path.abspath(os.path.join(os.path.dirname(__file__), "../testData"))
+        self.testDataPath = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../testData"))
 
         self.tempDataPath = testUtilities.createTempDataPath(self.testDataPath)
 
@@ -264,17 +264,18 @@ class TestModels(unittest.TestCase):
         self.assertEquals(MCXRayModel.AtomCollisionModel.TYPE_BROWNING, modelList[Models.KEY_ATOM_COLLISION_MODEL].getModel())
         self.assertEquals(MCXRayModel.AtomCollisionScreeningModel.TYPE_HENOC_MAURICE, modelList[Models.KEY_ATOM_COLLISION_SCREENING_MODEL].getModel())
         self.assertEquals(MCXRayModel.AtomElectronRangeModel.TYPE_KANAYA_OKAYAMA, modelList[Models.KEY_ATOM_ELECTRON_RANGE_MODEL].getModel())
-        self.assertEquals(MCXRayModel.XRayCSCharacteristicModel.TYPE_CASTANI1982, modelList[Models.KEY_XRAY_CS_CHARACTERISTIC_MODEL].getModel())
+        self.assertEquals(MCXRayModel.XRayCSCharacteristicModel.TYPE_BOTE2009, modelList[Models.KEY_XRAY_CS_CHARACTERISTIC_MODEL].getModel())
         self.assertEquals(MCXRayModel.XRayCSBremsstrahlungModel.TYPE_KIRKPATRICK_WIEDMAN, modelList[Models.KEY_XRAY_CS_BREMSSTRAHLUNG_MODEL].getModel())
         self.assertEquals(MCXRayModel.SampleEnergyLossModel.TYPE_BETHE_JOY_LUO, modelList[Models.KEY_SAMPLE_ENERGY_LOSS_MODEL].getModel())
 
         #self.fail("Test if the testcase is working.")
 
-    @ignore()
     def test_write(self):
         """
         Tests for method `write`.
         """
+        raise SkipTest
+
         self.maxDiff = None
 
         for title in testUtilities.getSimulationTitles():
@@ -286,18 +287,19 @@ class TestModels(unittest.TestCase):
 
             models.write(filepath)
 
-            linesRef = open(filepathReference, 'rb').readlines()
-            lines = open(filepath, 'rb').readlines()
+            linesRef = open(filepathReference, 'r').readlines()
+            lines = open(filepath, 'r').readlines()
 
             self.assertListEqual(linesRef, lines)
 
         #self.fail("Test if the testcase is working.")
 
-    @ignore()
     def test_write_1_1_1(self):
         """
         Tests for method `write`.
         """
+        raise SkipTest
+
         self.maxDiff = None
 
         title = "AlMgBulk5keV_version_1_1_1"
@@ -310,8 +312,8 @@ class TestModels(unittest.TestCase):
 
         models.write(filepath)
 
-        linesRef = open(filepathReference, 'rb').readlines()
-        lines = open(filepath, 'rb').readlines()
+        linesRef = open(filepathReference, 'r').readlines()
+        lines = open(filepath, 'r').readlines()
 
         self.assertListEqual(linesRef, lines)
 
@@ -330,14 +332,15 @@ class TestModels(unittest.TestCase):
         filepath = os.path.join(self.tempDataPath, "%s.par" % (title))
         models = Models.Models()
         models.version = Version.VERSION_1_2_0
+        models._modelList[Models.KEY_XRAY_CS_CHARACTERISTIC_MODEL].setModel(MCXRayModel.XRayCSCharacteristicModel.TYPE_CASTANI1982)
         models._modelList[Models.KEY_XRAY_CS_BREMSSTRAHLUNG_MODEL].setModel(MCXRayModel.XRayCSBremsstrahlungModel.TYPE_DING)
         models._modelList[Models.KEY_ATOM_CROSS_SECTION_MODEL].setModel(MCXRayModel.AtomCrossSectionModel.TYPE_GAUVIN_DROUIN)
         models._modelList[Models.KEY_ATOM_COLLISION_MODEL].setModel(MCXRayModel.AtomCollisionModel.TYPE_RUTHERFORD)
 
         models.write(filepath)
 
-        linesRef = open(filepathReference, 'rb').readlines()
-        lines = open(filepath, 'rb').readlines()
+        linesRef = open(filepathReference, 'r').readlines()
+        lines = open(filepath, 'r').readlines()
 
         self.assertListEqual(linesRef, lines)
 
@@ -356,14 +359,15 @@ class TestModels(unittest.TestCase):
         filepath = os.path.join(self.tempDataPath, "%s.par" % (title))
         models = Models.Models()
         models.version = Version.VERSION_1_2_1
+        models._modelList[Models.KEY_XRAY_CS_CHARACTERISTIC_MODEL].setModel(MCXRayModel.XRayCSCharacteristicModel.TYPE_CASTANI1982)
         models._modelList[Models.KEY_XRAY_CS_BREMSSTRAHLUNG_MODEL].setModel(MCXRayModel.XRayCSBremsstrahlungModel.TYPE_DING)
         models._modelList[Models.KEY_ATOM_CROSS_SECTION_MODEL].setModel(MCXRayModel.AtomCrossSectionModel.TYPE_GAUVIN_DROUIN)
         models._modelList[Models.KEY_ATOM_COLLISION_MODEL].setModel(MCXRayModel.AtomCollisionModel.TYPE_RUTHERFORD)
 
         models.write(filepath)
 
-        linesRef = open(filepathReference, 'rb').readlines()
-        lines = open(filepath, 'rb').readlines()
+        linesRef = open(filepathReference, 'r').readlines()
+        lines = open(filepath, 'r').readlines()
 
         self.assertListEqual(linesRef, lines)
 
@@ -382,14 +386,15 @@ class TestModels(unittest.TestCase):
         filepath = os.path.join(self.tempDataPath, "%s.par" % (title))
         models = Models.Models()
         models.version = Version.VERSION_1_4_1
+        models._modelList[Models.KEY_XRAY_CS_CHARACTERISTIC_MODEL].setModel(MCXRayModel.XRayCSCharacteristicModel.TYPE_CASTANI1982)
         models._modelList[Models.KEY_XRAY_CS_BREMSSTRAHLUNG_MODEL].setModel(MCXRayModel.XRayCSBremsstrahlungModel.TYPE_DING)
         models._modelList[Models.KEY_ATOM_CROSS_SECTION_MODEL].setModel(MCXRayModel.AtomCrossSectionModel.TYPE_GAUVIN_DROUIN)
         models._modelList[Models.KEY_ATOM_COLLISION_MODEL].setModel(MCXRayModel.AtomCollisionModel.TYPE_RUTHERFORD)
 
         models.write(filepath)
 
-        linesRef = open(filepathReference, 'rb').readlines()
-        lines = open(filepath, 'rb').readlines()
+        linesRef = open(filepathReference, 'r').readlines()
+        lines = open(filepath, 'r').readlines()
 
         self.assertListEqual(linesRef, lines)
 

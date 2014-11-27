@@ -22,16 +22,17 @@ __svnId__ = "$Id$"
 import unittest
 import logging
 import os.path
+import copy
 
 # Third party modules.
+from nose.plugins.skip import SkipTest
 
 # Local modules.
-from pyHendrixDemersTools.Testings import ignore
 
 # Project modules
-import SimulationInputs
-import testUtilities
-import Version
+import pymcxray.FileFormat.SimulationInputs as SimulationInputs
+import pymcxray.FileFormat.testUtilities as testUtilities
+import pymcxray.FileFormat.Version as Version
 
 # Globals and constants variables.
 
@@ -47,7 +48,7 @@ class TestSimulationInputs(unittest.TestCase):
 
         unittest.TestCase.setUp(self)
 
-        self.testDataPath = os.path.abspath(os.path.join(os.path.dirname(__file__), "../testData"))
+        self.testDataPath = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../testData"))
         self.tempDataPath = testUtilities.createTempDataPath(self.testDataPath)
 
     def tearDown(self):
@@ -202,11 +203,12 @@ class TestSimulationInputs(unittest.TestCase):
 
         #self.fail("Test if the testcase is working.")
 
-    @ignore()
     def test_write(self):
         """
         Tests for method `write`.
         """
+        raise SkipTest
+
         self.maxDiff = None
 
         # todo: make test pass using testUtilities.getSimulationTitles().
@@ -222,22 +224,23 @@ class TestSimulationInputs(unittest.TestCase):
             self.assertEquals("%s.mic" % (title), simulationInputs.microsopeFilename)
             self.assertEquals("%s.par" % (title), simulationInputs.simulationParametersFilename)
 
-            linesRef = open(filepathReference, 'rb').readlines()
-            lines = open(filepath, 'rb').readlines()
+            linesRef = open(filepathReference, 'r').readlines()
+            lines = open(filepath, 'r').readlines()
 
             self.assertListEqual(linesRef, lines)
 
         #self.fail("Test if the testcase is working.")
 
-    @ignore()
     def test_write_1_1_1(self):
         """
         Tests for method `write`.
         """
+        raise SkipTest
+
         self.maxDiff = None
 
         simulationInputsRef = SimulationInputs.SimulationInputs()
-        simulationInputsRef.version = Version.VERSION_1_1_1
+        simulationInputsRef.version = copy.deepcopy(Version.VERSION_1_1_1)
 
         title = "AlMgBulk5keV_version_1_1_1"
         filepathReference = os.path.abspath(os.path.join(self.testDataPath, "inputs", "%s.sim" % (title)))
@@ -247,7 +250,7 @@ class TestSimulationInputs(unittest.TestCase):
 
         filepath = os.path.join(self.tempDataPath, "%s.sim" % (title))
         simulationInputs = SimulationInputs.SimulationInputs()
-        simulationInputs.version = Version.VERSION_1_1_1
+        simulationInputs.version = copy.deepcopy(Version.VERSION_1_1_1)
         simulationInputs.write(filepath)
 
         self.assertEquals("%s.sam" % (title), simulationInputs.specimenFilename)
@@ -260,8 +263,8 @@ class TestSimulationInputs(unittest.TestCase):
         self.assertEquals(simulationInputsRef.version.revision, simulationInputs.version.revision)
         self.assertEquals(simulationInputsRef.version, simulationInputs.version)
 
-        linesRef = open(filepathReference, 'rb').readlines()
-        lines = open(filepath, 'rb').readlines()
+        linesRef = open(filepathReference, 'r').readlines()
+        lines = open(filepath, 'r').readlines()
 
         self.assertListEqual(linesRef, lines)
 
@@ -274,7 +277,7 @@ class TestSimulationInputs(unittest.TestCase):
         self.maxDiff = None
 
         simulationInputsRef = SimulationInputs.SimulationInputs()
-        simulationInputsRef.version = Version.VERSION_1_2_0
+        simulationInputsRef.version = copy.deepcopy(Version.VERSION_1_2_0)
 
         title = "AlMgBulk5keV_version_1_2_0"
         filepathReference = os.path.abspath(os.path.join(self.testDataPath, "inputs", "%s.sim" % (title)))
@@ -284,7 +287,7 @@ class TestSimulationInputs(unittest.TestCase):
 
         filepath = os.path.join(self.tempDataPath, "%s.sim" % (title))
         simulationInputs = SimulationInputs.SimulationInputs()
-        simulationInputs.version = Version.VERSION_1_2_0
+        simulationInputs.version = copy.deepcopy(Version.VERSION_1_2_0)
         simulationInputs.write(filepath)
 
         self.assertEquals("%s.sam" % (title), simulationInputs.specimenFilename)
@@ -297,8 +300,8 @@ class TestSimulationInputs(unittest.TestCase):
         self.assertEquals(simulationInputsRef.version.revision, simulationInputs.version.revision)
         self.assertEquals(simulationInputsRef.version, simulationInputs.version)
 
-        linesRef = open(filepathReference, 'rb').readlines()
-        lines = open(filepath, 'rb').readlines()
+        linesRef = open(filepathReference, 'r').readlines()
+        lines = open(filepath, 'r').readlines()
 
         self.assertListEqual(linesRef, lines)
 
@@ -311,7 +314,7 @@ class TestSimulationInputs(unittest.TestCase):
         self.maxDiff = None
 
         simulationInputsRef = SimulationInputs.SimulationInputs()
-        simulationInputsRef.version = Version.VERSION_1_2_1
+        simulationInputsRef.version = copy.deepcopy(Version.VERSION_1_2_1)
 
         title = "AlMgBulk5keV_version_1_2_1"
         filepathReference = os.path.abspath(os.path.join(self.testDataPath, "inputs", "%s.sim" % (title)))
@@ -321,7 +324,7 @@ class TestSimulationInputs(unittest.TestCase):
 
         filepath = os.path.join(self.tempDataPath, "%s.sim" % (title))
         simulationInputs = SimulationInputs.SimulationInputs()
-        simulationInputs.version = Version.VERSION_1_2_1
+        simulationInputs.version = copy.deepcopy(Version.VERSION_1_2_1)
         simulationInputs.write(filepath)
 
         self.assertEquals("%s.sam" % (title), simulationInputs.specimenFilename)
@@ -334,8 +337,8 @@ class TestSimulationInputs(unittest.TestCase):
         self.assertEquals(simulationInputsRef.version.revision, simulationInputs.version.revision)
         self.assertEquals(simulationInputsRef.version, simulationInputs.version)
 
-        linesRef = open(filepathReference, 'rb').readlines()
-        lines = open(filepath, 'rb').readlines()
+        linesRef = open(filepathReference, 'r').readlines()
+        lines = open(filepath, 'r').readlines()
 
         self.assertListEqual(linesRef, lines)
 
@@ -348,7 +351,7 @@ class TestSimulationInputs(unittest.TestCase):
         self.maxDiff = None
 
         simulationInputsRef = SimulationInputs.SimulationInputs()
-        simulationInputsRef.version = Version.VERSION_1_4_1
+        simulationInputsRef.version = copy.deepcopy(Version.VERSION_1_4_1)
 
         title = "AlMgBulk5keV_version_1_4_1"
         filepathReference = os.path.abspath(os.path.join(self.testDataPath, "inputs", "%s.sim" % (title)))
@@ -358,6 +361,7 @@ class TestSimulationInputs(unittest.TestCase):
 
         filepath = os.path.join(self.tempDataPath, "%s.sim" % (title))
         simulationInputs = SimulationInputs.SimulationInputs()
+        simulationInputs.version = Version.Version(1, 4, 1)
         simulationInputs.write(filepath)
 
         self.assertEquals("%s.sam" % (title), simulationInputs.specimenFilename)
@@ -372,8 +376,8 @@ class TestSimulationInputs(unittest.TestCase):
         self.assertEquals(simulationInputsRef.version.revision, simulationInputs.version.revision)
         self.assertEquals(simulationInputsRef.version, simulationInputs.version)
 
-        linesRef = open(filepathReference, 'rb').readlines()
-        lines = open(filepath, 'rb').readlines()
+        linesRef = open(filepathReference, 'r').readlines()
+        lines = open(filepath, 'r').readlines()
 
         self.assertListEqual(linesRef, lines)
 

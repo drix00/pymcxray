@@ -23,7 +23,7 @@ import logging
 import pyHendrixDemersTools.Files as Files
 
 # Project modules
-import XraySimulatedSpectraRegion
+import pymcxray.FileFormat.Results.XraySimulatedSpectraRegion as XraySimulatedSpectraRegion
 
 # Globals and constants variables.
 
@@ -60,7 +60,7 @@ class TestXraySimulatedSpectraRegion(unittest.TestCase):
         """
 
         spectrumFile = XraySimulatedSpectraRegion.XraySimulatedSpectraRegion()
-        spectrumFile.path = Files.getCurrentModulePath(__file__, "../../testData/results")
+        spectrumFile.path = Files.getCurrentModulePath(__file__, "../../../testData/results")
         spectrumFile.basename = "testC_10e_10kp"
 
         spectrumFile.read()

@@ -25,10 +25,10 @@ __svnId__ = "$Id$"
 # Local modules.
 
 # Project modules
-import Element
-import RegionDimensions
-import RegionType
-import FileReaderWriterTools
+import pymcxray.FileFormat.Element as Element
+import pymcxray.FileFormat.RegionDimensions as RegionDimensions
+import pymcxray.FileFormat.RegionType as RegionType
+import pymcxray.FileFormat.FileReaderWriterTools as FileReaderWriterTools
 
 # Globals and constants variables.
 KEY_NUMBER_ELEMENTS = "NumberElements"
@@ -73,7 +73,7 @@ class Region(object):
         self.numberElements = int(lines[indexLine])
         indexLine += 1
 
-        for _indexElement in xrange(self.numberElements):
+        for _indexElement in range(self.numberElements):
             element = Element.Element()
             element.extractFromLineOldVersion(lines[indexLine])
             self.elements.append(element)
@@ -107,7 +107,7 @@ class Region(object):
             self.numberElements = extractMethods[key](items[-1])
             indexLine += 1
 
-        for _indexElement in xrange(self.numberElements):
+        for _indexElement in range(self.numberElements):
             element = Element.Element()
             indexLine +=element.extractFromLinesWithKey(lines[indexLine:])
             self.elements.append(element)

@@ -14,14 +14,15 @@ __copyright__ = "Copyright (c) 2012 Hendrix Demers"
 __license__ = ""
 
 # Standard library modules.
+import copy
 
 # Third party modules.
 
 # Local modules.
 
 # Project modules
-import MCXRayModel
-import Version
+import pymcxray.FileFormat.MCXRayModel as MCXRayModel
+import pymcxray.FileFormat.Version as Version
 
 # Globals and constants variables.
 KEY_COMPUTE_XRAY_CHARACTERISTIC = "ComputeXrayCharacteristic"
@@ -31,7 +32,7 @@ KEY_COMPUTE_XRAY_SIMULATED_SPECTRUM = "ComputeXraySimulatedSpectrum"
 
 class ResultsParameters(object):
     def __init__(self):
-        self.version = Version.CURRENT_VERSION
+        self.version = copy.deepcopy(Version.CURRENT_VERSION)
 
         self._keys = self._createKeys()
 
@@ -71,7 +72,7 @@ class ResultsParameters(object):
     def read(self, filepath):
         self.version.readFromFile(filepath)
 
-        lines = open(filepath, 'rb').readlines()
+        lines = open(filepath, 'r').readlines()
 
         extractMethods = self._createExtractMethod()
 
@@ -84,7 +85,7 @@ class ResultsParameters(object):
                     self._parameters[key] = extractMethods[key](items[-1])
 
     def write(self, filepath):
-        outputFile = open(filepath, 'wb')
+        outputFile = open(filepath, 'w')
 
         self._writeHeader(outputFile)
 

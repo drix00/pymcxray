@@ -268,10 +268,10 @@ def getXRayEnergy_keV(line, element):
     return 0.0
 
 def run():
-    print getMassDensity_g_cm3('Cr')
-    print ATOM_ION_ENERGY_SHELL_K_keV[7-1]
-    print ATOM_ION_ENERGY_SHELL_K_keV[28-1]
-    print ATOM_ION_ENERGY_SHELL_K_keV[79-1]
+    print(getMassDensity_g_cm3('Cr'))
+    print(ATOM_ION_ENERGY_SHELL_K_keV[7-1])
+    print(ATOM_ION_ENERGY_SHELL_K_keV[28-1])
+    print(ATOM_ION_ENERGY_SHELL_K_keV[79-1])
 
 if __name__ == '__main__': #pragma: no cover
     import pyHendrixDemersTools.Runner as Runner

@@ -23,7 +23,7 @@ import logging
 import pyHendrixDemersTools.Files as Files
 
 # Project modules
-import PhirhozEmittedCharacteristicThinFilm
+import pymcxray.FileFormat.Results.PhirhozEmittedCharacteristicThinFilm as PhirhozEmittedCharacteristicThinFilm
 
 # Globals and constants variables.
 
@@ -60,7 +60,7 @@ class TestPhirhozEmittedCharacteristicThinFilm(unittest.TestCase):
         """
 
         phirhozThinFilm = PhirhozEmittedCharacteristicThinFilm.PhirhozEmittedCharacteristicThinFilm()
-        phirhozThinFilm.path = Files.getCurrentModulePath(__file__, "../../testData/results")
+        phirhozThinFilm.path = Files.getCurrentModulePath(__file__, "../../../testData/results")
         phirhozThinFilm.basename = "SimulationMCXrayPhirhozTestCases_Cu_E500d0keV_N100000e"
 
         phirhozThinFilm.read()
@@ -89,7 +89,7 @@ class TestPhirhozEmittedCharacteristicThinFilm(unittest.TestCase):
         """
 
         phirhozThinFilm = PhirhozEmittedCharacteristicThinFilm.PhirhozEmittedCharacteristicThinFilm()
-        phirhozThinFilm.path = Files.getCurrentModulePath(__file__, "../../testData/results")
+        phirhozThinFilm.path = Files.getCurrentModulePath(__file__, "../../../testData/results")
         phirhozThinFilm.basename = "SimulationMCXrayPhirhozTestCases_Cu_E500d0keV_N100000e"
 
         phirhozThinFilm.read()

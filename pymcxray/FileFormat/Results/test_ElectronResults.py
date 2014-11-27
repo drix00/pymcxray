@@ -23,7 +23,7 @@ import logging
 import pyHendrixDemersTools.Files as Files
 
 # Project modules
-import ElectronResults
+import pymcxray.FileFormat.Results.ElectronResults as ElectronResults
 
 # Globals and constants variables.
 
@@ -60,7 +60,7 @@ class TestElectronResults(unittest.TestCase):
         """
 
         electronResults = ElectronResults.ElectronResults()
-        electronResults.path = Files.getCurrentModulePath(__file__, "../../testData/results")
+        electronResults.path = Files.getCurrentModulePath(__file__, "../../../testData/results")
         electronResults.basename = "SimulationKalefEzra1982_Al100T10000A_E300d0keV_N100000e"
 
         electronResults.read()

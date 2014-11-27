@@ -28,7 +28,7 @@ import os
 # Local modules.
 
 # Project modules
-import Dump
+import pymcxray.FileFormat.Results.Dump as Dump
 
 # Globals and constants variables.
 
@@ -44,7 +44,7 @@ class TestDump(unittest.TestCase):
 
         unittest.TestCase.setUp(self)
 
-        self.testDataPath = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../testData"))
+        self.testDataPath = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../testData"))
 
     def tearDown(self):
         """

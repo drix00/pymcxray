@@ -27,7 +27,7 @@ import logging
 # Local modules.
 
 # Project modules
-import RegionVolume
+import pymcxray.FileFormat.Results.RegionVolume as RegionVolume
 import pymcxray.FileFormat.RegionType as RegionType
 import pymcxray.FileFormat.RegionDimensions as RegionDimensions
 

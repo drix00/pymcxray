@@ -22,7 +22,7 @@ import logging
 # Local modules.
 
 # Project modules
-import BaseResults
+import pymcxray.FileFormat.Results.BaseResults as BaseResults
 
 # Globals and constants variables.
 

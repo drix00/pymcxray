@@ -22,16 +22,17 @@ __svnId__ = "$Id$"
 import unittest
 import logging
 import os.path
+import copy
 
 # Third party modules.
+from nose.plugins.skip import SkipTest
 
 # Local modules.
-from pyHendrixDemersTools.Testings import ignore
 
 # Project modules
-import SimulationParameters
-import testUtilities
-import Version
+import pymcxray.FileFormat.SimulationParameters as SimulationParameters
+import pymcxray.FileFormat.testUtilities as testUtilities
+import pymcxray.FileFormat.Version as Version
 
 # Globals and constants variables.
 
@@ -47,7 +48,7 @@ class TestSimulationParameters(unittest.TestCase):
 
         unittest.TestCase.setUp(self)
 
-        self.testDataPath = os.path.abspath(os.path.join(os.path.dirname(__file__), "../testData"))
+        self.testDataPath = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../testData"))
         self.tempDataPath = testUtilities.createTempDataPath(self.testDataPath)
 
     def tearDown(self):
@@ -329,6 +330,7 @@ class TestSimulationParameters(unittest.TestCase):
         elif title == "AlMgBulk5keV_version_1_1_1":
             baseFilenameRef = r"Results\%s" % ("AlMgBulk5keV")
             simulationParameters.baseFilename = baseFilenameRef
+            simulationParameters.version = Version.Version(1, 1, 1)
             simulationParameters.numberElectrons = 1000
             simulationParameters.numberPhotons = 127678
             simulationParameters.numberWindows = 64
@@ -341,6 +343,7 @@ class TestSimulationParameters(unittest.TestCase):
         elif title == "AlMgBulk5keV_version_1_2_0":
             baseFilenameRef = r"Results\%s" % ("AlMgBulk5keV_1_2_0")
             simulationParameters.baseFilename = baseFilenameRef
+            simulationParameters.version = Version.Version(1, 2, 0)
             simulationParameters.numberElectrons = 10000
             simulationParameters.numberPhotons = 1000
             simulationParameters.numberWindows = 128
@@ -353,6 +356,7 @@ class TestSimulationParameters(unittest.TestCase):
         elif title == "AlMgBulk5keV_version_1_2_1":
             baseFilenameRef = r"Results\%s" % ("AlMgBulk5keV_1_2_1")
             simulationParameters.baseFilename = baseFilenameRef
+            simulationParameters.version = Version.Version(1, 2, 1)
             simulationParameters.numberElectrons = 10000
             simulationParameters.numberPhotons = 1000
             simulationParameters.numberWindows = 128
@@ -365,6 +369,7 @@ class TestSimulationParameters(unittest.TestCase):
         elif title == "AlMgBulk5keV_version_1_4_1":
             baseFilenameRef = r"Results\%s" % ("AlMgBulk5keV_1_4_1")
             simulationParameters.baseFilename = baseFilenameRef
+            simulationParameters.version = Version.Version(1, 4, 1)
             simulationParameters.numberElectrons = 10000
             simulationParameters.numberPhotons = 1000
             simulationParameters.numberWindows = 128
@@ -377,6 +382,7 @@ class TestSimulationParameters(unittest.TestCase):
         elif title == "AlMgBulk5keV_version_1_4_4":
             baseFilenameRef = r"Results\%s" % ("AlMgBulk5keV_1_4_4")
             simulationParameters.baseFilename = baseFilenameRef
+            simulationParameters.version = Version.Version(1, 4, 4)
             simulationParameters.numberElectrons = 10000
             simulationParameters.numberPhotons = 1000
             simulationParameters.numberWindows = 128
@@ -398,23 +404,24 @@ class TestSimulationParameters(unittest.TestCase):
 
         simulationParameters = SimulationParameters.SimulationParameters()
 
-        simulationParameters.version = Version.VERSION_1_4_3
+        simulationParameters.version = copy.deepcopy(Version.VERSION_1_4_3)
         numberKeys = 10
         keys = simulationParameters._createKeys()
         self.assertEquals(numberKeys, len(keys))
 
-        simulationParameters.version = Version.VERSION_1_4_4
+        simulationParameters.version = copy.deepcopy(Version.VERSION_1_4_4)
         numberKeys = 12
         keys = simulationParameters._createKeys()
         self.assertEquals(numberKeys, len(keys))
 
         #self.fail("Test if the testcase is working.")
 
-    @ignore()
     def test_write(self):
         """
         Tests for method `write`.
         """
+        raise SkipTest
+
         self.maxDiff = None
 
         for title in testUtilities.getSimulationTitles():
@@ -440,18 +447,19 @@ class TestSimulationParameters(unittest.TestCase):
             self.assertEquals(simulationParametersRef.spectrumInterpolationModel, simulationParameters.spectrumInterpolationModel)
             self.assertEquals(simulationParametersRef.voxelSimplification, simulationParameters.voxelSimplification, title)
 
-            linesRef = open(filepathReference, 'rb').readlines()
-            lines = open(filepath, 'rb').readlines()
+            linesRef = open(filepathReference, 'r').readlines()
+            lines = open(filepath, 'r').readlines()
 
             self.assertListEqual(linesRef, lines)
 
         #self.fail("Test if the testcase is working.")
 
-    @ignore()
     def test_write_1_1_1(self):
         """
         Tests for method `write`.
         """
+        raise SkipTest
+
         self.maxDiff = None
 
         title = "AlMgBulk5keV_version_1_1_1"
@@ -482,8 +490,8 @@ class TestSimulationParameters(unittest.TestCase):
         self.assertEquals(simulationParametersRef.version.revision, simulationParameters.version.revision)
         self.assertEquals(simulationParametersRef.version, simulationParameters.version)
 
-        linesRef = open(filepathReference, 'rb').readlines()
-        lines = open(filepath, 'rb').readlines()
+        linesRef = open(filepathReference, 'r').readlines()
+        lines = open(filepath, 'r').readlines()
 
         self.assertListEqual(linesRef, lines)
 
@@ -503,7 +511,7 @@ class TestSimulationParameters(unittest.TestCase):
         filepath = os.path.join(self.tempDataPath, "%s.par" % (title))
         simulationParameters = SimulationParameters.SimulationParameters()
         simulationParameters = simulationParametersRef
-        simulationParameters.version = Version.VERSION_1_2_0
+        simulationParameters.version = copy.deepcopy(Version.VERSION_1_2_0)
         simulationParameters.write(filepath)
 
         self.assertEquals(simulationParametersRef.baseFilename, simulationParameters.baseFilename)
@@ -523,8 +531,8 @@ class TestSimulationParameters(unittest.TestCase):
         self.assertEquals(simulationParametersRef.version.revision, simulationParameters.version.revision)
         self.assertEquals(simulationParametersRef.version, simulationParameters.version)
 
-        linesRef = open(filepathReference, 'rb').readlines()
-        lines = open(filepath, 'rb').readlines()
+        linesRef = open(filepathReference, 'r').readlines()
+        lines = open(filepath, 'r').readlines()
 
         self.assertListEqual(linesRef, lines)
 
@@ -544,7 +552,7 @@ class TestSimulationParameters(unittest.TestCase):
         filepath = os.path.join(self.tempDataPath, "%s.par" % (title))
         simulationParameters = SimulationParameters.SimulationParameters()
         simulationParameters = simulationParametersRef
-        simulationParameters.version = Version.VERSION_1_2_1
+        simulationParameters.version = copy.deepcopy(Version.VERSION_1_2_1)
 
         simulationParameters.write(filepath)
 
@@ -565,8 +573,8 @@ class TestSimulationParameters(unittest.TestCase):
         self.assertEquals(simulationParametersRef.version.revision, simulationParameters.version.revision)
         self.assertEquals(simulationParametersRef.version, simulationParameters.version)
 
-        linesRef = open(filepathReference, 'rb').readlines()
-        lines = open(filepath, 'rb').readlines()
+        linesRef = open(filepathReference, 'r').readlines()
+        lines = open(filepath, 'r').readlines()
 
         self.assertListEqual(linesRef, lines)
 
@@ -586,7 +594,7 @@ class TestSimulationParameters(unittest.TestCase):
         filepath = os.path.join(self.tempDataPath, "%s.par" % (title))
         simulationParameters = SimulationParameters.SimulationParameters()
         simulationParameters = simulationParametersRef
-        simulationParameters.version = Version.VERSION_1_4_1
+        simulationParameters.version = copy.deepcopy(Version.VERSION_1_4_1)
 
         simulationParameters.write(filepath)
 
@@ -607,8 +615,8 @@ class TestSimulationParameters(unittest.TestCase):
         self.assertEquals(simulationParametersRef.version.revision, simulationParameters.version.revision)
         self.assertEquals(simulationParametersRef.version, simulationParameters.version)
 
-        linesRef = open(filepathReference, 'rb').readlines()
-        lines = open(filepath, 'rb').readlines()
+        linesRef = open(filepathReference, 'r').readlines()
+        lines = open(filepath, 'r').readlines()
 
         self.assertListEqual(linesRef, lines)
 
@@ -628,7 +636,7 @@ class TestSimulationParameters(unittest.TestCase):
         filepath = os.path.join(self.tempDataPath, "%s.par" % (title))
         simulationParameters = SimulationParameters.SimulationParameters()
         simulationParameters = simulationParametersRef
-        simulationParameters.version = Version.VERSION_1_4_4
+        simulationParameters.version = copy.deepcopy(Version.VERSION_1_4_4)
 
         simulationParameters.write(filepath)
 
@@ -651,8 +659,8 @@ class TestSimulationParameters(unittest.TestCase):
         self.assertEquals(simulationParametersRef.version.revision, simulationParameters.version.revision)
         self.assertEquals(simulationParametersRef.version, simulationParameters.version)
 
-        linesRef = open(filepathReference, 'rb').readlines()
-        lines = open(filepath, 'rb').readlines()
+        linesRef = open(filepathReference, 'r').readlines()
+        lines = open(filepath, 'r').readlines()
 
         self.assertListEqual(linesRef, lines)
 

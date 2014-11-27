@@ -14,6 +14,7 @@ __copyright__ = "Copyright (c) 2012 Hendrix Demers"
 __license__ = ""
 
 # Standard library modules.
+import copy
 
 # Third party modules.
 
@@ -46,14 +47,14 @@ class Version(object):
         outputFile.write(line)
 
     def readFromFile(self, filepath):
-        lines = open(filepath, 'rb').readlines()
+        lines = open(filepath, 'r').readlines()
 
         for line in lines:
             line = line.strip()
 
             if line.startswith(self.key):
                 items = line.split('=')
-                self.fromString(str(items[-1]))
+                self.fromString((items[-1]))
                 return
         else:
             self.major = 1
@@ -65,6 +66,33 @@ class Version(object):
             return True
         else:
             return False
+
+    def __lt__(self, other):
+        if self == other:
+            return False
+
+        if self.major < other.major:
+            return True
+        elif self.major > other.major:
+            return False
+
+        if self.minor < other.minor:
+            return True
+        elif self.minor > other.minor:
+            return False
+
+        if self.revision < other.revision:
+            return True
+        elif self.revision > other.revision:
+            return False
+
+    def __ge__(self, other):
+        if self == other:
+            return True
+        if self < other:
+            return False
+        else:
+            return True
 
     @property
     def major(self):
@@ -113,8 +141,18 @@ VERSION_1_4_3 = Version(1, 4, 3)
 
 VERSION_1_4_4 = Version(1, 4, 4)
 
-BEFORE_VERSION = VERSION_1_1_1
-CURRENT_VERSION = VERSION_1_4_4
+VERSION_1_4_5 = Version(1, 4, 5)
+
+VERSION_1_4_6 = Version(1, 4, 6)
+
+VERSION_1_5_0 = Version(1, 5, 0)
+
+VERSION_1_5_1 = Version(1, 5, 1)
+
+VERSION_1_5_2 = Version(1, 5, 2)
+
+BEFORE_VERSION = copy.deepcopy(VERSION_1_1_1)
+CURRENT_VERSION = copy.deepcopy(VERSION_1_5_2)
 
 
 if __name__ == '__main__': #pragma: no cover

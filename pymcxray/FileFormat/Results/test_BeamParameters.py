@@ -27,7 +27,7 @@ import logging
 # Local modules.
 
 # Project modules
-import BeamParameters
+import pymcxray.FileFormat.Results.BeamParameters as BeamParameters
 
 # Globals and constants variables.
 

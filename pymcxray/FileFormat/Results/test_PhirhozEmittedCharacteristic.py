@@ -23,7 +23,7 @@ import logging
 import pyHendrixDemersTools.Files as Files
 
 # Project modules
-import PhirhozEmittedCharacteristic
+import pymcxray.FileFormat.Results.PhirhozEmittedCharacteristic as PhirhozEmittedCharacteristic
 
 # Globals and constants variables.
 
@@ -61,7 +61,7 @@ class TestPhirhozEmittedCharacteristic(unittest.TestCase):
         #PhirhozMCXRay_Ag_E5d0keV_N10000e_tB0d0deg_TOA45d0deg_PhirhozEmittedCharacteristic_Region0.csv
 
         spectrumFile = PhirhozEmittedCharacteristic.PhirhozEmittedCharacteristic()
-        spectrumFile.path = Files.getCurrentModulePath(__file__, "../../testData/results")
+        spectrumFile.path = Files.getCurrentModulePath(__file__, "../../../testData/results")
         spectrumFile.basename = "PhirhozMCXRay_Ag_E5d0keV_N10000e_tB0d0deg_TOA45d0deg"
 
         regionID = 0

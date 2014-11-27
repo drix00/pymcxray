@@ -86,7 +86,7 @@ class PhirhozRegion(object):
                 break
         else:
             message = "Cannot find the section header in the liens: %s" % (KEY_PHIRHOZ_DISTISTRIBUTION)
-            raise ValueError, message
+            raise ValueError(message)
 
         # todo read phirhoz distribution.
         indexLine += 2
@@ -105,9 +105,9 @@ class PhirhozRegion(object):
                 break
         else:
             message = "Cannot find the section header in the liens: %s" % (KEY_ELEMENTS)
-            raise ValueError, message
+            raise ValueError(message)
 
-        for indexElements in xrange(self.numberElements):
+        for indexElements in range(self.numberElements):
             line = lines[indexLine]
             indexLine += 1
 
@@ -121,7 +121,7 @@ class PhirhozRegion(object):
 
     def readBackgroundPhirhozs(self, lines):
         indexLine = 0
-        for indexWindows in xrange(self._numberEnergyWindows):
+        for indexWindows in range(self._numberEnergyWindows):
             for line in lines[indexLine:]:
                 indexLine += 1
                 if line.strip().startswith(KEY_PHIRHOZ_BACKGROUND):
@@ -136,9 +136,9 @@ class PhirhozRegion(object):
                     break
             else:
                 message = "Cannot find the section header in the liens: %s" % (KEY_PHIRHOZ_BACKGROUND)
-                raise ValueError, message
+                raise ValueError(message)
 
-        for indexDepth in xrange(self._numberLayersZ):
+        for indexDepth in range(self._numberLayersZ):
             line = lines[indexLine]
             indexLine += 1
             items = line.split()
@@ -152,9 +152,9 @@ class PhirhozRegion(object):
                 break
         else:
             message = "Cannot find the section header in the liens: %s" % (KEY_PHIRHOZ_BACKGROUND_SUMMARY)
-            raise ValueError, message
+            raise ValueError(message)
 
-        for indexWindows in xrange(self._numberEnergyWindows):
+        for indexWindows in range(self._numberEnergyWindows):
             line  = lines[indexLine]
             indexLine += 1
 

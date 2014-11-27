@@ -27,7 +27,7 @@ import logging
 # Local modules.
 
 # Project modules
-import ModelParameters
+import pymcxray.FileFormat.Results.ModelParameters as ModelParameters
 import pymcxray.FileFormat.MCXRayModel as MCXRayModel
 
 # Globals and constants variables.

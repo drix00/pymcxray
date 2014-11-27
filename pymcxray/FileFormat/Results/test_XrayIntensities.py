@@ -23,7 +23,7 @@ import logging
 import pyHendrixDemersTools.Files as Files
 
 # Project modules
-import XrayIntensities
+import pymcxray.FileFormat.Results.XrayIntensities as XrayIntensities
 
 # Globals and constants variables.
 
@@ -60,7 +60,7 @@ class TestXrayIntensities(unittest.TestCase):
         """
 
         intensitiesFile = XrayIntensities.XrayIntensities()
-        intensitiesFile.path = Files.getCurrentModulePath(__file__, "../../testData/results")
+        intensitiesFile.path = Files.getCurrentModulePath(__file__, "../../../testData/results")
         intensitiesFile.basename = "SimulationsFRatio_Al0d200000Cu0d800000_E5d0keV"
 
         intensitiesFile.read()

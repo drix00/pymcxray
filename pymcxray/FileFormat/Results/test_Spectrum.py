@@ -27,7 +27,7 @@ import logging
 # Local modules.
 
 # Project modules
-import Spectrum
+import pymcxray.FileFormat.Results.Spectrum as Spectrum
 
 # Globals and constants variables.
 
