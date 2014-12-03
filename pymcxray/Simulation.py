@@ -606,8 +606,8 @@ class Simulation(object):
 
     def createSimulationFiles(self, path, simulationPath):
         nameWithoutDot = self.name.replace('.', 'd')
-        baseFilenameRef = r"Results\%s" % (nameWithoutDot)
-        self._simulationParameters.baseFilename = baseFilenameRef
+        baseFilenameRef = "Results/%s" % (nameWithoutDot)
+        self._simulationParameters.baseFilename = os.path.normpath(baseFilenameRef)
 
         self._simulationInputs.specimenFilename = self.name + ".sam"
         self._simulationInputs.modelFilename = self.name + ".mdl"
@@ -797,8 +797,8 @@ _XrayIntensitiesFromPhirhoz.csv""".splitlines()
 
     def generateBaseFilename(self):
         nameWithoutDot = self.name.replace('.', 'd')
-        baseFilenameRef = r"Results\%s" % (nameWithoutDot)
-        self._simulationParameters.baseFilename = baseFilenameRef
+        baseFilenameRef = "Results/%s" % (nameWithoutDot)
+        self._simulationParameters.baseFilename = os.path.normpath(baseFilenameRef)
 
     @property
     def energy_keV(self):
