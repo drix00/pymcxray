@@ -137,7 +137,7 @@ class ElectronTrajectoriesResults(object):
         self.read(filepath)
 
     def read(self, filepath):
-        reader = csv.reader(open(filepath, 'r'))
+        reader = csv.reader(open(filepath, 'rb'))
 
         #Skip header line
         next(reader)
@@ -317,7 +317,7 @@ class ElectronTrajectoriesResults(object):
         if trajectoryType == 1:
             color = 'b'
         elif trajectoryType == 2:
-            color = 'r'
+            color = 'rb'
         elif trajectoryType == 3:
             color = 'y'
         elif trajectoryType == 4:

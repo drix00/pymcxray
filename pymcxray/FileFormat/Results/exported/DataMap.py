@@ -32,7 +32,7 @@ class DataMap(object):
         self.size = (0, 0)
 
     def read(self):
-        lines = open(self._filepath, 'r').readlines()
+        lines = open(self._filepath, 'rb').readlines()
 
         line = lines[0]
         index = line.rfind('(')

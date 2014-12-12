@@ -137,7 +137,7 @@ class SimulationParameters(object):
     def read(self, filepath):
         self.version.readFromFile(filepath)
 
-        lines = open(filepath, 'r').readlines()
+        lines = open(filepath, 'rb').readlines()
 
         extractMethods = self._createExtractMethod()
 
@@ -150,7 +150,7 @@ class SimulationParameters(object):
                     self._parameters[key] = extractMethods[key](items[-1])
 
     def write(self, filepath):
-        outputFile = open(filepath, 'w')
+        outputFile = open(filepath, 'wb')
 
         self._writeHeader(outputFile)
 
@@ -164,7 +164,7 @@ class SimulationParameters(object):
             else:
                 value = formatMethods[key] % (self._parameters[key])
             if value is not None and value != "None":
-                line = "%s=%s\r\n" % (key, value)
+                line = "%s=%s\n" % (key, value)
                 outputFile.write(line)
 
     def _writeHeader(self, outputFile):
@@ -233,7 +233,7 @@ class SimulationParameters(object):
                             "********************************************************************************"]
 
         for line in headerLines:
-            outputFile.write(line+'\r\n')
+            outputFile.write(line+'\n')
 
     @property
     def version(self):

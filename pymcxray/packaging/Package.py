@@ -100,7 +100,7 @@ class Package(object):
                 return
 
             logging.info("Create zip file: %s", zipFilepath)
-            zipFile = zipfile.ZipFile(zipFilepath, 'w')
+            zipFile = zipfile.ZipFile(zipFilepath, 'wb')
 
             oldPath = os.getcwd()
             os.chdir(temporaryPath)
@@ -124,7 +124,7 @@ class Package(object):
         wincasinoResourceFilepath = os.path.join(self._developmentPath, self.RESOURCE_FILEPATH)
         wincasinoResourceFilepath = os.path.normpath(wincasinoResourceFilepath)
 
-        lines = open(wincasinoResourceFilepath, 'r').readlines()
+        lines = open(wincasinoResourceFilepath, 'rb').readlines()
 
         for line in lines:
             line = line.strip()
@@ -316,7 +316,7 @@ class Package(object):
 
             shutil.copy2(sourceFilepath, destinationFilepath)
 
-            zipFile = zipfile.ZipFile(destinationFilepath, 'r')
+            zipFile = zipfile.ZipFile(destinationFilepath, 'rb')
             zipFile.extractall(destinationPath)
             zipFile.close()
 
@@ -334,7 +334,7 @@ class Package(object):
     def _createVersionFile(self, archiveFilename, destinationPath):
         versionFilepath = self._getVersionFilepath(archiveFilename, destinationPath)
 
-        fileVersion = open(versionFilepath, 'w')
+        fileVersion = open(versionFilepath, 'wb')
         versionBasename, dummyExtension = os.path.splitext(archiveFilename)
         fileVersion.write(versionBasename)
         fileVersion.close()

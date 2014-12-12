@@ -118,7 +118,7 @@ class SimulationsParameters(dict):
         return experiments
 
     def computeNumberXrays(self, experiment):
-        reader = csv.reader(open(self.computeNumberXraysFilepath, 'r'))
+        reader = csv.reader(open(self.computeNumberXraysFilepath, 'rb'))
 
         next(reader)
 

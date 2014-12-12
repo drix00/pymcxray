@@ -224,8 +224,8 @@ class TestSimulationInputs(unittest.TestCase):
             self.assertEquals("%s.mic" % (title), simulationInputs.microsopeFilename)
             self.assertEquals("%s.par" % (title), simulationInputs.simulationParametersFilename)
 
-            linesRef = open(filepathReference, 'r').readlines()
-            lines = open(filepath, 'r').readlines()
+            linesRef = open(filepathReference, 'rb').readlines()
+            lines = open(filepath, 'rb').readlines()
 
             self.assertListEqual(linesRef, lines)
 
@@ -263,8 +263,8 @@ class TestSimulationInputs(unittest.TestCase):
         self.assertEquals(simulationInputsRef.version.revision, simulationInputs.version.revision)
         self.assertEquals(simulationInputsRef.version, simulationInputs.version)
 
-        linesRef = open(filepathReference, 'r').readlines()
-        lines = open(filepath, 'r').readlines()
+        linesRef = open(filepathReference, 'rb').readlines()
+        lines = open(filepath, 'rb').readlines()
 
         self.assertListEqual(linesRef, lines)
 
@@ -300,8 +300,8 @@ class TestSimulationInputs(unittest.TestCase):
         self.assertEquals(simulationInputsRef.version.revision, simulationInputs.version.revision)
         self.assertEquals(simulationInputsRef.version, simulationInputs.version)
 
-        linesRef = open(filepathReference, 'r').readlines()
-        lines = open(filepath, 'r').readlines()
+        linesRef = open(filepathReference, 'rb').readlines()
+        lines = open(filepath, 'rb').readlines()
 
         self.assertListEqual(linesRef, lines)
 
@@ -337,8 +337,8 @@ class TestSimulationInputs(unittest.TestCase):
         self.assertEquals(simulationInputsRef.version.revision, simulationInputs.version.revision)
         self.assertEquals(simulationInputsRef.version, simulationInputs.version)
 
-        linesRef = open(filepathReference, 'r').readlines()
-        lines = open(filepath, 'r').readlines()
+        linesRef = open(filepathReference, 'rb').readlines()
+        lines = open(filepath, 'rb').readlines()
 
         self.assertListEqual(linesRef, lines)
 
@@ -376,8 +376,8 @@ class TestSimulationInputs(unittest.TestCase):
         self.assertEquals(simulationInputsRef.version.revision, simulationInputs.version.revision)
         self.assertEquals(simulationInputsRef.version, simulationInputs.version)
 
-        linesRef = open(filepathReference, 'r').readlines()
-        lines = open(filepath, 'r').readlines()
+        linesRef = open(filepathReference, 'rb').readlines()
+        lines = open(filepath, 'rb').readlines()
 
         self.assertListEqual(linesRef, lines)
 

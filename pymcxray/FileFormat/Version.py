@@ -43,11 +43,11 @@ class Version(object):
         self.revision = items[2]
 
     def writeLine(self, outputFile):
-        line = "%s=%s\r\n" % (self.key, self.toString())
+        line = "%s=%s\n" % (self.key, self.toString())
         outputFile.write(line)
 
     def readFromFile(self, filepath):
-        lines = open(filepath, 'r').readlines()
+        lines = open(filepath, 'rb').readlines()
 
         for line in lines:
             line = line.strip()

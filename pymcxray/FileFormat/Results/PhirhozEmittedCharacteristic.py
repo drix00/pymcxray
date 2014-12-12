@@ -40,7 +40,7 @@ class PhirhozEmittedCharacteristic(BaseResults.BaseResults):
         filename = self.basename + suffix
         filepath = os.path.join(self.path, filename)
 
-        with open(filepath, 'r') as csvFile:
+        with open(filepath, 'rb') as csvFile:
             reader = csv.DictReader(csvFile)
 
             fieldnames = reader.fieldnames

@@ -35,7 +35,7 @@ class ExportedSpectrum(object):
         self._intensities = []
 
     def read(self, filepath):
-        lines = open(filepath, 'r').readlines()
+        lines = open(filepath, 'rb').readlines()
 
         header = lines[0].strip()
         self._spectrumType = header

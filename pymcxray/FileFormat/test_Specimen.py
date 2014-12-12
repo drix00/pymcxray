@@ -402,8 +402,8 @@ class TestSpecimen(unittest.TestCase):
 
             specimen.write(filepath)
 
-            linesRef = open(filepathReference, 'r').readlines()
-            lines = open(filepath, 'r').readlines()
+            linesRef = open(filepathReference, 'rb').readlines()
+            lines = open(filepath, 'rb').readlines()
 
             for index in range(len(linesRef)):
                 lineRef = linesRef[index]
@@ -434,8 +434,8 @@ class TestSpecimen(unittest.TestCase):
 
         specimen.write(filepath)
 
-        linesRef = open(filepathReference, 'r').readlines()
-        lines = open(filepath, 'r').readlines()
+        linesRef = open(filepathReference, 'rb').readlines()
+        lines = open(filepath, 'rb').readlines()
 
         for index in range(len(linesRef)):
             lineRef = linesRef[index]
@@ -464,8 +464,8 @@ class TestSpecimen(unittest.TestCase):
         specimen.version = copy.deepcopy(Version.VERSION_1_2_0)
         specimen.write(filepath)
 
-        linesRef = open(filepathReference, 'r').readlines()
-        lines = open(filepath, 'r').readlines()
+        linesRef = open(filepathReference, 'rb').readlines()
+        lines = open(filepath, 'rb').readlines()
 
         for index in range(len(linesRef)):
             lineRef = linesRef[index]
@@ -494,8 +494,8 @@ class TestSpecimen(unittest.TestCase):
         specimen.version = copy.deepcopy(Version.VERSION_1_2_1)
         specimen.write(filepath)
 
-        linesRef = open(filepathReference, 'r').readlines()
-        lines = open(filepath, 'r').readlines()
+        linesRef = open(filepathReference, 'rb').readlines()
+        lines = open(filepath, 'rb').readlines()
 
         for index in range(len(linesRef)):
             lineRef = linesRef[index]
@@ -524,8 +524,8 @@ class TestSpecimen(unittest.TestCase):
 
         specimen.write(filepath)
 
-        linesRef = open(filepathReference, 'r').readlines()
-        lines = open(filepath, 'r').readlines()
+        linesRef = open(filepathReference, 'rb').readlines()
+        lines = open(filepath, 'rb').readlines()
 
         for index in range(len(linesRef)):
             lineRef = linesRef[index]
@@ -876,4 +876,4 @@ class TestSpecimen(unittest.TestCase):
 if __name__ == '__main__':  #pragma: no cover
     logging.getLogger().setLevel(logging.DEBUG)
     from pyHendrixDemersTools.Testings import runTestModuleWithCoverage
-    runTestModuleWithCoverage(__file__, withCoverage=True)
+    runTestModuleWithCoverage(__file__, withCoverage=False)

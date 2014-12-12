@@ -61,7 +61,7 @@ class SimulationInputs(object):
 
         self._title = self._extractTitleFromFilepath(filepath)
 
-        lines = open(filepath, 'r').readlines()
+        lines = open(filepath, 'rb').readlines()
 
         for line in lines:
             line = line.strip()
@@ -74,7 +74,7 @@ class SimulationInputs(object):
     def write(self, filepath):
         title = self._extractTitleFromFilepath(filepath)
 
-        outputFile = open(filepath, 'w')
+        outputFile = open(filepath, 'wb')
 
         self.version.writeLine(outputFile)
 
@@ -89,7 +89,7 @@ class SimulationInputs(object):
                 self._filenames[key] = filename
 
             if self._filenames[key] is not None:
-                line = "%s=%s\r\n" % (key, self._filenames[key])
+                line = "%s=%s\n" % (key, self._filenames[key])
                 outputFile.write(line)
 
     def _extractTitleFromFilepath(self, filepath):
