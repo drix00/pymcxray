@@ -158,7 +158,7 @@ class MicroscopeParameters(object):
     def read(self, filepath):
         self.version.readFromFile(filepath)
 
-        lines = open(filepath, 'r').readlines()
+        lines = open(filepath, 'rb').readlines()
 
         extractMethods = self._createExtractMethod()
 
@@ -171,7 +171,7 @@ class MicroscopeParameters(object):
                     self._parameters[key] = extractMethods[key](items[-1])
 
     def write(self, filepath):
-        outputFile = open(filepath, 'w')
+        outputFile = open(filepath, 'wb')
 
         self._writeHeader(outputFile)
 
@@ -186,7 +186,7 @@ class MicroscopeParameters(object):
             if "e+" in value:
                 value = value.replace('e+', 'e+0')
 
-            line = "%s=%s\r\n" % (key, value)
+            line = "%s=%s\n" % (key, value)
             outputFile.write(line)
 
     def _writeHeader(self, outputFile):
@@ -220,7 +220,7 @@ class MicroscopeParameters(object):
                         "********************************************************************************"]
 
         for line in headerLines:
-            outputFile.write(line+'\r\n')
+            outputFile.write(line+'\n')
 
     def _createFormats(self):
         formats = {}

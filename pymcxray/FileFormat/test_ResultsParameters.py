@@ -183,8 +183,8 @@ class TestResultsParameters(unittest.TestCase):
             self.assertEquals(resultsParametersRef.isComputeXrayBremsstrahlung, resultsParameters.isComputeXrayBremsstrahlung)
             self.assertEquals(resultsParametersRef.isComputeXrayPhirhoz, resultsParameters.isComputeXrayPhirhoz)
 
-            linesRef = open(filepathReference, 'r').readlines()
-            lines = open(filepath, 'r').readlines()
+            linesRef = open(filepathReference, 'rb').readlines()
+            lines = open(filepath, 'rb').readlines()
 
             self.assertListEqual(linesRef, lines)
 
@@ -217,8 +217,8 @@ class TestResultsParameters(unittest.TestCase):
         self.assertEquals(resultsParametersRef.version.revision, resultsParameters.version.revision)
         self.assertEquals(resultsParametersRef.version, resultsParameters.version)
 
-        linesRef = open(filepathReference, 'r').readlines()
-        lines = open(filepath, 'r').readlines()
+        linesRef = open(filepathReference, 'rb').readlines()
+        lines = open(filepath, 'rb').readlines()
 
         self.assertListEqual(linesRef, lines)
 
@@ -252,8 +252,8 @@ class TestResultsParameters(unittest.TestCase):
         self.assertEquals(resultsParametersRef.version.revision, resultsParameters.version.revision)
         self.assertEquals(resultsParametersRef.version, resultsParameters.version)
 
-        linesRef = open(filepathReference, 'r').readlines()
-        lines = open(filepath, 'r').readlines()
+        linesRef = open(filepathReference, 'rb').readlines()
+        lines = open(filepath, 'rb').readlines()
 
         self.assertListEqual(linesRef, lines)
 

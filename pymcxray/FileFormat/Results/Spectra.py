@@ -43,7 +43,7 @@ class Spectra(object):
         self._elementSpectra = {}
 
     def read(self, filepath):
-        lines = open(filepath, 'r').readlines()
+        lines = open(filepath, 'rb').readlines()
 
         lineIndex = 0
 

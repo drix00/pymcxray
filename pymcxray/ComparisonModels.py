@@ -55,7 +55,7 @@ class ComparisonModels(object):
                 logging.info("Reading filepath: %s", filepath)
 
                 data = {}
-                reader = csv.DictReader(open(filepath, 'r'))
+                reader = csv.DictReader(open(filepath, 'rb'))
 
                 validFieldnames = []
                 for fieldname in reader.fieldnames:
@@ -161,7 +161,7 @@ class ComparisonModels(object):
             atomicNumber = int(items[2][1:])
             logging.debug(atomicNumber)
 
-            reader = csv.DictReader(open(filepath, 'r'))
+            reader = csv.DictReader(open(filepath, 'rb'))
 
             fieldnames = reader.fieldnames
             logging.debug(fieldnames)
@@ -218,7 +218,7 @@ class ComparisonModels(object):
             energy_keV = int(items[3][1:-3])
             logging.debug(energy_keV)
 
-            reader = csv.DictReader(open(filepath, 'r'))
+            reader = csv.DictReader(open(filepath, 'rb'))
 
             fieldnames = reader.fieldnames
             fieldnames = fieldnames[:-1]
@@ -276,7 +276,7 @@ class ComparisonModels(object):
             subshell = items[3]
             logging.debug(subshell)
 
-            reader = csv.DictReader(open(filepath, 'r'))
+            reader = csv.DictReader(open(filepath, 'rb'))
 
             fieldnames = reader.fieldnames
             fieldnames = fieldnames[:-1]

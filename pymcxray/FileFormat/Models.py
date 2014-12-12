@@ -95,7 +95,7 @@ class Models(object):
     def read(self, filepath):
         self.version.readFromFile(filepath)
 
-        lines = open(filepath, 'r').readlines()
+        lines = open(filepath, 'rb').readlines()
 
         for line in lines:
             line = line.strip()
@@ -109,7 +109,7 @@ class Models(object):
         return self._modelList
 
     def write(self, filepath):
-        outputFile = open(filepath, 'w')
+        outputFile = open(filepath, 'wb')
 
         self._writeHeader(outputFile)
 
@@ -124,7 +124,7 @@ class Models(object):
             keys.remove(KEY_MASS_ABSORPTION_COEFFICIENT_MODEL)
 
         for key in keys:
-            line = "%s=%s\r\n" % (key, self._modelList[key].getModel())
+            line = "%s=%s\n" % (key, self._modelList[key].getModel())
             outputFile.write(line)
 
     def _writeHeader(self, outputFile):
@@ -167,7 +167,7 @@ class Models(object):
         headerLines.append("********************************************************************************")
 
         for line in headerLines:
-            outputFile.write(line+'\r\n')
+            outputFile.write(line+'\n')
 
     @property
     def version(self):

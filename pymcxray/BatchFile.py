@@ -58,7 +58,7 @@ class BatchFile(object):
                 filepath = os.path.join(path, filename)
 
                 logging.info("Write batch file: %s", filepath)
-                batchFile = open(filepath, 'w')
+                batchFile = open(filepath, 'wb')
 
                 for simulationFilename in self._simulationFilenames[indexFilenames:indexFilenames+indexStep]:
                     line = simulationFilename + "\n"
@@ -72,7 +72,7 @@ class BatchFile(object):
             filepath = os.path.join(path, filename)
 
             logging.info("Write batch file: %s", filepath)
-            batchFile = open(filepath, 'w')
+            batchFile = open(filepath, 'wb')
 
             for simulationFilename in self._simulationFilenames:
                 line = simulationFilename + "\n"

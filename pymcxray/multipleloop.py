@@ -125,21 +125,21 @@ all pairs: 6
 
 Here is another example with more experiments::
 
->>> p = {'b': '1 & 0 & 0.5', 'func': 'y & siny', 'w': '[1:1.3,0.1]'}
+>>> p = {'b': '1 & 0 & 0.5', 'func': 'y & siny', 'wb': '[1:1.3,0.1]'}
 >>> prm_values = [(name, input2values(p[name])) for name in p]
 >>> import pprint
 >>> pprint.pprint(prm_values)
 [('b', [1, 0, 0.5]),
- ('w', [1, 1.1000000000000001, 1.2000000000000002]),
+ ('wb', [1, 1.1000000000000001, 1.2000000000000002]),
  ('func', ['y', 'siny'])]
 >>>
 >>> # main function:
 >>> all, names, varied = combine(prm_values)
 >>>
 >>> print names
-['b', 'w', 'func']
+['b', 'wb', 'func']
 >>> print varied
-['b', 'w', 'func']
+['b', 'wb', 'func']
 >>> pprint.pprint(all)
 [[1, 1, 'y'],
  [0, 1, 'y'],
@@ -560,7 +560,7 @@ for cmlargs, parameters, varied_parameters in experiments:
     print 'function.append((response, varied_parameters))'
 
 """ % (p, p[one_name], one_name, one_name, one_value)
-    f = open('_tmp.py', 'w')
+    f = open('_tmp.py', 'wb')
     f.write(code)
     f.close()
     import commands
@@ -574,7 +574,7 @@ for cmlargs, parameters, varied_parameters in experiments:
 def _doc_str_example():
     p = {'A': '1 & 2 & 5', 'B': 'hello & world'}
     text1 = _demo(p, 'A', '5')
-    p = {'w': '[1:1.3,0.1]', 'b': '1 & 0 & 0.5', 'func': 'y & siny'}
+    p = {'wb': '[1:1.3,0.1]', 'b': '1 & 0 & 0.5', 'func': 'y & siny'}
     text2 = _demo(p, 'b', '1')
     return text1 + text2
 
@@ -599,15 +599,15 @@ def _test1():
     p = [('prm1', l3), ('prm2', l2), ('prm3', l1)]
     all, names, varied = combine(p)
     _dump(all, names, varied)
-    p = {'w': [0.7, 1.3, 0.1], 'b': [1, 0], 'func': ['y', 'siny']}
+    p = {'wb': [0.7, 1.3, 0.1], 'b': [1, 0], 'func': ['y', 'siny']}
     all, names, varied = combine(p)
     print('\n\n\n')
     _dump(all, names, varied)
     print(options(all, names, prefix='-'))
 
 def _test2():
-    p = {'w': '[0.7:1.3,0.1]', 'b': '1 & 0.3 & 0', 'func': 'y & siny'}
-    print(input2values(p['w']))
+    p = {'wb': '[0.7:1.3,0.1]', 'b': '1 & 0.3 & 0', 'func': 'y & siny'}
+    print(input2values(p['wb']))
     print(input2values(p['b']))
     print(input2values(p['func']))
     prm_values = [(name, input2values(p[name])) \
@@ -618,7 +618,7 @@ def _test2():
 
     # rule out b=0 when w>1
     all_restricted = [];
-    bi = names.index('b'); wi = names.index('w')
+    bi = names.index('b'); wi = names.index('wb')
     for e in all:
         if e[bi] == 0 and e[wi] > 1:
             pass # rule out
@@ -627,9 +627,9 @@ def _test2():
     # b->damping, w->omega:
     names2 = names[:]
     names2[names.index('b')] = 'damping'
-    names2[names.index('w')] = 'omega'
+    names2[names.index('wb')] = 'omega'
     print(options(all, names, prefix='--'))
-    conditions = (('b',operator.eq,0), ('w',operator.gt,1))
+    conditions = (('b',operator.eq,0), ('wb',operator.gt,1))
     def rule_out(all, conditions):
         all_restricted = []
         for e in all:
@@ -669,7 +669,7 @@ class MultipleLoop:
 
     Example:
 
-    >>> p = {'b': '1 & 0 & 0.5', 'func': 'y & siny', 'w': '[1:1.3,0.1]'}
+    >>> p = {'b': '1 & 0 & 0.5', 'func': 'y & siny', 'wb': '[1:1.3,0.1]'}
     >>> experiments = MultipleLoop(option_prefix='-')
     >>> for name in p:
     ...     experiments.register_parameter(name, p[name])
@@ -751,7 +751,7 @@ class MultipleLoop:
 class ReportHTML:
     def __init__(self, filename):
         self.filename = filename
-        f = open(self.filename, 'w') # new file
+        f = open(self.filename, 'wb') # new file
         f.write("""<html><body>\n""")
         f.close()
         self._experiment_section_counter = 0
