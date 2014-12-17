@@ -77,7 +77,7 @@ class TestPhirhozRegion(unittest.TestCase):
 
 def getLinesAndReference(path):
     filepath = os.path.join(path, "version1.1/autoSavedFiles/phirhozGenerated_region0.txt")
-    lines = open(filepath, 'rb').readlines()
+    lines = open(filepath, 'r').readlines()
 
     phirhozRegionRef = PhirhozRegion.PhirhozRegion(64, 128)
     phirhozRegionRef.regionID = 0

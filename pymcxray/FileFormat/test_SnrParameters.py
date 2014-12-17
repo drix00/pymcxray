@@ -130,8 +130,8 @@ class TestSnrParameters(unittest.TestCase):
             self.assertEquals(snrParametersRef.backgroundEnergyWindowsSize, snrParameters.backgroundEnergyWindowsSize)
             self.assertEquals(snrParametersRef.spectrumEnergyWindowsSize, snrParameters.spectrumEnergyWindowsSize)
 
-            linesRef = open(filepathReference, 'rb').readlines()
-            lines = open(filepath, 'rb').readlines()
+            linesRef = open(filepathReference, 'r').readlines()
+            lines = open(filepath, 'r').readlines()
 
             self.assertListEqual(linesRef, lines)
 

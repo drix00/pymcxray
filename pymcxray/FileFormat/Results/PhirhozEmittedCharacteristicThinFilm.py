@@ -49,7 +49,7 @@ class PhirhozEmittedCharacteristicThinFilm(BaseResults.BaseResults):
         filename = self.basename + suffix
         filepath = os.path.join(self.path, filename)
 
-        with open(filepath, 'rb') as csvFile:
+        with open(filepath, 'r') as csvFile:
             reader = csv.DictReader(csvFile, self.fieldNames)
             # Skip header row
             next(reader)

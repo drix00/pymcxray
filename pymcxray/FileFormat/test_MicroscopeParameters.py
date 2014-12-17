@@ -371,8 +371,8 @@ class TestMicroscopeParameters(unittest.TestCase):
             self.assertEquals(microscopeParametersRef.detectorHAADFLow_rad, microscopeParameters.detectorHAADFLow_rad)
             self.assertEquals(microscopeParametersRef.detectorHAADFHigh_rad, microscopeParameters.detectorHAADFHigh_rad)
 
-            linesRef = open(filepathReference, 'rb').readlines()
-            lines = open(filepath, 'rb').readlines()
+            linesRef = open(filepathReference, 'r').readlines()
+            lines = open(filepath, 'r').readlines()
 
             self.assertListEqual(linesRef, lines)
 
@@ -424,8 +424,8 @@ class TestMicroscopeParameters(unittest.TestCase):
         self.assertEquals(microscopeParametersRef.detectorHAADFLow_rad, microscopeParameters.detectorHAADFLow_rad)
         self.assertEquals(microscopeParametersRef.detectorHAADFHigh_rad, microscopeParameters.detectorHAADFHigh_rad)
 
-        linesRef = open(filepathReference, 'rb').readlines()
-        lines = open(filepath, 'rb').readlines()
+        linesRef = open(filepathReference, 'r').readlines()
+        lines = open(filepath, 'r').readlines()
 
         self.assertListEqual(linesRef, lines)
 
@@ -478,8 +478,8 @@ class TestMicroscopeParameters(unittest.TestCase):
         self.assertEquals(microscopeParametersRef.detectorHAADFLow_rad, microscopeParameters.detectorHAADFLow_rad)
         self.assertEquals(microscopeParametersRef.detectorHAADFHigh_rad, microscopeParameters.detectorHAADFHigh_rad)
 
-        linesRef = open(filepathReference, 'rb').readlines()
-        lines = open(filepath, 'rb').readlines()
+        linesRef = open(filepathReference, 'r').readlines()
+        lines = open(filepath, 'r').readlines()
 
         self.assertListEqual(linesRef, lines)
 
@@ -531,8 +531,8 @@ class TestMicroscopeParameters(unittest.TestCase):
         self.assertEquals(microscopeParametersRef.detectorHAADFLow_rad, microscopeParameters.detectorHAADFLow_rad)
         self.assertEquals(microscopeParametersRef.detectorHAADFHigh_rad, microscopeParameters.detectorHAADFHigh_rad)
 
-        linesRef = open(filepathReference, 'rb').readlines()
-        lines = open(filepath, 'rb').readlines()
+        linesRef = open(filepathReference, 'r').readlines()
+        lines = open(filepath, 'r').readlines()
 
         self.assertListEqual(linesRef, lines)
 
@@ -582,8 +582,8 @@ class TestMicroscopeParameters(unittest.TestCase):
         self.assertEquals(microscopeParametersRef.detectorHAADFLow_rad, microscopeParameters.detectorHAADFLow_rad)
         self.assertEquals(microscopeParametersRef.detectorHAADFHigh_rad, microscopeParameters.detectorHAADFHigh_rad)
 
-        linesRef = open(filepathReference, 'rb').readlines()
-        lines = open(filepath, 'rb').readlines()
+        linesRef = open(filepathReference, 'r').readlines()
+        lines = open(filepath, 'r').readlines()
 
         self.assertEquals(len(linesRef), len(lines))
         # todo make this assert pass

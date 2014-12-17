@@ -198,14 +198,14 @@ class _Simulations(object):
 
         shutil.copy2(archiveFilepath, destinationFilepath)
 
-        zipFile = zipfile.ZipFile(destinationFilepath, 'rb')
+        zipFile = zipfile.ZipFile(destinationFilepath, 'r')
         try:
             zipFile.extractall(destinationPath)
         except IOError as message:
             logging.error(message)
         zipFile.close()
 
-        fileVersion = open(versionFilepath, 'wb')
+        fileVersion = open(versionFilepath, 'w')
         fileVersion.write(versionBasename)
         fileVersion.close()
 

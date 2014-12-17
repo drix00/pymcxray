@@ -72,7 +72,7 @@ class ResultsParameters(object):
     def read(self, filepath):
         self.version.readFromFile(filepath)
 
-        lines = open(filepath, 'rb').readlines()
+        lines = open(filepath, 'r').readlines()
 
         extractMethods = self._createExtractMethod()
 
@@ -85,7 +85,7 @@ class ResultsParameters(object):
                     self._parameters[key] = extractMethods[key](items[-1])
 
     def write(self, filepath):
-        outputFile = open(filepath, 'wb')
+        outputFile = open(filepath, 'w')
 
         self._writeHeader(outputFile)
 

@@ -79,10 +79,10 @@ class TestSpectraEDS(unittest.TestCase):
         Tests for method `_isTestInputSection`.
         """
 
-        lines = open(self.spectraEdsRegion0Filepath, 'rb').readlines()
+        lines = open(self.spectraEdsRegion0Filepath, 'r').readlines()
         self.assertFalse(SpectraEDS.SpectraEDS()._isTestInputSection(lines))
 
-        lines = open(self.spectraEdsRegion1Filepath, 'rb').readlines()
+        lines = open(self.spectraEdsRegion1Filepath, 'r').readlines()
         self.assertFalse(SpectraEDS.SpectraEDS()._isTestInputSection(lines))
 
         lines = """TEST INPUT - START
@@ -126,11 +126,11 @@ TEST INPUT - STOP
         Tests for method `_isTestInputSection`.
         """
 
-        lines = open(self.spectraEdsRegion0Filepath, 'rb').readlines()
+        lines = open(self.spectraEdsRegion0Filepath, 'r').readlines()
         lines =[line.strip() for line in lines]
         self.assertTrue(SpectraEDS.SpectraEDS()._isPartialSpectraReferenceSection(lines))
 
-        lines = open(self.spectraEdsRegion1Filepath, 'rb').readlines()
+        lines = open(self.spectraEdsRegion1Filepath, 'r').readlines()
         lines =[line.strip() for line in lines]
         self.assertTrue(SpectraEDS.SpectraEDS()._isPartialSpectraReferenceSection(lines))
 
@@ -169,11 +169,11 @@ TEST INPUT - STOP
 
         self.assertRaises(ValueError, SpectraEDS.SpectraEDS().readPartialSpectraReferenceSection, lines)
 
-        lines = open(self.spectraEdsRegion0Filepath, 'rb').readlines()
+        lines = open(self.spectraEdsRegion0Filepath, 'r').readlines()
         lines =[line.strip() for line in lines]
         self.assertEquals(2097, SpectraEDS.SpectraEDS().readPartialSpectraReferenceSection(lines))
 
-        lines = open(self.spectraEdsRegion1Filepath, 'rb').readlines()
+        lines = open(self.spectraEdsRegion1Filepath, 'r').readlines()
         lines =[line.strip() for line in lines]
         self.assertEquals(2097, SpectraEDS.SpectraEDS().readPartialSpectraReferenceSection(lines))
 
@@ -209,10 +209,10 @@ TEST INPUT - STOP
         Tests for method `_isRegionSpectraSection`.
         """
 
-        lines = open(self.spectraEdsRegion0Filepath, 'rb').readlines()
+        lines = open(self.spectraEdsRegion0Filepath, 'r').readlines()
         self.assertTrue(SpectraEDS.SpectraEDS()._isRegionSpectraSection(lines))
 
-        lines = open(self.spectraEdsRegion1Filepath, 'rb').readlines()
+        lines = open(self.spectraEdsRegion1Filepath, 'r').readlines()
         self.assertTrue(SpectraEDS.SpectraEDS()._isRegionSpectraSection(lines))
 
         lines = """TEST INPUT - START
@@ -252,7 +252,7 @@ TEST INPUT - STOP
         spectraEDS = SpectraEDS.SpectraEDS()
 
         # Region 0 file.
-        lines = open(self.spectraEdsRegion0Filepath, 'rb').readlines()
+        lines = open(self.spectraEdsRegion0Filepath, 'r').readlines()
         lines =[line.strip() for line in lines]
 
         self.assertEquals(6279, spectraEDS.readRegionSpectraSection(lines))
@@ -277,7 +277,7 @@ TEST INPUT - STOP
         self.assertEquals(1024, len(spectraEDS.continuumCumulativeEquiprobableChannels))
 
         # Region 1 file
-        lines = open(self.spectraEdsRegion1Filepath, 'rb').readlines()
+        lines = open(self.spectraEdsRegion1Filepath, 'r').readlines()
         lines =[line.strip() for line in lines]
 
         self.assertEquals(6263, spectraEDS.readRegionSpectraSection(lines))

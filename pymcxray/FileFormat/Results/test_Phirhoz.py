@@ -89,7 +89,7 @@ class TestPhirhoz(unittest.TestCase):
 
 def getLinesAndReference(path):
     filepath = os.path.join(path, "version1.1/autoSavedFiles/phirhozGenerated_elementShell.txt")
-    lines = open(filepath, 'rb').readlines()
+    lines = open(filepath, 'r').readlines()
 
     phirhozRef = Phirhoz.Phirhoz('Au', SHELL_L)
     phirhozRef.intensity = 1.366974e+007

@@ -47,7 +47,7 @@ class Version(object):
         outputFile.write(line)
 
     def readFromFile(self, filepath):
-        lines = open(filepath, 'rb').readlines()
+        lines = open(filepath, 'r').readlines()
 
         for line in lines:
             line = line.strip()
