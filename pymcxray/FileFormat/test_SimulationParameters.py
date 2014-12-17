@@ -447,8 +447,8 @@ class TestSimulationParameters(unittest.TestCase):
             self.assertEquals(simulationParametersRef.spectrumInterpolationModel, simulationParameters.spectrumInterpolationModel)
             self.assertEquals(simulationParametersRef.voxelSimplification, simulationParameters.voxelSimplification, title)
 
-            linesRef = open(filepathReference, 'rb').readlines()
-            lines = open(filepath, 'rb').readlines()
+            linesRef = open(filepathReference, 'r').readlines()
+            lines = open(filepath, 'r').readlines()
 
             self.assertListEqual(linesRef, lines)
 
@@ -490,8 +490,8 @@ class TestSimulationParameters(unittest.TestCase):
         self.assertEquals(simulationParametersRef.version.revision, simulationParameters.version.revision)
         self.assertEquals(simulationParametersRef.version, simulationParameters.version)
 
-        linesRef = open(filepathReference, 'rb').readlines()
-        lines = open(filepath, 'rb').readlines()
+        linesRef = open(filepathReference, 'r').readlines()
+        lines = open(filepath, 'r').readlines()
 
         self.assertListEqual(linesRef, lines)
 
@@ -531,8 +531,8 @@ class TestSimulationParameters(unittest.TestCase):
         self.assertEquals(simulationParametersRef.version.revision, simulationParameters.version.revision)
         self.assertEquals(simulationParametersRef.version, simulationParameters.version)
 
-        linesRef = open(filepathReference, 'rb').readlines()
-        lines = open(filepath, 'rb').readlines()
+        linesRef = open(filepathReference, 'r').readlines()
+        lines = open(filepath, 'r').readlines()
 
         self.assertListEqual(linesRef, lines)
 
@@ -573,8 +573,8 @@ class TestSimulationParameters(unittest.TestCase):
         self.assertEquals(simulationParametersRef.version.revision, simulationParameters.version.revision)
         self.assertEquals(simulationParametersRef.version, simulationParameters.version)
 
-        linesRef = open(filepathReference, 'rb').readlines()
-        lines = open(filepath, 'rb').readlines()
+        linesRef = open(filepathReference, 'r').readlines()
+        lines = open(filepath, 'r').readlines()
 
         self.assertListEqual(linesRef, lines)
 
@@ -615,8 +615,8 @@ class TestSimulationParameters(unittest.TestCase):
         self.assertEquals(simulationParametersRef.version.revision, simulationParameters.version.revision)
         self.assertEquals(simulationParametersRef.version, simulationParameters.version)
 
-        linesRef = open(filepathReference, 'rb').readlines()
-        lines = open(filepath, 'rb').readlines()
+        linesRef = open(filepathReference, 'r').readlines()
+        lines = open(filepath, 'r').readlines()
 
         self.assertListEqual(linesRef, lines)
 
@@ -659,8 +659,8 @@ class TestSimulationParameters(unittest.TestCase):
         self.assertEquals(simulationParametersRef.version.revision, simulationParameters.version.revision)
         self.assertEquals(simulationParametersRef.version, simulationParameters.version)
 
-        linesRef = open(filepathReference, 'rb').readlines()
-        lines = open(filepath, 'rb').readlines()
+        linesRef = open(filepathReference, 'r').readlines()
+        lines = open(filepath, 'r').readlines()
 
         self.assertListEqual(linesRef, lines)
 

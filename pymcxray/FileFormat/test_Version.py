@@ -244,7 +244,7 @@ class TestVersion(unittest.TestCase):
         filepath = os.path.join(self.tempDataPath, "%s.sim" % (title))
         logging.info(filepath)
         version = Version.Version(3, 4, 5)
-        outputFile = open(filepath, 'wb')
+        outputFile = open(filepath, 'w')
         version.writeLine(outputFile)
         outputFile.close()
 

@@ -95,7 +95,7 @@ class Models(object):
     def read(self, filepath):
         self.version.readFromFile(filepath)
 
-        lines = open(filepath, 'rb').readlines()
+        lines = open(filepath, 'r').readlines()
 
         for line in lines:
             line = line.strip()
@@ -109,7 +109,7 @@ class Models(object):
         return self._modelList
 
     def write(self, filepath):
-        outputFile = open(filepath, 'wb')
+        outputFile = open(filepath, 'w')
 
         self._writeHeader(outputFile)
 

@@ -287,8 +287,8 @@ class TestModels(unittest.TestCase):
 
             models.write(filepath)
 
-            linesRef = open(filepathReference, 'rb').readlines()
-            lines = open(filepath, 'rb').readlines()
+            linesRef = open(filepathReference, 'r').readlines()
+            lines = open(filepath, 'r').readlines()
 
             self.assertListEqual(linesRef, lines)
 
@@ -312,8 +312,8 @@ class TestModels(unittest.TestCase):
 
         models.write(filepath)
 
-        linesRef = open(filepathReference, 'rb').readlines()
-        lines = open(filepath, 'rb').readlines()
+        linesRef = open(filepathReference, 'r').readlines()
+        lines = open(filepath, 'r').readlines()
 
         self.assertListEqual(linesRef, lines)
 
@@ -339,8 +339,8 @@ class TestModels(unittest.TestCase):
 
         models.write(filepath)
 
-        linesRef = open(filepathReference, 'rb').readlines()
-        lines = open(filepath, 'rb').readlines()
+        linesRef = open(filepathReference, 'r').readlines()
+        lines = open(filepath, 'r').readlines()
 
         self.assertListEqual(linesRef, lines)
 
@@ -366,8 +366,8 @@ class TestModels(unittest.TestCase):
 
         models.write(filepath)
 
-        linesRef = open(filepathReference, 'rb').readlines()
-        lines = open(filepath, 'rb').readlines()
+        linesRef = open(filepathReference, 'r').readlines()
+        lines = open(filepath, 'r').readlines()
 
         self.assertListEqual(linesRef, lines)
 
@@ -393,8 +393,8 @@ class TestModels(unittest.TestCase):
 
         models.write(filepath)
 
-        linesRef = open(filepathReference, 'rb').readlines()
-        lines = open(filepath, 'rb').readlines()
+        linesRef = open(filepathReference, 'r').readlines()
+        lines = open(filepath, 'r').readlines()
 
         self.assertListEqual(linesRef, lines)
 

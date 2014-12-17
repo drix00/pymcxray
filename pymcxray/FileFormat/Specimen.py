@@ -75,7 +75,7 @@ class Specimen(object):
             self._readWithVersion(filepath)
 
     def _readWithVersion(self, filepath):
-        lines = open(filepath, 'rb').readlines()
+        lines = open(filepath, 'r').readlines()
 
         indexLine = 0
         for line in lines:
@@ -98,7 +98,7 @@ class Specimen(object):
             indexLine += region.extractFromLinesWithVersion(lines[indexLine:])
 
     def _readOldVersion(self, filepath):
-        lines = open(filepath, 'rb').readlines()
+        lines = open(filepath, 'r').readlines()
 
         extractMethods = self._createExtractMethods()
 
@@ -121,7 +121,7 @@ class Specimen(object):
     def write(self, filepath):
         assert self.numberRegions == len(self.regions)
 
-        outputFile = open(filepath, 'wb')
+        outputFile = open(filepath, 'w')
 
         self._writeHeader(outputFile)
 

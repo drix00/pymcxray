@@ -560,7 +560,7 @@ for cmlargs, parameters, varied_parameters in experiments:
     print 'function.append((response, varied_parameters))'
 
 """ % (p, p[one_name], one_name, one_name, one_value)
-    f = open('_tmp.py', 'wb')
+    f = open('_tmp.py', 'w')
     f.write(code)
     f.close()
     import commands
@@ -751,7 +751,7 @@ class MultipleLoop:
 class ReportHTML:
     def __init__(self, filename):
         self.filename = filename
-        f = open(self.filename, 'wb') # new file
+        f = open(self.filename, 'w') # new file
         f.write("""<html><body>\n""")
         f.close()
         self._experiment_section_counter = 0

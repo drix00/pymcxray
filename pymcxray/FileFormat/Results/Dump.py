@@ -34,7 +34,7 @@ class Dump(object):
         pass
 
     def read(self, filepath):
-        lines = open(filepath, 'rb').readlines()
+        lines = open(filepath, 'r').readlines()
 
         lineIndex = 2
         intersections = Intersections.Intersections()

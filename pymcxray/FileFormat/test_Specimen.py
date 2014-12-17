@@ -402,8 +402,8 @@ class TestSpecimen(unittest.TestCase):
 
             specimen.write(filepath)
 
-            linesRef = open(filepathReference, 'rb').readlines()
-            lines = open(filepath, 'rb').readlines()
+            linesRef = open(filepathReference, 'r').readlines()
+            lines = open(filepath, 'r').readlines()
 
             for index in range(len(linesRef)):
                 lineRef = linesRef[index]
@@ -434,8 +434,8 @@ class TestSpecimen(unittest.TestCase):
 
         specimen.write(filepath)
 
-        linesRef = open(filepathReference, 'rb').readlines()
-        lines = open(filepath, 'rb').readlines()
+        linesRef = open(filepathReference, 'r').readlines()
+        lines = open(filepath, 'r').readlines()
 
         for index in range(len(linesRef)):
             lineRef = linesRef[index]
@@ -464,8 +464,8 @@ class TestSpecimen(unittest.TestCase):
         specimen.version = copy.deepcopy(Version.VERSION_1_2_0)
         specimen.write(filepath)
 
-        linesRef = open(filepathReference, 'rb').readlines()
-        lines = open(filepath, 'rb').readlines()
+        linesRef = open(filepathReference, 'r').readlines()
+        lines = open(filepath, 'r').readlines()
 
         for index in range(len(linesRef)):
             lineRef = linesRef[index]
@@ -494,8 +494,8 @@ class TestSpecimen(unittest.TestCase):
         specimen.version = copy.deepcopy(Version.VERSION_1_2_1)
         specimen.write(filepath)
 
-        linesRef = open(filepathReference, 'rb').readlines()
-        lines = open(filepath, 'rb').readlines()
+        linesRef = open(filepathReference, 'r').readlines()
+        lines = open(filepath, 'r').readlines()
 
         for index in range(len(linesRef)):
             lineRef = linesRef[index]
@@ -524,8 +524,8 @@ class TestSpecimen(unittest.TestCase):
 
         specimen.write(filepath)
 
-        linesRef = open(filepathReference, 'rb').readlines()
-        lines = open(filepath, 'rb').readlines()
+        linesRef = open(filepathReference, 'r').readlines()
+        lines = open(filepath, 'r').readlines()
 
         for index in range(len(linesRef)):
             lineRef = linesRef[index]

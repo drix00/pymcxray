@@ -63,7 +63,7 @@ class SpectraEDS(object):
         self._parameters = {}
 
     def readFilepath(self, filepath):
-        inputFile = open(filepath, 'rb')
+        inputFile = open(filepath, 'r')
 
         self.readFileObject(inputFile)
 
