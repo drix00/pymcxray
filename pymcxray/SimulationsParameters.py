@@ -18,7 +18,7 @@ import logging
 import csv
 
 # Third party modules.
-import pymcxray.multipleloop as multipleloop
+import pyHendrixDemersTools.multipleloop as multipleloop
 
 # Local modules.
 
