@@ -2,3 +2,4 @@ syntax: glob
 .coverage
 *.pyc
 *.cfg
+testData
