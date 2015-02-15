@@ -64,18 +64,27 @@ class XrayIntensities(BaseResults.BaseResults):
     def getDetectedIntensity(self, atomicNumber, xrayLine):
         return self.getIntensityEmittedDetected(atomicNumber, xrayLine)
 
-    def getIntensityEmitted(self, atomicNumber, xrayLine):
-        data = {}
+    def getIntensityEmitted(self, atomicNumber, xrayLine, total=False):
+        if total:
+            data = 0.0
+        else:
+            data = {}
 
         for intensity in self.intensities:
             indexRegion = intensity[INDEX_REGION]
 
-            xrayLineLabel = "Line %s" % (xrayLine)
+            if not xrayLine.startswith("Line"):
+                xrayLineLabel = "Line %s" % (xrayLine)
+            else:
+                xrayLineLabel = xrayLine
             if intensity[ATOMIC_NUMBER] == str(atomicNumber) and intensity[LINE].startswith(xrayLineLabel):
-                if indexRegion not in data:
+                if not total and indexRegion not in data:
                     data[indexRegion] = 0.0
 
-                data[indexRegion] += float(intensity[INTENSITY_EMITTED])
+                if total:
+                    data += float(intensity[INTENSITY_EMITTED])
+                else:
+                    data[indexRegion] += float(intensity[INTENSITY_EMITTED])
 
         return data
 
@@ -135,6 +144,18 @@ class XrayIntensities(BaseResults.BaseResults):
                 data[indexRegion] += float(intensity[INTENSITY_GENERATED_DETECTED])
 
         return data
+
+    def getAtomicNumberLineEnergySets(self):
+        atomicNumberLineSets = set()
+
+        for intensity in self.intensities:
+            atomicNumber = intensity[ATOMIC_NUMBER]
+            line = intensity[LINE]
+            energy_keV = intensity[LINE_ENERGY_KEV]
+
+            atomicNumberLineSets.add((atomicNumber, line, energy_keV))
+
+        return atomicNumberLineSets
 
     @property
     def fieldNames(self):
