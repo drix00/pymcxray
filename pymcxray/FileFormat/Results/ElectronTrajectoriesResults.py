@@ -137,7 +137,7 @@ class ElectronTrajectoriesResults(object):
         self.read(filepath)
 
     def read(self, filepath):
-        reader = csv.reader(open(filepath, 'rb'))
+        reader = csv.reader(open(filepath, 'r'))
 
         #Skip header line
         next(reader)
@@ -256,10 +256,9 @@ class ElectronTrajectoriesResults(object):
 
         plt.xlabel('X (nm)')
         plt.ylabel('Z (nm)')
-        plt.axes().set_aspect('equal', 'datalim')
         plt.grid(True)
-        yMin, yMax = plt.ylim()
-        plt.ylim((yMax, yMin))
+        plt.gca().set_aspect('equal', 'datalim')
+        plt.gca().invert_yaxis()
 
         print(sorted(indexUniqueRegionsAllTrajectories))
 
@@ -284,7 +283,7 @@ class ElectronTrajectoriesResults(object):
 
         plt.xlabel('X (nm)')
         plt.ylabel('Y (nm)')
-        plt.axes().set_aspect('equal', 'box')
+        plt.gca().set_aspect('equal', 'box')
         plt.grid(True)
 
     def drawYZ(self, title="", corrected=False):
@@ -308,16 +307,15 @@ class ElectronTrajectoriesResults(object):
 
         plt.xlabel('Y (nm)')
         plt.ylabel('Z (nm)')
-        plt.axes().set_aspect('equal', 'box-forced')
         plt.grid(True)
-        yMin, yMax = plt.ylim()
-        plt.ylim((yMax, yMin))
+        plt.gca().set_aspect('equal', 'box-forced')
+        plt.gca().invert_yaxis()
 
     def _getColor(self, trajectoryType):
         if trajectoryType == 1:
             color = 'b'
         elif trajectoryType == 2:
-            color = 'rb'
+            color = 'r'
         elif trajectoryType == 3:
             color = 'y'
         elif trajectoryType == 4:
@@ -331,7 +329,7 @@ class ElectronTrajectoriesResults(object):
         return color
 
 def run():
-    path = Files.getCurrentModulePath(__file__, "../../testData/version1.2")
+    path = Files.getCurrentModulePath(__file__, "../../../testData/version1.2")
     filepath = os.path.join(path, "SimulationsComplexPhiRhoZ_Cr_T5nm_Z0nm_Al_E10d0keV_ElectronTrajectoriesResults.csv")
     #filepath = os.path.join(path, "SimulationsComplexPhiRhoZ_Cr100T50A_IsolatedLayer_E10d0keV_ElectronTrajectoriesResults.csv")
 
@@ -356,5 +354,4 @@ def runFogging():
     plt.show()
 
 if __name__ == '__main__': #pragma: no cover
-    import pyHendrixDemersTools.Runner as Runner
-    Runner.Runner().run(runFunction=runFogging)
+    run()
