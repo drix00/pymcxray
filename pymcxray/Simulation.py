@@ -288,7 +288,7 @@ def createParticleOnFilm(atomicNumberParticle, atomicNumberSubstrate, particleDi
     region = Region.Region()
     region.numberElements = 0
     region.regionType = RegionType.REGION_TYPE_BOX
-    parameters = [-10000000000.0, 10000000000.0, -10000000000.0, 10000000000.0, 0.0, particleDiameter_A]
+    parameters = [-10000000000.0, 10000000000.0, -10000000000.0, 10000000000.0, 0.0, particleDiameter_A+filmThiskness_A + 100.0]
     region.regionDimensions = RegionDimensions.RegionDimensionsBox(parameters)
     specimen.regions.append(region)
 
@@ -303,7 +303,7 @@ def createParticleOnFilm(atomicNumberParticle, atomicNumberSubstrate, particleDi
     particlePositionY_A = 0.0
     particlePositionZ_A = particleRadius_A
 
-    parameters = [particlePositionX_A, particlePositionY_A, particlePositionZ_A, particleRadius_A]
+    parameters = [particlePositionX_A, particlePositionY_A, particlePositionZ_A+0.1, particleRadius_A]
     region.regionDimensions = RegionDimensions.RegionDimensionsSphere(parameters)
     specimen.regions.append(region)
 
@@ -312,7 +312,7 @@ def createParticleOnFilm(atomicNumberParticle, atomicNumberSubstrate, particleDi
     element = Element.Element(atomicNumberSubstrate)
     region.elements.append(element)
     region.regionType = RegionType.REGION_TYPE_BOX
-    parameters = [-10000000000.0, 10000000000.0, -10000000000.0, 10000000000.0, particleDiameter_A, filmThiskness_A]
+    parameters = [-10000000000.0, 10000000000.0, -10000000000.0, 10000000000.0, particleDiameter_A+0.2, particleDiameter_A+0.2+filmThiskness_A]
     region.regionDimensions = RegionDimensions.RegionDimensionsBox(parameters)
     specimen.regions.append(region)
 

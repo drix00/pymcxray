@@ -283,7 +283,7 @@ class ElectronTrajectoriesResults(object):
 
         plt.xlabel('X (nm)')
         plt.ylabel('Y (nm)')
-        plt.gca().set_aspect('equal', 'box')
+        plt.gca().set_aspect('equal', 'datalim')
         plt.grid(True)
 
     def drawYZ(self, title="", corrected=False):
@@ -308,7 +308,7 @@ class ElectronTrajectoriesResults(object):
         plt.xlabel('Y (nm)')
         plt.ylabel('Z (nm)')
         plt.grid(True)
-        plt.gca().set_aspect('equal', 'box-forced')
+        plt.gca().set_aspect('equal', 'datalim')
         plt.gca().invert_yaxis()
 
     def _getColor(self, trajectoryType):
@@ -353,5 +353,25 @@ def runFogging():
 
     plt.show()
 
+def runAuCThinFilm():
+    path = r"D:\work\results\simulations\MCXRay\SimulationAuCThinFilm\MCXRay_v1_4_6\simulations\Results"
+    filepath = os.path.join(path, "SimulationAuCThinFilm_Au_d100A_C_E5d0keV_N100000e_PX1000d0PY0d0nm_ElectronTrajectoriesResults.csv")
+
+    electronTrajectoriesResults = ElectronTrajectoriesResults(filepath)
+
+    electronTrajectoriesResults.drawXZ()
+    #electronTrajectoriesResults.drawXY()
+    #electronTrajectoriesResults.drawYZ()
+
+    filepath = os.path.join(path, "SimulationAuCThinFilm_Au_d100A_C_E5d0keV_N100000e_PX0d0PY0d0nm_ElectronTrajectoriesResults.csv")
+
+    electronTrajectoriesResults = ElectronTrajectoriesResults(filepath)
+
+    electronTrajectoriesResults.drawXZ()
+    #electronTrajectoriesResults.drawXY()
+    #electronTrajectoriesResults.drawYZ()
+
+    plt.show()
+
 if __name__ == '__main__': #pragma: no cover
-    run()
+    runAuCThinFilm()
