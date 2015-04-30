@@ -31,6 +31,7 @@ import pyHendrixDemersTools.Files as Files
 # Globals and constants variables.
 COLOR_TRAJECTORY_TYPE = "colorTrajectoryType"
 COLOR_REGION = "colorRegion"
+COLOR_ENERGY = "colorEnergy"
 
 COLLISION_TYPE_UNKNOWN = 0
 COLLISION_TYPE_ELECTRON_GUN = 1
@@ -254,6 +255,8 @@ class ElectronTrajectoriesResults(object):
                     color = self._getColorRegion(indexRegion)
                     plt.plot(x, zz, '.', color=color)
 
+                plt.plot(x, z, '-', color="gray")
+
         plt.xlabel('X (nm)')
         plt.ylabel('Z (nm)')
         plt.grid(True)
@@ -317,7 +320,7 @@ class ElectronTrajectoriesResults(object):
         elif trajectoryType == 2:
             color = 'r'
         elif trajectoryType == 3:
-            color = 'y'
+            color = 'b'
         elif trajectoryType == 4:
             color = 'm'
 
@@ -355,7 +358,7 @@ def runFogging():
 
 def runAuCThinFilm():
     path = r"D:\work\results\simulations\MCXRay\SimulationAuCThinFilm\MCXRay_v1_4_6\simulations\Results"
-    filepath = os.path.join(path, "SimulationAuCThinFilm_Au_d100A_C_E5d0keV_N100000e_PX1000d0PY0d0nm_ElectronTrajectoriesResults.csv")
+    filepath = os.path.join(path, "SimulationAuCThinFilm_Au_d100A_C_E5d0keV_N1000000e_PX1000d0PY0d0nm_ElectronTrajectoriesResults.csv")
 
     electronTrajectoriesResults = ElectronTrajectoriesResults(filepath)
 
@@ -363,7 +366,7 @@ def runAuCThinFilm():
     #electronTrajectoriesResults.drawXY()
     #electronTrajectoriesResults.drawYZ()
 
-    filepath = os.path.join(path, "SimulationAuCThinFilm_Au_d100A_C_E5d0keV_N100000e_PX0d0PY0d0nm_ElectronTrajectoriesResults.csv")
+    filepath = os.path.join(path, "SimulationAuCThinFilm_Au_d100A_C_E5d0keV_N1000000e_PX0d0PY0d0nm_ElectronTrajectoriesResults.csv")
 
     electronTrajectoriesResults = ElectronTrajectoriesResults(filepath)
 
