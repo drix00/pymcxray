@@ -18,9 +18,9 @@ import logging
 import csv
 
 # Third party modules.
-import pyHendrixDemersTools.multipleloop as multipleloop
 
 # Local modules.
+import pyHendrixDemersTools.multipleloop as multipleloop
 
 # Project modules
 
