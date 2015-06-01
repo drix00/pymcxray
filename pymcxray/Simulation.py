@@ -174,7 +174,9 @@ def createAlloyFilmOverSubstrate(film_elements, substrate_elements, film_thickne
     region.regionDimensions = RegionDimensions.RegionDimensionsBox(parameters)
     region.regionMassDensity_g_cm3 = film_mass_density_g_cm3
     specimen.regions.append(region)
-
+    
+    name += "_T%inm" % (film_thickness_nm)
+    
     specimen.name = name
 
     return specimen
