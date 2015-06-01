@@ -142,7 +142,8 @@ def createFilmOverSubstrate(atomicNumberFilm, atomicNumberSubstrate,
 
     return specimen
 
-def createAlloyFilmOverSubstrate(film_elements, substrate_elements, film_thickness_nm=10.0):
+def createAlloyFilmOverSubstrate(film_elements, substrate_elements, film_thickness_nm=10.0,
+                                 film_mass_density_g_cm3=None, substrate_mass_density_g_cm3=None):
     specimen = Specimen.Specimen()
 
     name = ""
@@ -158,6 +159,7 @@ def createAlloyFilmOverSubstrate(film_elements, substrate_elements, film_thickne
     region.regionType = RegionType.REGION_TYPE_BOX
     parameters = [-10000000000.0, 10000000000.0, -10000000000.0, 10000000000.0, 0.0, 20000000000.0]
     region.regionDimensions = RegionDimensions.RegionDimensionsBox(parameters)
+    region.regionMassDensity_g_cm3 = substrate_mass_density_g_cm3
     specimen.regions.append(region)
 
     region = Region.Region()
@@ -170,6 +172,7 @@ def createAlloyFilmOverSubstrate(film_elements, substrate_elements, film_thickne
     film_thickness_A = film_thickness_nm*1.0e1
     parameters = [-10000000000.0, 10000000000.0, -10000000000.0, 10000000000.0, 0.0, film_thickness_A]
     region.regionDimensions = RegionDimensions.RegionDimensionsBox(parameters)
+    region.regionMassDensity_g_cm3 = film_mass_density_g_cm3
     specimen.regions.append(region)
 
     specimen.name = name
