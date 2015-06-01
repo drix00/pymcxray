@@ -103,8 +103,11 @@ class XrayIntensities(BaseResults.BaseResults):
 
         return data
 
-    def getIntensityGenerated(self, atomicNumber, xraySubshell):
-        data = {}
+    def getIntensityGenerated(self, atomicNumber, xraySubshell, total=False):
+        if total:
+            data = 0.0
+        else:
+            data = {}
 
         for intensity in self.intensities:
             indexRegion = intensity[INDEX_REGION]
@@ -117,10 +120,13 @@ class XrayIntensities(BaseResults.BaseResults):
                 xrayLine = "Ma"
             xrayLineLabel = "Line %s" % (xrayLine)
             if intensity[ATOMIC_NUMBER] == str(atomicNumber) and intensity[LINE].startswith(xrayLineLabel):
-                if indexRegion not in data:
+                if not total and indexRegion not in data:
                     data[indexRegion] = 0.0
 
-                data[indexRegion] += float(intensity[INTENSITY_GENERATED])
+                if total:
+                    data += float(intensity[INTENSITY_GENERATED])
+                else:
+                    data[indexRegion] += float(intensity[INTENSITY_GENERATED])
 
         return data
 
