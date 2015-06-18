@@ -35,11 +35,12 @@ import pymcxray.Simulation as Simulation
 from pymcxray.SimulationsParameters import PARAMETER_SPECIMEN
 
 # Globals and constants variables.
-
 ANALYZE_TYPE_GENERATE_INPUT_FILE = "generate"
 ANALYZE_TYPE_CHECK_PROGRESS = "check"
 ANALYZE_TYPE_READ_RESULTS = "read"
 ANALYZE_TYPE_ANALYZE_RESULTS = "analyze"
+
+SAVE_EVERY_SIMULATIONS = 10
 
 def _getOptions():
     analyzeTypes = []
@@ -403,7 +404,8 @@ class _Simulations(object):
                             logging.debug(filepath)
                             simulationResultsList[key] = self.readOneResults(simulation)
                             newResults = True
-                            simulationsResults.save(simulationResultsList)
+                            if index % SAVE_EVERY_SIMULATIONS == 0:
+                                simulationsResults.save(simulationResultsList)
                         else:
                             logging.warning("File not found: %s", filepath)
                 except UnboundLocalError as message:
