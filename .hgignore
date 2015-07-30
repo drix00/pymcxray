@@ -4,3 +4,4 @@ syntax: glob
 *.cfg
 testData
 pymcxray.egg-info/
+.eggs
