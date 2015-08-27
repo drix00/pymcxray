@@ -22,6 +22,7 @@ import shutil
 import zipfile
 import errno
 import stat
+import time
 
 # Third party modules.
 
@@ -46,7 +47,15 @@ class Package(object):
         self._packageName = packageName
 
         self._overWrite = overWrite
+
+        self._resetData()
         self._initData()
+
+    def _resetData(self):
+        self._libraryFilenames = []
+        self._documentFilenames = []
+        self._projectInfoFilenames = []
+        self._programNames = {}
 
     def _initData(self):
         raise NotImplementedError
@@ -74,7 +83,11 @@ class Package(object):
             else:
                 logging.info("Create %s path: %s", name, path)
 
-            os.makedirs(path)
+            try:
+                os.makedirs(path)
+            except PermissionError:
+                time.sleep(5.0)
+                os.makedirs(path)
 
     def _createZipFileFromLastCompile(self):
         version = self._getProgramVersion()
@@ -92,6 +105,7 @@ class Package(object):
                 self._copyPrograms(temporaryPath)
                 self._copyLibraries(temporaryPath)
                 self._copyDocumentations(temporaryPath)
+                self._copyProjectInformation(temporaryPath)
                 self._copyLicenses(temporaryPath)
                 self._copyVersionFile(zipFilepath, temporaryPath)
             except IOError as message:
@@ -232,6 +246,17 @@ class Package(object):
             destinationFilepath = os.path.join(path, newName)
             shutil.copy2(sourceFilepath, destinationFilepath)
 
+    def _copyProjectInformation(self, temporaryPath):
+        infoPath = self._developmentPath
+
+        for name in self._projectInfoFilenames:
+            sourceFilepath = os.path.join(infoPath, name)
+            newName = name.replace('_', '')
+            path = os.path.join(temporaryPath, "Documentations")
+            path = Files.createPath(path)
+            destinationFilepath = os.path.join(path, newName)
+            shutil.copy2(sourceFilepath, destinationFilepath)
+
     def _copyLicenses(self, temporaryPath):
         sourcePath = os.path.join(self._developmentPath, self.FOLDER_LICENSES)
         destinationPath = os.path.join(temporaryPath, self.FOLDER_LICENSES)
@@ -316,9 +341,15 @@ class Package(object):
 
             shutil.copy2(sourceFilepath, destinationFilepath)
 
-            zipFile = zipfile.ZipFile(destinationFilepath, 'r')
-            zipFile.extractall(destinationPath)
-            zipFile.close()
+            try:
+                zipFile = zipfile.ZipFile(destinationFilepath, 'r')
+                zipFile.extractall(destinationPath)
+                zipFile.close()
+            except PermissionError:
+                time.sleep(5.0)
+                zipFile = zipfile.ZipFile(destinationFilepath, 'r')
+                zipFile.extractall(destinationPath)
+                zipFile.close()
 
             self._createVersionFile(archiveFilename, destinationPath)
 
@@ -358,8 +389,8 @@ class PackageMCXRay(Package):
     NAME_MCXRAY = "MCXRay"
 
     def _initData(self):
-        self._libraryFilenames = []
         self._documentFilenames = ["MCXRayLiteManual_1.2_20121024.pdf"]
+        self._projectInfoFilenames = ["AUTHORS.txt", "ChangeLog.txt", "LICENSE.txt", "README.txt"]
 
         self._programNames = {"mcxray_console_Release_32.exe": "console_mcxray.exe",
                         "mcxray_console_Release_64.exe": "console_mcxray_x64.exe",
@@ -385,10 +416,12 @@ class PackageMCXRayLite(Package):
     NAME_MCXRAY = "MCXRayLite"
 
     def _initData(self):
-        self._libraryFilenames = []
         self._documentFilenames = ["MCXRayLiteManual_1.2_20121024.pdf"]
+        self._projectInfoFilenames = ["AUTHORS.txt", "ChangeLog.txt", "LICENSE.txt", "README.txt"]
 
-        self._programNames = {"McXRayLite_Release_32.exe": "McXRayLite.exe",
+        self._programNames = {"mcxray_console_lite_Release_32.exe": "console_mcxray_lite.exe",
+                        "mcxray_console_lite_Release_64.exe": "console_mcxray_lite_x64.exe",
+                        "McXRayLite_Release_32.exe": "McXRayLite.exe",
                         "McXRayLite_Release_64.exe": "McXRayLite_x64.exe"}
 
     def _generateProgramName(self):
