@@ -37,6 +37,9 @@ PARAMETER_BOX_SIDE_nm = "boxSide"
 PARAMETER_BOX_WIDTH_nm = "boxWidth"
 PARAMETER_BOX_DEPTH_nm = "boxDepth"
 PARAMETER_FILM_THICKNESS_nm = "filmThickness"
+
+PARAMETER_MEAN_NUMBER_COLLISIONS = "meanNumberCollisions"
+
 PARAMETER_SPECIMEN = "specimen"
 PARAMETER_SAMPLE_NAME = "sampleName"
 PARAMETER_ELASTIC_CROSS_SECTION_SCALING_FACTOR = "elasticCrossSectionScalingFactor"
