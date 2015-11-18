@@ -243,6 +243,9 @@ def getMassDensity_g_cm3(symbol):
 
     return ATOM_MASS_DENSITY_g_cm3[atomicNumber-1]
 
+def get_atomic_weight_g_mol(atomic_number):
+    return ATOM_WEIGHTS[atomic_number-1]
+
 def getIonizationEnergy_keV(shell, element):
     atomicNumber = getAtomicNumber(element)
 
