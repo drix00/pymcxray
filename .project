@@ -3,6 +3,7 @@
 	<name>pymcxray</name>
 	<comment></comment>
 	<projects>
+		<project>pyHendrixDemersTools</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
