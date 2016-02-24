@@ -105,6 +105,7 @@ class Package(object):
                 self._copyPrograms(temporaryPath)
                 self._copyLibraries(temporaryPath)
                 self._copyDocumentations(temporaryPath)
+                self._copyExamples(temporaryPath)
                 self._copyProjectInformation(temporaryPath)
                 self._copyLicenses(temporaryPath)
                 self._copyVersionFile(zipFilepath, temporaryPath)
@@ -245,6 +246,12 @@ class Package(object):
             path = Files.createPath(path)
             destinationFilepath = os.path.join(path, newName)
             shutil.copy2(sourceFilepath, destinationFilepath)
+
+    def _copyExamples(self, temporary_path):
+        examples_path = os.path.join(self._developmentPath, self.FOLDER_DOCUMENTATIONS, "examples")
+
+        temporary_examples_path = os.path.join(temporary_path, "examples")
+        shutil.copytree(examples_path, temporary_examples_path)
 
     def _copyProjectInformation(self, temporaryPath):
         infoPath = self._developmentPath
@@ -389,7 +396,7 @@ class PackageMCXRay(Package):
     NAME_MCXRAY = "MCXRay"
 
     def _initData(self):
-        self._documentFilenames = ["MCXRayLiteManual_1.2_20121024.pdf"]
+        self._documentFilenames = ["MCXRayLiteManual_1.6.pdf"]
         self._projectInfoFilenames = ["AUTHORS.txt", "ChangeLog.txt", "LICENSE.txt", "README.txt"]
 
         self._programNames = {"mcxray_console_Release_32.exe": "console_mcxray.exe",
@@ -408,7 +415,7 @@ class PackageMCXRay(Package):
 class PackageMCXRayLite(Package):
     FOLDER_CASINO_BIN = "bin"
     FOLDER_DLL = ""
-    FOLDER_DOCUMENTATIONS = r"documentations/Manual"
+    FOLDER_DOCUMENTATIONS = r"documentations\Manual"
     FOLDER_LICENSES = "licenses"
     PROGRAM_NAME = "McXRayLite"
     RESOURCE_FILEPATH = "MCXRay/McXRayLite.rc"
@@ -416,7 +423,7 @@ class PackageMCXRayLite(Package):
     NAME_MCXRAY = "MCXRayLite"
 
     def _initData(self):
-        self._documentFilenames = ["MCXRayLiteManual_1.2_20121024.pdf"]
+        self._documentFilenames = ["MCXRayLiteManual_1.6.pdf"]
         self._projectInfoFilenames = ["AUTHORS.txt", "ChangeLog.txt", "LICENSE.txt", "README.txt"]
 
         self._programNames = {"mcxray_console_lite_Release_32.exe": "console_mcxray_lite.exe",
