@@ -1,0 +1,105 @@
+#!/usr/bin/env python
+""" """
+
+# Script information for the file.
+__author__ = "Hendrix Demers (hendrix.demers@mail.mcgill.ca)"
+__version__ = ""
+__date__ = ""
+__copyright__ = "Copyright (c) 2011 Hendrix Demers"
+__license__ = ""
+
+# Standard library modules.
+import logging
+import os.path
+
+# Third party modules.
+import numpy as np
+
+# Local modules.
+
+# Project modules
+import pymcxray.serialization._Serialization as _Serialization
+
+# Globals and constants variables.
+
+class SerializationNumpy(_Serialization._Serialization):
+    def load(self):
+        filepath = self.getFilepath()
+        if self._verbose:
+            logging.debug("Reading serialization file: %s.", filepath)
+
+        serializedData = np.zeros((1), dtype=float)
+
+        if os.path.isfile(filepath):
+            serializedData = np.fromfile(filepath)
+
+        return serializedData
+
+    def save(self, serializedData):
+        filepath = self.getFilepath()
+        if self._verbose:
+            logging.debug("Writing serialization file %s.", filepath)
+
+        serializedData.tofile(filepath)
+
+    def _getSerializationExtension(self):
+        return "_numpy.dat"
+
+class SerializationNumpyTxt(SerializationNumpy):
+    def _getSerializationExtension(self):
+        return "_numpy.txt"
+
+    def load(self):
+        data = np.zeros((1))
+
+        filepath = self.getFilepath()
+        if os.path.isfile(filepath):
+            data = np.loadtxt(filepath)
+
+        return data
+
+    def save(self, data):
+        filepath = self.getFilepath()
+        np.savetxt(filepath, data)
+
+class SerializationNumpyTxtGz(SerializationNumpyTxt):
+    def _getSerializationExtension(self):
+        return "_numpy.txt.gz"
+
+class SerializationNumpyNPY(SerializationNumpy):
+    def _getSerializationExtension(self):
+        return "_numpy.npy"
+
+    def load(self):
+        data = np.zeros((1))
+
+        filepath = self.getFilepath()
+        if os.path.isfile(filepath):
+            data = np.load(filepath)
+
+        return data
+
+    def save(self, data):
+        filepath = self.getFilepath()
+        np.save(filepath, data)
+
+class SerializationNumpyNPZ(SerializationNumpy):
+    def _getSerializationExtension(self):
+        return "_numpy.npz"
+
+    def load(self):
+        data = {}
+        filepath = self.getFilepath()
+        if os.path.isfile(filepath):
+            npzfile  = np.load(filepath)
+
+            for key in npzfile.files:
+                data[key] = npzfile[key]
+
+            del npzfile
+
+        return data
+
+    def save(self, data):
+        filepath = self.getFilepath()
+        np.savez(filepath, **data)
