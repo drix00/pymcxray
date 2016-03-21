@@ -73,7 +73,6 @@ setup(name="pymcxray",
                         'matplotlib',
                         'scipy',
                         'Pillow', # Fork of PIL (Python 3 compatible)
-                        'six',
                         ],
       setup_requires=['nose', 'coverage'],
 

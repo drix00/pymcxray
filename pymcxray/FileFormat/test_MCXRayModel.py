@@ -23,7 +23,6 @@ import unittest
 import logging
 
 # Third party modules.
-import six
 
 # Local modules.
 
@@ -64,10 +63,7 @@ class TestMCXRayModel(unittest.TestCase):
         Tests for method `MCXRayModel`.
         """
 
-        if six.PY3:
-            self.assertRaises(NotImplementedError, MCXRayModel.MCXRayModel)
-        else:
-            self.assertRaises(TypeError, MCXRayModel.MCXRayModel)
+        self.assertRaises(NotImplementedError, MCXRayModel.MCXRayModel)
 
         #self.fail("Test if the testcase is working.")
 

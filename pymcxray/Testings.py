@@ -22,7 +22,7 @@ import warnings
 import nose #@UnresolvedImport
 
 # Local modules.
-import pyHendrixDemersTools.Files as Files
+from pymcxray import getCurrentModulePath, readValueFromConfigurationFile
 
 # Globals and constants variables.
 PLATFORM_ALL = 'all'
@@ -92,9 +92,9 @@ def _createIgnoredModules(configurationFile):
     return ignoredModules
 
 def _createIgnoredItems(sectionName, configurationFile):
-    configurationFilepath = Files.getCurrentModulePath(__file__, configurationFile)
+    configurationFilepath = getCurrentModulePath(__file__, configurationFile)
 
-    values = Files.readValueFromConfigurationFile(configurationFilepath, "Testings", sectionName, default="")
+    values = readValueFromConfigurationFile(configurationFilepath, "Testings", sectionName, default="")
 
     names = []
     for item in values.split(','):
