@@ -21,7 +21,7 @@ import os.path
 import numpy as np
 
 # Local modules.
-from pySpecimenTools.ElementProperties import getAtomicMass_g_mol
+from pymcxray.ElementProperties import getAtomicMass_g_mol
 
 # Project modules
 import pymcxray.AtomData as AtomData
@@ -96,7 +96,7 @@ def createAlloyThinFilm(elements, filmThickness_nm):
     name = ""
 
     for atomicNumber, weightFraction in elements:
-        name += "%s%i" % (AtomData.getAtomSymbol(atomicNumber), weightFraction*100)
+        name += "%s%0.6f" % (AtomData.getAtomSymbol(atomicNumber), weightFraction)
         element = Element.Element(atomicNumber, massFraction=weightFraction)
         region.elements.append(element)
 
@@ -724,47 +724,47 @@ class Simulation(object):
         return _isDone
 
     def getFilenameSuffixes(self):
-        filenameSuffixes = """_ElectronResults.dat
-_ElectronTrajectoriesResults.csv
-_ElectronTrajectoriesResultsInfo.dat
-_InternalDump.dat
-_MacBremsstrahlung.csv
-_MacCharacteristic.csv
-_NumberVacancies.csv
-_Options.txt
-_PartialSpectraInterpolatedRegion_0.csv
-_PartialSpectraOriginalRegion_0.csv
-_PhirhozEmittedBremsstrahlung_Region0.csv
-_PhirhozEmittedBremsstrahlungThinFilm.csv
-_PhirhozEmittedCharacteristic_Region0.csv
-_PhirhozEmittedCharacteristicThinFilm.csv
-_PhirhozEmittedInfo.dat
-_PhirhozGeneratedBremsstrahlung_Region0.csv
-_PhirhozGeneratedBremsstrahlungThinFilm.csv
-_PhirhozGeneratedCharacteristic_Region0.csv
-_PhirhozGeneratedCharacteristicThinFilm.csv
-_PhirhozGeneratedInfo.dat
-_ProgramVersion.dat
-_SimulatedSpectraCharacteristicRegion_0.csv
-_SimulatedSpectraRegion_0.csv
-_SimulatedSpectraRegionInfo_0.dat
-_SimulatedSpectraSpecimen.csv
-_SpectraAtomDetectedLines_Region0.csv
-_SpectraAtomEmittedDetectedLines_Region0.csv
-_SpectraAtomInfo_Region0_Aluminium.dat
-_SpectraAtomInfo_Region0_Copper.dat
-_SpectraAtomPerElectronLines_1_srkeV_Region0.csv
-_SpectraDetectedRegion_0.csv
-_SpectraEmittedDetectedRegion_0.csv
-_SpectraPerElectron_1_srkeV_Region_0.csv
-_SpectraRegionInfo_0.dat
-_SpectraSpecimen.csv
-_SpectraSpecimenEmittedDetected.csv
-_SpectraSpecimenInfo.dat
-_XrayIntensities.csv
-_XrayIntensitiesBremstrahlungAfterInterpolation_Region0.csv
-_XrayIntensitiesBremstrahlungBeforeInterpolation_Region0.csv
-_XrayIntensitiesFromPhirhoz.csv""".splitlines()
+#         filenameSuffixes = """_ElectronResults.dat
+# _ElectronTrajectoriesResults.csv
+# _ElectronTrajectoriesResultsInfo.dat
+# _InternalDump.dat
+# _MacBremsstrahlung.csv
+# _MacCharacteristic.csv
+# _NumberVacancies.csv
+# _Options.txt
+# _PartialSpectraInterpolatedRegion_0.csv
+# _PartialSpectraOriginalRegion_0.csv
+# _PhirhozEmittedBremsstrahlung_Region0.csv
+# _PhirhozEmittedBremsstrahlungThinFilm.csv
+# _PhirhozEmittedCharacteristic_Region0.csv
+# _PhirhozEmittedCharacteristicThinFilm.csv
+# _PhirhozEmittedInfo.dat
+# _PhirhozGeneratedBremsstrahlung_Region0.csv
+# _PhirhozGeneratedBremsstrahlungThinFilm.csv
+# _PhirhozGeneratedCharacteristic_Region0.csv
+# _PhirhozGeneratedCharacteristicThinFilm.csv
+# _PhirhozGeneratedInfo.dat
+# _ProgramVersion.dat
+# _SimulatedSpectraCharacteristicRegion_0.csv
+# _SimulatedSpectraRegion_0.csv
+# _SimulatedSpectraRegionInfo_0.dat
+# _SimulatedSpectraSpecimen.csv
+# _SpectraAtomDetectedLines_Region0.csv
+# _SpectraAtomEmittedDetectedLines_Region0.csv
+# _SpectraAtomInfo_Region0_Aluminium.dat
+# _SpectraAtomInfo_Region0_Copper.dat
+# _SpectraAtomPerElectronLines_1_srkeV_Region0.csv
+# _SpectraDetectedRegion_0.csv
+# _SpectraEmittedDetectedRegion_0.csv
+# _SpectraPerElectron_1_srkeV_Region_0.csv
+# _SpectraRegionInfo_0.dat
+# _SpectraSpecimen.csv
+# _SpectraSpecimenEmittedDetected.csv
+# _SpectraSpecimenInfo.dat
+# _XrayIntensities.csv
+# _XrayIntensitiesBremstrahlungAfterInterpolation_Region0.csv
+# _XrayIntensitiesBremstrahlungBeforeInterpolation_Region0.csv
+# _XrayIntensitiesFromPhirhoz.csv""".splitlines()
 
         filenameSuffixes = """_ElectronResults.dat
 _ElectronTrajectoriesResults.csv
@@ -1066,7 +1066,3 @@ _XrayIntensitiesFromPhirhoz.csv""".splitlines()
     @energyLossScalingFactor.setter
     def energyLossScalingFactor(self, energyLossScalingFactor):
         self._simulationParameters.energyLossScalingFactor = energyLossScalingFactor
-
-if __name__ == '__main__': #pragma: no cover
-    import pyHendrixDemersTools.Runner as Runner
-    Runner.Runner().run(runFunction=None)

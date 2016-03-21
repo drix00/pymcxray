@@ -256,7 +256,3 @@ class Spectra(object):
     def numberRegions(self):
         assert len(self._regionSpectra) == len(self._regionParametersList)
         return len(self._regionSpectra)
-
-if __name__ == '__main__': #pragma: no cover
-    import pyHendrixDemersTools.Runner as Runner
-    Runner.Runner().run(runFunction=None)

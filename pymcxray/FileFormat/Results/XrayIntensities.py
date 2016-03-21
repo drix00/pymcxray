@@ -188,7 +188,3 @@ class XrayIntensities(BaseResults.BaseResults):
     @property
     def numberIntensities(self):
         return len(self.intensities)
-
-if __name__ == '__main__': #pragma: no cover
-    import pyHendrixDemersTools.Runner as Runner
-    Runner.Runner().run(runFunction=None)

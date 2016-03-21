@@ -30,7 +30,3 @@ __svnId__ = "$Id$"
 REGION_TYPE_BOX = "BOX"
 REGION_TYPE_CYLINDER = "CYLINDER"
 REGION_TYPE_SPHERE = "SPHERE"
-
-if __name__ == '__main__': #pragma: no cover
-    import pyHendrixDemersTools.Runner as Runner
-    Runner.Runner().run(runFunction=None)

@@ -277,5 +277,4 @@ def run():
     print(ATOM_ION_ENERGY_SHELL_K_keV[79-1])
 
 if __name__ == '__main__': #pragma: no cover
-    import pyHendrixDemersTools.Runner as Runner
-    Runner.Runner().run(runFunction=run)
+    run()

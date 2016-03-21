@@ -20,7 +20,7 @@ import logging
 # Third party modules.
 
 # Local modules.
-import pyHendrixDemersTools.Files as Files
+from pymcxray import getCurrentModulePath
 
 # Project modules
 import pymcxray.FileFormat.Results.XraySimulatedSpectraSpecimen as XraySimulatedSpectraSpecimen
@@ -60,7 +60,7 @@ class TestXraySimulatedSpectraSpecimen(unittest.TestCase):
         """
 
         spectrumFile = XraySimulatedSpectraSpecimen.XraySimulatedSpectraSpecimen()
-        spectrumFile.path = Files.getCurrentModulePath(__file__, "../../../testData/results")
+        spectrumFile.path = getCurrentModulePath(__file__, "../../../testData/results")
         spectrumFile.basename = "testC_10e_10kp"
 
         spectrumFile.read()
@@ -72,5 +72,5 @@ class TestXraySimulatedSpectraSpecimen(unittest.TestCase):
 
 if __name__ == '__main__':  #pragma: no cover
     logging.getLogger().setLevel(logging.DEBUG)
-    from pyHendrixDemersTools.Testings import runTestModuleWithCoverage
+    from pymcxray.Testings import runTestModuleWithCoverage
     runTestModuleWithCoverage(__file__)

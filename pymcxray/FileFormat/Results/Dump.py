@@ -59,7 +59,3 @@ class Dump(object):
 #    fprintf(prResultsDump, "   faults Z neg = %d\tmin coord index = %d\n", (int)rFaultNbrNeg.dZ, (int)rFaultMaxNeg.dZ);
 #    fprintf(prResultsDump, "   faults Z pos = %d\tmax coord index = %d\n", (int)rFaultNbrPos.dZ, (int)rFaultMaxPos.dZ);
 #    fprintf(prResultsDump, "\n##### Energy Update End #####\n");
-
-if __name__ == '__main__': #pragma: no cover
-    import pyHendrixDemersTools.Runner as Runner
-    Runner.Runner().run(runFunction=None)

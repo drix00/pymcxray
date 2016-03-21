@@ -332,7 +332,3 @@ class SimulationParameters(object):
     @energyLossScalingFactor.setter
     def energyLossScalingFactor(self, energyLossScalingFactor):
         self._parameters[KEY_ENERGY_LOSS_SCALING_FACTOR] = energyLossScalingFactor
-
-if __name__ == '__main__': #pragma: no cover
-    import pyHendrixDemersTools.Runner as Runner
-    Runner.Runner().run(runFunction=None)

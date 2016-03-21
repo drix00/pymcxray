@@ -54,7 +54,3 @@ class ExportedSpectrum(object):
 
     def getData(self):
         return self._energies_keV, self._intensities
-
-if __name__ == '__main__': #pragma: no cover
-    import pyHendrixDemersTools.Runner as Runner
-    Runner.Runner().run(runFunction=None)

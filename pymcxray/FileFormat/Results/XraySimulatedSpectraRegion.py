@@ -54,7 +54,7 @@ class XraySimulatedSpectraRegion(BaseResults.BaseResults):
 
         with open(filepath, 'r') as csvFile:
             reader = csv.DictReader(csvFile)
-            fieldNames = reader.fieldnames
+            _fieldNames = reader.fieldnames
 
             # Skip header row
 
@@ -138,7 +138,3 @@ class XraySimulatedSpectraRegion(BaseResults.BaseResults):
     @peakToBackgrpoundAverage.setter
     def peakToBackgrpoundAverage(self, peakToBackgrpoundAverage):
         self._peakToBackgrpoundAverage = peakToBackgrpoundAverage
-
-if __name__ == '__main__': #pragma: no cover
-    import pyHendrixDemersTools.Runner as Runner
-    Runner.Runner().run(runFunction=None)

@@ -20,7 +20,7 @@ import logging
 # Third party modules.
 
 # Local modules.
-import pyHendrixDemersTools.Files as Files
+from pymcxray import getCurrentModulePath
 
 # Project modules
 import pymcxray.FileFormat.Results.ElectronResults as ElectronResults
@@ -60,7 +60,7 @@ class TestElectronResults(unittest.TestCase):
         """
 
         electronResults = ElectronResults.ElectronResults()
-        electronResults.path = Files.getCurrentModulePath(__file__, "../../../testData/results")
+        electronResults.path = getCurrentModulePath(__file__, "../../../testData/results")
         electronResults.basename = "SimulationKalefEzra1982_Al100T10000A_E300d0keV_N100000e"
 
         electronResults.read()
@@ -89,5 +89,5 @@ class TestElectronResults(unittest.TestCase):
 
 if __name__ == '__main__':  #pragma: no cover
     logging.getLogger().setLevel(logging.DEBUG)
-    from pyHendrixDemersTools.Testings import runTestModuleWithCoverage
+    from pymcxray.Testings import runTestModuleWithCoverage
     runTestModuleWithCoverage(__file__)

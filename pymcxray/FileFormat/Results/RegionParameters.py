@@ -75,7 +75,3 @@ class RegionParameters(object):
     @layerThickness_A.setter
     def layerThickness_A(self, layerThickness_A):
         self._parameters[REGION_PARAMETERS_LAYER_THICKNESS_A] = layerThickness_A
-
-if __name__ == '__main__': #pragma: no cover
-    import pyHendrixDemersTools.Runner as Runner
-    Runner.Runner().run(runFunction=None)

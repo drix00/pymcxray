@@ -202,7 +202,6 @@ class TestResultsParameters(unittest.TestCase):
         filepathReference = os.path.abspath(os.path.join(self.testDataPath, "inputs", "%s.rp" % (title)))
 
         filepath = os.path.join(self.tempDataPath, "%s.rp" % (title))
-        resultsParameters = ResultsParameters.ResultsParameters()
         resultsParameters = resultsParametersRef
         resultsParameters.version = Version.VERSION_1_4_1
 
@@ -236,7 +235,6 @@ class TestResultsParameters(unittest.TestCase):
         filepathReference = os.path.abspath(os.path.join(self.testDataPath, "inputs", "%s.rp" % (title)))
 
         filepath = os.path.join(self.tempDataPath, "%s.rp" % (title))
-        resultsParameters = ResultsParameters.ResultsParameters()
         resultsParameters = resultsParametersRef
         resultsParameters.version = Version.VERSION_1_4_3
 
@@ -261,5 +259,5 @@ class TestResultsParameters(unittest.TestCase):
 
 if __name__ == '__main__':  #pragma: no cover
     logging.getLogger().setLevel(logging.DEBUG)
-    from pyHendrixDemersTools.Testings import runTestModuleWithCoverage
+    from pymcxray.Testings import runTestModuleWithCoverage
     runTestModuleWithCoverage(__file__, withCoverage=False)

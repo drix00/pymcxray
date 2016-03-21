@@ -211,7 +211,3 @@ class Region(object):
         lines.append(line)
 
         return lines
-
-if __name__ == '__main__': #pragma: no cover
-    import pyHendrixDemersTools.Runner as Runner
-    Runner.Runner().run(runFunction=None)

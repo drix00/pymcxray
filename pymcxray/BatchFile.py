@@ -86,7 +86,3 @@ class BatchFile(object):
                 filepath = os.path.join(path, filename)
                 logging.info("Remove previous file: %s", filepath)
                 os.remove(filepath)
-
-if __name__ == '__main__': #pragma: no cover
-    import pyHendrixDemersTools.Runner as Runner
-    Runner.Runner().run(runFunction=None)

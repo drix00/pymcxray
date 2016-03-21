@@ -392,7 +392,6 @@ class TestMicroscopeParameters(unittest.TestCase):
         filepathReference = os.path.abspath(os.path.join(self.testDataPath, "inputs", "%s.mic" % (title)))
 
         filepath = os.path.join(self.tempDataPath, "%s.mic" % (title))
-        microscopeParameters = MicroscopeParameters.MicroscopeParameters()
         microscopeParameters = microscopeParametersRef
 
         microscopeParameters.write(filepath)
@@ -445,7 +444,6 @@ class TestMicroscopeParameters(unittest.TestCase):
         filepathReference = os.path.abspath(os.path.join(self.testDataPath, "inputs", "%s.mic" % (title)))
 
         filepath = os.path.join(self.tempDataPath, "%s.mic" % (title))
-        microscopeParameters = MicroscopeParameters.MicroscopeParameters()
         microscopeParameters = microscopeParametersRef
         microscopeParameters.version = Version.VERSION_1_2_0
 
@@ -795,5 +793,5 @@ class TestMicroscopeParameters(unittest.TestCase):
 
 if __name__ == '__main__':  #pragma: no cover
     logging.getLogger().setLevel(logging.DEBUG)
-    from pyHendrixDemersTools.Testings import runTestModuleWithCoverage
+    from pymcxray.Testings import runTestModuleWithCoverage
     runTestModuleWithCoverage(__file__)

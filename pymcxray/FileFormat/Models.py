@@ -182,7 +182,3 @@ class Models(object):
     @bremsstrahlungModel.setter
     def bremsstrahlungModel(self, bremsstrahlungModel):
         self._modelList[KEY_XRAY_CS_BREMSSTRAHLUNG_MODEL].setModel(bremsstrahlungModel)
-
-if __name__ == '__main__': #pragma: no cover
-    import pyHendrixDemersTools.Runner as Runner
-    Runner.Runner().run(runFunction=None)

@@ -93,7 +93,3 @@ class PhirhozGeneratedCharacteristicThinFilm(BaseResults.BaseResults):
     @property
     def numberRegions(self):
         return len(self.intensities)
-
-if __name__ == '__main__': #pragma: no cover
-    import pyHendrixDemersTools.Runner as Runner
-    Runner.Runner().run(runFunction=None)

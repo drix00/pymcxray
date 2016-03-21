@@ -27,8 +27,8 @@ import math
 import numpy as np
 
 # Local modules.
-import pyHendrixDemersTools.Files as Files
-import pyHendrixDemersTools.serialization.SerializationPickle as SerializationPickle
+from pymcxray import getCurrentModulePath, createPath, getResultsMcGillPath, getMCXRayProgramPath, getMCXRayProgramName, getMCXRayArchivePath, getMCXRayArchiveName
+import pymcxray.serialization.SerializationPickle as SerializationPickle
 
 # Project modules
 import pymcxray.Simulation as Simulation
@@ -67,7 +67,7 @@ class _Simulations(object):
 
     def __init__(self, simulationPath=None, basepath=None, relativePath=None, configurationFilepath=None):
         if configurationFilepath is None:
-            self._configurationFilepath = Files.getCurrentModulePath(__file__, "../../pyMcGill.cfg")
+            self._configurationFilepath = getCurrentModulePath(__file__, "../../pyMcGill.cfg")
         else:
             self._configurationFilepath = configurationFilepath
         self._output = None
@@ -103,15 +103,15 @@ class _Simulations(object):
             if self._simulationPath is not None:
                 return self._simulationPath
             elif self._relativePath is not None:
-                path = Files.getResultsMcGillPath(self._configurationFilepath)
+                path = getResultsMcGillPath(self._configurationFilepath)
                 path = os.path.join(path, "Simulations", self._relativePath)
             elif self._basepath is not None:
                 name = self.getAnalysisName()
-                path = Files.getResultsMcGillPath(self._configurationFilepath)
+                path = getResultsMcGillPath(self._configurationFilepath)
                 path = os.path.join(path, "Simulations", self._basepath, "%s" % (name))
             else:
                 name = self.getAnalysisName()
-                path = Files.getResultsMcGillPath(self._configurationFilepath, "Simulations/%s" % (name))
+                path = getResultsMcGillPath(self._configurationFilepath, "Simulations/%s" % (name))
 
             if not os.path.isdir(path):
                 os.makedirs(path)
@@ -133,7 +133,7 @@ class _Simulations(object):
 
     def getInputPath(self):
         inputPath = os.path.join(self.getSimulationsPath(), self.INPUTS_FOLDER)
-        inputPath = Files.createPath(inputPath)
+        inputPath = createPath(inputPath)
 
         return inputPath
 
@@ -149,9 +149,9 @@ class _Simulations(object):
                     os.makedirs(path)
 
     def _copyMCXRayProgramOld(self):
-        basePath = Files.getMCXRayProgramPath(self._configurationFilepath)
+        basePath = getMCXRayProgramPath(self._configurationFilepath)
 
-        programName = Files.getMCXRayProgramName(self._configurationFilepath, default="McXRay.exe")
+        programName = getMCXRayProgramName(self._configurationFilepath, default="McXRay.exe")
         sourceFilepath = os.path.join(basePath, programName)
         destinationPath = os.path.join(self.getSimulationsPath(), programName)
 
@@ -177,8 +177,8 @@ class _Simulations(object):
             shutil.copytree(sourcePath, destinationPath)
 
     def _copyMCXRayProgram(self):
-        archivesPath = Files.getMCXRayArchivePath(self._configurationFilepath)
-        archiveFilename = Files.getMCXRayArchiveName(self._configurationFilepath)
+        archivesPath = getMCXRayArchivePath(self._configurationFilepath)
+        archiveFilename = getMCXRayArchiveName(self._configurationFilepath)
         archiveFilepath = os.path.join(archivesPath, archiveFilename)
 
         destinationPath = self.getSimulationsPath()
@@ -271,7 +271,7 @@ class _Simulations(object):
         simulationTodoNames = []
 
         inputPath = os.path.join(self.getSimulationsPath(), "input")
-        inputPath = Files.createPath(inputPath)
+        inputPath = createPath(inputPath)
 
         for simulation in self.getAllSimulationParameters():
             if simulation.isDone(self.getSimulationsPath()):
@@ -606,7 +606,3 @@ class _Simulations(object):
     @createBackup.setter
     def createBackup(self, createBackup):
         self._createBackup = createBackup
-
-if __name__ == '__main__': #pragma: no cover
-    import pyHendrixDemersTools.Runner as Runner
-    Runner.Runner().run(runFunction=None)

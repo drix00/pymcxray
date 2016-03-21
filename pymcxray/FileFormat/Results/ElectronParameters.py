@@ -175,8 +175,3 @@ class ElectronParameters(object):
     @eRatio.setter
     def eRatio(self, eRatio):
         self._parameters[KEY_E_RATIO] = eRatio
-
-
-if __name__ == '__main__': #pragma: no cover
-    import pyHendrixDemersTools.Runner as Runner
-    Runner.Runner().run(runFunction=None)

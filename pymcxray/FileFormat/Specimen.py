@@ -222,7 +222,3 @@ class Specimen(object):
     @regions.setter
     def regions(self, regions):
         self._parameters[KEY_REGIONS] = regions
-
-if __name__ == '__main__': #pragma: no cover
-    import pyHendrixDemersTools.Runner as Runner
-    Runner.Runner().run(runFunction=None)

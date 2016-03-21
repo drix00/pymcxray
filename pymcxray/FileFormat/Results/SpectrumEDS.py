@@ -81,7 +81,3 @@ class SpectrumEDS(object):
     @countsList.setter
     def countsList(self, countsList):
         self._parameters[KEY_COUNTS] = countsList
-
-if __name__ == '__main__': #pragma: no cover
-    import pyHendrixDemersTools.Runner as Runner
-    Runner.Runner().run(runFunction=None)

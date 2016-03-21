@@ -441,7 +441,3 @@ class MicroscopeParameters(object):
     @detectorHAADFHigh_rad.setter
     def detectorHAADFHigh_rad(self, detectorHAADFHigh_rad):
         self._parameters[KEY_DETECTOR_HAADF_HIGH_rad] = detectorHAADFHigh_rad
-
-if __name__ == '__main__': #pragma: no cover
-    import pyHendrixDemersTools.Runner as Runner
-    Runner.Runner().run(runFunction=None)

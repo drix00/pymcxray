@@ -142,7 +142,3 @@ class ElectronResults(BaseResults.BaseResults):
     @fractionSkirtedElectrons.setter
     def fractionSkirtedElectrons(self, fractionSkirtedElectrons):
         self._values[FRACTION_SKIRTED_ELECTRONS] = float(fractionSkirtedElectrons)
-
-if __name__ == '__main__': #pragma: no cover
-    import pyHendrixDemersTools.Runner as Runner
-    Runner.Runner().run(runFunction=None)
