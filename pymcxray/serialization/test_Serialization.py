@@ -20,7 +20,7 @@ import time
 from nose.plugins.skip import SkipTest
 
 # Local modules.
-import pyHendrixDemersTools.Files as Files
+from pymcxray import getCurrentModulePath
 
 # Project modules
 import pymcxray.serialization._Serialization as _Serialization
@@ -118,7 +118,7 @@ class Test_Serialization(unittest.TestCase):
         self.serialization.setFilepath(filepathRef)
         self.assertFalse(self.serialization.isFile())
 
-        filepathRef = Files.getCurrentModulePath(__file__, "../../testData/serialization/empty.ser")
+        filepathRef = getCurrentModulePath(__file__, "../../testData/serialization/empty.ser")
         if not os.path.isfile(filepathRef):
             raise SkipTest
 
@@ -129,7 +129,7 @@ class Test_Serialization(unittest.TestCase):
 
     def test_deleteFile(self):
         filename = "empty.ser"
-        filepathRef = Files.getCurrentModulePath(__file__, "../../testData/serialization/")
+        filepathRef = getCurrentModulePath(__file__, "../../testData/serialization/")
         filepathRef = os.path.join(filepathRef, filename)
         if not os.path.isfile(filepathRef):
             raise SkipTest
@@ -147,7 +147,7 @@ class Test_Serialization(unittest.TestCase):
     def test_isOlderThan(self):
 
         filename = "empty"
-        filepathRef = Files.getCurrentModulePath(__file__, "../../testData/serialization/")
+        filepathRef = getCurrentModulePath(__file__, "../../testData/serialization/")
         filepathRef = os.path.join(filepathRef, filename+'.ser')
         if not os.path.isfile(filepathRef):
             raise SkipTest
