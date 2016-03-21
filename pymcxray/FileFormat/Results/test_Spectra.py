@@ -29,7 +29,6 @@ import os.path
 
 # Project modules
 import pymcxray.FileFormat.Results.Spectra as Spectra
-import pymcxray.FileFormat.testUtilities as testUtilities
 
 # Globals and constants variables.
 
@@ -261,5 +260,5 @@ Ratio of emitted x-ray Intensity times energy to absorbed energy = 6.281129e-018
 
 if __name__ == '__main__':  #pragma: no cover
     logging.getLogger().setLevel(logging.DEBUG)
-    from pyHendrixDemersTools.Testings import runTestModuleWithCoverage
+    from pymcxray.Testings import runTestModuleWithCoverage
     runTestModuleWithCoverage(__file__)

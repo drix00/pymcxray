@@ -76,7 +76,3 @@ class Spectrum(object):
     @characteristicIntensities.setter
     def characteristicIntensities(self, characteristicIntensities):
         self._values[SPECTRUM_INTENSITIES_CHARACTERISTIC] = characteristicIntensities
-
-if __name__ == '__main__': #pragma: no cover
-    import pyHendrixDemersTools.Runner as Runner
-    Runner.Runner().run(runFunction=None)

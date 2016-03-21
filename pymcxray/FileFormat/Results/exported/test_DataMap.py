@@ -20,7 +20,7 @@ import logging
 # Third party modules.
 
 # Local modules.
-import pyHendrixDemersTools.Files as Files
+from pymcxray import getCurrentModulePath
 
 # Project modules
 import pymcxray.FileFormat.Results.exported.DataMap as DataMap
@@ -39,7 +39,7 @@ class TestDataMap(unittest.TestCase):
 
         unittest.TestCase.setUp(self)
 
-        self.filepath = Files.getCurrentModulePath(__file__, "../../../../testData/exportedFiles/CNTsFePt_30keV_100e_100pixels_BF.txt")
+        self.filepath = getCurrentModulePath(__file__, "../../../../testData/exportedFiles/CNTsFePt_30keV_100e_100pixels_BF.txt")
 
     def tearDown(self):
         """
@@ -83,5 +83,5 @@ class TestDataMap(unittest.TestCase):
 
 if __name__ == '__main__':  #pragma: no cover
     logging.getLogger().setLevel(logging.DEBUG)
-    from pyHendrixDemersTools.Testings import runTestModuleWithCoverage
+    from pymcxray.Testings import runTestModuleWithCoverage
     runTestModuleWithCoverage(__file__, withCoverage=False)

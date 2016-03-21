@@ -468,7 +468,6 @@ class TestSimulationParameters(unittest.TestCase):
         filepathReference = os.path.abspath(os.path.join(self.testDataPath, "inputs", "%s.par" % (title)))
 
         filepath = os.path.join(self.tempDataPath, "%s.par" % (title))
-        simulationParameters = SimulationParameters.SimulationParameters()
         simulationParameters = simulationParametersRef
 
         simulationParameters.write(filepath)
@@ -509,7 +508,6 @@ class TestSimulationParameters(unittest.TestCase):
         filepathReference = os.path.abspath(os.path.join(self.testDataPath, "inputs", "%s.par" % (title)))
 
         filepath = os.path.join(self.tempDataPath, "%s.par" % (title))
-        simulationParameters = SimulationParameters.SimulationParameters()
         simulationParameters = simulationParametersRef
         simulationParameters.version = copy.deepcopy(Version.VERSION_1_2_0)
         simulationParameters.write(filepath)
@@ -550,7 +548,6 @@ class TestSimulationParameters(unittest.TestCase):
         filepathReference = os.path.abspath(os.path.join(self.testDataPath, "inputs", "%s.par" % (title)))
 
         filepath = os.path.join(self.tempDataPath, "%s.par" % (title))
-        simulationParameters = SimulationParameters.SimulationParameters()
         simulationParameters = simulationParametersRef
         simulationParameters.version = copy.deepcopy(Version.VERSION_1_2_1)
 
@@ -592,7 +589,6 @@ class TestSimulationParameters(unittest.TestCase):
         filepathReference = os.path.abspath(os.path.join(self.testDataPath, "inputs", "%s.par" % (title)))
 
         filepath = os.path.join(self.tempDataPath, "%s.par" % (title))
-        simulationParameters = SimulationParameters.SimulationParameters()
         simulationParameters = simulationParametersRef
         simulationParameters.version = copy.deepcopy(Version.VERSION_1_4_1)
 
@@ -634,7 +630,6 @@ class TestSimulationParameters(unittest.TestCase):
         filepathReference = os.path.abspath(os.path.join(self.testDataPath, "inputs", "%s.par" % (title)))
 
         filepath = os.path.join(self.tempDataPath, "%s.par" % (title))
-        simulationParameters = SimulationParameters.SimulationParameters()
         simulationParameters = simulationParametersRef
         simulationParameters.version = copy.deepcopy(Version.VERSION_1_4_4)
 
@@ -668,5 +663,5 @@ class TestSimulationParameters(unittest.TestCase):
 
 if __name__ == '__main__':  #pragma: no cover
     logging.getLogger().setLevel(logging.DEBUG)
-    from pyHendrixDemersTools.Testings import runTestModuleWithCoverage
+    from pymcxray.Testings import runTestModuleWithCoverage
     runTestModuleWithCoverage(__file__)

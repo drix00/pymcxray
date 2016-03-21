@@ -28,11 +28,9 @@ import logging
 
 # Project modules
 import pymcxray.FileFormat.Region as Region
-import pymcxray.FileFormat.testUtilities as testUtilities
 import pymcxray.FileFormat.RegionType as RegionType
 import pymcxray.FileFormat.Element as Element
 import pymcxray.FileFormat.RegionDimensions as RegionDimensions
-import pymcxray.FileFormat.Version as Version
 
 # Globals and constants variables.
 
@@ -480,5 +478,5 @@ RegionParameters=0.500000 0.600000 102.000000 101.000000
 
 if __name__ == '__main__':  #pragma: no cover
     logging.getLogger().setLevel(logging.DEBUG)
-    from pyHendrixDemersTools.Testings import runTestModuleWithCoverage
+    from pymcxray.Testings import runTestModuleWithCoverage
     runTestModuleWithCoverage(__file__, withCoverage=True)

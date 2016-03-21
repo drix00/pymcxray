@@ -134,7 +134,3 @@ class BeamParameters(object):
     @gaussianSigma.setter
     def gaussianSigma(self, gaussianSigma):
         self._parameters[KEY_GAUSSIAN_SIGMA] = gaussianSigma
-
-if __name__ == '__main__': #pragma: no cover
-    import pyHendrixDemersTools.Runner as Runner
-    Runner.Runner().run(runFunction=None)

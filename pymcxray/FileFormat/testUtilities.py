@@ -50,7 +50,3 @@ def createTempDataPath(path):
 def removeTempDataPath(path):
     if os.path.expanduser(path):
         shutil.rmtree(path)
-
-if __name__ == '__main__': #pragma: no cover
-    import pyHendrixDemersTools.Runner as Runner
-    Runner.Runner().run(runFunction=None)

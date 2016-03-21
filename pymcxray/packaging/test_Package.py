@@ -38,5 +38,5 @@ class TestPackage(unittest.TestCase):
 
 if __name__ == '__main__':    #pragma: no cover
     logging.getLogger().setLevel(logging.DEBUG)
-    from pyHendrixDemersTools.Testings import runTestModule
+    from pymcxray.Testings import runTestModule
     runTestModule()

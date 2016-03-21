@@ -20,7 +20,7 @@ import logging
 # Third party modules.
 
 # Local modules.
-import pyHendrixDemersTools.Files as Files
+from pymcxray import getCurrentModulePath
 
 # Project modules
 import pymcxray.FileFormat.Results.PhirhozGeneratedCharacteristicThinFilm as PhirhozGeneratedCharacteristicThinFilm
@@ -60,7 +60,7 @@ class TestPhirhozGeneratedCharacteristicThinFilm(unittest.TestCase):
         """
 
         phirhozThinFilm = PhirhozGeneratedCharacteristicThinFilm.PhirhozGeneratedCharacteristicThinFilm()
-        phirhozThinFilm.path = Files.getCurrentModulePath(__file__, "../../../testData/results")
+        phirhozThinFilm.path = getCurrentModulePath(__file__, "../../../testData/results")
         phirhozThinFilm.basename = "SimulationMCXrayPhirhozTestCases_Cu_E500d0keV_N100000e"
 
         phirhozThinFilm.read()
@@ -83,7 +83,7 @@ class TestPhirhozGeneratedCharacteristicThinFilm(unittest.TestCase):
         """
 
         phirhozThinFilm = PhirhozGeneratedCharacteristicThinFilm.PhirhozGeneratedCharacteristicThinFilm()
-        phirhozThinFilm.path = Files.getCurrentModulePath(__file__, "../../../testData/results")
+        phirhozThinFilm.path = getCurrentModulePath(__file__, "../../../testData/results")
         phirhozThinFilm.basename = "SimulationMCXrayPhirhozTestCases_Cu_E500d0keV_N100000e"
 
         phirhozThinFilm.read()
@@ -103,5 +103,5 @@ class TestPhirhozGeneratedCharacteristicThinFilm(unittest.TestCase):
 
 if __name__ == '__main__':  #pragma: no cover
     logging.getLogger().setLevel(logging.DEBUG)
-    from pyHendrixDemersTools.Testings import runTestModuleWithCoverage
+    from pymcxray.Testings import runTestModuleWithCoverage
     runTestModuleWithCoverage(__file__)

@@ -167,7 +167,3 @@ class ElectronExistResults(BaseResults.BaseResults):
     @property
     def data(self):
         return self._data
-
-if __name__ == '__main__': #pragma: no cover
-    import pyHendrixDemersTools.Runner as Runner
-    Runner.Runner().run(runFunction=None)

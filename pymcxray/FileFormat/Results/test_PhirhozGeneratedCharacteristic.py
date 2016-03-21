@@ -20,7 +20,7 @@ import logging
 # Third party modules.
 
 # Local modules.
-import pyHendrixDemersTools.Files as Files
+from pymcxray import getCurrentModulePath
 
 # Project modules
 import pymcxray.FileFormat.Results.PhirhozGeneratedCharacteristic as PhirhozGeneratedCharacteristic
@@ -61,7 +61,7 @@ class TestPhirhozGeneratedCharacteristic(unittest.TestCase):
         #PhirhozMCXRay_Ag_E5d0keV_N10000e_tB0d0deg_TOA45d0deg_PhirhozGeneratedCharacteristic_Region0.csv
 
         spectrumFile = PhirhozGeneratedCharacteristic.PhirhozGeneratedCharacteristic()
-        spectrumFile.path = Files.getCurrentModulePath(__file__, "../../../testData/results")
+        spectrumFile.path = getCurrentModulePath(__file__, "../../../testData/results")
         spectrumFile.basename = "PhirhozMCXRay_Ag_E5d0keV_N10000e_tB0d0deg_TOA45d0deg"
 
         regionID = 0
@@ -76,5 +76,5 @@ class TestPhirhozGeneratedCharacteristic(unittest.TestCase):
 
 if __name__ == '__main__':  #pragma: no cover
     logging.getLogger().setLevel(logging.DEBUG)
-    from pyHendrixDemersTools.Testings import runTestModuleWithCoverage
+    from pymcxray.Testings import runTestModuleWithCoverage
     runTestModuleWithCoverage(__file__)

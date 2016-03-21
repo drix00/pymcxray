@@ -20,7 +20,7 @@ import csv
 # Third party modules.
 
 # Local modules.
-import pyHendrixDemersTools.multipleloop as multipleloop
+import pymcxray.multipleloop as multipleloop
 
 # Project modules
 
@@ -167,7 +167,3 @@ class SimulationsParametersFixed(object):
 
     def getAllSimulationParameters(self):
         return self._experiments
-
-if __name__ == '__main__': #pragma: no cover
-    import pyHendrixDemersTools.Runner as Runner
-    Runner.Runner().run(runFunction=None)

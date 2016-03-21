@@ -27,7 +27,7 @@ import time
 # Third party modules.
 
 # Local modules.
-import pyHendrixDemersTools.Files as Files
+from pymcxray import getCurrentModulePath, getMCXRayDevPath, createPath, getBinPath
 
 # Globals and constants variables.
 
@@ -243,7 +243,7 @@ class Package(object):
             sourceFilepath = os.path.join(docPath, name)
             newName = name.replace('_', '')
             path = os.path.join(temporaryPath, "Documentations")
-            path = Files.createPath(path)
+            path = createPath(path)
             destinationFilepath = os.path.join(path, newName)
             shutil.copy2(sourceFilepath, destinationFilepath)
 
@@ -260,7 +260,7 @@ class Package(object):
             sourceFilepath = os.path.join(infoPath, name)
             newName = name.replace('_', '')
             path = os.path.join(temporaryPath, "Documentations")
-            path = Files.createPath(path)
+            path = createPath(path)
             destinationFilepath = os.path.join(path, newName)
             shutil.copy2(sourceFilepath, destinationFilepath)
 
@@ -465,10 +465,10 @@ def runMCXRayLite():
     logging.info("*"*30)
     logging.info("MCXRayLite")
 
-    configurationFilepath = Files.getCurrentModulePath(__file__, "../pymcxray.cfg")
+    configurationFilepath = getCurrentModulePath(__file__, "../pymcxray.cfg")
     try:
-        releaseBasePath = Files.getBinPath(configurationFilepath, "mcxray/MCXRayLite")
-        developmentPath = Files.getMCXRayDevPath(configurationFilepath)
+        releaseBasePath = getBinPath(configurationFilepath, "mcxray/MCXRayLite")
+        developmentPath = getMCXRayDevPath(configurationFilepath)
     except IOError as message:
         logging.info(configurationFilepath)
         logging.error(message)
@@ -480,10 +480,10 @@ def runMCXRayLite():
 def runMCXRay(packageName=None):
     logging.info("*"*30)
     logging.info("MCXRay")
-    configurationFilepath = Files.getCurrentModulePath(__file__, "../pymcxray.cfg")
+    configurationFilepath = getCurrentModulePath(__file__, "../pymcxray.cfg")
     try:
-        releaseBasePath = Files.getBinPath(configurationFilepath, "mcxray/MCXRay")
-        developmentPath = Files.getMCXRayDevPath(configurationFilepath)
+        releaseBasePath = getBinPath(configurationFilepath, "mcxray/MCXRay")
+        developmentPath = getMCXRayDevPath(configurationFilepath)
     except IOError as message:
         logging.info(configurationFilepath)
         logging.error(message)
@@ -497,5 +497,4 @@ def run():
     runMCXRay()
 
 if __name__ == '__main__':    #pragma: no cover
-    import pyHendrixDemersTools.Runner as Runner
-    Runner.Runner().run(runFunction=run)
+    run()

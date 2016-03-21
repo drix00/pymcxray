@@ -242,7 +242,3 @@ class SpectrumInterpolationModel(MCXRayModel):
         self._modelNames[self.TYPE_SPLINE_POINT] = "Spline Point"
 
         self.setModel(self.TYPE_LINEAR_DOUBLE)
-
-if __name__ == '__main__': #pragma: no cover
-    import pyHendrixDemersTools.Runner as Runner
-    Runner.Runner().run(runFunction=None)

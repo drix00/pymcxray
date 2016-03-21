@@ -349,7 +349,7 @@ def runExample():
 
     testDataPath = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../testData"))
 
-    spectraEdsRegion1Filepath = os.path.join(testDataPath, "version1.1/autoSavedFiles/DetectionLimits_N1000x_C_r10A_z11A_Au_E30d0keVEDSRegion1.txt")
+    _spectraEdsRegion1Filepath = os.path.join(testDataPath, "version1.1/autoSavedFiles/DetectionLimits_N1000x_C_r10A_z11A_Au_E30d0keVEDSRegion1.txt")
 
     spectraEDSregion0 = SpectraEDS()
     spectraEdsRegion0Filepath = os.path.join(testDataPath, "version1.1/autoSavedFiles/DetectionLimits_N1000x_C_r10A_z11A_Au_E30d0keVEDSRegion0.txt")
@@ -357,7 +357,7 @@ def runExample():
 
     plt.figure()
 
-    x = spectraEDSregion0.originalSpectrumEDS.channels
+    _x = spectraEDSregion0.originalSpectrumEDS.channels
     x = spectraEDSregion0.originalSpectrumEDS.enegies_keV
     y = spectraEDSregion0.originalSpectrumEDS.countsList
     plt.plot(x, y, label="Original")
@@ -414,5 +414,4 @@ def runExample():
     plt.show()
 
 if __name__ == '__main__': #pragma: no cover
-    import pyHendrixDemersTools.Runner as Runner
-    Runner.Runner().run(runFunction=runExample)
+    runExample()

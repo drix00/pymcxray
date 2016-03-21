@@ -92,7 +92,3 @@ class PhirhozElement(object):
     @isIonizationShell_M.setter
     def isIonizationShell_M(self, isIonizationShell_M):
         self._parameters[KEY_IONIZATION_SHELL_M] = isIonizationShell_M
-
-if __name__ == '__main__': #pragma: no cover
-    import pyHendrixDemersTools.Runner as Runner
-    Runner.Runner().run(runFunction=None)

@@ -153,8 +153,3 @@ VERSION_1_5_2 = Version(1, 5, 2)
 
 BEFORE_VERSION = copy.deepcopy(VERSION_1_1_1)
 CURRENT_VERSION = copy.deepcopy(VERSION_1_5_2)
-
-
-if __name__ == '__main__': #pragma: no cover
-    import pyHendrixDemersTools.Runner as Runner
-    Runner.Runner().run(runFunction=None)

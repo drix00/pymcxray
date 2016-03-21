@@ -20,7 +20,7 @@ import logging
 # Third party modules.
 
 # Local modules.
-import pyHendrixDemersTools.Files as Files
+from pymcxray import getCurrentModulePath
 
 # Project modules
 import pymcxray.FileFormat.Results.XrayIntensities as XrayIntensities
@@ -60,7 +60,7 @@ class TestXrayIntensities(unittest.TestCase):
         """
 
         intensitiesFile = XrayIntensities.XrayIntensities()
-        intensitiesFile.path = Files.getCurrentModulePath(__file__, "../../../testData/results")
+        intensitiesFile.path = getCurrentModulePath(__file__, "../../../testData/results")
         intensitiesFile.basename = "SimulationsFRatio_Al0d200000Cu0d800000_E5d0keV"
 
         intensitiesFile.read()
@@ -71,5 +71,5 @@ class TestXrayIntensities(unittest.TestCase):
 
 if __name__ == '__main__':  #pragma: no cover
     logging.getLogger().setLevel(logging.DEBUG)
-    from pyHendrixDemersTools.Testings import runTestModuleWithCoverage
+    from pymcxray.Testings import runTestModuleWithCoverage
     runTestModuleWithCoverage(__file__)

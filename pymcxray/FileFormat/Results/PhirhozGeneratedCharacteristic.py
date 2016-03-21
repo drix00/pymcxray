@@ -78,7 +78,3 @@ class PhirhozGeneratedCharacteristic(BaseResults.BaseResults):
     @phirhozs.setter
     def phirhozs(self, phirhozs):
         self._phirhozs = phirhozs
-
-if __name__ == '__main__': #pragma: no cover
-    import pyHendrixDemersTools.Runner as Runner
-    Runner.Runner().run(runFunction=None)

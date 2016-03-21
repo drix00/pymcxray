@@ -187,7 +187,3 @@ class SimulationParameters(object):
     @maximumLiveTime_s.setter
     def maximumLiveTime_s(self, maximumLiveTime_s):
         self._parameters[KEY_MAXIMUM_LIVE_TIME_s] = maximumLiveTime_s
-
-if __name__ == '__main__': #pragma: no cover
-    import pyHendrixDemersTools.Runner as Runner
-    Runner.Runner().run(runFunction=None)

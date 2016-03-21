@@ -29,8 +29,3 @@ class XrayIntensityXY(object):
 
     def readData(self, filepath):
         self_filepath = filepath
-
-
-if __name__ == '__main__': #pragma: no cover
-    import pyHendrixDemersTools.Runner as Runner
-    Runner.Runner().run(runFunction=None)

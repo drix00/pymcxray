@@ -25,7 +25,7 @@ from matplotlib.backends.backend_pdf import PdfPages
 import numpy as np
 
 # Local modules.
-import pyHendrixDemersTools.Files as Files
+from pymcxray import findAllFiles, createPath
 
 # Project modules
 
@@ -82,7 +82,7 @@ class ComparisonModels(object):
 
                 graphicFilename = "%s_%s_Z%i_E%ikeV.pdf" % (basename, "XrayEnergy", atomicNumber, int(electronEnergy_keV))
                 graphicFilepath = os.path.join(self._dataPath, "Graphics")
-                graphicFilepath = Files.createPath(graphicFilepath)
+                graphicFilepath = createPath(graphicFilepath)
                 graphicFilepath = os.path.join(graphicFilepath, graphicFilename)
                 pdf = PdfPages(graphicFilepath)
 
@@ -113,7 +113,7 @@ class ComparisonModels(object):
 
                 graphicFilename = "%s_%s_Z%i_E%ikeV.pdf" % (basename, "XrayTheta", atomicNumber, int(electronEnergy_keV))
                 graphicFilepath = os.path.join(self._dataPath, "Graphics")
-                graphicFilepath = Files.createPath(graphicFilepath)
+                graphicFilepath = createPath(graphicFilepath)
                 graphicFilepath = os.path.join(graphicFilepath, graphicFilename)
                 pdf = PdfPages(graphicFilepath)
 
@@ -147,11 +147,11 @@ class ComparisonModels(object):
 
         graphicFilename = "%s.pdf" % (basename)
         graphicFilepath = os.path.join(self._dataPath, "Graphics")
-        graphicFilepath = Files.createPath(graphicFilepath)
+        graphicFilepath = createPath(graphicFilepath)
         graphicFilepath = os.path.join(graphicFilepath, graphicFilename)
         pdf = PdfPages(graphicFilepath)
 
-        for filepath in Files.findAllFiles(self._dataPath, "CompareModels_XrayMassAbsorptionCoefficient*.csv", single_level=True):
+        for filepath in findAllFiles(self._dataPath, "CompareModels_XrayMassAbsorptionCoefficient*.csv", single_level=True):
             logging.debug(filepath)
 
             filename = os.path.basename(filepath)
@@ -202,11 +202,11 @@ class ComparisonModels(object):
 
         graphicFilename = "%s.pdf" % (basename)
         graphicFilepath = os.path.join(self._dataPath, "Graphics")
-        graphicFilepath = Files.createPath(graphicFilepath)
+        graphicFilepath = createPath(graphicFilepath)
         graphicFilepath = os.path.join(graphicFilepath, graphicFilename)
         pdf = PdfPages(graphicFilepath)
 
-        for filepath in Files.findAllFiles(self._dataPath, "CompareModels_RegionEnergyLoss_*.csv", single_level=True):
+        for filepath in findAllFiles(self._dataPath, "CompareModels_RegionEnergyLoss_*.csv", single_level=True):
             logging.debug(filepath)
 
             filename = os.path.basename(filepath)
@@ -261,11 +261,11 @@ class ComparisonModels(object):
 
         graphicFilename = "%s.pdf" % (basename)
         graphicFilepath = os.path.join(self._dataPath, "Graphics")
-        graphicFilepath = Files.createPath(graphicFilepath)
+        graphicFilepath = createPath(graphicFilepath)
         graphicFilepath = os.path.join(graphicFilepath, graphicFilename)
         pdf = PdfPages(graphicFilepath)
 
-        for filepath in Files.findAllFiles(self._dataPath, "CompareModels_XrayCrossSectionCharacteristic_*.csv", single_level=True):
+        for filepath in findAllFiles(self._dataPath, "CompareModels_XrayCrossSectionCharacteristic_*.csv", single_level=True):
             logging.debug(filepath)
 
             filename = os.path.basename(filepath)
@@ -353,5 +353,4 @@ def runVersion1_4_1():
     comparisonModels.graphicsIonizationCrossSection()
 
 if __name__ == '__main__': #pragma: no cover
-    import pyHendrixDemersTools.Runner as Runner
-    Runner.Runner().run(runFunction=runVersion1_4_1)
+    runVersion1_4_1()

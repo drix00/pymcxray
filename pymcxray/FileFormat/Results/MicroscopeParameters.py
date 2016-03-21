@@ -62,7 +62,3 @@ class MicroscopeParameters(object):
     @detectorParameters.setter
     def detectorParameters(self, detectorParameters):
         self._parameters[DetectorParameters.KEY_DETECTOR_PARAMETERS] = detectorParameters
-
-if __name__ == '__main__': #pragma: no cover
-    import pyHendrixDemersTools.Runner as Runner
-    Runner.Runner().run(runFunction=None)

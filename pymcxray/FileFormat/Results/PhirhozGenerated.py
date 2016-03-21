@@ -93,7 +93,7 @@ class PhirhozGenerated(object):
 
         self._regions = {}
 
-        for indexRegion in range(self.numberRegions):
+        for _indexRegion in range(self.numberRegions):
             region = PhirhozRegion.PhirhozRegion(self.simulationParameters.numberEnergyWindows, self.simulationParameters.numberLayersZ)
             indexLine += region.readFromLines(lines[indexLine:])
 
@@ -140,7 +140,3 @@ class PhirhozGenerated(object):
     @numberRegions.setter
     def numberRegions(self, numberRegions):
         self._parameters[KEY_NUMBER_REGIONS] = numberRegions
-
-if __name__ == '__main__': #pragma: no cover
-    import pyHendrixDemersTools.Runner as Runner
-    Runner.Runner().run(runFunction=None)

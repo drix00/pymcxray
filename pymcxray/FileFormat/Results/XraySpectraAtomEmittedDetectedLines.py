@@ -73,7 +73,3 @@ class XraySpectraAtomEmittedDetectedLines(BaseResults.BaseResults):
     @characteristics.setter
     def characteristics(self, characteristics):
         self._characteristics = characteristics
-
-if __name__ == '__main__': #pragma: no cover
-    import pyHendrixDemersTools.Runner as Runner
-    Runner.Runner().run(runFunction=None)

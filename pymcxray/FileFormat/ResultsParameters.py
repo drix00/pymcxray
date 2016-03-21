@@ -21,7 +21,6 @@ import copy
 # Local modules.
 
 # Project modules
-import pymcxray.FileFormat.MCXRayModel as MCXRayModel
 import pymcxray.FileFormat.Version as Version
 
 # Globals and constants variables.
@@ -146,7 +145,3 @@ class ResultsParameters(object):
     @isComputeXraySimulatedSpectrum.setter
     def isComputeXraySimulatedSpectrum(self, isComputeXraySimulatedSpectrum):
         self._parameters[KEY_COMPUTE_XRAY_SIMULATED_SPECTRUM] = bool(isComputeXraySimulatedSpectrum)
-
-if __name__ == '__main__': #pragma: no cover
-    import pyHendrixDemersTools.Runner as Runner
-    Runner.Runner().run(runFunction=None)

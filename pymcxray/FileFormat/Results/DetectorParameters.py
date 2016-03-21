@@ -262,7 +262,3 @@ class DetectorParameters(object):
     @solidAngle_deg.setter
     def solidAngle_deg(self, solidAngle_deg):
         self._parameters[KEY_SOLID_ANGLE_deg] = solidAngle_deg
-
-if __name__ == '__main__': #pragma: no cover
-    import pyHendrixDemersTools.Runner as Runner
-    Runner.Runner().run(runFunction=None)

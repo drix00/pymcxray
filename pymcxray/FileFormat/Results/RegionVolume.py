@@ -60,7 +60,3 @@ class RegionVolume(object):
     @regionID.setter
     def regionID(self, regionID):
         self._parameters[KEY_REGION_ID] = regionID
-
-if __name__ == '__main__': #pragma: no cover
-    import pyHendrixDemersTools.Runner as Runner
-    Runner.Runner().run(runFunction=None)

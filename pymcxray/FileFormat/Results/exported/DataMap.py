@@ -88,9 +88,9 @@ class DataMap(object):
         self._pixels = pixels
 
 def run():
-    import pyHendrixDemersTools.Files as Files
+    from pymcxray import getCurrentModulePath
 
-    filepath = Files.getCurrentModulePath(__file__, "../../../testData/exportedFiles/CNTsFePt_30keV_100e_100pixels_BF.txt")
+    filepath = getCurrentModulePath(__file__, "../../../../testData/exportedFiles/CNTsFePt_30keV_100e_100pixels_BF.txt")
 
     dataMap = DataMap(filepath)
     dataMap.read()
@@ -99,5 +99,4 @@ def run():
     dataMap.saveImage()
 
 if __name__ == '__main__': #pragma: no cover
-    import pyHendrixDemersTools.Runner as Runner
-    Runner.Runner().run(runFunction=run)
+    run()

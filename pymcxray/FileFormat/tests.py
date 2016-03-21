@@ -23,7 +23,7 @@ __svnId__ = "$Id$"
 # Third party modules.
 
 # Local modules.
-import pyHendrixDemersTools.Testings as Testings
+import pymcxray.Testings as Testings
 
 # Project modules
 

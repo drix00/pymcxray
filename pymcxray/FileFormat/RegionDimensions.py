@@ -253,7 +253,3 @@ def createRegionDimensions(regionType):
         return RegionDimensionsCylinder()
     elif regionType == RegionType.REGION_TYPE_SPHERE:
         return RegionDimensionsSphere()
-
-if __name__ == '__main__': #pragma: no cover
-    import pyHendrixDemersTools.Runner as Runner
-    Runner.Runner().run(runFunction=None)

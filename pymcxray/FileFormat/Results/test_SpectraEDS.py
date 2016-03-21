@@ -20,7 +20,6 @@ __svnId__ = "$Id$"
 
 # Standard library modules.
 import unittest
-import logging
 import os.path
 
 # Third party modules.
