@@ -64,6 +64,7 @@ PARAMETER_NUMBER_WINDOWS = "numberBackgroundWindows"
 PARAMETER_WEIGHT_FRACTION = "weightFraction"
 PARAMETER_WEIGHT_FRACTIONS = "weightFractions"
 PARAMETER_ATOMIC_FRACTION = "atomicFraction"
+PARAMETER_ATOMIC_FRACTIONs = "atomicFractions"
 
 PARAMETER_TRACER_ATOMIC_NUMBER = "tracerAtomicNumber"
 PARAMETER_TRACER_THICKNESS_nm = "tracerThickness"
@@ -85,9 +86,12 @@ class SimulationsParameters(dict):
 
     def _removeDuplicated(self, parameters):
         numberBefore = len(parameters)
-
-        parameters = list(set(parameters))
-
+        
+        try:
+            parameters = list(set(parameters))
+        except TypeError:
+            pass            
+        
         numberAfter = len(parameters)
         numberDuplicated = numberBefore - numberAfter
         if numberDuplicated > 0:

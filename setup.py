@@ -50,7 +50,7 @@ class TestDataCommand(Command):
                     z.write(filename, arcname)
 
 setup(name="pymcxray",
-      version='0.1',
+      version='0.1.1',
       url='',
       description="",
       author="Hendrix Demers",
