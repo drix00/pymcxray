@@ -6,3 +6,4 @@ testData
 pymcxray.egg-info/
 .eggs
 build
+*.whl
