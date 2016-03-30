@@ -64,7 +64,7 @@ class XrayIntensities(BaseResults.BaseResults):
     def getDetectedIntensity(self, atomicNumber, xrayLine):
         return self.getIntensityEmittedDetected(atomicNumber, xrayLine)
 
-    def getIntensityEmitted(self, atomicNumber, xrayLine, total=False):
+    def getIntensityEmitted(self, atomicNumber, xrayLine, total=True):
         if total:
             data = 0.0
         else:
@@ -88,18 +88,24 @@ class XrayIntensities(BaseResults.BaseResults):
 
         return data
 
-    def getIntensityEmittedDetected(self, atomicNumber, xrayLine):
-        data = {}
+    def getIntensityEmittedDetected(self, atomicNumber, xrayLine, total=True):
+        if total:
+            data = 0.0
+        else:
+            data = {}
 
         for intensity in self.intensities:
             indexRegion = intensity[INDEX_REGION]
 
             xrayLineLabel = "Line %s" % (xrayLine)
             if intensity[ATOMIC_NUMBER] == str(atomicNumber) and intensity[LINE].startswith(xrayLineLabel):
-                if indexRegion not in data:
+                if not total and indexRegion not in data:
                     data[indexRegion] = 0.0
 
-                data[indexRegion] += float(intensity[INTENSITY_EMITTED_DETECTED])
+                if total:
+                    data += float(intensity[INTENSITY_EMITTED_DETECTED])
+                else:
+                    data[indexRegion] += float(intensity[INTENSITY_EMITTED_DETECTED])
 
         return data
 
