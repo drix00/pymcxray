@@ -174,9 +174,48 @@ def createAlloyFilmOverSubstrate(film_elements, substrate_elements, film_thickne
     region.regionDimensions = RegionDimensions.RegionDimensionsBox(parameters)
     region.regionMassDensity_g_cm3 = film_mass_density_g_cm3
     specimen.regions.append(region)
-    
+
     name += "_T%inm" % (film_thickness_nm)
-    
+
+    specimen.name = name
+
+    return specimen
+
+def createBoxFeatureInSubstrate(feature_elements, substrate_elements, depth_nm, width_nm):
+    depth_A = depth_nm*1.0e1
+    width_A = width_nm*1.0e1
+
+    specimen = Specimen.Specimen()
+
+    name = ""
+
+    specimen.numberRegions = 2
+
+    region = Region.Region()
+    region.numberElements = len(substrate_elements)
+    for atomicNumber, weightFraction in substrate_elements:
+        name += "%s%i" % (AtomData.getAtomSymbol(atomicNumber), weightFraction*100)
+        element = Element.Element(atomicNumber, massFraction=weightFraction)
+        region.elements.append(element)
+    region.regionType = RegionType.REGION_TYPE_BOX
+    parameters = [-10000000000.0, 10000000000.0, -10000000000.0, 10000000000.0, 0.0, 20000000000.0]
+    region.regionDimensions = RegionDimensions.RegionDimensionsBox(parameters)
+    specimen.regions.append(region)
+
+    region = Region.Region()
+    region.numberElements = len(feature_elements)
+    for atomicNumber, weightFraction in feature_elements:
+        name += "%s%i" % (AtomData.getAtomSymbol(atomicNumber), weightFraction*100)
+        element = Element.Element(atomicNumber, massFraction=weightFraction)
+        region.elements.append(element)
+    region.regionType = RegionType.REGION_TYPE_BOX
+    parameters = [-width_A/2.0, width_A/2.0, -width_A/2.0, width_A/2.0, 0.0, depth_A]
+    region.regionDimensions = RegionDimensions.RegionDimensionsBox(parameters)
+    specimen.regions.append(region)
+
+    name += "_D%inm" % (depth_nm)
+    name += "_W%inm" % (width_nm)
+
     specimen.name = name
 
     return specimen
