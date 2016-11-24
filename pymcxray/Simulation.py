@@ -16,7 +16,7 @@ __license__ = ""
 # Standard library modules.
 import logging
 import os.path
-from itertools import combinations_with_replacement
+from itertools import combinations_with_replacement, product, combinations
 
 # Third party modules.
 import numpy as np
@@ -41,7 +41,9 @@ from pymcxray.SimulationsParameters import PARAMETER_INCIDENT_ENERGY_keV, PARAME
 PARAMETER_NUMBER_XRAYS, PARAMETER_TIME_s, PARAMETER_CURRENT_nA, PARAMETER_BEAM_DIAMETER_nm, PARAMETER_BEAM_TILT_deg, PARAMETER_BEAM_POSITION_nm, \
 PARAMETER_DETECTOR_DISTANCE_cm, PARAMETER_DETECTOR_RADIUS_cm, PARAMETER_DETECTOR_THICKNESS_cm, \
 PARAMETER_DETECTOR_NOISE_eV, PARAMETER_DETECTOR_CHANNEL_WIDTH_eV, PARAMETER_TOA_deg, PARAMETER_DETECTOR_AZIMUTHAL_ANGLE_deg, PARAMETER_NUMBER_WINDOWS, \
-PARAMETER_ELASTIC_CROSS_SECTION_SCALING_FACTOR, PARAMETER_ENERGY_LOSS_SCALING_FACTOR, PARAMETER_REPETITION
+PARAMETER_ELASTIC_CROSS_SECTION_SCALING_FACTOR, PARAMETER_ENERGY_LOSS_SCALING_FACTOR, PARAMETER_REPETITION, \
+PARAMETER_MODEL_SAMPLE_ENERGY_LOSS, PARAMETER_MODEL_XRAY_CHARACTERISTIC, PARAMETER_MODEL_XRAY_BREMSSTRAHLUNG, \
+PARAMETER_MODEL_ATOM_CROSS_SECTION, PARAMETER_MODEL_ATOM_COLLISION, PARAMETER_MODEL_ATOM_MAC
 
 
 # Globals and constants variables.
@@ -668,42 +670,12 @@ def computeWeightFraction(atomicNumberRef, atomicWeights):
     weightFraction = nominator/denominator
     return weightFraction
 
-
-def _combinators(_handle, items, n):
-    """
-    Factored-out common structure of all following combinators.
-
-    :param _handle:
-    :param items:
-    :param n:
-    :return:
-    """
-    if n == 0:
-        yield []
-        return
-
-    for i, item in enumerate(items):
-        this_one = [item]
-        for cc in _combinators(_handle, _handle(items, i), n-1):
-            yield this_one + cc
-
-
-def combination(items, n):
-    def skip_ith_item(items, i):
-        return items[:i] + items[i+1:]
-    def no_skip(items, i):
-        return items
-
-    return list(_combinators(no_skip, items, n))
-
-
 def create_weight_fractions(weight_fraction_step, number_elements):
     weight_fractions = np.arange(0.0, 1.0+weight_fraction_step, weight_fraction_step)
     if number_elements == 1:
         return weight_fractions
 
-    items = combination(weight_fractions.tolist(), number_elements)
-    #items = combinations_with_replacement(weight_fractions.tolist(), number_elements)
+    items = product(weight_fractions.tolist(), repeat=number_elements)
 
     weight_fractions_data = []
     for item in items:
@@ -711,7 +683,6 @@ def create_weight_fractions(weight_fraction_step, number_elements):
             weight_fractions_data.append(item)
 
     return np.array(weight_fractions_data)
-
 
 class Simulation(object):
     def __init__(self, overwrite=True):
@@ -916,6 +887,20 @@ _XrayIntensitiesFromPhirhoz.csv""".splitlines()
         if PARAMETER_ENERGY_LOSS_SCALING_FACTOR in parameters:
             self.energyLossScalingFactor = parameters[PARAMETER_ENERGY_LOSS_SCALING_FACTOR]
 
+        if PARAMETER_MODEL_SAMPLE_ENERGY_LOSS in parameters:
+            self._models.modelSampleEnergyLoss = parameters[PARAMETER_MODEL_SAMPLE_ENERGY_LOSS]
+        if PARAMETER_MODEL_XRAY_CHARACTERISTIC in parameters:
+            self._models.modelXrayCharacteristic = parameters[PARAMETER_MODEL_XRAY_CHARACTERISTIC]
+        if PARAMETER_MODEL_XRAY_BREMSSTRAHLUNG in parameters:
+            self._models.modelXrayBremsstrahlung = parameters[PARAMETER_MODEL_XRAY_BREMSSTRAHLUNG]
+        if PARAMETER_MODEL_ATOM_CROSS_SECTION in parameters:
+            self._models.modelAtomCrossSection = parameters[PARAMETER_MODEL_ATOM_CROSS_SECTION]
+        if PARAMETER_MODEL_ATOM_COLLISION in parameters:
+            self._models.modelAtomCollision = parameters[PARAMETER_MODEL_ATOM_COLLISION]
+        if PARAMETER_MODEL_ATOM_MAC in parameters:
+            self._models.modelAtomMac = parameters[PARAMETER_MODEL_ATOM_MAC]
+
+
     def getParameters(self):
         return self._parameters
 
@@ -1088,6 +1073,19 @@ _XrayIntensitiesFromPhirhoz.csv""".splitlines()
         if PARAMETER_ENERGY_LOSS_SCALING_FACTOR in self._parameters:
             name += "_ELF%f" % (self._parameters[PARAMETER_ENERGY_LOSS_SCALING_FACTOR])
 
+        if PARAMETER_MODEL_SAMPLE_ENERGY_LOSS in self._parameters:
+            name += "_MSEL%i" % (self._parameters[PARAMETER_MODEL_SAMPLE_ENERGY_LOSS])
+        if PARAMETER_MODEL_XRAY_CHARACTERISTIC in self._parameters:
+            name += "_MXC%i" % (self._parameters[PARAMETER_MODEL_XRAY_CHARACTERISTIC])
+        if PARAMETER_MODEL_XRAY_BREMSSTRAHLUNG in self._parameters:
+            name += "_MXB%i" % (self._parameters[PARAMETER_MODEL_XRAY_BREMSSTRAHLUNG])
+        if PARAMETER_MODEL_ATOM_CROSS_SECTION in self._parameters:
+            name += "_MACS%i" % (self._parameters[PARAMETER_MODEL_ATOM_CROSS_SECTION])
+        if PARAMETER_MODEL_ATOM_COLLISION in self._parameters:
+            name += "_MAC%i" % (self._parameters[PARAMETER_MODEL_ATOM_COLLISION])
+        if PARAMETER_MODEL_ATOM_MAC in self._parameters:
+            name += "_MAM%i" % (self._parameters[PARAMETER_MODEL_ATOM_MAC])
+
         if self._useOldVersion:
             name += "_E%.1fkeV" % (self.energy_keV)
 
@@ -1118,11 +1116,11 @@ _XrayIntensitiesFromPhirhoz.csv""".splitlines()
         self._simulationParameters.numberPhotons = numberPhotons
 
     @property
-    def bremsstrahlungModel(self):
-        return self._models.bremsstrahlungModel
-    @bremsstrahlungModel.setter
-    def bremsstrahlungModel(self, bremsstrahlungModel):
-        self._models.bremsstrahlungModel = bremsstrahlungModel
+    def modelXrayBremsstrahlung(self):
+        return self._models.modelXrayBremsstrahlung
+    @modelXrayBremsstrahlung.setter
+    def modelXrayBremsstrahlung(self, modelXrayBremsstrahlung):
+        self._models.modelXrayBremsstrahlung = modelXrayBremsstrahlung
 
     @property
     def numberEnergyWindows(self):
