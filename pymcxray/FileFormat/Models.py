@@ -35,15 +35,34 @@ KEY_ATOM_MEAN_IONIZATION_POTENTIAL_MODEL = "AtomMeanIonizationPotentialModel"
 KEY_ATOM_ENERGY_LOSS_MODEL = "AtomEnergyLossModel"
 KEY_ATOM_SCREENING_MODEL = "AtomScreeningModel"
 KEY_ATOM_CROSS_SECTION_MODEL = "AtomCrossSectionModel"
+ATOM_CROSS_SECTION_MODEL_BROWNING = 0
+ATOM_CROSS_SECTION_MODEL_GAUVIN_DROUIN = 1
 KEY_ATOM_CROSS_SECTION_SCREENING_MODEL = "AtomCrossSectionScreeningModel"
 KEY_ATOM_COLLISION_MODEL = "AtomCollisionModel"
+ATOM_COLLISION_MODEL_RUTHERFORD = 0
+ATOM_COLLISION_MODEL_BROWNING = 1
+ATOM_COLLISION_MODEL_GAUVIN = 2
 KEY_ATOM_COLLISION_SCREENING_MODEL = "AtomCollisionScreeningModel"
 KEY_ATOM_ELECTRON_RANGE_MODEL = "AtomElectronRangeModel"
 KEY_XRAY_CS_CHARACTERISTIC_MODEL = "XRayCSCharacteristicModel"
+XRAY_CS_CHARACTERISTIC_MODEL_CASNATI = 0
+XRAY_CS_CHARACTERISTIC_MODEL_BOTE = 1 
 KEY_XRAY_CS_BREMSSTRAHLUNG_MODEL = "XRayCSBremsstrahlungModel"
+XRAY_CS_BREMSSTRAHLUNG_MODEL_BETHE_HEITLER = 0
+XRAY_CS_BREMSSTRAHLUNG_MODEL_KIRPATRICK_WIEDMAN = 1
+XRAY_CS_BREMSSTRAHLUNG_MODEL_DING = 2
 KEY_SAMPLE_ENERGY_LOSS_MODEL = "SampleEnergyLossModel"
+SAMPLE_ENERGY_LOSS_MODEL_BETHE_JOY_LUO = 0
+SAMPLE_ENERGY_LOSS_MODEL_BETHE = 1
+SAMPLE_ENERGY_LOSS_MODEL_BETHE_RELATIVISTIC = 2
+SAMPLE_ENERGY_LOSS_MODEL_JOY_LUO_GAUVIN = 3
+SAMPLE_ENERGY_LOSS_MODEL_JOY_LUO_MONSEL = 4
 KEY_REGION_ENERGY_LOSS_MODEL = "RegionEnergyLossModel"
 KEY_MASS_ABSORPTION_COEFFICIENT_MODEL = "XRayMassAbsorptionCoefficientMode"
+MASS_ABSORPTION_COEFFICIENT_MODEL_HENKE = 0
+MASS_ABSORPTION_COEFFICIENT_MODEL_HEINRICH_DATA = 1
+MASS_ABSORPTION_COEFFICIENT_MODEL_HEINRICH_PARAMETERS = 2
+MASS_ABSORPTION_COEFFICIENT_MODEL_CHANTLER = 3
 
 
 class Models(object):
@@ -177,8 +196,43 @@ class Models(object):
         self._version = version
 
     @property
-    def bremsstrahlungModel(self):
+    def modelSampleEnergyLoss(self):
+        return self._modelList[KEY_REGION_ENERGY_LOSS_MODEL].getModel()
+    @modelSampleEnergyLoss.setter
+    def modelSampleEnergyLoss(self, modelSampleEnergyLoss):
+        self._modelList[KEY_REGION_ENERGY_LOSS_MODEL].setModel(modelSampleEnergyLoss)
+
+    @property
+    def modelXrayCharacteristic(self):
+        return self._modelList[KEY_XRAY_CS_CHARACTERISTIC_MODEL].getModel()
+    @modelXrayCharacteristic.setter
+    def modelXrayCharacteristic(self, modelXrayCharacteristic):
+        self._modelList[KEY_XRAY_CS_CHARACTERISTIC_MODEL].setModel(modelXrayCharacteristic)
+
+    @property
+    def modelXrayBremsstrahlung(self):
         return self._modelList[KEY_XRAY_CS_BREMSSTRAHLUNG_MODEL].getModel()
-    @bremsstrahlungModel.setter
-    def bremsstrahlungModel(self, bremsstrahlungModel):
-        self._modelList[KEY_XRAY_CS_BREMSSTRAHLUNG_MODEL].setModel(bremsstrahlungModel)
+    @modelXrayBremsstrahlung.setter
+    def modelXrayBremsstrahlung(self, modelXrayBremsstrahlung):
+        self._modelList[KEY_XRAY_CS_BREMSSTRAHLUNG_MODEL].setModel(modelXrayBremsstrahlung)
+
+    @property
+    def modelAtomCrossSection(self):
+        return self._modelList[KEY_ATOM_CROSS_SECTION_MODEL].getModel()
+    @modelAtomCrossSection.setter
+    def modelAtomCrossSection(self, modelAtomCrossSection):
+        self._modelList[KEY_ATOM_CROSS_SECTION_MODEL].setModel(modelAtomCrossSection)
+
+    @property
+    def modelAtomCollision(self):
+        return self._modelList[KEY_ATOM_COLLISION_MODEL].getModel()
+    @modelAtomCollision.setter
+    def modelAtomCollision(self, modelAtomCollision):
+        self._modelList[KEY_ATOM_COLLISION_MODEL].setModel(modelAtomCollision)
+
+    @property
+    def modelAtomMac(self):
+        return self._modelList[KEY_MASS_ABSORPTION_COEFFICIENT_MODEL].getModel()
+    @modelAtomMac.setter
+    def modelAtomMac(self, modelAtomMac):
+        self._modelList[KEY_MASS_ABSORPTION_COEFFICIENT_MODEL].setModel(modelAtomMac)

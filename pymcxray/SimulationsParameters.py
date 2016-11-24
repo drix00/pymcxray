@@ -72,6 +72,13 @@ PARAMETER_TRACER_ATOMIC_NUMBER = "tracerAtomicNumber"
 PARAMETER_TRACER_THICKNESS_nm = "tracerThickness"
 PARAMETER_TRACER_LINE = "tracerLine"
 
+PARAMETER_MODEL_SAMPLE_ENERGY_LOSS = "modelSampleEnergyLoss"
+PARAMETER_MODEL_XRAY_CHARACTERISTIC = "modelXrayCharacteristic"
+PARAMETER_MODEL_XRAY_BREMSSTRAHLUNG = "modelXrayBremsstrahlung"
+PARAMETER_MODEL_ATOM_CROSS_SECTION = "modelAtomCrossSection"
+PARAMETER_MODEL_ATOM_COLLISION = "modelAtomCollision"
+PARAMETER_MODEL_ATOM_MAC = "modelAtomMac"
+
 class SimulationsParameters(dict):
     def __init__(self):
         self._variedParameters = {}
