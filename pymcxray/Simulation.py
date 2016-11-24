@@ -16,6 +16,7 @@ __license__ = ""
 # Standard library modules.
 import logging
 import os.path
+from itertools import combinations_with_replacement
 
 # Third party modules.
 import numpy as np
@@ -666,6 +667,51 @@ def computeWeightFraction(atomicNumberRef, atomicWeights):
 
     weightFraction = nominator/denominator
     return weightFraction
+
+
+def _combinators(_handle, items, n):
+    """
+    Factored-out common structure of all following combinators.
+
+    :param _handle:
+    :param items:
+    :param n:
+    :return:
+    """
+    if n == 0:
+        yield []
+        return
+
+    for i, item in enumerate(items):
+        this_one = [item]
+        for cc in _combinators(_handle, _handle(items, i), n-1):
+            yield this_one + cc
+
+
+def combination(items, n):
+    def skip_ith_item(items, i):
+        return items[:i] + items[i+1:]
+    def no_skip(items, i):
+        return items
+
+    return list(_combinators(no_skip, items, n))
+
+
+def create_weight_fractions(weight_fraction_step, number_elements):
+    weight_fractions = np.arange(0.0, 1.0+weight_fraction_step, weight_fraction_step)
+    if number_elements == 1:
+        return weight_fractions
+
+    items = combination(weight_fractions.tolist(), number_elements)
+    #items = combinations_with_replacement(weight_fractions.tolist(), number_elements)
+
+    weight_fractions_data = []
+    for item in items:
+        if 1.0-weight_fraction_step/2.0 <= sum(item) <= 1.0+weight_fraction_step/2.0:
+            weight_fractions_data.append(item)
+
+    return np.array(weight_fractions_data)
+
 
 class Simulation(object):
     def __init__(self, overwrite=True):
