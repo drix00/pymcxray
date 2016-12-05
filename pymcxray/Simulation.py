@@ -680,9 +680,9 @@ def create_weight_fractions(weight_fraction_step, number_elements):
     weight_fractions_data = []
     for item in items:
         if 1.0-weight_fraction_step/2.0 <= sum(item) <= 1.0+weight_fraction_step/2.0:
-            weight_fractions_data.append(item)
+            weight_fractions_data.append(tuple(item))
 
-    return np.array(weight_fractions_data)
+    return list(weight_fractions_data)
 
 class Simulation(object):
     def __init__(self, overwrite=True):
