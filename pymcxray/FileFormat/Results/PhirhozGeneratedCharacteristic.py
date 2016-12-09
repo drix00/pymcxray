@@ -27,6 +27,9 @@ import pymcxray.FileFormat.Results.BaseResults as BaseResults
 # Globals and constants variables.
 FIELD_DEPTH_A = "Depth (A)"
 
+HDF5_PHIRHOZ_GENERATED_CHARACTERISTIC = "PhirhozGeneratedCharacteristic"
+HDF5_DEPTH_nm = "Depth (nm)"
+
 class PhirhozGeneratedCharacteristic(BaseResults.BaseResults):
     def __init__(self):
         super(PhirhozGeneratedCharacteristic, self).__init__()
@@ -54,6 +57,16 @@ class PhirhozGeneratedCharacteristic(BaseResults.BaseResults):
                     symbol, xrayLine = elementSymbolLine.split()
                     self.phirhozs.setdefault((symbol.strip(), xrayLine.strip()), []).append(float(row[elementSymbolLine]))
 
+    def write_hdf5(self, hdf5_group):
+        hdf5_group = hdf5_group.require_group(HDF5_PHIRHOZ_GENERATED_CHARACTERISTIC)
+        
+        hdf5_group.create_dataset(HDF5_DEPTH_nm, data=self.depth_nm)
+        
+        for phirhoz_name in self.phirhozs:
+            symbol, subshell = phirhoz_name
+            group = hdf5_group.require_group(symbol)
+            group.create_dataset(subshell, data=self.phirhozs[phirhoz_name])
+            
     @property
     def fieldNames(self):
         return self._fieldNames

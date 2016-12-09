@@ -25,6 +25,7 @@ import math
 
 # Third party modules.
 import numpy as np
+import h5py
 
 # Local modules.
 from pymcxray import getCurrentModulePath, createPath, getResultsMcGillPath, getMCXRayProgramPath, getMCXRayProgramName, getMCXRayArchivePath, getMCXRayArchiveName
@@ -41,6 +42,8 @@ ANALYZE_TYPE_READ_RESULTS = "read"
 ANALYZE_TYPE_ANALYZE_RESULTS = "analyze"
 
 SAVE_EVERY_SIMULATIONS = 10
+
+HDF5_SIMULATIONS = "simulations"
 
 def _getOptions():
     analyzeTypes = []
@@ -77,6 +80,8 @@ class _Simulations(object):
         self.useSerialization = True
         self.verbose = True
         self.createBackup = True
+        self.use_hdf5 = False
+        self.delete_result_files = False
 
         if simulationPath is not None:
             self._simulationPath = os.path.normpath(simulationPath)
@@ -136,6 +141,38 @@ class _Simulations(object):
         inputPath = createPath(inputPath)
 
         return inputPath
+
+    def get_hdf5_group(self):
+        result_path = self.getResultsPath()
+        name = self.getAnalysisName()
+        file_path = os.path.join(result_path, name + ".hdf5")
+        logging.debug(file_path)
+
+        hdf5_file = h5py.File(file_path, 'a')
+        logging.debug(hdf5_file.filename)
+        logging.debug(hdf5_file.mode)
+        logging.debug(hdf5_file.driver)
+        logging.debug(hdf5_file.libver)
+        logging.debug(hdf5_file.userblock_size)
+
+        hdf5_group = hdf5_file.require_group(HDF5_SIMULATIONS)
+        return hdf5_group
+
+    def get_results_hdf5(self):
+        result_path = self.getResultsPath()
+        name = self.getAnalysisName()
+        file_path = os.path.join(result_path, name + ".hdf5")
+        logging.debug(file_path)
+
+        hdf5_file = h5py.File(file_path, 'r')
+        logging.debug(hdf5_file.filename)
+        logging.debug(hdf5_file.mode)
+        logging.debug(hdf5_file.driver)
+        logging.debug(hdf5_file.libver)
+        logging.debug(hdf5_file.userblock_size)
+
+        hdf5_group = hdf5_file.require_group(HDF5_SIMULATIONS)
+        return hdf5_group
 
     def _createAllFolders(self, basePath):
         if basePath is not None:
@@ -244,9 +281,9 @@ class _Simulations(object):
         simulationTodoNames = []
 
         for simulation in self.getAllSimulationParameters():
-            simulation.createSimulationFiles(self.getInputPath(), self.getSimulationsPath())
+            simulation.createSimulationFiles(self.getInputPath(), self.getSimulationsPath(), self.get_hdf5_group())
 
-            if simulation.isDone(self.getSimulationsPath()):
+            if simulation.isDone(self.getSimulationsPath(), self.get_hdf5_group()):
                 numberSimulationsDone += 1
             else:
                 numberSimulationsTodo += 1
@@ -270,11 +307,15 @@ class _Simulations(object):
         numberSimulationsDone = 0
         simulationTodoNames = []
 
+        if self.use_hdf5:
+            hdf5_group = self.get_hdf5_group()
+        else:
+            hdf5_group = None
         inputPath = os.path.join(self.getSimulationsPath(), "input")
         inputPath = createPath(inputPath)
 
         for simulation in self.getAllSimulationParameters():
-            if simulation.isDone(self.getSimulationsPath()):
+            if simulation.isDone(self.getSimulationsPath(), hdf5_group):
                 numberSimulationsDone += 1
             else:
                 numberSimulationsTodo += 1
@@ -345,7 +386,10 @@ class _Simulations(object):
     def readResults(self, resultFilepaths=None, serializationFilename="", isResultsKeep=True):
         logging.info("readResults")
 
-        self._readAllResults(serializationFilename, isResultsKeep)
+        if self.use_hdf5:
+            self._read_all_results_hdf5()
+        else:
+            self._readAllResults(serializationFilename, isResultsKeep)
 
     def _readAllResults(self, serializationFilename="", isResultsKeep=True):
         if self.useSerialization:
@@ -480,6 +524,64 @@ class _Simulations(object):
         else:
             del simulationResultsList
 
+    def _read_all_results_hdf5(self):
+        logging.info("_read_all_results_hdf5")
+
+        hdf5_root = self.get_hdf5_group()
+        _numberError = 0
+        simulations = self.getAllSimulationParameters()
+        total = len(simulations)
+        for index, simulation in enumerate(simulations):
+            if simulation.isDone(self.getSimulationsPath(), None):
+                try:
+                    filepath = simulation.getProgramVersionFilepath(self.getSimulationsPath())
+                    logging.info("Processing file %i/%i", (index+1), total)
+
+                    if os.path.isfile(filepath):
+                        logging.debug(filepath)
+
+                        name = simulation.name
+                        if name in hdf5_root:
+                            del hdf5_root[name]
+                        hdf5_group = hdf5_root.require_group(name)
+
+                        parameters = simulation.getParameters()
+                        for parameter_name in parameters:
+                            hdf5_group.attrs[parameter_name] = parameters[parameter_name]
+
+                        self.read_one_results_hdf5(simulation, hdf5_group)
+
+                        hdf5_root.file.flush()
+
+                        if self.delete_result_files:
+                            self.delete_simulation_result_files(simulation)
+                    else:
+                        logging.warning("File not found: %s", filepath)
+                except UnboundLocalError as message:
+                    logging.error("UnboundLocalError in %s for %s", "_readAllResultsSerialization", filepath)
+                    logging.error(message)
+                except ValueError as message:
+                    logging.error("ValueError in %s for %s", "_readAllResultsSerialization", filepath)
+                    logging.error(message)
+                except AssertionError as message:
+                    logging.error("AssertionError in %s for %s", "_readAllResultsSerialization", filepath)
+                    logging.error(message)
+                except IOError as message:
+                    logging.warning(message)
+                    logging.warning(simulation.name)
+                    _numberError += 1
+
+        if _numberError > 0:
+            logging.info("Number of IO error: %i", _numberError)
+
+    def delete_simulation_result_files(self, simulation):
+        simulation_name = simulation.name.replace('.', 'd')
+        for file_name in os.listdir(self.getResultsPath()):
+            if file_name.startswith(simulation_name):
+                file_path = os.path.join(self.getResultsPath(), file_name)
+                logging.debug("Remove file: %s", file_name)
+                os.remove(file_path)
+
     def getResults(self, parameters):
         return self._simulationResultsList[parameters]
 
@@ -509,7 +611,7 @@ class _Simulations(object):
     def generateResultsKey(self, simulation):
         variedParameterLabels = self.getVariedParameterLabels()
 
-        simulation.createSimulationFiles(self.getInputPath(), self.getSimulationsPath())
+        simulation.createSimulationFiles(self.getInputPath(), self.getSimulationsPath(), self.get_hdf5_group())
 
         key = self._createKey(variedParameterLabels, simulation)
 
@@ -529,7 +631,10 @@ class _Simulations(object):
         if options == ANALYZE_TYPE_READ_RESULTS:
             self.readResultsFiles()
         if options == ANALYZE_TYPE_ANALYZE_RESULTS:
-            self.analyzeResultsFiles()
+            if self.use_hdf5:
+                self.analyze_results_hdf5()
+            else:
+                self.analyzeResultsFiles()
 
     def _computeMCXrayFwhm_keV(self, detectorNoise_eV, xrayEnergy_keV):
         xrayEnergy_eV = xrayEnergy_keV*1.0e3

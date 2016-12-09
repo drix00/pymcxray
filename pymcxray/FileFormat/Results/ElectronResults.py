@@ -35,6 +35,8 @@ FRACTION_BACKSCATTERED_ELECTRONS = "Backscattering coefficient"
 FRACTION_TRANSMITTED_ELECTRONS = "Transmitted coefficient"
 FRACTION_SKIRTED_ELECTRONS = "Skirted coefficient"
 
+HDF5_ELECTRON_RESULTS = "ElectronResults"
+
 class ElectronResults(BaseResults.BaseResults):
     def __init__(self):
         super(ElectronResults, self).__init__()
@@ -55,7 +57,13 @@ class ElectronResults(BaseResults.BaseResults):
                     for fieldName in self.fieldNames:
                         if fieldName in items[0]:
                             self._values[fieldName] = items[-1]
-
+    
+    def write_hdf5(self, hdf5_group):
+        hdf5_group = hdf5_group.require_group(HDF5_ELECTRON_RESULTS)
+        
+        for field_name in self.fieldNames:
+            hdf5_group.attrs[field_name] = self._values[field_name]
+            
     @property
     def fieldNames(self):
         fieldNames = []

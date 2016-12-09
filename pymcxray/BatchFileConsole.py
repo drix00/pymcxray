@@ -49,23 +49,25 @@ class BatchFileConsole(object):
         random.shuffle(self._simulationFilenames)
 
         if self._numberFiles > 1:
-            indexStep = int(math.ceil(float(len(self._simulationFilenames))/float(self._numberFiles)))
+            number_simulations = len(self._simulationFilenames)
+            indexStep = int(math.ceil(float(number_simulations)/float(self._numberFiles)))
 
             indexFilenames = 0
             for indexFile in range(self._numberFiles):
-                filename = self._name + "_%i" % (indexFile+1) + self._extension
-                filepath = os.path.join(path, filename)
-
-                logging.info("Write batch file: %s", filepath)
-                batchFile = open(filepath, 'w')
-
-                for simulationFilename in self._simulationFilenames[indexFilenames:indexFilenames+indexStep]:
-                    line = "%s %s\n" % (self._programName, simulationFilename)
-                    batchFile.write(line)
-
-                indexFilenames += indexStep
-
-                batchFile.close()
+                if indexFilenames < number_simulations:
+                    filename = self._name + "_%i" % (indexFile+1) + self._extension
+                    filepath = os.path.join(path, filename)
+    
+                    logging.info("Write batch file: %s", filepath)
+                    batchFile = open(filepath, 'w')
+    
+                    for simulationFilename in self._simulationFilenames[indexFilenames:indexFilenames+indexStep]:
+                        line = "%s %s\n" % (self._programName, simulationFilename)
+                        batchFile.write(line)
+    
+                    indexFilenames += indexStep
+    
+                    batchFile.close()
         else:
             filename = self._name + self._extension
             filepath = os.path.join(path, filename)

@@ -56,7 +56,7 @@ class BatchFile(object):
             for indexFile in range(self._numberFiles):
                 filename = self._name + "_%i" % (indexFile+1) + self._extension
                 filepath = os.path.join(path, filename)
-
+                
                 logging.info("Write batch file: %s", filepath)
                 batchFile = open(filepath, 'w')
 
