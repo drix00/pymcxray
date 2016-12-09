@@ -699,7 +699,7 @@ class Simulation(object):
 
         self._parameters = {}
 
-    def createSimulationFiles(self, path, simulationPath):
+    def createSimulationFiles(self, path, simulationPath, hdf5_group):
         nameWithoutDot = self.name.replace('.', 'd')
         baseFilenameRef = "Results/%s" % (nameWithoutDot)
         self._simulationParameters.baseFilename = os.path.normpath(baseFilenameRef)
@@ -714,14 +714,14 @@ class Simulation(object):
 
         self._path = path
 
-        if self._overwrite or not self.isDone(simulationPath):
+        if self._overwrite or not self.isDone(simulationPath, hdf5_group):
             self._createSimulationInputsFile()
             self._createSpecimenInputFile()
             self._createModelsInputFile()
             self._createMicroscopeInputFile()
             self._createSimulationParametersInputFile()
             self._createResultParametersInputFile()
-        elif self.isDone(simulationPath):
+        elif self.isDone(simulationPath, hdf5_group):
             self.removeInputsFiles()
 
     def _createSimulationInputsFile(self):
@@ -769,7 +769,7 @@ class Simulation(object):
         filepath = os.path.join(self._path, self._simulationInputs.resultParametersFilename)
         self._resultParameters.write(filepath)
 
-    def isDone(self, simulationPath):
+    def isDone(self, simulationPath, hdf5_group):
         _isDone = True
         for suffix in self.getFilenameSuffixes():
             filepath = os.path.join(simulationPath, self._simulationParameters.baseFilename + suffix)
@@ -777,6 +777,10 @@ class Simulation(object):
                 _isDone = False
                 logging.debug("Missing file: %s", self._simulationParameters.baseFilename + suffix)
 
+        if hdf5_group is not None and not _isDone:
+            group_name = self.name
+            if group_name in hdf5_group:
+                _isDone = True
         return _isDone
 
     def getFilenameSuffixes(self):

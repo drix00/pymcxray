@@ -18,6 +18,7 @@ import os.path
 import csv
 
 # Third party modules.
+import numpy as np
 
 # Local modules.
 
@@ -35,11 +36,18 @@ INTENSITY_GENERATED_DETECTED = "Intensity Generated Detected (photons)"
 INTENSITY_EMITTED = "Intensity Emitted (photons/e/sr)"
 INTENSITY_EMITTED_DETECTED = "Intensity Emitted Detected (photons)"
 
+HDF5_PHIRHOZ_GENERATED_CHARACTERISTIC_THIN_FILM = "PhirhozGeneratedCharacteristicThinFilm"
+HDF5_REGION_IDS = "Region IDs"
+HDF5_XRAY_LINES = "X-ray lines"
+
 class XrayIntensities(BaseResults.BaseResults):
     def __init__(self):
         super(XrayIntensities, self).__init__()
 
         self.intensities = []
+        self.atomic_numbers = set()
+        self.xray_lines = set()
+        self.regions = set()
 
     def read(self):
         suffix = "_XrayIntensities.csv"
@@ -56,6 +64,14 @@ class XrayIntensities(BaseResults.BaseResults):
                 for key in intensity:
                     try:
                         intensity[key] = intensity[key].strip()
+                        if key is ATOMIC_NUMBER:
+                            self.atomic_numbers.add(int(intensity[key]))
+                        if key is LINE:
+                            line = str(intensity[key])
+                            line = line[5:]
+                            self.xray_lines.add(line)
+                        if key is INDEX_REGION:
+                            self.regions.add(int(intensity[key]))
                     except AttributeError:
                         pass
 
@@ -168,6 +184,51 @@ class XrayIntensities(BaseResults.BaseResults):
             atomicNumberLineSets.add((atomicNumber, line, energy_keV))
 
         return atomicNumberLineSets
+
+    def getIntensity(self, data_type, region_id, atomic_number, xray_line):
+        xray_line = "Line " + xray_line
+
+        if data_type == LINE_ENERGY_KEV:
+            for atomicNumber, line, energy_keV in self.getAtomicNumberLineEnergySets():
+                if atomicNumber == atomic_number and line == xray_line:
+                    return energy_keV
+            return 0.0
+        elif data_type == INTENSITY_GENERATED:
+            return 0.0
+        elif data_type == INTENSITY_GENERATED_DETECTED:
+            return 0.0
+        elif data_type == INTENSITY_EMITTED:
+            return 0.0
+        elif data_type == INTENSITY_EMITTED_DETECTED:
+            return 0.0
+        else:
+            return 0.0
+
+    def write_hdf5(self, hdf5_group):
+        hdf5_group = hdf5_group.require_group(HDF5_PHIRHOZ_GENERATED_CHARACTERISTIC_THIN_FILM)
+
+        data = np.array(sorted(list(self.regions)))
+        region_ids = hdf5_group.create_dataset(HDF5_REGION_IDS, dtype='i4', data=data)
+        xray_lines = np.array(sorted(self.xray_lines()), dtype='S4')
+        subshells = hdf5_group.create_dataset(HDF5_XRAY_LINES, dtype='S4', data=data)
+
+        shape = (self.numberRegions, len(data))
+
+        for atomic_number in sorted(self.atomic_numbers):
+            hdf5_group_element = hdf5_group.require_group(atomic_number)
+
+            data_types = [LINE_ENERGY_KEV, INTENSITY_GENERATED, INTENSITY_GENERATED_DETECTED, INTENSITY_EMITTED, INTENSITY_EMITTED_DETECTED]
+            for data_type in data_types:
+                intensity = np.zeros(shape)
+                for region_id in range(self.numberRegions):
+                    for xray_lines_id, xray_line in enumerate(xray_lines):
+                        intensity[region_id, xray_lines_id] = self.getIntensity(data_type, region_id, atomic_number, xray_line)
+
+                dataset = hdf5_group.create_dataset(data_type, data=intensity)
+                dataset.dims.create_scale(region_ids, 'Region ID')
+                dataset.dims.create_scale(subshells, 'Subshell')
+                dataset.dims[0].attach_scale(region_ids)
+                dataset.dims[1].attach_scale(subshells)
 
     @property
     def fieldNames(self):

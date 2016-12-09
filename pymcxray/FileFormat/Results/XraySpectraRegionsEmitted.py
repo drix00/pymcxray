@@ -25,6 +25,12 @@ from pymcxray.FileFormat.Results.XraySpectraRegionEmitted import XraySpectraRegi
 
 # Globals and constants variables.
 
+HDF5_XRAY_SPECTRA_REGIONS_EMITTED = "XraySpectraRegionsEmitted"
+HDF5_ENERGIES_keV = "energies_keV"
+HDF5_TOTAL = "total_1_ekeVsr"
+HDF5_CHARACTERISTIC = "characteristic_1_ekeVsr"
+HDF5_BREMSSTRAHLUNG = "bremsstrahlung_1_ekeVsr"
+
 class XraySpectraRegionsEmitted(XraySpectraRegionEmitted):
 
     def read(self):
@@ -53,6 +59,14 @@ class XraySpectraRegionsEmitted(XraySpectraRegionEmitted):
         self.total_1_ekeVsr = list(total_1_ekeVsr)
         self.characteristic_1_ekeVsr = list(characteristic_1_ekeVsr)
         self.bremsstrahlung_1_ekeVsr = list(bremsstrahlung_1_ekeVsr)
+
+    def write_hdf5(self, hdf5_group):
+        hdf5_group = hdf5_group.require_group(HDF5_XRAY_SPECTRA_REGIONS_EMITTED)
+
+        hdf5_group.create_dataset(HDF5_ENERGIES_keV, data=self.energies_keV)
+        hdf5_group.create_dataset(HDF5_TOTAL, data=self.total_1_ekeVsr)
+        hdf5_group.create_dataset(HDF5_CHARACTERISTIC, data=self.characteristic_1_ekeVsr)
+        hdf5_group.create_dataset(HDF5_BREMSSTRAHLUNG, data=self.bremsstrahlung_1_ekeVsr)
 
 def run():
     pass

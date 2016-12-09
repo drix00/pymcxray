@@ -30,6 +30,12 @@ SPECTRUM_TOTAL = "Spectra Total"
 SPECTRUM_LINES = "Spectra Lines"
 SPECTRUM_BREMSSTRAHLUNG = "Spectra Bremsstrahlung"
 
+HDF5_XRAY_SPECTRA_SPECIMEN_EMITTED_DETECTED = "XraySpectraSpecimenEmittedDetected"
+HDF5_ENERGIES_keV = ENERGIES_keV
+HDF5_TOTAL = SPECTRUM_TOTAL
+HDF5_CHARACTERISTIC = SPECTRUM_LINES
+HDF5_BREMSSTRAHLUNG = SPECTRUM_BREMSSTRAHLUNG
+
 class XraySpectraSpecimenEmittedDetected(BaseResults.BaseResults):
     def __init__(self):
         super(XraySpectraSpecimenEmittedDetected, self).__init__()
@@ -54,6 +60,14 @@ class XraySpectraSpecimenEmittedDetected(BaseResults.BaseResults):
                 self.totals.append(float(row[SPECTRUM_TOTAL]))
                 self.characteristics.append(float(row[SPECTRUM_LINES]))
                 self.backgrounds.append(float(row[SPECTRUM_BREMSSTRAHLUNG]))
+
+    def write_hdf5(self, hdf5_group):
+        hdf5_group = hdf5_group.require_group(HDF5_XRAY_SPECTRA_SPECIMEN_EMITTED_DETECTED)
+
+        hdf5_group.create_dataset(HDF5_ENERGIES_keV, data=self.energies_keV)
+        hdf5_group.create_dataset(HDF5_TOTAL, data=self.totals)
+        hdf5_group.create_dataset(HDF5_CHARACTERISTIC, data=self.characteristics)
+        hdf5_group.create_dataset(HDF5_BREMSSTRAHLUNG, data=self.backgrounds)
 
     @property
     def fieldNames(self):
