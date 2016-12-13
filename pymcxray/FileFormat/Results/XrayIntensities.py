@@ -16,6 +16,7 @@ __license__ = ""
 # Standard library modules.
 import os.path
 import csv
+import logging
 
 # Third party modules.
 import numpy as np
@@ -24,6 +25,7 @@ import numpy as np
 
 # Project modules
 import pymcxray.FileFormat.Results.BaseResults as BaseResults
+from pymcxray.ElementProperties import getSymbol
 
 # Globals and constants variables.
 INDEX_REGION = "Index Region"
@@ -35,10 +37,12 @@ INTENSITY_GENERATED = "Intensity Generated (photons/e/sr)"
 INTENSITY_GENERATED_DETECTED = "Intensity Generated Detected (photons)"
 INTENSITY_EMITTED = "Intensity Emitted (photons/e/sr)"
 INTENSITY_EMITTED_DETECTED = "Intensity Emitted Detected (photons)"
+DETECTOR_EFFICIENCY = "Detector efficiency"
 
-HDF5_PHIRHOZ_GENERATED_CHARACTERISTIC_THIN_FILM = "PhirhozGeneratedCharacteristicThinFilm"
+HDF5_INTENSITY = "Intensity"
 HDF5_REGION_IDS = "Region IDs"
 HDF5_XRAY_LINES = "X-ray lines"
+HDF5_RESULT_TYPES = "Result types"
 
 class XrayIntensities(BaseResults.BaseResults):
     def __init__(self):
@@ -205,30 +209,71 @@ class XrayIntensities(BaseResults.BaseResults):
             return 0.0
 
     def write_hdf5(self, hdf5_group):
-        hdf5_group = hdf5_group.require_group(HDF5_PHIRHOZ_GENERATED_CHARACTERISTIC_THIN_FILM)
+        hdf5_group = hdf5_group.require_group(HDF5_INTENSITY)
 
         data = np.array(sorted(list(self.regions)))
         region_ids = hdf5_group.create_dataset(HDF5_REGION_IDS, dtype='i4', data=data)
-        xray_lines = np.array(sorted(self.xray_lines()), dtype='S4')
-        subshells = hdf5_group.create_dataset(HDF5_XRAY_LINES, dtype='S4', data=data)
+        data = np.array(self.get_xray_lines(), dtype='S4')
+        xray_lines = hdf5_group.create_dataset(HDF5_XRAY_LINES, dtype='S4', data=data)
+        data = np.array(self.get_result_types(), dtype='S60')
+        result_types = hdf5_group.create_dataset(HDF5_RESULT_TYPES, dtype='S60', data=data)
 
-        shape = (self.numberRegions, len(data))
+        logging.info("Regions %i", len(region_ids))
+        logging.info("X-ray lines %i", len(xray_lines))
+        logging.info("Result types %i", len(result_types))
 
+        shape = (len(region_ids), len(xray_lines), len(result_types))
+        logging.info(shape)
         for atomic_number in sorted(self.atomic_numbers):
-            hdf5_group_element = hdf5_group.require_group(atomic_number)
 
-            data_types = [LINE_ENERGY_KEV, INTENSITY_GENERATED, INTENSITY_GENERATED_DETECTED, INTENSITY_EMITTED, INTENSITY_EMITTED_DETECTED]
-            for data_type in data_types:
-                intensity = np.zeros(shape)
-                for region_id in range(self.numberRegions):
-                    for xray_lines_id, xray_line in enumerate(xray_lines):
-                        intensity[region_id, xray_lines_id] = self.getIntensity(data_type, region_id, atomic_number, xray_line)
+            result_data = np.zeros(shape)
 
-                dataset = hdf5_group.create_dataset(data_type, data=intensity)
-                dataset.dims.create_scale(region_ids, 'Region ID')
-                dataset.dims.create_scale(subshells, 'Subshell')
-                dataset.dims[0].attach_scale(region_ids)
-                dataset.dims[1].attach_scale(subshells)
+            for intensity in self._intensities:
+                if int(intensity[ATOMIC_NUMBER]) == atomic_number:
+                    index_region = int(intensity[INDEX_REGION])
+                    xray_line = intensity[LINE][5:].strip()
+                    index_line = self.get_xray_lines().index(xray_line)
+
+                    result_data[index_region, index_line, 0] = float(intensity[LINE_ENERGY_KEV])
+                    result_data[index_region, index_line, 1] = float(intensity[INTENSITY_GENERATED])
+                    result_data[index_region, index_line, 2] = float(intensity[INTENSITY_GENERATED_DETECTED])
+                    result_data[index_region, index_line, 3] = float(intensity[INTENSITY_EMITTED])
+                    result_data[index_region, index_line, 4] = float(intensity[INTENSITY_EMITTED_DETECTED])
+                    result_data[index_region, index_line, 5] = float(intensity[DETECTOR_EFFICIENCY])
+
+            symbol = getSymbol(atomic_number)
+            dataset = hdf5_group.create_dataset(symbol, data=result_data)
+            dataset.dims.create_scale(region_ids, 'Region ID')
+            dataset.dims.create_scale(xray_lines, 'X-ray line')
+            dataset.dims.create_scale(result_types, 'Result types')
+            dataset.dims[0].attach_scale(region_ids)
+            dataset.dims[1].attach_scale(xray_lines)
+            dataset.dims[2].attach_scale(result_types)
+
+    def get_xray_lines(self):
+        xray_lines = []
+        xray_lines.append("Ka1")
+        xray_lines.append("Ka2")
+        xray_lines.append("Kb1")
+        xray_lines.append("Kb2")
+        xray_lines.append("La")
+        xray_lines.append("Lb1")
+        xray_lines.append("Lb2")
+        xray_lines.append("Lg")
+        xray_lines.append("Ma")
+
+        return xray_lines
+
+    def get_result_types(self):
+        result_types = []
+        result_types.append(LINE_ENERGY_KEV)
+        result_types.append(INTENSITY_GENERATED)
+        result_types.append(INTENSITY_GENERATED_DETECTED)
+        result_types.append(INTENSITY_EMITTED)
+        result_types.append(INTENSITY_EMITTED_DETECTED)
+        result_types.append(DETECTOR_EFFICIENCY)
+
+        return result_types
 
     @property
     def fieldNames(self):
@@ -242,6 +287,7 @@ class XrayIntensities(BaseResults.BaseResults):
         fieldNames.append(INTENSITY_GENERATED_DETECTED)
         fieldNames.append(INTENSITY_EMITTED)
         fieldNames.append(INTENSITY_EMITTED_DETECTED)
+        fieldNames.append(DETECTOR_EFFICIENCY)
 
         return fieldNames
 
