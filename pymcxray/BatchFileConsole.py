@@ -25,14 +25,17 @@ import random
 # Local modules.
 
 # Project modules
+from pymcxray.mcxray import ANALYZE_TYPE_READ_RESULTS
 
 # Globals and constants variables.
+READ_RESULT_AFTER_N_SIMULATIONS = 10
 
 class BatchFileConsole(object):
-    def __init__(self, name, programName, numberFiles=1):
+    def __init__(self, name, programName, numberFiles=1, script_file_path=None):
         self._name = name
         self._programName = programName
         self._numberFiles = numberFiles
+        self.script_file_path = script_file_path
 
         self._extension = ".bat"
         self._simulationFilenames = []
@@ -57,16 +60,22 @@ class BatchFileConsole(object):
                 if indexFilenames < number_simulations:
                     filename = self._name + "_%i" % (indexFile+1) + self._extension
                     filepath = os.path.join(path, filename)
-    
+
                     logging.info("Write batch file: %s", filepath)
                     batchFile = open(filepath, 'w')
-    
-                    for simulationFilename in self._simulationFilenames[indexFilenames:indexFilenames+indexStep]:
+
+                    for index_local_batch, simulationFilename in enumerate(self._simulationFilenames[indexFilenames:indexFilenames+indexStep]):
                         line = "%s %s\n" % (self._programName, simulationFilename)
                         batchFile.write(line)
-    
+                        if self.script_file_path is not None and index_local_batch%10 == 0:
+                            line_read_data = "py -3 %s %s\n" % (self.script_file_path, ANALYZE_TYPE_READ_RESULTS)
+                            batchFile.write(line_read_data)
+
                     indexFilenames += indexStep
-    
+
+                    if self.script_file_path is not None:
+                        line_read_data = "py -3 %s %s\n" % (self.script_file_path, ANALYZE_TYPE_READ_RESULTS)
+                        batchFile.write(line_read_data)
                     batchFile.close()
         else:
             filename = self._name + self._extension
@@ -75,10 +84,16 @@ class BatchFileConsole(object):
             logging.info("Write batch file: %s", filepath)
             batchFile = open(filepath, 'w')
 
-            for simulationFilename in self._simulationFilenames:
+            for index_local_batch, simulationFilename in enumerate(self._simulationFilenames):
                 line = "%s %s\n" % (self._programName, simulationFilename)
                 batchFile.write(line)
+                if self.script_file_path is not None and index_local_batch != 0 and index_local_batch%READ_RESULT_AFTER_N_SIMULATIONS == 0:
+                    line_read_data = "py -3 %s %s\n" % (self.script_file_path, ANALYZE_TYPE_READ_RESULTS)
+                    batchFile.write(line_read_data)
 
+            if self.script_file_path is not None:
+                line_read_data = "py -3 %s %s\n" % (self.script_file_path, ANALYZE_TYPE_READ_RESULTS)
+                batchFile.write(line_read_data)
             batchFile.close()
 
     def removePreviousFiles(self, path):
