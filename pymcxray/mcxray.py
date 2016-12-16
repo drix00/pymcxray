@@ -57,6 +57,8 @@ def _getOptions():
                         default=ANALYZE_TYPE_GENERATE_INPUT_FILE,
                         help='Type of analyze to do')
 
+    parser.add_argument('args', nargs=argparse.REMAINDER)
+
     args = parser.parse_args()
     logging.debug(args.type)
 

@@ -67,14 +67,14 @@ class BatchFileConsole(object):
                     for index_local_batch, simulationFilename in enumerate(self._simulationFilenames[indexFilenames:indexFilenames+indexStep]):
                         line = "%s %s\n" % (self._programName, simulationFilename)
                         batchFile.write(line)
-                        if self.script_file_path is not None and index_local_batch%10 == 0:
-                            line_read_data = "py -3 %s %s\n" % (self.script_file_path, ANALYZE_TYPE_READ_RESULTS)
+                        if indexFile == 0 and self.script_file_path is not None and index_local_batch%10 == 0:
+                            line_read_data = "py -3 \"%s\" %s\n" % (self.script_file_path, ANALYZE_TYPE_READ_RESULTS)
                             batchFile.write(line_read_data)
 
                     indexFilenames += indexStep
 
-                    if self.script_file_path is not None:
-                        line_read_data = "py -3 %s %s\n" % (self.script_file_path, ANALYZE_TYPE_READ_RESULTS)
+                    if indexFile == 0 and self.script_file_path is not None:
+                        line_read_data = "py -3 \"%s\" %s\n" % (self.script_file_path, ANALYZE_TYPE_READ_RESULTS)
                         batchFile.write(line_read_data)
                     batchFile.close()
         else:
@@ -87,12 +87,12 @@ class BatchFileConsole(object):
             for index_local_batch, simulationFilename in enumerate(self._simulationFilenames):
                 line = "%s %s\n" % (self._programName, simulationFilename)
                 batchFile.write(line)
-                if self.script_file_path is not None and index_local_batch != 0 and index_local_batch%READ_RESULT_AFTER_N_SIMULATIONS == 0:
-                    line_read_data = "py -3 %s %s\n" % (self.script_file_path, ANALYZE_TYPE_READ_RESULTS)
+                if indexFile == 0 and self.script_file_path is not None and index_local_batch != 0 and index_local_batch%READ_RESULT_AFTER_N_SIMULATIONS == 0:
+                    line_read_data = "py -3 \"%s\" %s\n" % (self.script_file_path, ANALYZE_TYPE_READ_RESULTS)
                     batchFile.write(line_read_data)
 
-            if self.script_file_path is not None:
-                line_read_data = "py -3 %s %s\n" % (self.script_file_path, ANALYZE_TYPE_READ_RESULTS)
+            if indexFile == 0 and self.script_file_path is not None:
+                line_read_data = "py -3 \"%s\" %s\n" % (self.script_file_path, ANALYZE_TYPE_READ_RESULTS)
                 batchFile.write(line_read_data)
             batchFile.close()
 
