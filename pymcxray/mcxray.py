@@ -22,10 +22,12 @@ import logging
 import zipfile
 import stat
 import math
+import datetime
 
 # Third party modules.
 import numpy as np
 import h5py
+from apscheduler.schedulers.blocking import BlockingScheduler
 
 # Local modules.
 from pymcxray import getCurrentModulePath, createPath, getResultsMcGillPath, getMCXRayProgramPath, getMCXRayProgramName, getMCXRayArchivePath, getMCXRayArchiveName
@@ -40,6 +42,7 @@ ANALYZE_TYPE_GENERATE_INPUT_FILE = "generate"
 ANALYZE_TYPE_CHECK_PROGRESS = "check"
 ANALYZE_TYPE_READ_RESULTS = "read"
 ANALYZE_TYPE_ANALYZE_RESULTS = "analyze"
+ANALYZE_TYPE_ANALYZE_SCHEDULED_READ = "scheduled_read"
 
 SAVE_EVERY_SIMULATIONS = 10
 
@@ -51,6 +54,7 @@ def _getOptions():
     analyzeTypes.append(ANALYZE_TYPE_CHECK_PROGRESS)
     analyzeTypes.append(ANALYZE_TYPE_READ_RESULTS)
     analyzeTypes.append(ANALYZE_TYPE_ANALYZE_RESULTS)
+    analyzeTypes.append(ANALYZE_TYPE_ANALYZE_SCHEDULED_READ)
 
     parser = argparse.ArgumentParser(description='Analyze MCXRay x-ray background problem.')
     parser.add_argument('type', metavar='AnalyzeType', type=str, choices=analyzeTypes, nargs='?',
@@ -84,6 +88,7 @@ class _Simulations(object):
         self.createBackup = True
         self.use_hdf5 = False
         self.delete_result_files = False
+        self.read_interval_h = 1
 
         if simulationPath is not None:
             self._simulationPath = os.path.normpath(simulationPath)
@@ -144,37 +149,22 @@ class _Simulations(object):
 
         return inputPath
 
-    def get_hdf5_group(self):
+    def get_hdf5_file_path(self):
         result_path = self.getResultsPath()
         name = self.getAnalysisName()
         file_path = os.path.join(result_path, name + ".hdf5")
         logging.debug(file_path)
+        return file_path
 
-        hdf5_file = h5py.File(file_path, 'a')
-        logging.debug(hdf5_file.filename)
-        logging.debug(hdf5_file.mode)
-        logging.debug(hdf5_file.driver)
-        logging.debug(hdf5_file.libver)
-        logging.debug(hdf5_file.userblock_size)
-
-        hdf5_group = hdf5_file.require_group(HDF5_SIMULATIONS)
-        return hdf5_group
-
-    def get_results_hdf5(self):
-        result_path = self.getResultsPath()
-        name = self.getAnalysisName()
-        file_path = os.path.join(result_path, name + ".hdf5")
-        logging.debug(file_path)
-
-        hdf5_file = h5py.File(file_path, 'r')
-        logging.debug(hdf5_file.filename)
-        logging.debug(hdf5_file.mode)
-        logging.debug(hdf5_file.driver)
-        logging.debug(hdf5_file.libver)
-        logging.debug(hdf5_file.userblock_size)
-
-        hdf5_group = hdf5_file.require_group(HDF5_SIMULATIONS)
-        return hdf5_group
+    def get_hdf5_group(self, hdf5_file):
+        try:
+            hdf5_group = hdf5_file[HDF5_SIMULATIONS]
+            return hdf5_group
+        except KeyError as message:
+            logging.error(message)
+            message = "Filename: %s" % (hdf5_file.filename)
+            logging.error(message)
+            return None
 
     def _createAllFolders(self, basePath):
         if basePath is not None:
@@ -277,15 +267,25 @@ class _Simulations(object):
 
         self._copyMCXRayProgram()
 
+        if self.use_hdf5:
+            file_path = self.get_hdf5_file_path()
+            with h5py.File(file_path, 'r', driver='core') as hdf5_file:
+                hdf5_group = self.get_hdf5_group(hdf5_file)
+                self._generate_input_files(batchFile, hdf5_group)
+        else:
+            hdf5_group = None
+            self._generate_input_files(batchFile, hdf5_group)
+
+    def _generate_input_files(self, batchFile, hdf5_group):
         numberSimulations = 0
         numberSimulationsTodo = 0
         numberSimulationsDone = 0
         simulationTodoNames = []
 
         for simulation in self.getAllSimulationParameters():
-            simulation.createSimulationFiles(self.getInputPath(), self.getSimulationsPath(), self.get_hdf5_group())
+            simulation.createSimulationFiles(self.getInputPath(), self.getSimulationsPath(), hdf5_group)
 
-            if simulation.isDone(self.getSimulationsPath(), self.get_hdf5_group()):
+            if simulation.isDone(self.getSimulationsPath(), hdf5_group):
                 numberSimulationsDone += 1
             else:
                 numberSimulationsTodo += 1
@@ -304,15 +304,21 @@ class _Simulations(object):
         logging.info("Number of todo: %4i/%i (%5.2f%%)", numberSimulationsTodo, numberSimulations, percentage)
 
     def checkProgress(self):
+        if self.use_hdf5:
+            file_path = self.get_hdf5_file_path()
+            with h5py.File(file_path, 'r', driver='core') as hdf5_file:
+                hdf5_group = self.get_hdf5_group(hdf5_file)
+                self._check_progress(hdf5_group)
+        else:
+            hdf5_group = None
+            self._check_progress(hdf5_group)
+
+    def _check_progress(self, hdf5_group):
         numberSimulations = 0
         numberSimulationsTodo = 0
         numberSimulationsDone = 0
         simulationTodoNames = []
 
-        if self.use_hdf5:
-            hdf5_group = self.get_hdf5_group()
-        else:
-            hdf5_group = None
         inputPath = os.path.join(self.getSimulationsPath(), "input")
         inputPath = createPath(inputPath)
 
@@ -529,52 +535,82 @@ class _Simulations(object):
     def _read_all_results_hdf5(self):
         logging.info("_read_all_results_hdf5")
 
-        hdf5_root = self.get_hdf5_group()
-        _numberError = 0
-        simulations = self.getAllSimulationParameters()
-        total = len(simulations)
-        for index, simulation in enumerate(simulations):
-            if simulation.isDone(self.getSimulationsPath(), None):
-                try:
-                    filepath = simulation.getProgramVersionFilepath(self.getSimulationsPath())
-                    logging.info("Processing file %i/%i", (index+1), total)
+        file_path = self.get_hdf5_file_path()
+        if self.createBackup:
+            self.backup_hdf5_File(file_path)
 
-                    if os.path.isfile(filepath):
-                        logging.debug(filepath)
+        with h5py.File(file_path, 'a', driver='core', backing_store=True) as hdf5_file:
+            hdf5_root = self.get_hdf5_group(hdf5_file)
+            _numberError = 0
+            simulations = self.getAllSimulationParameters()
+            total = len(simulations)
+            for index, simulation in enumerate(simulations):
+                if simulation.isDone(self.getSimulationsPath(), None):
+                    try:
+                        filepath = simulation.getProgramVersionFilepath(self.getSimulationsPath())
+                        logging.info("Processing file %i/%i", (index+1), total)
 
-                        name = simulation.name
-                        if name in hdf5_root:
-                            del hdf5_root[name]
-                        hdf5_group = hdf5_root.require_group(name)
+                        if os.path.isfile(filepath):
+                            logging.debug(filepath)
 
-                        parameters = simulation.getParameters()
-                        for parameter_name in parameters:
-                            hdf5_group.attrs[parameter_name] = parameters[parameter_name]
+                            name = simulation.name
+                            if name in hdf5_root:
+                                del hdf5_root[name]
+                            hdf5_group = hdf5_root.require_group(name)
 
-                        self.read_one_results_hdf5(simulation, hdf5_group)
+                            parameters = simulation.getParameters()
+                            for parameter_name in parameters:
+                                hdf5_group.attrs[parameter_name] = parameters[parameter_name]
 
-                        hdf5_root.file.flush()
+                            self.read_one_results_hdf5(simulation, hdf5_group)
 
-                        if self.delete_result_files:
-                            self.delete_simulation_result_files(simulation)
-                    else:
-                        logging.warning("File not found: %s", filepath)
-                except UnboundLocalError as message:
-                    logging.error("UnboundLocalError in %s for %s", "_readAllResultsSerialization", filepath)
-                    logging.error(message)
-                except ValueError as message:
-                    logging.error("ValueError in %s for %s", "_readAllResultsSerialization", filepath)
-                    logging.error(message)
-                except AssertionError as message:
-                    logging.error("AssertionError in %s for %s", "_readAllResultsSerialization", filepath)
-                    logging.error(message)
-                except IOError as message:
-                    logging.warning(message)
-                    logging.warning(simulation.name)
-                    _numberError += 1
+                            hdf5_root.file.flush()
 
-        if _numberError > 0:
-            logging.info("Number of IO error: %i", _numberError)
+                            if self.delete_result_files:
+                                self.delete_simulation_result_files(simulation)
+                        else:
+                            logging.warning("File not found: %s", filepath)
+                    except UnboundLocalError as message:
+                        logging.error("UnboundLocalError in %s for %s", "_read_all_results_hdf5", filepath)
+                        logging.error(message)
+                    except ValueError as message:
+                        logging.error("ValueError in %s for %s", "_read_all_results_hdf5", filepath)
+                        logging.error(message)
+                    except AssertionError as message:
+                        logging.error("AssertionError in %s for %s", "_read_all_results_hdf5", filepath)
+                        logging.error(message)
+                    except IOError as message:
+                        logging.warning(message)
+                        logging.warning(simulation.name)
+                        _numberError += 1
+
+            if _numberError > 0:
+                logging.info("Number of IO error: %i", _numberError)
+
+    def backup_hdf5_File(self, file_path):
+        if os.path.isfile(file_path):
+            suffix = self.generate_time_stamp()
+            index_extension = file_path.rfind('.hdf5')
+            base_name = file_path[:index_extension]
+            destination_file_path = base_name + "_" + suffix + ".hdf5"
+
+            shutil.copy2(file_path, destination_file_path)
+            logging.info("Backup created: %s", destination_file_path)
+
+    def generate_time_stamp(self):
+        dateTime = datetime.datetime.now()
+
+        year = dateTime.year
+        month = dateTime.month
+        day = dateTime.day
+        hour = dateTime.hour
+        minute = dateTime.minute
+        second = dateTime.second
+
+        arguments = (year, month, day, hour, minute, second)
+        name = "%04i-%02i-%02i_%02ih%02im%02is" % (arguments)
+
+        return name
 
     def delete_simulation_result_files(self, simulation):
         simulation_name = simulation.name.replace('.', 'd')
@@ -613,12 +649,9 @@ class _Simulations(object):
     def generateResultsKey(self, simulation):
         variedParameterLabels = self.getVariedParameterLabels()
 
-        simulation.createSimulationFiles(self.getInputPath(), self.getSimulationsPath(), self.get_hdf5_group())
-
         key = self._createKey(variedParameterLabels, simulation)
 
         return tuple(key)
-
 
     def run(self, batchFile):
         self._initData()
@@ -637,6 +670,15 @@ class _Simulations(object):
                 self.analyze_results_hdf5()
             else:
                 self.analyzeResultsFiles()
+        if options == ANALYZE_TYPE_ANALYZE_SCHEDULED_READ:
+            scheduler = BlockingScheduler()
+            scheduler.add_job(self.readResultsFiles, 'interval', hours=self.read_interval_h, coalesce=True)
+            print('Press Ctrl+{0} to exit'.format('Break' if os.name == 'nt' else 'C'))
+
+            try:
+                scheduler.start()
+            except (KeyboardInterrupt, SystemExit):
+                pass
 
     def _computeMCXrayFwhm_keV(self, detectorNoise_eV, xrayEnergy_keV):
         xrayEnergy_eV = xrayEnergy_keV*1.0e3

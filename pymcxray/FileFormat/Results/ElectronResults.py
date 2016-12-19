@@ -57,13 +57,13 @@ class ElectronResults(BaseResults.BaseResults):
                     for fieldName in self.fieldNames:
                         if fieldName in items[0]:
                             self._values[fieldName] = items[-1]
-    
+
     def write_hdf5(self, hdf5_group):
         hdf5_group = hdf5_group.require_group(HDF5_ELECTRON_RESULTS)
-        
+
         for field_name in self.fieldNames:
-            hdf5_group.attrs[field_name] = self._values[field_name]
-            
+            hdf5_group.attrs[field_name] = self._values[field_name].strip()
+
     @property
     def fieldNames(self):
         fieldNames = []
