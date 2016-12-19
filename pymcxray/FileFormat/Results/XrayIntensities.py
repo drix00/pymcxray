@@ -239,7 +239,10 @@ class XrayIntensities(BaseResults.BaseResults):
                     result_data[index_region, index_line, 2] = float(intensity[INTENSITY_GENERATED_DETECTED])
                     result_data[index_region, index_line, 3] = float(intensity[INTENSITY_EMITTED])
                     result_data[index_region, index_line, 4] = float(intensity[INTENSITY_EMITTED_DETECTED])
-                    result_data[index_region, index_line, 5] = float(intensity[DETECTOR_EFFICIENCY])
+                    try:
+                        result_data[index_region, index_line, 5] = float(intensity[DETECTOR_EFFICIENCY])
+                    except ValueError:
+                        result_data[index_region, index_line, 5] = 0.0
 
             symbol = getSymbol(atomic_number)
             dataset = hdf5_group.create_dataset(symbol, data=result_data)

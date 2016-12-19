@@ -769,7 +769,7 @@ class Simulation(object):
         filepath = os.path.join(self._path, self._simulationInputs.resultParametersFilename)
         self._resultParameters.write(filepath)
 
-    def isDone(self, simulationPath, hdf5_group):
+    def isDone(self, simulationPath, hdf5_group=None):
         _isDone = True
         for suffix in self.getFilenameSuffixes():
             filepath = os.path.join(simulationPath, self._simulationParameters.baseFilename + suffix)
