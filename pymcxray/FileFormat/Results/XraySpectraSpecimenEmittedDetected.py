@@ -18,6 +18,7 @@ import os.path
 import csv
 
 # Third party modules.
+import numpy as np
 
 # Local modules.
 
@@ -50,7 +51,11 @@ class XraySpectraSpecimenEmittedDetected(BaseResults.BaseResults):
         filename = self.basename + suffix
         filepath = os.path.join(self.path, filename)
 
-        with open(filepath, 'r') as csvFile:
+        self._read(filepath)
+        #self._read_fast(filepath)
+
+    def _read(self, file_path):
+        with open(file_path, 'r') as csvFile:
             reader = csv.DictReader(csvFile, self.fieldNames)
             # Skip header row
             next(reader)
@@ -60,6 +65,26 @@ class XraySpectraSpecimenEmittedDetected(BaseResults.BaseResults):
                 self.totals.append(float(row[SPECTRUM_TOTAL]))
                 self.characteristics.append(float(row[SPECTRUM_LINES]))
                 self.backgrounds.append(float(row[SPECTRUM_BREMSSTRAHLUNG]))
+
+    def _read(self, file_path):
+        with open(file_path, 'r') as csvFile:
+            reader = csv.reader(csvFile, self.fieldNames)
+            # Skip header row
+            next(reader)
+
+            for items in reader:
+                self.energies_keV.append(float(items[0]))
+                self.totals.append(float(items[1]))
+                self.characteristics.append(float(items[2]))
+                self.backgrounds.append(float(items[3]))
+
+    def _read_fast(self, file_path):
+        with open(file_path, 'r') as data_file:
+            data = np.loadtxt(data_file, dtype=float, delimiter =',', skiprows=1)
+            self.energies_keV = data[:,0].tolist()
+            self.totals = data[:,1].tolist()
+            self.characteristics = data[:,2].tolist()
+            self.backgrounds = data[:,3].tolist()
 
     def write_hdf5(self, hdf5_group):
         hdf5_group = hdf5_group.require_group(HDF5_XRAY_SPECTRA_SPECIMEN_EMITTED_DETECTED)
