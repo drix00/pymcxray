@@ -540,6 +540,7 @@ class _Simulations(object):
         number_simulations_read = 0
 
         file_path = self.get_hdf5_file_path()
+        backup_file_path = ""
         if os.path.isfile(file_path):
             backup_file_path = self.backup_hdf5_File(file_path)
 
