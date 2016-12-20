@@ -776,6 +776,7 @@ class Simulation(object):
             if not os.path.isfile(filepath):
                 _isDone = False
                 logging.debug("Missing file: %s", self._simulationParameters.baseFilename + suffix)
+                break
 
         if hdf5_group is not None and not _isDone:
             group_name = self.name

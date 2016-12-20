@@ -129,6 +129,8 @@ class _Simulations(object):
 
             if not os.path.isdir(path):
                 os.makedirs(path)
+
+            self._simulationPath = path
             return path
         except NotImplementedError:
             return None
