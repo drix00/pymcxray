@@ -49,6 +49,9 @@ class XraySpectraRegionEmitted(BaseResults.BaseResults):
         if not os.path.isfile(filepath):
             raise ValueError
 
+        self._read_fast(filepath)
+
+    def _read(self, filepath):
         with open(filepath, 'r') as csvFile:
             reader = csv.DictReader(csvFile)
 
@@ -65,6 +68,17 @@ class XraySpectraRegionEmitted(BaseResults.BaseResults):
                 self.total_1_ekeVsr.append(float(row[FIELD_TOTAL]))
                 self.characteristic_1_ekeVsr.append(float(row[FIELD_CHARACTERISTIC]))
                 self.bremsstrahlung_1_ekeVsr.append(float(row[FIELD_BREMSSTRAHLUNG]))
+
+    def _read_fast(self, filepath):
+        with open(filepath, 'r') as csvFile:
+            reader = csv.reader(csvFile)
+            next(reader)
+
+            for items in reader:
+                self.energies_keV.append(float(items[0]))
+                self.total_1_ekeVsr.append(float(items[1]))
+                self.characteristic_1_ekeVsr.append(float(items[2]))
+                self.bremsstrahlung_1_ekeVsr.append(float(items[3]))
 
     def _indice(self, energy_keV):
         energy_keV = float(energy_keV)

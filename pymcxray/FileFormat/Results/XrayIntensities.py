@@ -218,12 +218,12 @@ class XrayIntensities(BaseResults.BaseResults):
         data = np.array(self.get_result_types(), dtype='S60')
         result_types = hdf5_group.create_dataset(HDF5_RESULT_TYPES, dtype='S60', data=data)
 
-        logging.info("Regions %i", len(region_ids))
-        logging.info("X-ray lines %i", len(xray_lines))
-        logging.info("Result types %i", len(result_types))
+        logging.debug("Regions %i", len(region_ids))
+        logging.debug("X-ray lines %i", len(xray_lines))
+        logging.debug("Result types %i", len(result_types))
 
         shape = (len(region_ids), len(xray_lines), len(result_types))
-        logging.info(shape)
+        logging.debug(shape)
         for atomic_number in sorted(self.atomic_numbers):
 
             result_data = np.zeros(shape)

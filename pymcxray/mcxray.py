@@ -23,6 +23,7 @@ import zipfile
 import stat
 import math
 import datetime
+import filecmp
 
 # Third party modules.
 import numpy as np
@@ -89,6 +90,7 @@ class _Simulations(object):
         self.use_hdf5 = False
         self.delete_result_files = False
         self.read_interval_h = 1
+        self.read_interval_m = None
 
         if simulationPath is not None:
             self._simulationPath = os.path.normpath(simulationPath)
@@ -267,8 +269,8 @@ class _Simulations(object):
 
         self._copyMCXRayProgram()
 
-        if self.use_hdf5:
-            file_path = self.get_hdf5_file_path()
+        file_path = self.get_hdf5_file_path()
+        if self.use_hdf5 and os.path.isfile(file_path):
             with h5py.File(file_path, 'r', driver='core') as hdf5_file:
                 hdf5_group = self.get_hdf5_group(hdf5_file)
                 self._generate_input_files(batchFile, hdf5_group)
@@ -304,8 +306,8 @@ class _Simulations(object):
         logging.info("Number of todo: %4i/%i (%5.2f%%)", numberSimulationsTodo, numberSimulations, percentage)
 
     def checkProgress(self):
-        if self.use_hdf5:
-            file_path = self.get_hdf5_file_path()
+        file_path = self.get_hdf5_file_path()
+        if self.use_hdf5 and os.path.isfile(file_path):
             with h5py.File(file_path, 'r', driver='core') as hdf5_file:
                 hdf5_group = self.get_hdf5_group(hdf5_file)
                 self._check_progress(hdf5_group)
@@ -534,18 +536,21 @@ class _Simulations(object):
 
     def _read_all_results_hdf5(self):
         logging.info("_read_all_results_hdf5")
+        starting_time_all = time.perf_counter()
+        number_simulations_read = 0
 
         file_path = self.get_hdf5_file_path()
-        if self.createBackup:
-            self.backup_hdf5_File(file_path)
+        if os.path.isfile(file_path):
+            backup_file_path = self.backup_hdf5_File(file_path)
 
         with h5py.File(file_path, 'a', driver='core', backing_store=True) as hdf5_file:
-            hdf5_root = self.get_hdf5_group(hdf5_file)
+            hdf5_root = hdf5_file.require_group(HDF5_SIMULATIONS)
             _numberError = 0
             simulations = self.getAllSimulationParameters()
             total = len(simulations)
             for index, simulation in enumerate(simulations):
                 if simulation.isDone(self.getSimulationsPath(), None):
+                    starting_time = time.perf_counter()
                     try:
                         filepath = simulation.getProgramVersionFilepath(self.getSimulationsPath())
                         logging.info("Processing file %i/%i", (index+1), total)
@@ -564,7 +569,8 @@ class _Simulations(object):
 
                             self.read_one_results_hdf5(simulation, hdf5_group)
 
-                            hdf5_root.file.flush()
+                            # if number_simulations_read%50 == 0:
+                            #     hdf5_root.file.flush()
 
                             if self.delete_result_files:
                                 self.delete_simulation_result_files(simulation)
@@ -584,18 +590,35 @@ class _Simulations(object):
                         logging.warning(simulation.name)
                         _numberError += 1
 
+                    elapse_time = time.perf_counter() - starting_time
+                    logging.info("Elapse time for one simulation: %.1f s", elapse_time)
+                    number_simulations_read += 1
+
             if _numberError > 0:
                 logging.info("Number of IO error: %i", _numberError)
 
+            elapse_time_all = time.perf_counter() - starting_time_all
+            logging.info("Elapse time for all simulations (%i): %.1f s", number_simulations_read, elapse_time_all)
+
+        if not self.createBackup and os.path.isfile(backup_file_path):
+            file_path = self.get_hdf5_file_path()
+            if self.use_hdf5 and os.path.isfile(file_path):
+                with h5py.File(file_path, 'r', driver='core') as hdf5_file:
+                    logging.info("Remove file: %s", backup_file_path)
+                    os.remove(backup_file_path)
+
     def backup_hdf5_File(self, file_path):
+        backup_file_path = None
         if os.path.isfile(file_path):
             suffix = self.generate_time_stamp()
             index_extension = file_path.rfind('.hdf5')
             base_name = file_path[:index_extension]
-            destination_file_path = base_name + "_" + suffix + ".hdf5"
+            backup_file_path = base_name + "_" + suffix + ".hdf5"
 
-            shutil.copy2(file_path, destination_file_path)
-            logging.info("Backup created: %s", destination_file_path)
+            shutil.copy2(file_path, backup_file_path)
+            logging.info("Backup created: %s", backup_file_path)
+
+        return backup_file_path
 
     def generate_time_stamp(self):
         dateTime = datetime.datetime.now()
@@ -671,8 +694,12 @@ class _Simulations(object):
             else:
                 self.analyzeResultsFiles()
         if options == ANALYZE_TYPE_ANALYZE_SCHEDULED_READ:
+            self.readResultsFiles()
             scheduler = BlockingScheduler()
-            scheduler.add_job(self.readResultsFiles, 'interval', hours=self.read_interval_h, coalesce=True)
+            if self.read_interval_h is not None and self.read_interval_m is None:
+                scheduler.add_job(self.readResultsFiles, 'interval', hours=self.read_interval_h, coalesce=True)
+            else:
+                scheduler.add_job(self.readResultsFiles, 'interval', minutes=self.read_interval_m, coalesce=True)
             print('Press Ctrl+{0} to exit'.format('Break' if os.name == 'nt' else 'C'))
 
             try:
