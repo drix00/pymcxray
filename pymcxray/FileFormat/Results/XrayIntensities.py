@@ -222,7 +222,7 @@ class XrayIntensities(BaseResults.BaseResults):
         logging.debug("X-ray lines %i", len(xray_lines))
         logging.debug("Result types %i", len(result_types))
 
-        shape = (len(region_ids), len(xray_lines), len(result_types))
+        shape = (max(region_ids)+1, len(xray_lines), len(result_types))
         logging.debug(shape)
         for atomic_number in sorted(self.atomic_numbers):
 
