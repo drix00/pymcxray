@@ -114,6 +114,40 @@ def createAlloyThinFilm(elements, filmThickness_nm):
 
     return specimen
 
+def createAlloyThinFilm2(elements, filmThickness_nm):
+    specimen = Specimen.Specimen()
+
+    specimen.numberRegions = 2
+
+    # Region 0
+    region = Region.Region()
+    region.numberElements = 0
+    region.regionType = RegionType.REGION_TYPE_BOX
+    parameters = [-10000000000.0, 10000000000.0, -10000000000.0, 10000000000.0, 0.0, 20000000000.0]
+    region.regionDimensions = RegionDimensions.RegionDimensionsBox(parameters)
+    specimen.regions.append(region)
+
+    # Region 1
+    region = Region.Region()
+    region.numberElements = len(elements)
+    name = ""
+
+    for atomicNumber, weightFraction in elements:
+        name += "%s%0.6f" % (AtomData.getAtomSymbol(atomicNumber), weightFraction)
+        element = Element.Element(atomicNumber, massFraction=weightFraction)
+        region.elements.append(element)
+
+    filmThickness_A = filmThickness_nm*10.0
+    name += "T%iA" % (filmThickness_A)
+
+    specimen.name = name
+    region.regionType = RegionType.REGION_TYPE_BOX
+    parameters = [-10000000000.0, 10000000000.0, -10000000000.0, 10000000000.0, 0.0, filmThickness_A]
+    region.regionDimensions = RegionDimensions.RegionDimensionsBox(parameters)
+    specimen.regions.append(region)
+
+    return specimen
+
 def createFilmOverSubstrate(atomicNumberFilm, atomicNumberSubstrate,
                             filmThickness_nm=10.0):
     specimen = Specimen.Specimen()
