@@ -196,7 +196,8 @@ class ElectronTrajectoriesResults(object):
 
         return positions_nm
 
-    def drawXZ(self, title="", corrected=False, theta_deg=0.0, colorType=COLOR_TRAJECTORY_TYPE, trajectoryIndexes=None):
+    def drawXZ(self, title="", corrected=False, theta_deg=0.0, colorType=COLOR_TRAJECTORY_TYPE, trajectoryIndexes=None,
+               x_limit=None, y_limit=None):
         theta_rad = math.radians(theta_deg)
         sinTheta = math.sin(theta_rad)
         cosTheta = math.cos(theta_rad)
@@ -259,13 +260,17 @@ class ElectronTrajectoriesResults(object):
 
         plt.xlabel('X (nm)')
         plt.ylabel('Z (nm)')
+        if x_limit is not None:
+            plt.xlim(x_limit)
+        if y_limit is not None:
+            plt.ylim(y_limit)
         plt.grid(True)
         plt.gca().set_aspect('equal', 'datalim')
         plt.gca().invert_yaxis()
 
         print(sorted(indexUniqueRegionsAllTrajectories))
 
-    def drawXY(self, title="", corrected=False):
+    def drawXY(self, title="", corrected=False, x_limit=None, y_limit=None):
         plt.figure()
         plt.title(title)
 
@@ -286,10 +291,14 @@ class ElectronTrajectoriesResults(object):
 
         plt.xlabel('X (nm)')
         plt.ylabel('Y (nm)')
+        if x_limit is not None:
+            plt.xlim(x_limit)
+        if y_limit is not None:
+            plt.ylim(y_limit)
         plt.gca().set_aspect('equal', 'datalim')
         plt.grid(True)
 
-    def drawYZ(self, title="", corrected=False):
+    def drawYZ(self, title="", corrected=False, x_limit=None, y_limit=None):
         plt.figure()
         plt.title(title)
 
@@ -310,6 +319,11 @@ class ElectronTrajectoriesResults(object):
 
         plt.xlabel('Y (nm)')
         plt.ylabel('Z (nm)')
+        if x_limit is not None:
+            plt.xlim(x_limit)
+        if y_limit is not None:
+            plt.ylim(y_limit)
+
         plt.grid(True)
         plt.gca().set_aspect('equal', 'datalim')
         plt.gca().invert_yaxis()
@@ -328,7 +342,10 @@ class ElectronTrajectoriesResults(object):
 
     def _getColorRegion(self, indexRegion):
         colors = ["blue", "green", "red", "black", "magenta", "yellow", "cyan"]
-        color = colors[indexRegion]
+        if indexRegion < len(colors):
+            color = colors[indexRegion]
+        else:
+            color = colors[indexRegion-len(colors)]
         return color
 
 def run():
