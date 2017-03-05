@@ -124,7 +124,7 @@ class TestXraySpectraRegionsEmitted(unittest.TestCase):
         self.assertEqual(0, spectra._indice(0.0025))
         self.assertEqual(0, spectra._indice(0.0026))
         self.assertEqual(0, spectra._indice(0.0049))
-        self.assertEqual(1, spectra._indice(0.0050))
+        self.assertEqual(0, spectra._indice(0.0050))
         self.assertEqual(1, spectra._indice(0.0051))
 
         self.assertEqual(56, spectra._indice(0.282))
@@ -132,7 +132,8 @@ class TestXraySpectraRegionsEmitted(unittest.TestCase):
         self.assertEqual(596, spectra._indice(2.984))
 
         self.assertEqual(5999, spectra._indice(29.999))
-        self.assertRaises(IndexError, spectra._indice, 30.0)
+        self.assertEqual(5999, spectra._indice(30.0))
+        #self.assertRaises(IndexError, spectra._indice, 30.0)
         self.assertRaises(IndexError, spectra._indice, 31.0)
 
         self.assertAlmostEqual(1.12879e-006+0.000126745, spectra.totalValue_1_ekeVsr(0.282), 12)

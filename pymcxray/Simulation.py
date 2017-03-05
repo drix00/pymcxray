@@ -707,7 +707,7 @@ def computeWeightFraction(atomicNumberRef, atomicWeights):
 def create_weight_fractions(weight_fraction_step, number_elements):
     weight_fractions = np.arange(0.0, 1.0+weight_fraction_step, weight_fraction_step)
     if number_elements == 1:
-        return weight_fractions
+        return weight_fractions.tolist()
 
     items = product(weight_fractions.tolist(), repeat=number_elements)
 
