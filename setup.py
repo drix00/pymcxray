@@ -1,16 +1,7 @@
 #!/usr/bin/env python
 
-# Script information for the file.
-__author__ = "Hendrix Demers"
-__email__ = "hendrix.demers@mail.mcgill.ca"
-__version__ = "0.1"
-__copyright__ = "Copyright (c) 2015 Hendrix Demeners"
-__license__ = ""
-
 # Standard library modules.
 import os
-import zipfile
-from distutils.cmd import Command
 
 # Third party modules.
 from setuptools import setup, find_packages
@@ -18,67 +9,54 @@ from setuptools import setup, find_packages
 # Local modules.
 
 # Globals and constants variables.
+with open('README.rst') as readme_file:
+    readme = readme_file.read()
 
-class TestDataCommand(Command):
+with open('HISTORY.rst') as history_file:
+    history = history_file.read()
 
-    description = "create a zip of all files in the testData folder"
-    user_options = [('dist-dir=', 'd',
-                     "directory to put final built distributions in "
-                     "[default: dist]"), ]
-
-    def initialize_options(self):
-        self.dist_dir = None
-
-    def finalize_options(self):
-        if self.dist_dir is None:
-            self.dist_dir = "dist"
-
-    def run(self):
-        if not os.path.isdir(self.dist_dir):
-            os.makedirs(self.dist_dir)
-
-        basepath = os.path.dirname(__file__)
-        testdatapath = os.path.join(basepath, 'testData')
-
-        zipfilename = self.distribution.get_fullname() + '-testData.zip'
-        zipfilepath = os.path.join(self.dist_dir, zipfilename)
-        with zipfile.ZipFile(zipfilepath, 'w') as z:
-            for root, _dirs, files in os.walk(testdatapath):
-                for file in files:
-                    filename = os.path.join(root, file)
-                    arcname = os.path.relpath(filename, basepath)
-                    z.write(filename, arcname)
-
-setup(name="pymcxray",
-      version='0.1.1',
-      url='',
-      description="",
-      author="Hendrix Demers",
-      author_email="hendrix.demers@mail.mcgill.ca",
-      license="",
-      classifiers=['Development Status :: 4 - Beta',
-                   'Intended Audience :: Developers',
-                   'Intended Audience :: Science/Research',
-                   'Natural Language :: English',
-                   'Programming Language :: Python',
-                   'Operating System :: OS Independent',
-                   'Topic :: Scientific/Engineering',
-                   'Topic :: Scientific/Engineering :: Physics'],
-
-      packages=find_packages(),
-
-      include_package_data=False, # Do not include test data
-
-      install_requires=['numpy',
+requirements = [
+    'numpy',
                         'matplotlib',
                         'scipy',
                         'Pillow', # Fork of PIL (Python 3 compatible)
-                        'apscheduler',
-                        ],
-      setup_requires=['nose', 'coverage'],
+                        'apscheduler'
+]
 
-      test_suite='nose.collector',
+test_requirements = [
+    'nose', 'coverage'
+]
 
-      cmdclass={'zip_testdata': TestDataCommand},
+setup(name="pymcxray",
+    version='0.1.1',
+    description="Python scripts for using mcxray software",
+    long_description=readme + '\n\n' + history,
+    author="Hendrix Demers",
+    author_email="hendrix.demers@mail.mcgill.ca",
+    url='https://github.com/drix00/pymcxray',
+    packages=[
+        'pymcxray',
+    ],
+    package_dir={'pymcxray':
+                 'pymcxray'},
+    include_package_data=True,
+    install_requires=requirements,
+    license="Apache Software License 2.0",
+    zip_safe=False,
+    keywords='pymcxray',
+    classifiers=['Development Status :: 4 - Beta',
+		'Intended Audience :: Developers',
+		'Intended Audience :: Science/Research',
+		'Natural Language :: English',
+        'License :: OSI Approved :: Apache Software License',
+		'Programming Language :: Python',
+		'Operating System :: OS Independent',
+		'Topic :: Scientific/Engineering',
+		'Topic :: Scientific/Engineering :: Physics'],
+
+    setup_requires=test_requirements,
+
+    test_suite='nose.collector',
+    tests_require=test_requirements
 )
 
