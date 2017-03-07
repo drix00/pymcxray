@@ -88,9 +88,9 @@ class DataMap(object):
         self._pixels = pixels
 
 def run():
-    from pymcxray import getCurrentModulePath
+    from pymcxray import get_current_module_path
 
-    filepath = getCurrentModulePath(__file__, "../../../../testData/exportedFiles/CNTsFePt_30keV_100e_100pixels_BF.txt")
+    filepath = get_current_module_path(__file__, "../../../../testData/exportedFiles/CNTsFePt_30keV_100e_100pixels_BF.txt")
 
     dataMap = DataMap(filepath)
     dataMap.read()

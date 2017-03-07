@@ -31,7 +31,7 @@ import h5py
 from apscheduler.schedulers.blocking import BlockingScheduler
 
 # Local modules.
-from pymcxray import getCurrentModulePath, createPath, getResultsMcGillPath, getMCXRayProgramPath, getMCXRayProgramName, getMCXRayArchivePath, getMCXRayArchiveName
+from pymcxray import get_current_module_path, create_path, getResultsMcGillPath, get_mcxray_program_path, get_mcxray_program_name, get_mcxray_archive_path, get_mcxray_archive_name
 import pymcxray.serialization.SerializationPickle as SerializationPickle
 
 # Project modules
@@ -77,7 +77,7 @@ class _Simulations(object):
 
     def __init__(self, simulationPath=None, basepath=None, relativePath=None, configurationFilepath=None):
         if configurationFilepath is None:
-            self._configurationFilepath = getCurrentModulePath(__file__, "../../pyMcGill.cfg")
+            self._configurationFilepath = get_current_module_path(__file__, "../../pyMcGill.cfg")
         else:
             self._configurationFilepath = configurationFilepath
         self._output = None
@@ -149,7 +149,7 @@ class _Simulations(object):
 
     def getInputPath(self):
         inputPath = os.path.join(self.getSimulationsPath(), self.INPUTS_FOLDER)
-        inputPath = createPath(inputPath)
+        inputPath = create_path(inputPath)
 
         return inputPath
 
@@ -182,9 +182,9 @@ class _Simulations(object):
                     os.makedirs(path)
 
     def _copyMCXRayProgramOld(self):
-        basePath = getMCXRayProgramPath(self._configurationFilepath)
+        basePath = get_mcxray_program_path(self._configurationFilepath)
 
-        programName = getMCXRayProgramName(self._configurationFilepath, default="McXRay.exe")
+        programName = get_mcxray_program_name(self._configurationFilepath, default="McXRay.exe")
         sourceFilepath = os.path.join(basePath, programName)
         destinationPath = os.path.join(self.getSimulationsPath(), programName)
 
@@ -210,8 +210,8 @@ class _Simulations(object):
             shutil.copytree(sourcePath, destinationPath)
 
     def _copyMCXRayProgram(self):
-        archivesPath = getMCXRayArchivePath(self._configurationFilepath)
-        archiveFilename = getMCXRayArchiveName(self._configurationFilepath)
+        archivesPath = get_mcxray_archive_path(self._configurationFilepath)
+        archiveFilename = get_mcxray_archive_name(self._configurationFilepath)
         archiveFilepath = os.path.join(archivesPath, archiveFilename)
 
         destinationPath = self.getSimulationsPath()
@@ -324,7 +324,7 @@ class _Simulations(object):
         simulationTodoNames = []
 
         inputPath = os.path.join(self.getSimulationsPath(), "input")
-        inputPath = createPath(inputPath)
+        inputPath = create_path(inputPath)
 
         for simulation in self.getAllSimulationParameters():
             if simulation.isDone(self.getSimulationsPath(), hdf5_group):

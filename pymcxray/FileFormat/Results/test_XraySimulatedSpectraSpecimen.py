@@ -20,7 +20,7 @@ import logging
 # Third party modules.
 
 # Local modules.
-from pymcxray import getCurrentModulePath
+from pymcxray import get_current_module_path
 
 # Project modules
 import pymcxray.FileFormat.Results.XraySimulatedSpectraSpecimen as XraySimulatedSpectraSpecimen
@@ -60,7 +60,7 @@ class TestXraySimulatedSpectraSpecimen(unittest.TestCase):
         """
 
         spectrumFile = XraySimulatedSpectraSpecimen.XraySimulatedSpectraSpecimen()
-        spectrumFile.path = getCurrentModulePath(__file__, "../../../testData/results")
+        spectrumFile.path = get_current_module_path(__file__, "../../../testData/results")
         spectrumFile.basename = "testC_10e_10kp"
 
         spectrumFile.read()

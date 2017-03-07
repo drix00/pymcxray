@@ -24,7 +24,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 # Local modules.
-from pymcxray import getCurrentModulePath
+from pymcxray import get_current_module_path
 
 # Project modules
 
@@ -349,7 +349,7 @@ class ElectronTrajectoriesResults(object):
         return color
 
 def run():
-    path = getCurrentModulePath(__file__, "../../../testData/version1.2")
+    path = get_current_module_path(__file__, "../../../testData/version1.2")
     filepath = os.path.join(path, "SimulationsComplexPhiRhoZ_Cr_T5nm_Z0nm_Al_E10d0keV_ElectronTrajectoriesResults.csv")
     #filepath = os.path.join(path, "SimulationsComplexPhiRhoZ_Cr100T50A_IsolatedLayer_E10d0keV_ElectronTrajectoriesResults.csv")
 

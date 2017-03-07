@@ -874,6 +874,5 @@ class TestSpecimen(unittest.TestCase):
         return specimen
 
 if __name__ == '__main__':  #pragma: no cover
-    logging.getLogger().setLevel(logging.DEBUG)
-    from pymcxray.Testings import runTestModuleWithCoverage
-    runTestModuleWithCoverage(__file__, withCoverage=False)
+    import nose
+    nose.runmodule()

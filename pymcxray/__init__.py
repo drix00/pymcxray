@@ -21,7 +21,7 @@ __author__ = """Hendrix Demers"""
 __email__ = 'hendrix.demers@mail.mcgill.ca'
 __version__ = '0.1.0'
 
-def getCurrentModulePath(modulePath, relativePath=""):
+def get_current_module_path(modulePath, relativePath=""):
     basepath = os.path.dirname(modulePath)
     #logging.debug(basepath)
 
@@ -31,7 +31,7 @@ def getCurrentModulePath(modulePath, relativePath=""):
 
     return filepath
 
-def createPath(path):
+def create_path(path):
     """
     Create a path from the input string if does not exists.
 
@@ -53,40 +53,9 @@ def createPath(path):
 
     return path
 
-def getBinPath(configurationFile, relativePath=""):
-        """
-        Read the configuration file for the works path.
 
-        The configuration file need to have this entry:
-        [Paths]
-        binPath=C:\hdemers\bin
-
-        """
-        sectionName = "Paths"
-        keyName = "binPath"
-
-        filepath = _readPathFromConfigurationFile(configurationFile, relativePath, sectionName, keyName)
-
-        return filepath
-
-def getMCXRayDevPath(configurationFile, relativePath=""):
-        """
-        Read the configuration file for the MCXRay\Dev path.
-
-        The configuration file need to have this entry:
-        [Paths]
-        mcxrayDevPath=J:\hdemers\work\mcgill2012\coding\MCXRay\mcxray-110218-hd\Dev
-
-        """
-        sectionName = "Paths"
-        keyName = "mcxrayDevPath"
-
-        filepath = _readPathFromConfigurationFile(configurationFile, relativePath, sectionName, keyName)
-
-        return filepath
-
-def _readPathFromConfigurationFile(configurationFile, relativePath, sectionName, keyName):
-        path = readValueFromConfigurationFile(configurationFile, sectionName, keyName)
+def _read_path_from_configuration_file(configurationFile, relativePath, sectionName, keyName):
+        path = read_value_from_configuration_file(configurationFile, sectionName, keyName)
 
         if relativePath.startswith('/'):
             relativePath = relativePath[1:]
@@ -95,7 +64,7 @@ def _readPathFromConfigurationFile(configurationFile, relativePath, sectionName,
         filepath = os.path.normpath(filepath)
         return filepath
 
-def readValueFromConfigurationFile(configurationFile, sectionName, keyName, default=None):
+def read_value_from_configuration_file(configurationFile, sectionName, keyName, default=None):
         config = configparser.SafeConfigParser()
         config.readfp(open(configurationFile))
         if config.has_section(sectionName):
@@ -115,7 +84,7 @@ def readValueFromConfigurationFile(configurationFile, sectionName, keyName, defa
             else:
                 return default
 
-def findAllFiles(root, patterns='*', ignorePathPatterns='', ignoreNamePatterns='', single_level=False, yield_folders=False):
+def find_all_files(root, patterns='*', ignorePathPatterns='', ignoreNamePatterns='', single_level=False, yield_folders=False):
     """
     Find all files in a root folder.
 
@@ -165,7 +134,7 @@ def findAllFiles(root, patterns='*', ignorePathPatterns='', ignoreNamePatterns='
             logging.debug("single_level")
             break
 
-def getMCXRayProgramName(configurationFile, default=None):
+def get_mcxray_program_name(configurationFile, default=None):
         """
         Read the configuration file for the MCXRay program name.
 
@@ -177,7 +146,7 @@ def getMCXRayProgramName(configurationFile, default=None):
         sectionName = "Paths"
         keyName = "mcxrayProgramName"
 
-        programName = readValueFromConfigurationFile(configurationFile, sectionName, keyName, default)
+        programName = read_value_from_configuration_file(configurationFile, sectionName, keyName, default)
 
         return programName
 
@@ -193,11 +162,11 @@ def getResultsMcGillPath(configurationFile, relativePath=""):
         sectionName = "Paths"
         keyName = "resultsMcGillPath"
 
-        filepath = _readPathFromConfigurationFile(configurationFile, relativePath, sectionName, keyName)
+        filepath = _read_path_from_configuration_file(configurationFile, relativePath, sectionName, keyName)
 
         return filepath
 
-def getMCXRayProgramPath(configurationFile, relativePath=""):
+def get_mcxray_program_path(configurationFile, relativePath=""):
         """
         Read the configuration file for the MCXRay program path.
 
@@ -209,11 +178,11 @@ def getMCXRayProgramPath(configurationFile, relativePath=""):
         sectionName = "Paths"
         keyName = "mcxrayProgramPath"
 
-        filepath = _readPathFromConfigurationFile(configurationFile, relativePath, sectionName, keyName)
+        filepath = _read_path_from_configuration_file(configurationFile, relativePath, sectionName, keyName)
 
         return filepath
 
-def getMCXRayArchivePath(configurationFile, relativePath=""):
+def get_mcxray_archive_path(configurationFile, relativePath=""):
         """
         Read the configuration file for the MCXRay archive path.
 
@@ -225,11 +194,11 @@ def getMCXRayArchivePath(configurationFile, relativePath=""):
         sectionName = "Paths"
         keyName = "mcxrayArchivePath"
 
-        filepath = _readPathFromConfigurationFile(configurationFile, relativePath, sectionName, keyName)
+        filepath = _read_path_from_configuration_file(configurationFile, relativePath, sectionName, keyName)
 
         return filepath
 
-def getMCXRayArchiveName(configurationFile, default=None):
+def get_mcxray_archive_name(configurationFile, default=None):
         """
         Read the configuration file for the MCXRay archive name.
 
@@ -241,6 +210,6 @@ def getMCXRayArchiveName(configurationFile, default=None):
         sectionName = "Paths"
         keyName = "mcxrayArchiveName"
 
-        programName = readValueFromConfigurationFile(configurationFile, sectionName, keyName, default)
+        programName = read_value_from_configuration_file(configurationFile, sectionName, keyName, default)
 
         return programName

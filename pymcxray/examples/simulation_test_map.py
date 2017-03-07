@@ -55,7 +55,7 @@ import pymcxray.FileFormat.Element as Element
 from pymcxray.FileFormat.Results.ElectronTrajectoriesResults import ElectronTrajectoriesResults, COLOR_REGION
 
 # Project modules.
-from xrayspectrummodeling import get_current_module_path, get_mcxray_program_name
+from pymcxray import get_current_module_path, get_mcxray_program_name
 
 # Globals and constants variables.
 

@@ -20,7 +20,7 @@ import logging
 # Third party modules.
 
 # Local modules.
-from pymcxray import getCurrentModulePath
+from pymcxray import get_current_module_path
 
 # Project modules
 import pymcxray.FileFormat.Results.XrayIntensities as XrayIntensities
@@ -60,7 +60,7 @@ class TestXrayIntensities(unittest.TestCase):
         """
 
         intensitiesFile = XrayIntensities.XrayIntensities()
-        intensitiesFile.path = getCurrentModulePath(__file__, "../../../testData/results")
+        intensitiesFile.path = get_current_module_path(__file__, "../../../testData/results")
         intensitiesFile.basename = "SimulationsFRatio_Al0d200000Cu0d800000_E5d0keV"
 
         intensitiesFile.read()

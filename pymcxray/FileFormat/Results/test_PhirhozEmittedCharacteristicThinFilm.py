@@ -20,7 +20,7 @@ import logging
 # Third party modules.
 
 # Local modules.
-from pymcxray import getCurrentModulePath
+from pymcxray import get_current_module_path
 
 # Project modules
 import pymcxray.FileFormat.Results.PhirhozEmittedCharacteristicThinFilm as PhirhozEmittedCharacteristicThinFilm
@@ -60,7 +60,7 @@ class TestPhirhozEmittedCharacteristicThinFilm(unittest.TestCase):
         """
 
         phirhozThinFilm = PhirhozEmittedCharacteristicThinFilm.PhirhozEmittedCharacteristicThinFilm()
-        phirhozThinFilm.path = getCurrentModulePath(__file__, "../../../testData/results")
+        phirhozThinFilm.path = get_current_module_path(__file__, "../../../testData/results")
         phirhozThinFilm.basename = "SimulationMCXrayPhirhozTestCases_Cu_E500d0keV_N100000e"
 
         phirhozThinFilm.read()
@@ -89,7 +89,7 @@ class TestPhirhozEmittedCharacteristicThinFilm(unittest.TestCase):
         """
 
         phirhozThinFilm = PhirhozEmittedCharacteristicThinFilm.PhirhozEmittedCharacteristicThinFilm()
-        phirhozThinFilm.path = getCurrentModulePath(__file__, "../../../testData/results")
+        phirhozThinFilm.path = get_current_module_path(__file__, "../../../testData/results")
         phirhozThinFilm.basename = "SimulationMCXrayPhirhozTestCases_Cu_E500d0keV_N100000e"
 
         phirhozThinFilm.read()

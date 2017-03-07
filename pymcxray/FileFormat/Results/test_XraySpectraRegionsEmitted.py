@@ -152,7 +152,4 @@ class TestXraySpectraRegionsEmitted(unittest.TestCase):
 
 if __name__ == '__main__':  #pragma: no cover
     import nose
-    import sys
-    argv = sys.argv
-    argv.append("--cover-package=pymcxray.FileFormat.Results.XraySpectraRegionsEmitted")
-    nose.runmodule(argv=argv)
+    nose.runmodule()

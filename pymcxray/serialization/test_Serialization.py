@@ -20,7 +20,7 @@ import time
 from nose.plugins.skip import SkipTest
 
 # Local modules.
-from pymcxray import getCurrentModulePath
+from pymcxray import get_current_module_path
 
 # Project modules
 import pymcxray.serialization._Serialization as _Serialization
@@ -118,7 +118,7 @@ class Test_Serialization(unittest.TestCase):
         self.serialization.setFilepath(filepathRef)
         self.assertFalse(self.serialization.isFile())
 
-        filepathRef = getCurrentModulePath(__file__, "../../testData/serialization/empty.ser")
+        filepathRef = get_current_module_path(__file__, "../../testData/serialization/empty.ser")
         if not os.path.isfile(filepathRef):
             raise SkipTest
 
@@ -129,7 +129,7 @@ class Test_Serialization(unittest.TestCase):
 
     def test_deleteFile(self):
         filename = "empty.ser"
-        filepathRef = getCurrentModulePath(__file__, "../../testData/serialization/")
+        filepathRef = get_current_module_path(__file__, "../../testData/serialization/")
         filepathRef = os.path.join(filepathRef, filename)
         if not os.path.isfile(filepathRef):
             raise SkipTest
@@ -147,7 +147,7 @@ class Test_Serialization(unittest.TestCase):
     def test_isOlderThan(self):
 
         filename = "empty"
-        filepathRef = getCurrentModulePath(__file__, "../../testData/serialization/")
+        filepathRef = get_current_module_path(__file__, "../../testData/serialization/")
         filepathRef = os.path.join(filepathRef, filename+'.ser')
         if not os.path.isfile(filepathRef):
             raise SkipTest
@@ -180,7 +180,6 @@ class Test_Serialization(unittest.TestCase):
         #self.fail("Test if the testcase is working.")
 
 if __name__ == '__main__':  #pragma: no cover
-    logging.getLogger().setLevel(logging.DEBUG)
-    from pymcxray.Testings import runTestModule
-    runTestModule()
+    import nose
+    nose.runmodule()
 
