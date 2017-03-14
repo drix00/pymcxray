@@ -70,4 +70,4 @@ target/
 .pydevproject
 
 # Project ignore files
-*.cfg
+*/examples/*.cfg
