@@ -7,13 +7,6 @@ MCXRay console batch file creator.
 
 """
 
-# Script information for the file.
-__author__ = "Hendrix Demers (hendrix.demers@mail.mcgill.ca)"
-__version__ = ""
-__date__ = ""
-__copyright__ = "Copyright (c) 2012 Hendrix Demers"
-__license__ = ""
-
 # Standard library modules.
 import os
 import logging
@@ -30,6 +23,17 @@ import random
 
 class BatchFileConsole(object):
     def __init__(self, name, programName, numberFiles=1):
+        """
+        The batch file is responsible to create the simulation structure with a copy of mcxray program.
+
+        One important parameter to set is the `numberFiles`, this is the number of batch files generated
+        and that can be run in parallel. For maximum efficiency it should be set as the number of logical processors minus 1 or 2.
+        For example, on a computer with 12 logical processors, the `numberFiles` should be set at 10.
+
+        :param str name: Basename used for the batch files
+        :param str programName: Name of the executable to add in the batch file
+        :param int numberFiles: Number of batch files to generate and possibly to run in parallel
+        """
         self._name = name
         self._programName = programName
         self._numberFiles = numberFiles
@@ -39,10 +43,20 @@ class BatchFileConsole(object):
 
 
     def addSimulationName(self, simulationFilename):
+        """
+        Add a simulation in the simulation list.
+
+        :param str simulationFilename: File path of the simulation added
+        """
         self._simulationFilenames.append(simulationFilename)
 
     def write(self, path):
-        self.removePreviousFiles(path)
+        """
+        Write the batch files for all simulations in the simulation list.
+
+        :param str path: Path where the batch files are written.
+        """
+        self._remove_previous_files(path)
 
         if len(self._simulationFilenames) == 0:
             return
@@ -81,7 +95,7 @@ class BatchFileConsole(object):
 
             batchFile.close()
 
-    def removePreviousFiles(self, path):
+    def _remove_previous_files(self, path):
         for filename in os.listdir(path):
             if filename.startswith(self._name) and filename.endswith(self._extension):
                 filepath = os.path.join(path, filename)

@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-.. py:currentmodule:: mcxray.simulation_maps_mm2017
+.. py:currentmodule:: pymcxray.examples.simulation_test_maps
    :synopsis: Script to simulate mcxray maps for MM2017 with Nadi.
 
 .. moduleauthor:: Hendrix Demers <hendrix.demers@mail.mcgill.ca>
@@ -37,7 +37,6 @@ import numpy as np
 
 # Local modules.
 
-import pymcxray.BatchFileConsole as BatchFileConsole
 import pymcxray.mcxray as mcxray
 import pymcxray.FileFormat.Results.XrayIntensities as XrayIntensities
 import pymcxray.FileFormat.Results.XraySpectraSpecimenEmittedDetected as XraySpectraSpecimenEmittedDetected
@@ -52,7 +51,6 @@ import pymcxray.FileFormat.Region as Region
 import pymcxray.FileFormat.RegionType as RegionType
 import pymcxray.FileFormat.RegionDimensions as RegionDimensions
 import pymcxray.FileFormat.Element as Element
-from pymcxray.FileFormat.Results.ElectronTrajectoriesResults import ElectronTrajectoriesResults, COLOR_REGION
 
 # Project modules.
 from pymcxray import get_current_module_path, get_mcxray_program_name
@@ -64,22 +62,24 @@ class SimulationTestMapsMM2017(mcxray._Simulations):
         self.use_hdf5 = True
         self.delete_result_files = False
         self.createBackup = True
-        self.read_interval_h = 2
-        self.read_interval_m = 10
 
-        enegy_keV = 30.0
+        # Local variables for value and list if values.
+        energy_keV = 30.0
         number_electrons = 10000
-        #number_xrays_list = [10, 20, 30, 50, 60, 100, 200, 500, 1000]
+
+        # number_xrays_list = [10, 20, 30, 50, 60, 100, 200, 500, 1000]
         number_xrays_list = [10]
         xs_nm = np.linspace(-5.0e3, 5.0e3, 3)
-        probePositions_nm = [tuple(position_nm) for position_nm in np.transpose([np.tile(xs_nm, len(xs_nm)), np.repeat(xs_nm, len(xs_nm))]).tolist()]
+        probePositions_nm = [tuple(position_nm) for position_nm in
+                             np.transpose([np.tile(xs_nm, len(xs_nm)), np.repeat(xs_nm, len(xs_nm))]).tolist()]
 
+        # Simulation parameters
         self._simulationsParameters = SimulationsParameters()
 
         self._simulationsParameters.addVaried(PARAMETER_NUMBER_XRAYS, number_xrays_list)
         self._simulationsParameters.addVaried(PARAMETER_BEAM_POSITION_nm, probePositions_nm)
 
-        self._simulationsParameters.addFixed(PARAMETER_INCIDENT_ENERGY_keV, enegy_keV)
+        self._simulationsParameters.addFixed(PARAMETER_INCIDENT_ENERGY_keV, energy_keV)
         self._simulationsParameters.addFixed(PARAMETER_NUMBER_ELECTRONS, number_electrons)
 
     def getAnalysisName(self):
@@ -216,111 +216,31 @@ class SimulationTestMapsMM2017(mcxray._Simulations):
             hdf5_group = self.get_hdf5_group(hdf5_file)
             logging.info(hdf5_group.name)
 
-    def analyzeResultsFiles(self): #pragma: no cover
-        self.readResults()
-
-        allResults = self.getAllResults()
-
-        keys = list(allResults.keys())
-        logging.debug("Key: %s", keys)
-
-class SimulationTestLinescansMM2017(SimulationTestMapsMM2017):
-    def _initData(self):
-        self.use_hdf5 = False
-        self.delete_result_files = False
-        self.createBackup = True
-        self.read_interval_h = 2
-        self.read_interval_m = 10
-
-        enegy_keV = 30.0
-        number_electrons = 10000
-        #number_xrays_list = [10, 20, 30, 50, 60, 100, 200, 500, 1000]
-        number_xrays_list = [10]
-
-        probePositions_nm = []
-        probePositions_nm.append((0.0, -2559.0))
-        probePositions_nm.append((0.0, -2480.0))
-        probePositions_nm.append((0.0, -2401.0))
-        probePositions_nm.append((0.0, 2401.0))
-        probePositions_nm.append((0.0, 2480.0))
-        probePositions_nm.append((0.0, 2559.0))
-
-        self._simulationsParameters = SimulationsParameters()
-
-        self._simulationsParameters.addVaried(PARAMETER_NUMBER_XRAYS, number_xrays_list)
-        self._simulationsParameters.addVaried(PARAMETER_BEAM_POSITION_nm, probePositions_nm)
-
-        self._simulationsParameters.addFixed(PARAMETER_INCIDENT_ENERGY_keV, enegy_keV)
-        self._simulationsParameters.addFixed(PARAMETER_NUMBER_ELECTRONS, number_electrons)
-
-    def getAnalysisName(self):
-        return "SimulationTestLinescansMM2017"
-
-    def readOneResults(self, simulation):
-        filepath = os.path.join(self.getSimulationsPath(), simulation.resultsBasename + "_ElectronTrajectoriesResults.csv")
-        electronTrajectoriesResults = ElectronTrajectoriesResults(filepath)
-
-        return electronTrajectoriesResults
-
-    def analyzeResultsFiles(self): #pragma: no cover
-        self.readResults()
-
-        allResults = self.getAllResults()
-
-        figure_path = self.getAnalyzesPath()
-        x_limit = (-1000.0, 1000.0)
-        z_limit = (-200.0, 400.0)
-        for key in allResults:
-            position_y_nm = key[0][1]
-            y_limit = (x_limit[0]+position_y_nm, x_limit[1]+position_y_nm)
-            electronTrajectoriesResults = allResults[key]
-
-            title = "Y = {} nm".format(int(position_y_nm))
-            electronTrajectoriesResults.drawXZ(title=title, x_limit=x_limit, y_limit=z_limit)
-            file_name = "trajectories_XZ_Y{}nm.png".format(int(position_y_nm))
-            file_path = os.path.join(figure_path, file_name)
-            plt.savefig(file_path)
-            plt.close()
-            electronTrajectoriesResults.drawXZ(colorType=COLOR_REGION, title=title, x_limit=x_limit, y_limit=z_limit)
-            file_name = "trajectories_XZ_Y{}nm_region.png".format(int(position_y_nm))
-            file_path = os.path.join(figure_path, file_name)
-            plt.savefig(file_path)
-            plt.close()
-            electronTrajectoriesResults.drawXY(title=title, x_limit=x_limit, y_limit=y_limit)
-            file_name = "trajectories_XY_Y{}nm.png".format(int(position_y_nm))
-            file_path = os.path.join(figure_path, file_name)
-            plt.savefig(file_path)
-            plt.close()
-            electronTrajectoriesResults.drawYZ(title=title, x_limit=y_limit, y_limit=z_limit)
-            file_name = "trajectories_YZ_Y{}nm.png".format(int(position_y_nm))
-            file_path = os.path.join(figure_path, file_name)
-            plt.savefig(file_path)
-            plt.close()
-
-
 def run():
-    configurationFilepath = get_current_module_path(__file__, "../../MCXRay_latest.cfg")
+    # import the batch file class.
+    from pymcxray.BatchFileConsole import BatchFileConsole
 
-    programName = get_mcxray_program_name(configurationFilepath)
+    # Find the configuration file path
+    configuration_file_path = get_current_module_path(__file__, "MCXRay_latest.cfg")
+    program_name = get_mcxray_program_name(configuration_file_path)
 
-    batchFile = BatchFileConsole.BatchFileConsole("BatchSimulationTestMapsMM2017", programName, numberFiles=10)
-    analyze = SimulationTestMapsMM2017(relativePath=r"mcxray/SimulationTestMapsMM2017", configurationFilepath=configurationFilepath)
-    analyze.overwrite = False
-    analyze.run(batchFile)
+    # Create the batch file object.
+    batch_file = BatchFileConsole("BatchSimulationTestMapsMM2017", program_name, numberFiles=6)
 
-    batchFile = BatchFileConsole.BatchFileConsole("BatchSimulationTestLinescansMM2017", programName, numberFiles=10)
-    analyze = SimulationTestLinescansMM2017(relativePath=r"mcxray/SimulationTestLinescansMM2017", configurationFilepath=configurationFilepath)
-    analyze.overwrite = False
-    analyze.run(batchFile)
+    # Create the simulation object and add the batch file object to it.
+    analyze = SimulationTestMapsMM2017(relativePath=r"mcxray/SimulationTestMapsMM2017",
+                                       configurationFilepath=configuration_file_path)
+    analyze.run(batch_file)
 
-    plt.show()
 
 if __name__ == '__main__': #pragma: no cover
     import sys
     logging.getLogger().setLevel(logging.INFO)
     logging.info(sys.argv)
-    sys.argv.append(mcxray.ANALYZE_TYPE_GENERATE_INPUT_FILE)
-    #sys.argv.append(mcxray.ANALYZE_TYPE_CHECK_PROGRESS)
-    #sys.argv.append(mcxray.ANALYZE_TYPE_ANALYZE_RESULTS)
-    #sys.argv.append(mcxray.ANALYZE_TYPE_ANALYZE_SCHEDULED_READ)
+    if len(sys.argv) == 1:
+        sys.argv.append(mcxray.ANALYZE_TYPE_GENERATE_INPUT_FILE)
+        #sys.argv.append(mcxray.ANALYZE_TYPE_CHECK_PROGRESS)
+        #sys.argv.append(mcxray.ANALYZE_TYPE_ANALYZE_RESULTS)
+        #sys.argv.append(mcxray.ANALYZE_TYPE_ANALYZE_SCHEDULED_READ)
     run()
+

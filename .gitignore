@@ -68,3 +68,6 @@ target/
 .settings
 .project
 .pydevproject
+
+# Project ignore files
+*.cfg

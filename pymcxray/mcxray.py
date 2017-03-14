@@ -31,7 +31,7 @@ import h5py
 from apscheduler.schedulers.blocking import BlockingScheduler
 
 # Local modules.
-from pymcxray import get_current_module_path, create_path, getResultsMcGillPath, get_mcxray_program_path, get_mcxray_program_name, get_mcxray_archive_path, get_mcxray_archive_name
+from pymcxray import get_current_module_path, create_path, get_results_mcgill_path, get_mcxray_program_path, get_mcxray_program_name, get_mcxray_archive_path, get_mcxray_archive_name
 import pymcxray.serialization.SerializationPickle as SerializationPickle
 
 # Project modules
@@ -117,15 +117,15 @@ class _Simulations(object):
             if self._simulationPath is not None:
                 return self._simulationPath
             elif self._relativePath is not None:
-                path = getResultsMcGillPath(self._configurationFilepath)
-                path = os.path.join(path, "Simulations", self._relativePath)
+                path = get_results_mcgill_path(self._configurationFilepath)
+                path = os.path.join(path, self._relativePath)
             elif self._basepath is not None:
                 name = self.getAnalysisName()
-                path = getResultsMcGillPath(self._configurationFilepath)
-                path = os.path.join(path, "Simulations", self._basepath, "%s" % (name))
+                path = get_results_mcgill_path(self._configurationFilepath)
+                path = os.path.join(path, self._basepath, "%s" % (name))
             else:
                 name = self.getAnalysisName()
-                path = getResultsMcGillPath(self._configurationFilepath, "Simulations/%s" % (name))
+                path = get_results_mcgill_path(self._configurationFilepath, "%s" % (name))
 
             if not os.path.isdir(path):
                 os.makedirs(path)

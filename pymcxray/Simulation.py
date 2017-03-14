@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 """
-.. py:currentmodule:: Simulation
+.. py:currentmodule:: pymcxray.Simulation
 .. moduleauthor:: Hendrix Demers <hendrix.demers@mail.mcgill.ca>
 
 MCXRay simulation parameters.

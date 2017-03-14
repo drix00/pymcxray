@@ -12,6 +12,8 @@ Contents:
    contributing
    authors
    history
+   todo
+   api/modules
 
 Indices and tables
 ==================

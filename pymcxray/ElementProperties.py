@@ -1,18 +1,6 @@
 #!/usr/bin/env python
 """ """
 
-# Script information for the file.
-__author__ = "Hendrix Demers (hendrix.demers@mail.mcgill.ca)"
-__version__ = ""
-__date__ = ""
-__copyright__ = "Copyright (c) 2007 Hendrix Demers"
-__license__ = ""
-
-# Subversion informations for the file.
-__svnRevision__ = "$Revision: 2146 $"
-__svnDate__ = "$Date: 2011-01-03 07:32:06 -0500 (Mon, 03 Jan 2011) $"
-__svnId__ = "$Id: ElementProperties.py 2146 2011-01-03 12:32:06Z hdemers $"
-
 # Standard library modules.
 import math
 
@@ -147,18 +135,6 @@ g_elementName = [
     , "Unnilpentium"
     , "Unnilhexium"]
 
-"""
- * Mass density of element in atomic number order.
- *
- * For elment H to Cm (1--96).
- *
- * In \f$ \gram\per\centi\meter^{3} \f$.
- *
- * From: Tableau periodique des elements, Sargent-Welch scientifique Canada
- * Limitee.
- *
- * @note Element Z = 85 and 87 set to 1 for the calculation.
-"""
 g_massDensity_g_cm3 = [
     0.0899, 0.1787, 0.5300, 1.8500, 2.3400, 2.6200, 1.2510, 1.4290,
     1.6960, 0.9010, 0.9700, 1.7400, 2.7000, 2.3300, 1.8200, 2.0700,
@@ -174,15 +150,20 @@ g_massDensity_g_cm3 = [
     10.070, 11.700, 15.400, 18.900, 20.400, 19.800, 13.600, 13.511
 ]
 """
- * Atomic weight of element in atomic number order.
- *
- * For element H to Sg (1--106).
- *
- * Unit \f$ \gram\per\mole \f$.
- *
- * From: Tableau periodique des elements, Sargent-Welch scientifique Canada
- * Limitee.
+Mass density of element in atomic number order.
+
+For element H to Cm (1-96).
+
+In :math:`g/cm{3}`.
+
+From: Tableau periodique des elements, Sargent-Welch scientifique Canada
+Limitee.
+
+.. note::
+
+    Element Z = 85 and 87 set to 1 for the calculation.
 """
+
 g_atomicMass_g_mol = [
     1.0079000, 4.0026000, 6.9410000, 9.0121800, 10.810000, 12.011000,
     14.006700, 15.999400, 18.998403, 20.179000, 22.989770, 24.305000,
@@ -203,15 +184,17 @@ g_atomicMass_g_mol = [
     247.00000, 251.00000, 252.00000, 257.00000, 258.00000, 259.00000,
     260.00000, 261.00000, 262.00000, 263.00000
 ]
+"""
+Atomic weight of element in atomic number order.
 
+For element H to Sg (1-106).
+
+Unit :math:`g/mole`.
+
+From: Tableau periodique des elements, Sargent-Welch scientifique Canada
+Limitee.
 """
- * Fermi energy of element in atomic number order.
- *
- * For element H to Lr (1--103).
- * From: CASINO source code, DOS version.
- *
- * @todo Add units.
-"""
+
 g_FermiEnergy = [
     1.000, 1.000, 4.700, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000,
     1.000, 3.100, 1.000, 1.000, 0.555, 1.000, 1.000, 1.000, 1.000,
@@ -226,15 +209,15 @@ g_FermiEnergy = [
     1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 0.000,
     1.000, 1.000, 1.000, 1.000
 ]
+"""
+Fermi energy of element in atomic number order.
 
+For element H to Lr (1-103).
+From: CASINO source code, DOS version.
+
+.. todo:: Add units.
 """
- * Fermi wavelength of element in atomic number order.
- *
- * For element H to Lr (1--103).
- * From: CASINO source code, DOS version.
- *
- * @todo Add units.
-"""
+
 g_kFermi = [
     7.00E7, 7.00E7, 1.10E8, 7.00E7, 7.00E7, 7.00E7, 7.00E7, 7.00E7,
     7.00E7, 7.00E7, 9.00E7, 7.00E7, 7.00E7, 4.00E7, 7.00E7, 7.00E7,
@@ -250,15 +233,15 @@ g_kFermi = [
     7.00E7, 7.00E7, 7.00E7, 7.00E7, 7.00E7, 7.00E7, 7.00E7, 7.00E7,
     7.00E7, 7.00E7, 0.00E0, 7.00E7, 7.00E7, 7.00E7, 7.00E7
 ]
+"""
+Fermi wavelength of element in atomic number order.
 
+For element H to Lr (1--103).
+From: CASINO source code, DOS version.
+
+.. todo:: Add units.
 """
- * Plasmon energy of element in atomic number order.
- *
- * For element H to Lr (1--103).
- * From: CASINO source code, DOS version.
- *
- * @todo Add units.
-"""
+
 g_plasmonEnergy = [
     15.0, 15.0, 7.10, 18.7, 22.7, 15.0, 15.0, 15.0, 15.0, 15.0, 5.70,
     10.3, 15.0, 16.7, 15.0, 15.0, 15.0, 15.0, 3.70, 8.80, 14.0, 17.9,
@@ -271,6 +254,16 @@ g_plasmonEnergy = [
     25.0, 15.0, 15.0, 15.0, 15.0, 15.0, 15.0, 15.0, 15.0, 15.0, 15.0,
     15.0, 15.0, 15.0, 15.0
 ]
+"""
+Plasmon energy of element in atomic number order.
+
+For element H to Lr (1-103).
+From: CASINO source code, DOS version.
+
+.. todo:: Add units.
+"""
+
+
 def getMassDensity_g_cm3(atomicNumber):
     index = int(atomicNumber)-1
     return g_massDensity_g_cm3[index]
@@ -291,20 +284,20 @@ def getPlasmonEnergy_eV(atomicNumber):
     index = int(atomicNumber)-1
     return g_plasmonEnergy[index]
 
-def getMeanIonizationEnergy_eV(atomicNumber):
+def getMeanIonizationEnergy_eV(atomic_number):
     """
-     * Get the mean ionization potential from the atomic number.
-     *
-     * In \f$ \electronvolt \f$.
-     *
-     * @param[in] atomicNumber Atomic number.
+    Get the mean ionization potential from the atomic number.
+
+    In :math:`eV`.
+
+    :param int  atomic_number: Atomic number
     """
 
-    if atomicNumber <= 13.0:
-        Value = 11.5*atomicNumber
+    if atomic_number <= 13.0:
+        Value = 11.5 * atomic_number
     else:
-        if math.pow(atomicNumber, 0.19) > 0.0:
-            Value = 9.76*atomicNumber + 58.8/math.pow(atomicNumber, 0.19)
+        if math.pow(atomic_number, 0.19) > 0.0:
+            Value = 9.76 * atomic_number + 58.8 / math.pow(atomic_number, 0.19)
         else:
             Value = 0.0
 
@@ -312,10 +305,10 @@ def getMeanIonizationEnergy_eV(atomicNumber):
 
 def getKRatioCorrection(atomicNumber):
     """
-     * Get the constant k ratio correction needed by the mean ionization potential
-     * from the atomic number.
-     *
-     * @param[in] atomicNumber Atomic number.
+    Get the constant k ratio correction needed by the mean ionization potential
+    from the atomic number.
+
+    :param int  atomic_number: Atomic number
     """
     Value = 0.734*math.pow(atomicNumber, 0.037);
 
@@ -337,19 +330,21 @@ def getKRatioCorrectionMonsel(atomicNumber, workFunction_keV):
 
 def computeAtomicDensity_atom_cm3(massDensity_g_cm3, atomicMass_g_mol):
     """
-     * Compute the atomic density.
-     *
-     * \f[
-     *     n_{i} = \frac{N_{A} \rho_{i}}{A_{i}}
-     * \f]
-     * where
-     * - \f$ n_{i} \f$ is the atomic density in \f$ \mathrm{atoms}\per\centi\meter^{3} \f$
-     * - \f$ N_{A} \f$ is the Avogadro number in \f$ \mathrm{atoms}\per\mole \f$
-     * - \f$ \rho_{i} \f$ is the mass density in \f$ \gram\per\centi\meter^{3} \f$
-     * - \f$ A_{i} \f$ is the atomic mass in \f$ \gram\per\mole \f$
-     *
-     * \param[in] massDensity_g_cm3
-     * \param[in] atomicMass_g_mol
+    Compute the atomic density.
+
+    .. math::
+
+        n_{i} = \\frac{N_{A} \\rho_{i}}{A_{i}}
+
+    where
+
+    - :math:`n_{i}` is the atomic density in :math:`\\mathrm{atoms}/cm^{3}`
+    - :math:`N_{A}` is the Avogadro number in :math:`\\mathrm{atoms}/mole`
+    - :math:`\\rho_{i}` is the mass density in :math:`g/cm^{3}`
+    - :math:`A_{i}` is the atomic mass in :math:`g/mole`
+
+    :param float massDensity_g_cm3:
+    :param float atomicMass_g_mol:
     """
 
     return g_AvogadroNumber_atom_mol*massDensity_g_cm3/atomicMass_g_mol

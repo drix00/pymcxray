@@ -5,8 +5,16 @@ Installation
 ============
 
 
+.. _stable-release-section:
+
 Stable release
 --------------
+
+.. todo:: Add pypi installation for this project.
+
+.. warning::
+
+    Right now, the :ref:`Stable release <stable-release-section>` installation does not work.
 
 To install pymcxray, run this command in your terminal:
 
