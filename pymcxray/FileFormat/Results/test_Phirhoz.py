@@ -45,7 +45,7 @@ class TestPhirhoz(unittest.TestCase):
 
         unittest.TestCase.setUp(self)
 
-        self.testDataPath = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../testData"))
+        self.testDataPath = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../test_data"))
 
     def tearDown(self):
         """

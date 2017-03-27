@@ -39,7 +39,7 @@ class TestDataMap(unittest.TestCase):
 
         unittest.TestCase.setUp(self)
 
-        self.filepath = get_current_module_path(__file__, "../../../../testData/exportedFiles/CNTsFePt_30keV_100e_100pixels_BF.txt")
+        self.filepath = get_current_module_path(__file__, "../../../../test_data/exportedFiles/CNTsFePt_30keV_100e_100pixels_BF.txt")
 
     def tearDown(self):
         """

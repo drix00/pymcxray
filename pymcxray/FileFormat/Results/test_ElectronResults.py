@@ -60,7 +60,7 @@ class TestElectronResults(unittest.TestCase):
         """
 
         electronResults = ElectronResults.ElectronResults()
-        electronResults.path = get_current_module_path(__file__, "../../../testData/results")
+        electronResults.path = get_current_module_path(__file__, "../../../test_data/results")
         electronResults.basename = "SimulationKalefEzra1982_Al100T10000A_E300d0keV_N100000e"
 
         electronResults.read()

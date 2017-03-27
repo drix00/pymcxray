@@ -43,7 +43,7 @@ class TestSpectraEDS(unittest.TestCase):
 
         unittest.TestCase.setUp(self)
 
-        self.testDataPath = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../testData"))
+        self.testDataPath = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../test_data"))
 
         self.spectraEdsRegion0Filepath = os.path.join(self.testDataPath, "version1.1/autoSavedFiles/DetectionLimits_N1000x_C_r10A_z11A_Au_E30d0keVEDSRegion0.txt")
         self.spectraEdsRegion1Filepath = os.path.join(self.testDataPath, "version1.1/autoSavedFiles/DetectionLimits_N1000x_C_r10A_z11A_Au_E30d0keVEDSRegion1.txt")

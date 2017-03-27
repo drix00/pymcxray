@@ -61,7 +61,7 @@ class TestXraySpectraSpecimenEmittedDetected(unittest.TestCase):
         """
 
         spectrumFile = XraySpectraSpecimenEmittedDetected.XraySpectraSpecimenEmittedDetected()
-        spectrumFile.path = get_current_module_path(__file__, "../../../testData/results")
+        spectrumFile.path = get_current_module_path(__file__, "../../../test_data/results")
         spectrumFile.basename = "SimulationsAuNPonC_Au_d100A_C_E10d0keV_N10000e_N1000000X"
 
         spectrumFile.read()

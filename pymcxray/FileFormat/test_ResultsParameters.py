@@ -42,7 +42,7 @@ class TestResultsParameters(unittest.TestCase):
 
         unittest.TestCase.setUp(self)
 
-        self.testDataPath = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../testData"))
+        self.testDataPath = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../test_data"))
         self.tempDataPath = testUtilities.createTempDataPath(self.testDataPath)
 
     def tearDown(self):

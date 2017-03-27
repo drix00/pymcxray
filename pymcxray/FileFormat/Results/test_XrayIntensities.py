@@ -60,7 +60,7 @@ class TestXrayIntensities(unittest.TestCase):
         """
 
         intensitiesFile = XrayIntensities.XrayIntensities()
-        intensitiesFile.path = get_current_module_path(__file__, "../../../testData/results")
+        intensitiesFile.path = get_current_module_path(__file__, "../../../test_data/results")
         intensitiesFile.basename = "SimulationsFRatio_Al0d200000Cu0d800000_E5d0keV"
 
         intensitiesFile.read()

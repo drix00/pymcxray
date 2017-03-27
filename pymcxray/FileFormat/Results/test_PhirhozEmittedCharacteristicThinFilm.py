@@ -60,7 +60,7 @@ class TestPhirhozEmittedCharacteristicThinFilm(unittest.TestCase):
         """
 
         phirhozThinFilm = PhirhozEmittedCharacteristicThinFilm.PhirhozEmittedCharacteristicThinFilm()
-        phirhozThinFilm.path = get_current_module_path(__file__, "../../../testData/results")
+        phirhozThinFilm.path = get_current_module_path(__file__, "../../../test_data/results")
         phirhozThinFilm.basename = "SimulationMCXrayPhirhozTestCases_Cu_E500d0keV_N100000e"
 
         phirhozThinFilm.read()
@@ -89,7 +89,7 @@ class TestPhirhozEmittedCharacteristicThinFilm(unittest.TestCase):
         """
 
         phirhozThinFilm = PhirhozEmittedCharacteristicThinFilm.PhirhozEmittedCharacteristicThinFilm()
-        phirhozThinFilm.path = get_current_module_path(__file__, "../../../testData/results")
+        phirhozThinFilm.path = get_current_module_path(__file__, "../../../test_data/results")
         phirhozThinFilm.basename = "SimulationMCXrayPhirhozTestCases_Cu_E500d0keV_N100000e"
 
         phirhozThinFilm.read()

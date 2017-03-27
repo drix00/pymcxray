@@ -347,7 +347,7 @@ def runExample():
     import matplotlib.pyplot as plt
     import logging
 
-    testDataPath = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../testData"))
+    testDataPath = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../test_data"))
 
     _spectraEdsRegion1Filepath = os.path.join(testDataPath, "version1.1/autoSavedFiles/DetectionLimits_N1000x_C_r10A_z11A_Au_E30d0keVEDSRegion1.txt")
 

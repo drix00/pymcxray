@@ -90,7 +90,7 @@ class DataMap(object):
 def run():
     from pymcxray import get_current_module_path
 
-    filepath = get_current_module_path(__file__, "../../../../testData/exportedFiles/CNTsFePt_30keV_100e_100pixels_BF.txt")
+    filepath = get_current_module_path(__file__, "../../../../test_data/exportedFiles/CNTsFePt_30keV_100e_100pixels_BF.txt")
 
     dataMap = DataMap(filepath)
     dataMap.read()

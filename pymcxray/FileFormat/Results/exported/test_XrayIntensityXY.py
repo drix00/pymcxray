@@ -59,7 +59,7 @@ class TestXrayIntensityXY(unittest.TestCase):
         Test if the test data file can be open.
         """
 
-        path = "../../testData"
+        path = "../../test_data"
         filename = "AlMgBulk5keVB_Generated.txt"
 
         filepath = os.path.join(path, filename)

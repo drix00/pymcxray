@@ -40,7 +40,7 @@ class TestElectronExistResults(unittest.TestCase):
         unittest.TestCase.setUp(self)
 
         #SimulationBseReciprocity_Ag_E1d0keV_N10000e_dB1d0nm_tB15d0deg_ElectronExitResults.csv
-        self.testDataPath = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../testData"))
+        self.testDataPath = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../test_data"))
 
         self.results = ElectronExistResults.ElectronExistResults(path=os.path.join(self.testDataPath, "results"), basename="SimulationBseReciprocity_Ag_E1d0keV_N10000e_dB1d0nm_tB15d0deg")
 

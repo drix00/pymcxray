@@ -61,7 +61,7 @@ class TestPhirhozEmittedCharacteristic(unittest.TestCase):
         #PhirhozMCXRay_Ag_E5d0keV_N10000e_tB0d0deg_TOA45d0deg_PhirhozEmittedCharacteristic_Region0.csv
 
         spectrumFile = PhirhozEmittedCharacteristic.PhirhozEmittedCharacteristic()
-        spectrumFile.path = get_current_module_path(__file__, "../../../testData/results")
+        spectrumFile.path = get_current_module_path(__file__, "../../../test_data/results")
         spectrumFile.basename = "PhirhozMCXRay_Ag_E5d0keV_N10000e_tB0d0deg_TOA45d0deg"
 
         regionID = 0
