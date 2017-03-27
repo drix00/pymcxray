@@ -48,6 +48,7 @@ ANALYZE_TYPE_ANALYZE_SCHEDULED_READ = "scheduled_read"
 SAVE_EVERY_SIMULATIONS = 10
 
 HDF5_SIMULATIONS = "simulations"
+HDF5_PARAMETERS = "parameters"
 
 def _getOptions():
     analyzeTypes = []
@@ -548,8 +549,12 @@ class _Simulations(object):
 
         with h5py.File(file_path, 'a', driver='core', backing_store=True) as hdf5_file:
             hdf5_root = hdf5_file.require_group(HDF5_SIMULATIONS)
+
             _numberError = 0
             simulations = self.getAllSimulationParameters()
+
+            self._write_parameters_hdf5(hdf5_root)
+
             total = len(simulations)
             for index, simulation in enumerate(simulations):
                 if simulation.isDone(self.getSimulationsPath(), None):
@@ -609,6 +614,21 @@ class _Simulations(object):
                 with h5py.File(file_path, 'r', driver='core') as hdf5_file:
                     logging.info("Remove file: %s", backup_file_path)
                     os.remove(backup_file_path)
+
+    def _write_parameters_hdf5(self, hdf5_root):
+        hdf5_parameters_group = hdf5_root.require_group(HDF5_PARAMETERS)
+
+        for fixed_parameter_name, fixed_parameter_value in self._simulationsParameters.fixedParameters.items():
+            hdf5_parameters_group.attrs[fixed_parameter_name] = fixed_parameter_value
+
+        for varied_parameter_name, varied_parameter_value in self._simulationsParameters.variedParameters.items():
+            if varied_parameter_name in hdf5_parameters_group:
+                del hdf5_parameters_group[varied_parameter_name]
+
+            data = np.array(varied_parameter_value)
+
+            data_set = hdf5_parameters_group.create_dataset(varied_parameter_name, data=data)
+
 
     def backup_hdf5_File(self, file_path):
         backup_file_path = None
