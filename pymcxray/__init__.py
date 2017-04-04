@@ -1,4 +1,6 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 """
 .. py:currentmodule:: __init__
 .. moduleauthor:: Hendrix Demers <hendrix.demers@mail.mcgill.ca>
