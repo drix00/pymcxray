@@ -695,6 +695,71 @@ def createAlloyMultiVerticalLayer(elementsLayers, layerWidths_nm):
 
     return specimen
 
+
+def create_cnt_sample(body_elements, cnt_length_nm=1000.0, cnt_outside_diameter_nm=100.0, cnt_inside_diameter_nm=50.0, particle_diameter_nm=5.0):
+    specimen = Specimen.Specimen()
+
+    cnt_length_A = cnt_length_nm * 10.0
+    cnt_outside_diameter_A = cnt_outside_diameter_nm * 10.0
+    cnt_inside_diameter_A = cnt_inside_diameter_nm *10.0
+    particle_diameter_A = particle_diameter_nm * 10.0
+    length_A = cnt_length_A
+
+    name = "cnt_B"
+    for atomic_number, weight_fraction in body_elements:
+        name += "{:s}{:03d}".format(AtomData.getAtomSymbol(atomic_number), int(weight_fraction*100))
+    specimen.name = name
+
+    specimen.numberRegions = 3
+
+    # region 0
+    region = Region.Region()
+    region.numberElements = 0
+    region.regionType = RegionType.REGION_TYPE_BOX
+    parameters = [-10000000000.0, 10000000000.0, -10000000000.0, 10000000000.0, 0.0, cnt_outside_diameter_A+particle_diameter_A + 10000.0]
+    region.regionDimensions = RegionDimensions.RegionDimensionsBox(parameters)
+    specimen.regions.append(region)
+
+    # Outside body
+    region = Region.Region()
+    region.numberElements = len(body_elements)
+    for atomic_number, weight_fraction in body_elements:
+        element = Element.Element(atomic_number, massFraction=weight_fraction)
+        region.elements.append(element)
+    region.regionType = RegionType.REGION_TYPE_CYLINDER
+    position_center_X_A = 0.0
+    position_center_Y_A = -length_A /2.0
+    position_center_Z_A = cnt_outside_diameter_A/2.0 + particle_diameter_A
+    direction_X = 0.0
+    direction_Y = 1.0
+    direction_Z = 0.0
+    radius_A = cnt_outside_diameter_A/2.0
+    parameters = [position_center_X_A, position_center_Y_A, position_center_Z_A,
+                  direction_X, direction_Y, direction_Z,
+                  length_A, radius_A]
+    region.regionDimensions = RegionDimensions.RegionDimensionsCylinder(parameters)
+    specimen.regions.append(region)
+
+    # Inside
+    region = Region.Region()
+    region.numberElements = 0
+    region.regionType = RegionType.REGION_TYPE_CYLINDER
+    position_center_X_A = 0.0
+    position_center_Y_A = -length_A /2.0
+    position_center_Z_A = cnt_outside_diameter_A/2.0 + particle_diameter_A
+    direction_X = 0.0
+    direction_Y = 1.0
+    direction_Z = 0.0
+    length_A = cnt_length_A
+    radius_A = cnt_inside_diameter_A/2.0
+    parameters = [position_center_X_A, position_center_Y_A, position_center_Z_A,
+                  direction_X, direction_Y, direction_Z,
+                  length_A, radius_A]
+    region.regionDimensions = RegionDimensions.RegionDimensionsCylinder(parameters)
+    specimen.regions.append(region)
+
+    return specimen
+
 def computeWeightFraction(atomicNumberRef, atomicWeights):
     nominator = atomicWeights[atomicNumberRef] * getAtomicMass_g_mol(atomicNumberRef)
     denominator = 0.0
