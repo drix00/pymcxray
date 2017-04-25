@@ -625,7 +625,12 @@ class _Simulations(object):
             if varied_parameter_name in hdf5_parameters_group:
                 del hdf5_parameters_group[varied_parameter_name]
 
-            data = np.array(varied_parameter_value)
+            if type(varied_parameter_value[0]) is str:
+                length = np.max([len(item) for item in varied_parameter_value])
+                data_type = "S{:d}".format(length)
+                data = np.array(varied_parameter_value, dtype=data_type)
+            else:
+                data = np.array(varied_parameter_value)
 
             data_set = hdf5_parameters_group.create_dataset(varied_parameter_name, data=data)
 
