@@ -798,6 +798,8 @@ class Simulation(object):
 
         self._parameters = {}
 
+        self.format_digit = {}
+
     def createSimulationFiles(self, path, simulationPath, hdf5_group):
         nameWithoutDot = self.name.replace('.', 'd')
         baseFilenameRef = "Results/%s" % (nameWithoutDot)
@@ -1128,7 +1130,10 @@ _XrayIntensitiesFromPhirhoz.csv""".splitlines()
         name = "%s_%s" % (self.basename, self._specimen.name)
 
         if PARAMETER_INCIDENT_ENERGY_keV in self._parameters:
-            name += "_E%.1fkeV" % (self._parameters[PARAMETER_INCIDENT_ENERGY_keV])
+            if PARAMETER_INCIDENT_ENERGY_keV in self.format_digit:
+                name += "_E{:.{}f}keV".format(self._parameters[PARAMETER_INCIDENT_ENERGY_keV], self.format_digit[PARAMETER_INCIDENT_ENERGY_keV])
+            else:
+                name += "_E%.1fkeV" % (self._parameters[PARAMETER_INCIDENT_ENERGY_keV])
 
         if PARAMETER_NUMBER_ELECTRONS in self._parameters:
             name += "_N%ie" % (self._parameters[PARAMETER_NUMBER_ELECTRONS])

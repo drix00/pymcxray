@@ -113,6 +113,8 @@ class _Simulations(object):
         self._simulationResultsList = {}
         self._serializationExtension = '.ser'
 
+        self.format_digit = {}
+
     def getSimulationPath(self):
         try:
             if self._simulationPath is not None:
@@ -219,7 +221,7 @@ class _Simulations(object):
         self._extractZipfile(archiveFilename, archiveFilepath, destinationPath)
 
     def _extractZipfile(self, archiveFilename, archiveFilepath, destinationPath):
-        versionBasename, dummyExtension = os.path.splitext(archiveFilepath)
+        versionBasename, dummyExtension = os.path.splitext(os.path.basename(archiveFilepath))
         versionFilename = versionBasename + ".txt"
         versionFilepath = os.path.join(destinationPath, versionFilename)
 
@@ -350,6 +352,7 @@ class _Simulations(object):
 
         for parameters in self._simulationsParameters.getAllSimulationParameters():
             simulation = Simulation.Simulation(overwrite=self._overwrite)
+            simulation.format_digit = self.format_digit
             simulation.basename = self.getAnalysisName()
 
             simulation.setParameters(parameters)
