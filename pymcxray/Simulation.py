@@ -705,7 +705,7 @@ def create_cnt_sample(body_elements, cnt_length_nm=1000.0, cnt_outside_diameter_
     particle_diameter_A = particle_diameter_nm * 10.0
     length_A = cnt_length_A
 
-    name = "cnt_B"
+    name = "cnt_B_"
     for atomic_number, weight_fraction in body_elements:
         name += "{:s}{:03d}".format(AtomData.getAtomSymbol(atomic_number), int(weight_fraction*100))
     specimen.name = name
@@ -728,8 +728,8 @@ def create_cnt_sample(body_elements, cnt_length_nm=1000.0, cnt_outside_diameter_
         region.elements.append(element)
     region.regionType = RegionType.REGION_TYPE_CYLINDER
     position_center_X_A = 0.0
-    position_center_Y_A = -length_A /2.0
-    position_center_Z_A = cnt_outside_diameter_A/2.0 + particle_diameter_A
+    position_center_Y_A = -length_A / 2.0
+    position_center_Z_A = cnt_outside_diameter_A / 2.0 + particle_diameter_A
     direction_X = 0.0
     direction_Y = 1.0
     direction_Z = 0.0

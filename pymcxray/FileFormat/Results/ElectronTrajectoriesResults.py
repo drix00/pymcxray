@@ -1,17 +1,29 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 """
 .. py:currentmodule:: FileFormat.Results.ElectronTrajectoriesResults
+
 .. moduleauthor:: Hendrix Demers <hendrix.demers@mail.mcgill.ca>
 
 Read MCXray electron trajectories results file.
 """
 
-# Script information for the file.
-__author__ = "Hendrix Demers (hendrix.demers@mail.mcgill.ca)"
-__version__ = ""
-__date__ = ""
-__copyright__ = "Copyright (c) 2012 Hendrix Demers"
-__license__ = ""
+###############################################################################
+# Copyright 2017 Hendrix Demers
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+###############################################################################
 
 # Standard library modules.
 import os.path
@@ -40,7 +52,21 @@ COLLISION_TYPE_OUT = 3
 COLLISION_TYPE_EMPTY_REGION = 4
 COLLISION_TYPE_ELASTIC = 5
 
-class Collission(object):
+HDF5_ELECTRON_TRAJECTORIES_RESULTS = "ElectronTrajectoriesResults"
+HDF5_ELECTRON_TRAJECTORIES = "ElectronTrajectories"
+HDF5_ELECTRON_TRAJECTORIES_TRAJECTORY_TYPE = 0
+HDF5_ELECTRON_TRAJECTORIES_X_A = 1
+HDF5_ELECTRON_TRAJECTORIES_Y_A = 2
+HDF5_ELECTRON_TRAJECTORIES_Z_A = 3
+HDF5_ELECTRON_TRAJECTORIES_CORRECTED_X_A = 4
+HDF5_ELECTRON_TRAJECTORIES_CORRECTED_Y_A = 5
+HDF5_ELECTRON_TRAJECTORIES_CORRECTED_Z_A = 6
+HDF5_ELECTRON_TRAJECTORIES_ENERGY_keV = 7
+HDF5_ELECTRON_TRAJECTORIES_INDEX_REGION = 8
+HDF5_ELECTRON_TRAJECTORIES_COLLISION_TYPE = 9
+
+
+class Collision(object):
 
     @property
     def x_A(self):
@@ -105,6 +131,7 @@ class Collission(object):
     def collisionType(self, collisionType):
         self._collisionType = collisionType
 
+
 class Trajectory(object):
     def __init__(self):
         self._collisions = []
@@ -133,8 +160,12 @@ class Trajectory(object):
     def collisions(self, collisions):
         self._collisions = collisions
 
+
 class ElectronTrajectoriesResults(object):
     def __init__(self, filepath):
+        self.number_trajectories = 0
+        self.maximum_number_collisions = 0
+
         self.read(filepath)
 
     def read(self, filepath):
@@ -153,13 +184,16 @@ class ElectronTrajectoriesResults(object):
             if trajectoryIndex != currentTrajectoryIndex:
                 if trajectory != None:
                     self._trajectories.append(trajectory)
+                    self.number_trajectories += 1
+                    self.maximum_number_collisions = max(self.maximum_number_collisions, number_collisions)
 
                 trajectory = Trajectory()
                 trajectory.index = trajectoryIndex
                 trajectory.trajectoryType = trajectoryType
                 currentTrajectoryIndex = trajectoryIndex
+                number_collisions = 0
             if len(row) == 8:
-                collision = Collission()
+                collision = Collision()
                 collision.x_A = float(row[2])
                 collision.y_A = float(row[3])
                 collision.z_A = float(row[4])
@@ -168,7 +202,7 @@ class ElectronTrajectoriesResults(object):
                 collision.indexRegion = int(row[6])
                 collision.collisionType = int(row[7])
             elif len(row) == 11:
-                collision = Collission()
+                collision = Collision()
                 collision.x_A = float(row[2])
                 collision.y_A = float(row[3])
                 collision.z_A = float(row[4])
@@ -180,8 +214,30 @@ class ElectronTrajectoriesResults(object):
                 collision.collisionType = int(row[10])
 
             trajectory.addCollision(collision)
+            number_collisions += 1
 
         logging.info("Number trajectories: %i", len(self._trajectories))
+
+    def write_hdf5(self, hdf5_group):
+        hdf5_group = hdf5_group.require_group(HDF5_ELECTRON_TRAJECTORIES_RESULTS)
+
+        shape = (10, self.number_trajectories, self.maximum_number_collisions)
+        electron_trajectories_data = np.zeros(shape, dtype=float)
+
+        for trajectory_id, trajectory in enumerate(self._trajectories):
+            for collision_id, collision in enumerate(trajectory.collisions):
+                electron_trajectories_data[HDF5_ELECTRON_TRAJECTORIES_TRAJECTORY_TYPE, trajectory_id, collision_id] = trajectory.trajectoryType
+                electron_trajectories_data[HDF5_ELECTRON_TRAJECTORIES_X_A, trajectory_id, collision_id] = collision.x_A
+                electron_trajectories_data[HDF5_ELECTRON_TRAJECTORIES_Y_A, trajectory_id, collision_id] = collision.y_A
+                electron_trajectories_data[HDF5_ELECTRON_TRAJECTORIES_Z_A, trajectory_id, collision_id] = collision.z_A
+                electron_trajectories_data[HDF5_ELECTRON_TRAJECTORIES_CORRECTED_X_A, trajectory_id, collision_id] = collision.correctedX_A
+                electron_trajectories_data[HDF5_ELECTRON_TRAJECTORIES_CORRECTED_Y_A, trajectory_id, collision_id] = collision.correctedY_A
+                electron_trajectories_data[HDF5_ELECTRON_TRAJECTORIES_CORRECTED_Z_A, trajectory_id, collision_id] = collision.correctedZ_A
+                electron_trajectories_data[HDF5_ELECTRON_TRAJECTORIES_ENERGY_keV, trajectory_id, collision_id] = collision.energy_keV
+                electron_trajectories_data[HDF5_ELECTRON_TRAJECTORIES_INDEX_REGION, trajectory_id, collision_id] = collision.indexRegion
+                electron_trajectories_data[HDF5_ELECTRON_TRAJECTORIES_COLLISION_TYPE, trajectory_id, collision_id] = collision.collisionType
+
+        hdf5_group.create_dataset(HDF5_ELECTRON_TRAJECTORIES, data=electron_trajectories_data)
 
     def getElectronGunPositions_nm(self):
         positions_nm = []
