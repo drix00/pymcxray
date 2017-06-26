@@ -1,17 +1,29 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 """
 .. py:currentmodule:: pymcxray.Simulation
+
 .. moduleauthor:: Hendrix Demers <hendrix.demers@mail.mcgill.ca>
 
 MCXRay simulation parameters.
 """
 
-# Script information for the file.
-__author__ = "Hendrix Demers (hendrix.demers@mail.mcgill.ca)"
-__version__ = ""
-__date__ = ""
-__copyright__ = "Copyright (c) 2012 Hendrix Demers"
-__license__ = ""
+###############################################################################
+# Copyright 2017 Hendrix Demers
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+###############################################################################
 
 # Standard library modules.
 import logging
@@ -45,8 +57,8 @@ PARAMETER_ELASTIC_CROSS_SECTION_SCALING_FACTOR, PARAMETER_ENERGY_LOSS_SCALING_FA
 PARAMETER_MODEL_SAMPLE_ENERGY_LOSS, PARAMETER_MODEL_XRAY_CHARACTERISTIC, PARAMETER_MODEL_XRAY_BREMSSTRAHLUNG, \
 PARAMETER_MODEL_ATOM_CROSS_SECTION, PARAMETER_MODEL_ATOM_COLLISION, PARAMETER_MODEL_ATOM_MAC
 
-
 # Globals and constants variables.
+
 
 def createPureBulkSample(atomicNumber):
     specimen = Specimen.Specimen()
@@ -64,6 +76,7 @@ def createPureBulkSample(atomicNumber):
     specimen.regions.append(region)
 
     return specimen
+
 
 def createAlloyBulkSample(elements, sampleName=None):
     specimen = Specimen.Specimen()
@@ -90,6 +103,7 @@ def createAlloyBulkSample(elements, sampleName=None):
 
     return specimen
 
+
 def createAlloyThinFilm(elements, filmThickness_nm):
     specimen = Specimen.Specimen()
 
@@ -113,6 +127,7 @@ def createAlloyThinFilm(elements, filmThickness_nm):
     specimen.regions.append(region)
 
     return specimen
+
 
 def createAlloyThinFilm2(elements, filmThickness_nm):
     specimen = Specimen.Specimen()
@@ -148,6 +163,7 @@ def createAlloyThinFilm2(elements, filmThickness_nm):
 
     return specimen
 
+
 def createFilmOverSubstrate(atomicNumberFilm, atomicNumberSubstrate,
                             filmThickness_nm=10.0):
     specimen = Specimen.Specimen()
@@ -178,6 +194,7 @@ def createFilmOverSubstrate(atomicNumberFilm, atomicNumberSubstrate,
     specimen.regions.append(region)
 
     return specimen
+
 
 def createAlloyFilmOverSubstrate(film_elements, substrate_elements, film_thickness_nm=10.0,
                                  film_mass_density_g_cm3=None, substrate_mass_density_g_cm3=None):
@@ -218,6 +235,68 @@ def createAlloyFilmOverSubstrate(film_elements, substrate_elements, film_thickne
 
     return specimen
 
+
+class Layer(object):
+    def __init__(self, elements, thickness_nm, mass_density_g_cm3=None):
+        self.elements = elements
+        self.thickness_nm = thickness_nm
+        self.mass_density_g_cm3 = mass_density_g_cm3
+
+
+def create_multi_horizontal_layer(substrate_elements, layers, substrate_mass_density_g_cm3=None):
+    """
+    Create a horizontal multi layer sample.
+    
+    The substrate is the first region created. The other region are each of the element in the `layers`.
+    
+    :param substrate_elements: list of atomic number and weight fraction pair for the composition of the substrate 
+    :param layers: 
+    :param substrate_mass_density_g_cm3: 
+    :return: 
+    """
+    specimen = Specimen.Specimen()
+    specimen.numberRegions = 1 + len(layers)
+
+    name = ""
+
+    # Create first region as the substrate.
+    region = Region.Region()
+    region.numberElements = len(substrate_elements)
+    for atomicNumber, weightFraction in substrate_elements:
+        name += "%s%i" % (AtomData.getAtomSymbol(atomicNumber), weightFraction*100)
+        element = Element.Element(atomicNumber, massFraction=weightFraction)
+        region.elements.append(element)
+    region.regionType = RegionType.REGION_TYPE_BOX
+    parameters = [-10000000000.0, 10000000000.0, -10000000000.0, 10000000000.0, 0.0, 20000000000.0]
+    region.regionDimensions = RegionDimensions.RegionDimensionsBox(parameters)
+    region.regionMassDensity_g_cm3 = substrate_mass_density_g_cm3
+    specimen.regions.append(region)
+
+    # Loop over each layer.
+    previous_layer_thickness_A = 0.0
+    for layer in layers:
+        region = Region.Region()
+
+        region.numberElements = len(layer.elements)
+        for atomicNumber, weightFraction in layer.elements:
+            name += "_%s%i" % (AtomData.getAtomSymbol(atomicNumber), weightFraction*100)
+            element = Element.Element(atomicNumber, massFraction=weightFraction)
+            region.elements.append(element)
+        region.regionType = RegionType.REGION_TYPE_BOX
+        layer_thickness_A = layer.thickness_nm*1.0e1
+        parameters = [-10000000000.0, 10000000000.0, -10000000000.0, 10000000000.0, previous_layer_thickness_A, previous_layer_thickness_A + layer_thickness_A]
+        region.regionDimensions = RegionDimensions.RegionDimensionsBox(parameters)
+        region.regionMassDensity_g_cm3 = layer.mass_density_g_cm3
+        specimen.regions.append(region)
+
+        name += "_T{:.1f}nm".format(layer_thickness_A)
+        previous_layer_thickness_A = layer_thickness_A
+
+    specimen.name = name
+
+    return specimen
+
+
 def createBoxFeatureInSubstrate(feature_elements, substrate_elements, depth_nm, width_nm):
     depth_A = depth_nm*1.0e1
     width_A = width_nm*1.0e1
@@ -257,6 +336,7 @@ def createBoxFeatureInSubstrate(feature_elements, substrate_elements, depth_nm, 
 
     return specimen
 
+
 def createFilmInSubstrate(atomicNumberFilm, atomicNumberSubstrate,
                             filmThickness_nm, filmTopPositionZ_nm):
     specimen = Specimen.Specimen()
@@ -290,6 +370,7 @@ def createFilmInSubstrate(atomicNumberFilm, atomicNumberSubstrate,
 
     return specimen
 
+
 def createPhirhozSpecimens(atomicNumberTracer, atomicNumberMatrix, tracerThickness_nm, maximumThickness_nm):
     specimens = []
 
@@ -305,6 +386,7 @@ def createPhirhozSpecimens(atomicNumberTracer, atomicNumberMatrix, tracerThickne
         specimens.append(specimen)
 
     return specimens
+
 
 def createParticleInSubstrate(atomicNumberParticle, atomicNumberSubstrate, particleRadius_nm, particlePositionZ_nm=None):
     if particlePositionZ_nm is None:
@@ -343,6 +425,7 @@ def createParticleInSubstrate(atomicNumberParticle, atomicNumberSubstrate, parti
     specimen.regions.append(region)
 
     return specimen
+
 
 def createParticleOnSubstrate(atomicNumberParticle, atomicNumberSubstrate, particleDiameter_nm):
     particleDiameter_A = particleDiameter_nm*10.0
@@ -387,6 +470,7 @@ def createParticleOnSubstrate(atomicNumberParticle, atomicNumberSubstrate, parti
     specimen.regions.append(region)
 
     return specimen
+
 
 def createParticleOnFilm(atomicNumberParticle, atomicNumberSubstrate, particleDiameter_nm, filmThiskness_nm):
     particleDiameter_A = particleDiameter_nm*10.0
@@ -433,6 +517,7 @@ def createParticleOnFilm(atomicNumberParticle, atomicNumberSubstrate, particleDi
 
     return specimen
 
+
 def createAlloyParticleInSubstrate(elementsParticle, atomicNumberSubstrate, particleRadius_nm, particlePositionZ_nm=None):
     if particlePositionZ_nm is None:
         particlePositionZ_nm = particleRadius_nm + 0.1
@@ -477,6 +562,7 @@ def createAlloyParticleInSubstrate(elementsParticle, atomicNumberSubstrate, part
     specimen.regions.append(region)
 
     return specimen
+
 
 def createAlloyParticleInThinFilm(elementsParticle, atomicNumberSubstrate, particleRadius_nm, filmThickness_nm,
                                   particlePositionZ_nm=None):
@@ -527,6 +613,7 @@ def createAlloyParticleInThinFilm(elementsParticle, atomicNumberSubstrate, parti
 
     return specimen
 
+
 def createAlloyBoxInSubstrate(elementsParticle, elementsSubstrate, boxParameters_nm):
     if isinstance(elementsSubstrate, int):
         elementsSubstrate = [(elementsSubstrate, 1.0)]
@@ -567,6 +654,7 @@ def createAlloyBoxInSubstrate(elementsParticle, elementsSubstrate, boxParameters
 
     return specimen
 
+
 def createAlloyBoxInThinFilm(elementsParticle, atomicNumberSubstrate, boxParameters_nm, filmThickness_nm):
     specimen = Specimen.Specimen()
 
@@ -602,6 +690,7 @@ def createAlloyBoxInThinFilm(elementsParticle, atomicNumberSubstrate, boxParamet
 
     return specimen
 
+
 def createAlloyBoxInVaccuum(elements, boxParameters_nm):
     specimen = Specimen.Specimen()
 
@@ -628,6 +717,7 @@ def createAlloyBoxInVaccuum(elements, boxParameters_nm):
     specimen.regions.append(region)
 
     return specimen
+
 
 def createAlloyMultiVerticalLayer(elementsLayers, layerWidths_nm):
     assert(len(elementsLayers) == len(layerWidths_nm))
@@ -760,6 +850,7 @@ def create_cnt_sample(body_elements, cnt_length_nm=1000.0, cnt_outside_diameter_
 
     return specimen
 
+
 def computeWeightFraction(atomicNumberRef, atomicWeights):
     nominator = atomicWeights[atomicNumberRef] * getAtomicMass_g_mol(atomicNumberRef)
     denominator = 0.0
@@ -768,6 +859,7 @@ def computeWeightFraction(atomicNumberRef, atomicWeights):
 
     weightFraction = nominator/denominator
     return weightFraction
+
 
 def create_weight_fractions(weight_fraction_step, number_elements):
     weight_fractions = np.arange(0.0, 1.0+weight_fraction_step, weight_fraction_step)
@@ -782,6 +874,7 @@ def create_weight_fractions(weight_fraction_step, number_elements):
             weight_fractions_data.append(tuple(item))
 
     return list(weight_fractions_data)
+
 
 class Simulation(object):
     def __init__(self, overwrite=True):
