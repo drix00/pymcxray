@@ -50,12 +50,14 @@ import pymcxray.FileFormat.SimulationParameters as SimulationParameters
 import pymcxray.FileFormat.ResultsParameters as ResultsParameters
 
 from pymcxray.SimulationsParameters import PARAMETER_INCIDENT_ENERGY_keV, PARAMETER_NUMBER_ELECTRONS, \
-PARAMETER_NUMBER_XRAYS, PARAMETER_TIME_s, PARAMETER_CURRENT_nA, PARAMETER_BEAM_DIAMETER_nm, PARAMETER_BEAM_TILT_deg, PARAMETER_BEAM_POSITION_nm, \
-PARAMETER_DETECTOR_DISTANCE_cm, PARAMETER_DETECTOR_RADIUS_cm, PARAMETER_DETECTOR_THICKNESS_cm, \
-PARAMETER_DETECTOR_NOISE_eV, PARAMETER_DETECTOR_CHANNEL_WIDTH_eV, PARAMETER_TOA_deg, PARAMETER_DETECTOR_AZIMUTHAL_ANGLE_deg, PARAMETER_NUMBER_WINDOWS, \
-PARAMETER_ELASTIC_CROSS_SECTION_SCALING_FACTOR, PARAMETER_ENERGY_LOSS_SCALING_FACTOR, PARAMETER_REPETITION, \
-PARAMETER_MODEL_SAMPLE_ENERGY_LOSS, PARAMETER_MODEL_XRAY_CHARACTERISTIC, PARAMETER_MODEL_XRAY_BREMSSTRAHLUNG, \
-PARAMETER_MODEL_ATOM_CROSS_SECTION, PARAMETER_MODEL_ATOM_COLLISION, PARAMETER_MODEL_ATOM_MAC
+    PARAMETER_NUMBER_XRAYS, PARAMETER_TIME_s, PARAMETER_CURRENT_nA, PARAMETER_BEAM_DIAMETER_nm, \
+    PARAMETER_BEAM_TILT_deg, PARAMETER_BEAM_POSITION_nm, PARAMETER_DETECTOR_DISTANCE_cm, \
+    PARAMETER_DETECTOR_RADIUS_cm, PARAMETER_DETECTOR_THICKNESS_cm, PARAMETER_DETECTOR_NOISE_eV, \
+    PARAMETER_DETECTOR_CHANNEL_WIDTH_eV, PARAMETER_TOA_deg, PARAMETER_DETECTOR_AZIMUTHAL_ANGLE_deg, \
+    PARAMETER_NUMBER_WINDOWS, PARAMETER_ELASTIC_CROSS_SECTION_SCALING_FACTOR, PARAMETER_ENERGY_LOSS_SCALING_FACTOR, \
+    PARAMETER_REPETITION, PARAMETER_MODEL_SAMPLE_ENERGY_LOSS, PARAMETER_MODEL_XRAY_CHARACTERISTIC, \
+    PARAMETER_MODEL_XRAY_BREMSSTRAHLUNG, PARAMETER_MODEL_ATOM_CROSS_SECTION, PARAMETER_MODEL_ATOM_COLLISION, \
+    PARAMETER_MODEL_ATOM_MAC, PARAMETER_NUMBER_LAYERS_X, PARAMETER_NUMBER_LAYERS_Y, PARAMETER_NUMBER_LAYERS_Z
 
 # Globals and constants variables.
 
@@ -1081,6 +1083,12 @@ _XrayIntensitiesFromPhirhoz.csv""".splitlines()
             self.detectorAzimuthalAngle_deg = parameters[PARAMETER_DETECTOR_AZIMUTHAL_ANGLE_deg]
         if PARAMETER_NUMBER_WINDOWS in parameters:
             self.numberContinuumWindows = parameters[PARAMETER_NUMBER_WINDOWS]
+        if PARAMETER_NUMBER_LAYERS_X in parameters:
+            self.numberLayersX = parameters[PARAMETER_NUMBER_LAYERS_X]
+        if PARAMETER_NUMBER_LAYERS_Y in parameters:
+            self.numberLayersY = parameters[PARAMETER_NUMBER_LAYERS_Y]
+        if PARAMETER_NUMBER_LAYERS_Z in parameters:
+            self.numberLayersZ = parameters[PARAMETER_NUMBER_LAYERS_Z]
         if PARAMETER_ELASTIC_CROSS_SECTION_SCALING_FACTOR in parameters:
             self.elasticCrossSectionScalingFactor = parameters[PARAMETER_ELASTIC_CROSS_SECTION_SCALING_FACTOR]
         if PARAMETER_ENERGY_LOSS_SCALING_FACTOR in parameters:
@@ -1170,6 +1178,27 @@ _XrayIntensitiesFromPhirhoz.csv""".splitlines()
     @numberContinuumWindows.setter
     def numberContinuumWindows(self, numberContinuumWindows):
         self._simulationParameters.numberWindows = numberContinuumWindows
+
+    @property
+    def numberLayersX(self):
+        return self._simulationParameters.numberFilmsX
+    @numberLayersX.setter
+    def numberLayersX(self, number_layers_x):
+        self._simulationParameters.numberFilmsX = number_layers_x
+
+    @property
+    def numberLayersY(self):
+        return self._simulationParameters.numberFilmsY
+    @numberLayersY.setter
+    def numberLayersY(self, number_layers_y):
+        self._simulationParameters.numberFilmsY = number_layers_y
+
+    @property
+    def numberLayersZ(self):
+        return self._simulationParameters.numberFilmsZ
+    @numberLayersZ.setter
+    def numberLayersZ(self, number_layers_z):
+        self._simulationParameters.numberFilmsZ = number_layers_z
 
     @property
     def solidAngle_sr(self):
@@ -1268,6 +1297,12 @@ _XrayIntensitiesFromPhirhoz.csv""".splitlines()
             name += "_AA%.1fdeg" % (self._parameters[PARAMETER_DETECTOR_AZIMUTHAL_ANGLE_deg])
         if PARAMETER_NUMBER_WINDOWS in self._parameters:
             name += "_N%iW" % (self._parameters[PARAMETER_NUMBER_WINDOWS])
+        if PARAMETER_NUMBER_LAYERS_X in self._parameters:
+            name += "_N%iLX" % (self._parameters[PARAMETER_NUMBER_LAYERS_X])
+        if PARAMETER_NUMBER_LAYERS_Y in self._parameters:
+            name += "_N%iLY" % (self._parameters[PARAMETER_NUMBER_LAYERS_Y])
+        if PARAMETER_NUMBER_LAYERS_Z in self._parameters:
+            name += "_N%iLZ" % (self._parameters[PARAMETER_NUMBER_LAYERS_Z])
 
         if PARAMETER_ELASTIC_CROSS_SECTION_SCALING_FACTOR in self._parameters:
             name += "_ECSF%f" % (self._parameters[PARAMETER_ELASTIC_CROSS_SECTION_SCALING_FACTOR])

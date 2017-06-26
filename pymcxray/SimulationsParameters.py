@@ -61,6 +61,10 @@ PARAMETER_TOA_deg = "detectorTOA"
 PARAMETER_DETECTOR_AZIMUTHAL_ANGLE_deg = "azimuthalAngle_deg"
 PARAMETER_NUMBER_WINDOWS = "numberBackgroundWindows"
 
+PARAMETER_NUMBER_LAYERS_X = "numberLayersX"
+PARAMETER_NUMBER_LAYERS_Y = "numberLayersY"
+PARAMETER_NUMBER_LAYERS_Z = "numberLayersZ"
+
 PARAMETER_WEIGHT_FRACTION = "weightFraction"
 PARAMETER_WEIGHT_FRACTIONS = "weightFractions"
 PARAMETER_ATOMIC_FRACTION = "atomicFraction"
