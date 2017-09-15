@@ -58,7 +58,14 @@ from pymcxray import get_current_module_path, get_mcxray_program_name
 
 # Globals and constants variables.
 
+
 class SimulationTrainingMapsMM2017(mcxray._Simulations):
+    def __init__(self, simulation_name, elements, **kwargs):
+        super().__init__(**kwargs)
+
+        self.elements = elements
+        self.simulation_name = simulation_name
+
     def _initData(self):
         self.use_hdf5 = True
         self.delete_result_files = False
@@ -68,47 +75,41 @@ class SimulationTrainingMapsMM2017(mcxray._Simulations):
         energy_keV = 30.0
         number_electrons = 10000
         number_xrays = 10
-        weight_fract = [(0.975, 1.0-0.975)]  #Mass fraction of the two elements in the map
-        
-        xs_nm = np.linspace(-5.0e3, 5.0e3, 10) #Number of position acquired by side (# of pixel by side)
-        probePositions_nm = [tuple(position_nm) for position_nm in
+
+        xs_nm = np.linspace(-5.0e3, 5.0e3, 10) # Number of position acquired by side (# of pixel by side)
+        probe_positions_nm = [tuple(position_nm) for position_nm in
                              np.transpose([np.tile(xs_nm, len(xs_nm)), np.repeat(xs_nm, len(xs_nm))]).tolist()]
 
         # Simulation parameters
         self._simulationsParameters = SimulationsParameters()
 
-        self._simulationsParameters.addVaried(PARAMETER_BEAM_POSITION_nm, probePositions_nm)
-        
-        self._simulationsParameters.addFixed(PARAMETER_WEIGHT_FRACTIONS, weight_fract)
+        self._simulationsParameters.addVaried(PARAMETER_BEAM_POSITION_nm, probe_positions_nm)
+
         self._simulationsParameters.addFixed(PARAMETER_NUMBER_XRAYS, number_xrays)
         self._simulationsParameters.addFixed(PARAMETER_INCIDENT_ENERGY_keV, energy_keV)
         self._simulationsParameters.addFixed(PARAMETER_NUMBER_ELECTRONS, number_electrons)
 
     def getAnalysisName(self):
-        return "SimulationTrainingMapsMM2017_wfFe975" # Name of the hdf5 file created
+        return self.simulation_name
 
     def createSpecimen(self, parameters):
-        weight_fract = parameters[PARAMETER_WEIGHT_FRACTIONS]
-        
-        elements = [(26, weight_fract[0]), (27, weight_fract[1])] # (Atomic number, mass fraction)
-        
-        filmThickness_nm = 200.0
-        specimen = createAlloyThinFilm(elements, filmThickness_nm)
-        
+        film_thickness_nm = 200.0
+        specimen = createAlloyThinFilm(self.elements, film_thickness_nm)
+
         return specimen
 
     def read_one_results_hdf5(self, simulation, hdf5_group):
-        electronResults = ElectronResults.ElectronResults()
-        electronResults.path = self.getSimulationsPath()
-        electronResults.basename = simulation.resultsBasename
-        electronResults.read()
-        electronResults.write_hdf5(hdf5_group)
+        electron_results = ElectronResults.ElectronResults()
+        electron_results.path = self.getSimulationsPath()
+        electron_results.basename = simulation.resultsBasename
+        electron_results.read()
+        electron_results.write_hdf5(hdf5_group)
 
-        xrayIntensities = XrayIntensities.XrayIntensities()
-        xrayIntensities.path = self.getSimulationsPath()
-        xrayIntensities.basename = simulation.resultsBasename
-        xrayIntensities.read()
-        xrayIntensities.write_hdf5(hdf5_group)
+        xray_intensities = XrayIntensities.XrayIntensities()
+        xray_intensities.path = self.getSimulationsPath()
+        xray_intensities.basename = simulation.resultsBasename
+        xray_intensities.read()
+        xray_intensities.write_hdf5(hdf5_group)
 
         spectrum = XraySpectraRegionsEmitted.XraySpectraRegionsEmitted()
         spectrum.path = self.getSimulationsPath()
@@ -122,7 +123,7 @@ class SimulationTrainingMapsMM2017(mcxray._Simulations):
         spectrum.read()
         spectrum.write_hdf5(hdf5_group)
 
-    def analyze_results_hdf5(self): #pragma: no cover
+    def analyze_results_hdf5(self):  # pragma: no cover
         self.readResults()
 
         file_path = self.get_hdf5_file_path()
@@ -130,7 +131,11 @@ class SimulationTrainingMapsMM2017(mcxray._Simulations):
             hdf5_group = self.get_hdf5_group(hdf5_file)
             logging.info(hdf5_group.name)
 
+
 def run():
+    simulation_name = "SimulationTrainingMapsMM2017_Fe075"
+    elements = [(26, 0.75), (27, 0.25)]
+
     # import the batch file class.
     from pymcxray.BatchFileConsole import BatchFileConsole
 
@@ -142,20 +147,20 @@ def run():
     batch_file = BatchFileConsole("BatchSimulationTrainingMapsMM2017", program_name, numberFiles=10)
 
     # Create the simulation object and add the batch file object to it.
-    analyze = SimulationTrainingMapsMM2017(relativePath=r"mcxray/SimulationTrainingMapsMM2017",
-                                       configurationFilepath=configuration_file_path)
+    analyze = SimulationTrainingMapsMM2017(simulation_name, elements, relativePath=r"mcxray/SimulationTrainingMapsMM2017",
+                                           configurationFilepath=configuration_file_path)
     analyze.run(batch_file)
 
 
-if __name__ == '__main__': #pragma: no cover
+if __name__ == '__main__':  # pragma: no cover
     import sys
     logging.getLogger().setLevel(logging.INFO)
     logging.info(sys.argv)
     if len(sys.argv) == 1:
-        #sys.argv.append(mcxray.ANALYZE_TYPE_GENERATE_INPUT_FILE)
-        #sys.argv.append(mcxray.ANALYZE_TYPE_CHECK_PROGRESS)
-        sys.argv.append(mcxray.ANALYZE_TYPE_READ_RESULTS)
-        #sys.argv.append(mcxray.ANALYZE_TYPE_ANALYZE_RESULTS)
-        #sys.argv.append(mcxray.ANALYZE_TYPE_ANALYZE_SCHEDULED_READ)
+        sys.argv.append(mcxray.ANALYZE_TYPE_GENERATE_INPUT_FILE)
+        # sys.argv.append(mcxray.ANALYZE_TYPE_CHECK_PROGRESS)
+        # sys.argv.append(mcxray.ANALYZE_TYPE_READ_RESULTS)
+        # sys.argv.append(mcxray.ANALYZE_TYPE_ANALYZE_RESULTS)
+        # sys.argv.append(mcxray.ANALYZE_TYPE_ANALYZE_SCHEDULED_READ)
     run()
 
