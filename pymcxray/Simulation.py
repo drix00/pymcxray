@@ -248,13 +248,13 @@ class Layer(object):
 def create_multi_horizontal_layer(substrate_elements, layers, substrate_mass_density_g_cm3=None):
     """
     Create a horizontal multi layer sample.
-    
+
     The substrate is the first region created. The other region are each of the element in the `layers`.
-    
-    :param substrate_elements: list of atomic number and weight fraction pair for the composition of the substrate 
-    :param layers: 
-    :param substrate_mass_density_g_cm3: 
-    :return: 
+
+    :param substrate_elements: list of atomic number and weight fraction pair for the composition of the substrate
+    :param layers:
+    :param substrate_mass_density_g_cm3:
+    :return:
     """
     specimen = Specimen.Specimen()
     specimen.numberRegions = 1 + len(layers)
@@ -1221,6 +1221,13 @@ _XrayIntensitiesFromPhirhoz.csv""".splitlines()
     @beamDiameter_nm.setter
     def beamDiameter_nm(self, beamDiameter_nm):
         self._microscopeParameters.beamDiameter_A = beamDiameter_nm*10.0
+
+    @property
+    def beamTilt_deg(self):
+        return self._microscopeParameters.beamTilt_deg
+    @beamTilt_deg.setter
+    def beamTilt_deg(self, beamTilt_deg):
+        self._microscopeParameters.beamTilt_deg = beamTilt_deg
 
     @property
     def beamPosition_nm(self):
