@@ -18,7 +18,7 @@ import os.path
 # Third party modules.
 
 # Local modules.
-import pymcxray.serialization.SerializationPickle as SerializationPickle
+import mcxray.serialization.SerializationPickle as SerializationPickle
 
 # Globals and constants variables.
 
@@ -76,5 +76,5 @@ class TestSerialization(unittest.TestCase):
 
 if __name__ == '__main__': #pragma: no cover
     logging.getLogger().setLevel(logging.DEBUG)
-    from tests.Testings import runTestModule
+    from tests.testings import runTestModule
     runTestModule()

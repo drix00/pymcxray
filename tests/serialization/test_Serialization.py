@@ -20,10 +20,10 @@ import time
 from nose.plugins.skip import SkipTest
 
 # Local modules.
-from pymcxray import get_current_module_path
+from mcxray import get_current_module_path
 
 # Project modules
-import pymcxray.serialization._Serialization as _Serialization
+import mcxray.serialization._Serialization as _Serialization
 
 # Globals and constants variables.
 

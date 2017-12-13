@@ -6,7 +6,7 @@
 
 .. moduleauthor:: Hendrix Demers <hendrix.demers@mail.mcgill.ca>
 
-Tests package for the pymcxray.examples package.
+Tests package for the mcxray.examples package.
 """
 
 ###############################################################################

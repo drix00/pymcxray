@@ -6,7 +6,7 @@
 
 .. moduleauthor:: Hendrix Demers <hendrix.demers@mail.mcgill.ca>
 
-Setup script for the project pymcxray.
+Setup script for the project mcxray.
 """
 
 ###############################################################################
@@ -54,19 +54,19 @@ test_requirements = [
 ]
 
 setup(name="pymcxray",
-      version='0.1.2',
+      version='2.0.0',
       description="Python scripts for using mcxray software",
       long_description=readme + '\n\n' + history,
       author="Hendrix Demers",
       author_email="hendrix.demers@mail.mcgill.ca",
       url='https://github.com/drix00/pymcxray',
       packages=packages,
-      package_dir={'pymcxray': 'pymcxray'},
+      package_dir={'mcxray': 'mcxray'},
       include_package_data=True,
       install_requires=requirements,
       license="Apache Software License 2.0",
       zip_safe=False,
-      keywords='pymcxray',
+      keywords='mcxray',
       classifiers=['Development Status :: 4 - Beta',
                    'Intended Audience :: Developers',
                    'Intended Audience :: Science/Research',

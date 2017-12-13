@@ -21,7 +21,7 @@ import numpy as np
 # Local modules.
 
 # Project modules
-import pymcxray.serialization.SerializationNumpy as SerializationNumpy
+import mcxray.serialization.SerializationNumpy as SerializationNumpy
 
 # Globals and constants variables.
 
@@ -139,5 +139,5 @@ class TestSerializationNumpy(unittest.TestCase):
 
 if __name__ == '__main__':  #pragma: no cover
     logging.getLogger().setLevel(logging.DEBUG)
-    from tests.Testings import runTestModule
+    from tests.testings import runTestModule
     runTestModule()

@@ -54,5 +54,5 @@ class Testmcxray(unittest.TestCase):
 
 if __name__ == '__main__':  #pragma: no cover
     logging.getLogger().setLevel(logging.DEBUG)
-    from tests.Testings import runTestModuleWithCoverage
+    from tests.testings import runTestModuleWithCoverage
     runTestModuleWithCoverage(__file__)

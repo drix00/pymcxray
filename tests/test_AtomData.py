@@ -21,7 +21,7 @@ import logging
 # Local modules.
 
 # Project modules
-import pymcxray.AtomData as AtomData
+import mcxray.AtomData as AtomData
 
 # Globals and constants variables.
 
@@ -73,5 +73,5 @@ class TestAtomData(unittest.TestCase):
 
 if __name__ == '__main__':  #pragma: no cover
     logging.getLogger().setLevel(logging.DEBUG)
-    from tests.Testings import runTestModuleWithCoverage
+    from tests.testings import runTestModuleWithCoverage
     runTestModuleWithCoverage(__file__)
