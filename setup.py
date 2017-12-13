@@ -26,7 +26,6 @@ Setup script for the project mcxray.
 ###############################################################################
 
 # Standard library modules.
-import os
 
 # Third party modules.
 from setuptools import setup, find_packages
@@ -81,5 +80,4 @@ setup(name="pymcxray",
 
       test_suite='nose.collector',
       tests_require=test_requirements
-)
-
+      )

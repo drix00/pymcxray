@@ -2,6 +2,11 @@
 History
 =======
 
+2.0.0 (2017-12-13)
+------------------
+
+* Refactor project for new version of mcxray (hdf5 file).
+
 0.1.2 (2017-06-26)
 ------------------
 
