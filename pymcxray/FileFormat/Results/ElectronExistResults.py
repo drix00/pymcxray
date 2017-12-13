@@ -148,13 +148,16 @@ class ElectronExistResults(BaseResults.BaseResults):
         if self.numberData == 0:
             self.read()
 
-        histogram, low_range, binsize, _extrapoints = scipy.stats.histogram(self.data[E_keV], numbins=numberBins)
+        # histogram, low_range, binsize, _extrapoints = scipy.stats.histogram(self.data[E_keV], numbins=numberBins)
+        histogram, bin_edges = np.histogram(self.data[E_keV], bins=numberBins)
 
-        startEnergy_keV = low_range + binsize/2.0
-        endEnergy_keV = startEnergy_keV + len(histogram) *binsize
-        stepEnergy_keV = binsize
-        energies_keV = np.arange(startEnergy_keV, endEnergy_keV, stepEnergy_keV)
+        stepEnergy_keV = (bin_edges[1] - bin_edges[0])
+        startEnergy_keV = bin_edges[0] + stepEnergy_keV/2.0
+        endEnergy_keV = bin_edges[-1] - stepEnergy_keV/2.0
+        # energies_keV = np.arange(startEnergy_keV, endEnergy_keV, stepEnergy_keV)
+        energies_keV = np.linspace(startEnergy_keV, endEnergy_keV, numberBins)
 
+        assert len(histogram) == len(energies_keV)
         return energies_keV, histogram
 
     @property
