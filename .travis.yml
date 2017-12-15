@@ -6,7 +6,7 @@ python:
     - 3.4
     - 3.5
     - 3.6
-    - 2.7
+#    - 2.7
 
 before_install:
     - echo -e "machine github.com\n  login ed880e956e8dee3515e1794d98314e321d571656" >> ~/.netrc
