@@ -39,18 +39,13 @@ with open('README.rst') as readme_file:
 with open('HISTORY.rst') as history_file:
     history = history_file.read()
 
+with open('requirements.txt') as requirements_file:
+    requirements = requirements_file.read()
+
+with open('requirements_test.txt') as requirements_file:
+    test_requirements = requirements_file.read()
+
 packages = find_packages()
-
-requirements = [
-    'numpy',
-    'matplotlib',
-    'scipy',
-    'Pillow',  # Fork of PIL (Python 3 compatible)
-]
-
-test_requirements = [
-    'nose', 'coverage'
-]
 
 setup(name="pymcxray",
       version='2.0.0',

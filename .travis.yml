@@ -2,21 +2,33 @@
 # This file will be regenerated if you run travis_pypi_setup.py
 
 language: python
-python: 3.5
+python:
+    - 3.4
+    - 3.5
+    - 3.6
+    - 2.7
 
-env:
-  - TOXENV=py35
-  - TOXENV=py34
-  - TOXENV=py33
-  - TOXENV=py27
-  - TOXENV=py26
-  - TOXENV=pypy
+before_install:
+    - echo -e "machine github.com\n  login ed880e956e8dee3515e1794d98314e321d571656" >> ~/.netrc
+    - git lfs pull
 
 # command to install dependencies, e.g. pip install -r requirements.txt --use-mirrors
-install: pip install -U tox
+install:
+  - pip install -r requirements.txt
+  - pip install .
 
 # command to run tests, e.g. python setup.py test
-script: tox -e ${TOXENV}
+script:
+  - nosetests
+
+after_success:
+  - codecov
+
+notifications:
+  email: false
+
+git:
+  lfs_skip_smudge: true
 
 # After you create the Github repo and add it to Travis, run the
 # travis_pypi_setup.py script to finish PyPI deployment setup
@@ -28,5 +40,5 @@ deploy:
     secure: PLEASE_REPLACE_ME
   on:
     tags: true
-    repo: drix00/pymcxray
-    condition: $TOXENV == py27
+    repo: drix00/pysemeels
+    condition: $TOXENV == py36
