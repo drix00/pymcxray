@@ -2,3 +2,5 @@ numpy
 matplotlib
 scipy
 Pillow
+vtk
+h5py
