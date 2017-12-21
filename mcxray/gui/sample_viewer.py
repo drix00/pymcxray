@@ -2,8 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-.. py:currentmodule:: sample_viewer
-   :synopsis: Script to view the mcxray sample in 3D.
+.. py:currentmodule:: mcxray.gui.sample_viewer
 
 .. moduleauthor:: Hendrix Demers <hendrix.demers@mail.mcgill.ca>
 
@@ -42,10 +41,12 @@ from mcxray.format.Specimen import Specimen
 from mcxray.format.RegionType import REGION_TYPE_BOX
 
 # Globals and constants variables.
-_colors = [(1.0, 0.0, 0.0), (1.0, 1.0, 0.0), (0.0, 1.0, 0.0), (0.0, 0.5, 0.0), (0.0, 1.0, 1.0), (0.0, 0.0, 1.0), (1.0, 0.0, 1.0)]
+_colors = [(1.0, 0.0, 0.0), (1.0, 1.0, 0.0), (0.0, 1.0, 0.0), (0.0, 0.5, 0.0), (0.0, 1.0, 1.0), (0.0, 0.0, 1.0),
+           (1.0, 0.0, 1.0)]
 colors = cycle(_colors)
 
-class SampleViewer():
+
+class SampleViewer(object):
     def __init__(self):
         self.maximum_size_nm = 1.0
 
@@ -83,7 +84,7 @@ class SampleViewer():
         transform = vtk.vtkTransform()
         transform.Translate(self.maximum_size_nm, 0.0, 0.0)
         transform.Scale(self.maximum_size_nm/2.0, self.maximum_size_nm/2.0, self.maximum_size_nm/2.0)
-        #  The axes are positioned with a user transform
+        #  The axes are positioned with a user transform.
         self.axes.SetUserTransform(transform)
 
     def open(self, file_path):
@@ -111,23 +112,26 @@ class SampleViewer():
         # create cube
         cube = vtk.vtkCubeSource()
         dimensions = region.regionDimensions
-        #cube.SetCenter(0.0, 0.0, 0.0)
-        cube.SetBounds(dimensions.minimumX/10.0, dimensions.maximumX/10.0, dimensions.minimumY/10.0, dimensions.maximumY/10.0, dimensions.minimumZ/10.0, dimensions.maximumZ/10.0)
-        self.maximum_size_nm = max(self.maximum_size_nm, dimensions.minimumX/10.0, dimensions.maximumX/10.0, dimensions.minimumY/10.0, dimensions.maximumY/10.0, dimensions.minimumZ/10.0, dimensions.maximumZ/10.0)
+        # cube.SetCenter(0.0, 0.0, 0.0)
+        cube.SetBounds(dimensions.minimumX/10.0, dimensions.maximumX/10.0, dimensions.minimumY/10.0,
+                       dimensions.maximumY/10.0, dimensions.minimumZ/10.0, dimensions.maximumZ/10.0)
+        self.maximum_size_nm = max(self.maximum_size_nm, dimensions.minimumX/10.0, dimensions.maximumX/10.0,
+                                   dimensions.minimumY/10.0, dimensions.maximumY/10.0, dimensions.minimumZ/10.0,
+                                   dimensions.maximumZ/10.0)
 
         # mapper
-        cubeMapper = vtk.vtkPolyDataMapper()
-        # cubeMapper.SetInputData(cube.GetOutput())
-        cubeMapper.SetInputConnection(cube.GetOutputPort())
+        cube_mapper = vtk.vtkPolyDataMapper()
+        # cube_mapper.SetInputData(cube.GetOutput())
+        cube_mapper.SetInputConnection(cube.GetOutputPort())
 
         # actor
-        cubeActor = vtk.vtkActor()
-        cubeActor.SetMapper(cubeMapper)
-        cubeActor.GetProperty().SetColor(next(colors))
-        cubeActor.GetProperty().SetOpacity(0.2)
-        cubeActor.GetProperty().SetEdgeVisibility(True)
+        cube_actor = vtk.vtkActor()
+        cube_actor.SetMapper(cube_mapper)
+        cube_actor.GetProperty().SetColor(next(colors))
+        cube_actor.GetProperty().SetOpacity(0.2)
+        cube_actor.GetProperty().SetEdgeVisibility(True)
 
-        self.renderer.AddActor(cubeActor)
+        self.renderer.AddActor(cube_actor)
 
         self._rescale_axes()
 
@@ -138,7 +142,7 @@ class SampleViewer():
         self.renderer.ResetCamera(-200, 200, -200, 200, -200, 200)
         self.render_window.Render()
 
-        # enable user interface interactor
+        # enable user interface interactor.
         self.interface_render.Initialize()
         self.render_window.Render()
         self.interface_render.Start()
@@ -147,7 +151,7 @@ class SampleViewer():
 if __name__ == '__main__':
     logging.getLogger().setLevel(logging.INFO)
 
-    file_path = r"D:\work\Dropbox\hdemers\professional\projects\MCXRay\maps\map_test_30kV.sim"
+    file_path = r"D:\Dropbox\hdemers\professional\projects\MCXRay\maps\map_test_30kV.sim"
 
     viewer = SampleViewer()
     viewer.open(file_path)

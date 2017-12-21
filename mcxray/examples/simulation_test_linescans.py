@@ -32,25 +32,14 @@ import os.path
 
 # Third party modules.
 import matplotlib.pyplot as plt
-import h5py
-import numpy as np
 
 # Local modules.
 
 import mcxray.mcxray as mcxray
-import mcxray.format.results.XrayIntensities as XrayIntensities
-import mcxray.format.results.XraySpectraSpecimenEmittedDetected as XraySpectraSpecimenEmittedDetected
-import mcxray.format.results.ElectronResults as ElectronResults
-import mcxray.format.results.XraySpectraRegionsEmitted as XraySpectraRegionsEmitted
 
-from mcxray.SimulationsParameters import SimulationsParameters, PARAMETER_INCIDENT_ENERGY_keV, PARAMETER_NUMBER_ELECTRONS, \
-PARAMETER_BEAM_POSITION_nm, PARAMETER_NUMBER_XRAYS
+from mcxray.SimulationsParameters import SimulationsParameters, PARAMETER_INCIDENT_ENERGY_keV, \
+    PARAMETER_NUMBER_ELECTRONS, PARAMETER_BEAM_POSITION_nm, PARAMETER_NUMBER_XRAYS
 
-import mcxray.format.Specimen as Specimen
-import mcxray.format.Region as Region
-import mcxray.format.RegionType as RegionType
-import mcxray.format.RegionDimensions as RegionDimensions
-import mcxray.format.Element as Element
 from mcxray.format.results.ElectronTrajectoriesResults import ElectronTrajectoriesResults, COLOR_REGION
 
 # Project modules.
@@ -58,6 +47,7 @@ from mcxray import get_current_module_path, get_mcxray_program_name
 from mcxray.examples.simulation_test_map import SimulationTestMapsMM2017
 
 # Globals and constants variables.
+
 
 class SimulationTestLinescansMM2017(SimulationTestMapsMM2017):
     def _initData(self):
@@ -69,7 +59,7 @@ class SimulationTestLinescansMM2017(SimulationTestMapsMM2017):
 
         enegy_keV = 30.0
         number_electrons = 10000
-        #number_xrays_list = [10, 20, 30, 50, 60, 100, 200, 500, 1000]
+        # number_xrays_list = [10, 20, 30, 50, 60, 100, 200, 500, 1000]
         number_xrays_list = [10]
 
         probePositions_nm = []
@@ -92,12 +82,13 @@ class SimulationTestLinescansMM2017(SimulationTestMapsMM2017):
         return "SimulationTestLinescansMM2017"
 
     def readOneResults(self, simulation):
-        filepath = os.path.join(self.getSimulationsPath(), simulation.resultsBasename + "_ElectronTrajectoriesResults.csv")
+        filepath = os.path.join(self.getSimulationsPath(),
+                                simulation.resultsBasename + "_ElectronTrajectoriesResults.csv")
         electronTrajectoriesResults = ElectronTrajectoriesResults(filepath)
 
         return electronTrajectoriesResults
 
-    def analyzeResultsFiles(self): #pragma: no cover
+    def analyzeResultsFiles(self):  # pragma: no cover
         self.readResults()
 
         allResults = self.getAllResults()
@@ -141,18 +132,20 @@ def run():
     programName = get_mcxray_program_name(configurationFilepath)
 
     batchFile = BatchFileConsole.BatchFileConsole("BatchSimulationTestLinescansMM2017", programName, numberFiles=10)
-    analyze = SimulationTestLinescansMM2017(relativePath=r"mcxray/SimulationTestLinescansMM2017", configurationFilepath=configurationFilepath)
+    analyze = SimulationTestLinescansMM2017(relativePath=r"mcxray/SimulationTestLinescansMM2017",
+                                            configurationFilepath=configurationFilepath)
     analyze.overwrite = False
     analyze.run(batchFile)
 
     plt.show()
 
-if __name__ == '__main__': #pragma: no cover
+
+if __name__ == '__main__':  # pragma: no cover
     import sys
     logging.getLogger().setLevel(logging.INFO)
     logging.info(sys.argv)
     sys.argv.append(mcxray.ANALYZE_TYPE_GENERATE_INPUT_FILE)
-    #sys.argv.append(mcxray.ANALYZE_TYPE_CHECK_PROGRESS)
-    #sys.argv.append(mcxray.ANALYZE_TYPE_ANALYZE_RESULTS)
-    #sys.argv.append(mcxray.ANALYZE_TYPE_ANALYZE_SCHEDULED_READ)
+    # sys.argv.append(mcxray.ANALYZE_TYPE_CHECK_PROGRESS)
+    # sys.argv.append(mcxray.ANALYZE_TYPE_ANALYZE_RESULTS)
+    # sys.argv.append(mcxray.ANALYZE_TYPE_ANALYZE_SCHEDULED_READ)
     run()

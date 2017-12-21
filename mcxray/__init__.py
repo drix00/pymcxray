@@ -5,7 +5,6 @@
 .. py:currentmodule:: __init__
 .. moduleauthor:: Hendrix Demers <hendrix.demers@mail.mcgill.ca>
 
-
 """
 
 # Standard library modules.

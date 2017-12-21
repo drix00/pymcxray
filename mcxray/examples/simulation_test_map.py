@@ -28,10 +28,8 @@ Script to simulate mcxray maps for MM2017 with Nadi.
 
 # Standard library modules.
 import logging
-import os.path
 
 # Third party modules.
-import matplotlib.pyplot as plt
 import h5py
 import numpy as np
 
@@ -43,8 +41,8 @@ import mcxray.format.results.XraySpectraSpecimenEmittedDetected as XraySpectraSp
 import mcxray.format.results.ElectronResults as ElectronResults
 import mcxray.format.results.XraySpectraRegionsEmitted as XraySpectraRegionsEmitted
 
-from mcxray.SimulationsParameters import SimulationsParameters, PARAMETER_INCIDENT_ENERGY_keV, PARAMETER_NUMBER_ELECTRONS, \
-PARAMETER_BEAM_POSITION_nm, PARAMETER_NUMBER_XRAYS
+from mcxray.SimulationsParameters import SimulationsParameters, PARAMETER_INCIDENT_ENERGY_keV, \
+    PARAMETER_NUMBER_ELECTRONS, PARAMETER_BEAM_POSITION_nm, PARAMETER_NUMBER_XRAYS
 
 import mcxray.format.Specimen as Specimen
 import mcxray.format.Region as Region
@@ -56,6 +54,7 @@ import mcxray.format.Element as Element
 from mcxray import get_current_module_path, get_mcxray_program_name
 
 # Globals and constants variables.
+
 
 class SimulationTestMapsMM2017(mcxray._Simulations):
     def _initData(self):
@@ -208,13 +207,14 @@ class SimulationTestMapsMM2017(mcxray._Simulations):
         spectrum.read()
         spectrum.write_hdf5(hdf5_group)
 
-    def analyze_results_hdf5(self): #pragma: no cover
+    def analyze_results_hdf5(self):  # pragma: no cover
         self.readResults()
 
         file_path = self.get_hdf5_file_path()
         with h5py.File(file_path, 'r', driver='core') as hdf5_file:
             hdf5_group = self.get_hdf5_group(hdf5_file)
             logging.info(hdf5_group.name)
+
 
 def run():
     # import the batch file class.
@@ -233,14 +233,14 @@ def run():
     analyze.run(batch_file)
 
 
-if __name__ == '__main__': #pragma: no cover
+if __name__ == '__main__':  # pragma: no cover
     import sys
     logging.getLogger().setLevel(logging.INFO)
     logging.info(sys.argv)
     if len(sys.argv) == 1:
         sys.argv.append(mcxray.ANALYZE_TYPE_GENERATE_INPUT_FILE)
-        #sys.argv.append(mcxray.ANALYZE_TYPE_CHECK_PROGRESS)
-        #sys.argv.append(mcxray.ANALYZE_TYPE_ANALYZE_RESULTS)
-        #sys.argv.append(mcxray.ANALYZE_TYPE_ANALYZE_SCHEDULED_READ)
+        # sys.argv.append(mcxray.ANALYZE_TYPE_CHECK_PROGRESS)
+        # sys.argv.append(mcxray.ANALYZE_TYPE_ANALYZE_RESULTS)
+        # sys.argv.append(mcxray.ANALYZE_TYPE_ANALYZE_SCHEDULED_READ)
     run()
 

@@ -28,10 +28,8 @@ Script to simulate mcxray maps for MM2017 with Nadi.
 
 # Standard library modules.
 import logging
-import os.path
 
 # Third party modules.
-import matplotlib.pyplot as plt
 import h5py
 import numpy as np
 
@@ -43,15 +41,9 @@ import mcxray.format.results.XraySpectraSpecimenEmittedDetected as XraySpectraSp
 import mcxray.format.results.ElectronResults as ElectronResults
 import mcxray.format.results.XraySpectraRegionsEmitted as XraySpectraRegionsEmitted
 
-from mcxray.SimulationsParameters import SimulationsParameters, PARAMETER_INCIDENT_ENERGY_keV, PARAMETER_NUMBER_ELECTRONS, \
-PARAMETER_BEAM_POSITION_nm, PARAMETER_NUMBER_XRAYS, PARAMETER_WEIGHT_FRACTIONS
+from mcxray.SimulationsParameters import SimulationsParameters, PARAMETER_INCIDENT_ENERGY_keV, \
+    PARAMETER_NUMBER_ELECTRONS, PARAMETER_BEAM_POSITION_nm, PARAMETER_NUMBER_XRAYS
 from mcxray.Simulation import createAlloyThinFilm
-
-import mcxray.format.Specimen as Specimen
-import mcxray.format.Region as Region
-import mcxray.format.RegionType as RegionType
-import mcxray.format.RegionDimensions as RegionDimensions
-import mcxray.format.Element as Element
 
 # Project modules.
 from mcxray import get_current_module_path, get_mcxray_program_name
