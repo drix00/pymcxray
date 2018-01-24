@@ -48,6 +48,7 @@ requirements = [
     'scipy',
     'Pillow',  # Fork of PIL (Python 3 compatible)
     'h5py',
+    'apscheduler',
 ]
 
 test_requirements = [
