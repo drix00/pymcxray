@@ -47,6 +47,7 @@ requirements = [
     'matplotlib',
     'scipy',
     'Pillow',  # Fork of PIL (Python 3 compatible)
+    'h5py',
 ]
 
 test_requirements = [
@@ -54,7 +55,7 @@ test_requirements = [
 ]
 
 setup(name="pymcxray",
-      version='0.1.2',
+      version='0.1.3',
       description="Python scripts for using mcxray software",
       long_description=readme + '\n\n' + history,
       author="Hendrix Demers",
