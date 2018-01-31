@@ -48,6 +48,7 @@ requirements = [
     'scipy',
     'h5py',
     'apscheduler',
+    'Pillow',
 ]
 
 test_requirements = [
