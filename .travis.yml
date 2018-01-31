@@ -1,18 +1,37 @@
 # Config file for automatic testing at travis-ci.org
 # This file will be regenerated if you run travis_pypi_setup.py
 
-language: python
-python: 3.5
+# This reportedly works around an issue downloading packages from pypi on
+# travis.  Consider removing this after the underlying issue is fixed.
+# https://github.com/travis-ci/travis-ci/issues/2389
+sudo: false
 
-env:
-  - TOXENV=py35
-  - TOXENV=py36
+language: python
+python:
+  - 3.3
+  - 3.4
+  - 3.5
+  - 3.6
+  # PyPy versions
+  - "pypy3"
 
 # command to install dependencies, e.g. pip install -r requirements.txt --use-mirrors
-install: pip install -U tox
+install:
+  - pip install -r requirements.txt
+  - pip install .
 
 # command to run tests, e.g. python setup.py test
-script: tox -e ${TOXENV}
+script:
+  - nosetests
+
+after_success:
+  - codecov
+
+notifications:
+  email: false
+
+git:
+  lfs_skip_smudge: true
 
 # After you create the Github repo and add it to Travis, run the
 # travis_pypi_setup.py script to finish PyPI deployment setup
