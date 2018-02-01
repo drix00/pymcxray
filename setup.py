@@ -32,6 +32,7 @@ import os
 from setuptools import setup, find_packages
 
 # Local modules.
+from pymcxray import __version__
 
 # Globals and constants variables.
 with open('README.rst') as readme_file:
@@ -56,7 +57,7 @@ test_requirements = [
 ]
 
 setup(name="pymcxray",
-      version='0.1.3',
+      version=__version__,
       description="Python scripts for using mcxray software",
       long_description=readme + '\n\n' + history,
       author="Hendrix Demers",
