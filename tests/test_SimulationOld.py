@@ -33,7 +33,7 @@ import unittest
 
 # Project modules
 # import pymcxray.Simulation as Simulation
-from mcxray.Simulation import create_weight_fractions, Layer, create_multi_horizontal_layer
+from mcxray.SimulationOld import create_weight_fractions, Layer, create_multi_horizontal_layer
 
 # Globals and constants variables.
 

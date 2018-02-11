@@ -35,7 +35,7 @@ from mcxray import get_current_module_path, create_path, get_results_mcgill_path
 import mcxray.serialization.SerializationPickle as SerializationPickle
 
 # Project modules
-import mcxray.Simulation as Simulation
+import mcxray.SimulationOld as Simulation
 from mcxray.SimulationsParameters import PARAMETER_SPECIMEN
 
 # Globals and constants variables.

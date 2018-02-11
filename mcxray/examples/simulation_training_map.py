@@ -43,7 +43,7 @@ import mcxray.format.results.XraySpectraRegionsEmitted as XraySpectraRegionsEmit
 
 from mcxray.SimulationsParameters import SimulationsParameters, PARAMETER_INCIDENT_ENERGY_keV, \
     PARAMETER_NUMBER_ELECTRONS, PARAMETER_BEAM_POSITION_nm, PARAMETER_NUMBER_XRAYS
-from mcxray.Simulation import createAlloyThinFilm
+from mcxray.SimulationOld import createAlloyThinFilm
 
 # Project modules.
 from mcxray import get_current_module_path, get_mcxray_program_name
