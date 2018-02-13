@@ -114,7 +114,7 @@ class TestSimulation(unittest.TestCase):
         """
 
         raise SkipTest
-        
+
         self.fail("Test if the testcase is working.")
         self.assert_(True)
 

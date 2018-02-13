@@ -27,6 +27,7 @@ Tests for the module :py:mod:`mcxray.format.text`.
 
 # Standard library modules.
 import unittest
+import os
 
 # Third party modules.
 
@@ -81,9 +82,10 @@ class TestText(unittest.TestCase):
         basename = extract_basename(file_path)
         self.assertEqual(basename_ref, basename)
 
-        file_path = r"C:\options\CuFeGrainBoundary20kV_5um\CuFeGrainBoundary20kV_5um.sim"
-        basename = extract_basename(file_path)
-        self.assertEqual(basename_ref, basename)
+        if os.sep == '\\':
+            file_path = r"C:\options\CuFeGrainBoundary20kV_5um\CuFeGrainBoundary20kV_5um.sim"
+            basename = extract_basename(file_path)
+            self.assertEqual(basename_ref, basename)
 
         # self.fail("Test if the testcase is working.")
         self.assert_(True)
