@@ -1,16 +1,23 @@
 # Config file for automatic testing at travis-ci.org
 # This file will be regenerated if you run travis_pypi_setup.py
 
+# This reportedly works around an issue downloading packages from pypi on
+# travis.  Consider removing this after the underlying issue is fixed.
+# https://github.com/travis-ci/travis-ci/issues/2389
+sudo: false
+
 language: python
 python:
     - 3.4
     - 3.5
     - 3.6
-#    - 2.7
 
 before_install:
     - echo -e "machine github.com\n  login ed880e956e8dee3515e1794d98314e321d571656" >> ~/.netrc
     - git lfs pull
+
+git:
+  lfs_skip_smudge: true
 
 # command to install dependencies, e.g. pip install -r requirements.txt --use-mirrors
 install:
@@ -40,5 +47,5 @@ deploy:
     secure: PLEASE_REPLACE_ME
   on:
     tags: true
-    repo: drix00/pysemeels
+    repo: drix00/pymcxray
     condition: $TOXENV == py36

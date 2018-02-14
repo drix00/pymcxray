@@ -31,6 +31,7 @@ Setup script for the project mcxray.
 from setuptools import setup, find_packages
 
 # Local modules.
+from pymcxray import __version__
 
 # Globals and constants variables.
 with open('README.rst') as readme_file:
@@ -48,7 +49,7 @@ with open('requirements_test.txt') as requirements_file:
 packages = find_packages()
 
 setup(name="pymcxray",
-      version='2.0.0',
+      version=__version__,
       description="Python scripts for using mcxray software",
       long_description=readme + '\n\n' + history,
       author="Hendrix Demers",
