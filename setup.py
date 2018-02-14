@@ -31,7 +31,7 @@ Setup script for the project mcxray.
 from setuptools import setup, find_packages
 
 # Local modules.
-from pymcxray import __version__
+from mcxray import __version__
 
 # Globals and constants variables.
 with open('README.rst') as readme_file:
