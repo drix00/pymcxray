@@ -1,0 +1,57 @@
+********************************************************************************
+***                                  SPECIMEN
+***
+***    First Entry is:
+***        number of region (integer)
+***
+***    then region by region:
+***        number of elements in region
+***        first element atomic number (integer)   mass concentration (double)
+***        ...
+***        last element atomic number (integer)    mass concentration (double)
+***        user's elements mass density if larger than 0.0 (double)
+***        region volume type: BOX, SPHERE or CYLINDER
+***        region extents (all doubles):
+***            BOX:      minX maxX minY maxY minZ maxZ
+***            SPHERE:   posX posY posZ radius
+***            CYLINDER: posX posY posZ dirX dirY dirZ length radius
+***                      the position is the center of the base of the cylinder
+***
+********************************************************************************
+Version=1.6.6
+NumberRegions=5
+
+NumberElements=2
+AtomicNumber=26
+WeightFraction=0.500000000000000
+AtomicNumber=29
+WeightFraction=0.500000000000000
+UserDefinedMassDensity=0
+RegionType=BOX
+RegionParameters=-50000.000000 50000.000000 -50000.000000 50000.000000 50000.000000 100000.000000
+
+NumberElements=1
+AtomicNumber=13
+WeightFraction=1.000000000000000
+UserDefinedMassDensity=0
+RegionType=SPHERE
+RegionParameters=0.000000 0.000000 75000.000000 10000.000000
+
+NumberElements=0
+UserDefinedMassDensity=0
+RegionType=BOX
+RegionParameters=-10000000000.000000 10000000000.000000 -10000000000.000000 10000000000.000000 0.000000 20000000000.000000
+
+NumberElements=1
+AtomicNumber=12
+WeightFraction=1.000000000000000
+UserDefinedMassDensity=0
+RegionType=BOX
+RegionParameters=-50000.000000 50000.000000 -50000.000000 50000.000000 1000.000000 49000.000000
+
+NumberElements=1
+AtomicNumber=5
+WeightFraction=1.000000000000000
+UserDefinedMassDensity=0
+RegionType=BOX
+RegionParameters=-30000.000000 30000.000000 -30000.000000 30000.000000 101000.000000 110000.000000
