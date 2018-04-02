@@ -1,7 +1,7 @@
-pymcxray
-========
+mcxray
+======
 
 .. toctree::
    :maxdepth: 4
 
-   pymcxray
+   mcxray

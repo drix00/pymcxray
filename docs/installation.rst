@@ -10,12 +10,6 @@ Installation
 Stable release
 --------------
 
-.. todo:: Add pypi installation for this project.
-
-.. warning::
-
-    Right now, the :ref:`Stable release <stable-release-section>` installation does not work.
-
 To install pymcxray, run this command in your terminal:
 
 .. code-block:: console
@@ -51,6 +45,21 @@ Go in the project folder and install it with pip in developer mode:
 
    The project use Git LFS for the test data file. Follow the information on `Git LFS <https://git-lfs.github.com/>`_
    to get the test data when the repository is pull.
+
+Build the documentation:
+
+.. code-block:: console
+
+    $ cd docs
+    $ make html
+
+Add or modify the API documentation:
+
+.. code-block:: console
+
+    $ cd docs
+    $ phinx-apidoc -o api -e -f -P ../mcxray
+    $ make html
 
 From sources
 ------------

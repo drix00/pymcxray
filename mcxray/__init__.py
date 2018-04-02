@@ -22,6 +22,7 @@ __author__ = """Hendrix Demers"""
 __email__ = 'hendrix.demers@mail.mcgill.ca'
 __version__ = '2.0.0'
 
+
 def get_current_module_path(module_path, relative_path=""):
     """
     Extract the current module path and combine it with the relative path and return it.
@@ -36,6 +37,7 @@ def get_current_module_path(module_path, relative_path=""):
     file_path = os.path.normpath(file_path)
 
     return file_path
+
 
 def create_path(path):
     """
@@ -69,6 +71,7 @@ def _read_path_from_configuration_file(configurationFile, relativePath, sectionN
     filepath = os.path.normpath(filepath)
     return filepath
 
+
 def read_value_from_configuration_file(configuration_file, section_name, key_name, default=None):
     """
     Read a value from an entry in a section from a configuration file.
@@ -98,6 +101,7 @@ def read_value_from_configuration_file(configuration_file, section_name, key_nam
             raise configparser.NoSectionError(section_name)
         else:
             return default
+
 
 def find_all_files(root, patterns='*', ignore_path_patterns='', ignore_name_patterns='',
                    single_level=False, yield_folders=False):
@@ -147,6 +151,7 @@ def find_all_files(root, patterns='*', ignore_path_patterns='', ignore_name_patt
             logging.debug("single_level")
             break
 
+
 def get_mcxray_program_name(configuration_file_path, default=None):
     """
     Read the MCXRay program name in the configuration file.
@@ -174,6 +179,7 @@ def get_mcxray_program_name(configuration_file_path, default=None):
 
     return program_name
 
+
 def get_results_mcgill_path(configuration_file_path, relative_path=""):
     """
     Read the results path for McGill in the configuration file.
@@ -198,6 +204,7 @@ def get_results_mcgill_path(configuration_file_path, relative_path=""):
     file_path = _read_path_from_configuration_file(configuration_file_path, relative_path, section_name, key_name)
 
     return file_path
+
 
 def get_mcxray_program_path(configuration_file_path, relative_path=""):
     """
@@ -226,6 +233,7 @@ def get_mcxray_program_path(configuration_file_path, relative_path=""):
 
     return file_path
 
+
 def get_mcxray_archive_path(configuration_file_path, relative_path=""):
     """
     Read the MCXRay archive path in the configuration file.
@@ -248,6 +256,7 @@ def get_mcxray_archive_path(configuration_file_path, relative_path=""):
     file_path = _read_path_from_configuration_file(configuration_file_path, relative_path, section_name, key_name)
 
     return file_path
+
 
 def get_mcxray_archive_name(configuration_file_path, default=None):
     """
