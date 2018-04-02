@@ -39,13 +39,28 @@ from mcxray.format.text import extract_basename
 
 class Simulation(object):
     def __init__(self):
+        """
+        Constructor.
+        """
         self.name = ""
 
     def __eq__(self, other):
+        """
+        Comparison between two objects.
+
+        :param other:
+        :return: if two objects are equal.
+        """
         return self.name == other.name
 
 
 def read_text_input(file_path):
+    """
+    Read simulation input from a text file.
+
+    :param file_path: path of the text file.
+    :return: :py:`Simulation` object.
+    """
     simulation = Simulation()
 
     basename = extract_basename(file_path)
@@ -55,6 +70,13 @@ def read_text_input(file_path):
 
 
 def read_text_output(path, basename):
+    """
+    Read simulation output from a text file.
+
+    :param path: path of the text files
+    :param basename:
+    :return: :py:`Simulation` object.
+    """
     simulation = Simulation()
 
     simulation.name = basename
@@ -63,16 +85,41 @@ def read_text_output(path, basename):
 
 
 def convert_text_input_to_hdf5(text_file_path, hdf5_file_path=None):
-    simulation = Simulation()
+    """
+    Convert a text input files into a hdf5.
+
+    .. todo:: Implement this method.
+
+    :param text_file_path:
+    :param hdf5_file_path:
+    :return: :py:`Simulation` object.
+    """
+    simulation = read_text_input(text_file_path)
+
     return simulation
 
 
 def convert_text_output_to_hdf5(text_file_path, hdf5_file_path=None):
-    simulation = Simulation()
+    """
+    Convert a text output files into a hdf5.
+
+    .. todo:: Implement this method.
+
+    :param text_file_path:
+    :param hdf5_file_path:
+    :return: :py:`Simulation` object.
+    """
+    simulation = read_text_output(text_file_path)
     return simulation
 
 
 def read_hdf5_input(file_path):
+    """
+    Read simulation input from a hdf5 file.
+
+    :param file_path:
+    :return: :py:`Simulation` object.
+    """
     simulation = Simulation()
 
     basename = extract_basename(file_path)
@@ -82,6 +129,12 @@ def read_hdf5_input(file_path):
 
 
 def read_hdf5_output(file_path):
+    """
+    Read simulation output from a hdf5 file.
+
+    :param file_path:
+    :return: :py:`Simulation` object.
+    """
     simulation = Simulation()
 
     basename = extract_basename(file_path)

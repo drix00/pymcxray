@@ -111,6 +111,8 @@ class TestSimulation(unittest.TestCase):
     def test_convert_text_input_to_hdf5(self):
         """
         Test method convert_text_input_to_hdf5.
+
+        .. todo:: Implement this test.
         """
 
         raise SkipTest
@@ -121,6 +123,8 @@ class TestSimulation(unittest.TestCase):
     def test_convert_text_output_to_hdf5(self):
         """
         Test method convert_text_output_to_hdf5.
+
+        .. todo:: Implement this test.
         """
 
         raise SkipTest
