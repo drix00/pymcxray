@@ -1,5 +1,11 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 """
+.. py:currentmodule:: mcxray.multipleloop
+
+.. moduleauthor:: H. P. Langtangen
+
 This module provides a tool for handling computer experiments with
 of a set of input parameters, where each input parameter
 is varied in a prescribed fashion.
@@ -18,8 +24,19 @@ of values can easily be removed.
 The usage and implementation of the module are documented in the
 book "Python Scripting for Computational Science" (H. P. Langtangen,
 Springer, 2009), Chapter 12.1.
+
+.. note:: see also http://pyslice.sourceforge.net/HomePage
 """
-# see also http://pyslice.sourceforge.net/HomePage
+# Standard library modules.
+
+# Third party modules.
+
+# Local modules.
+
+# Project modules.
+
+# Globals and constants variables.
+
 
 def _outer(a, b):
     """
@@ -35,7 +52,8 @@ def _outer(a, b):
     all_combination = []
     if not isinstance(a, list):
         raise TypeError('a must be a list')
-    if isinstance(b, (float,int,complex,str)):  b = [b]  # scalar?
+    if isinstance(b, (float, int, complex, str)):
+        b = [b]  # scalar?
 
     if len(a) == 0:
         # first call:
@@ -50,9 +68,10 @@ def _outer(a, b):
                 # the underlying list (in a), which is not what
                 # we want, we need a copy, extend the copy, and
                 # add to all_combination
-                k = i + [j]  # extend previous prms with new one
+                k = i + [j]  # extend previous parameters with new one
                 all_combination.append(k)
     return all_combination
+
 
 def combine(prm_values):
     """
@@ -75,21 +94,19 @@ def combine(prm_values):
 
 
     Code example:
-
-    >>> dx = array([1.0/2**k for k in range(2,5)])
+    >>> dx = list([1.0/2**k for k in range(2,5)])
     >>> dt = 3*dx;  dt = dt[:-1]
     >>> p = {'dx': dx, 'dt': dt}
     >>> p
     {'dt': [ 0.75 , 0.375,], 'dx': [ 0.25  , 0.125 , 0.0625,]}
-    >>> all, names, varied = combine(p)
-    >>> all
+    >>> all_combination, names, varied = combine(p)
+    >>> all_combination
     [[0.75, 0.25], [0.375, 0.25], [0.75, 0.125], [0.375, 0.125],
      [0.75, 0.0625], [0.375, 0.0625]]
     """
     if isinstance(prm_values, dict):
         # turn dict into list [(name,values),(name,values),...]:
-        prm_values = [(name, prm_values[name]) \
-                      for name in prm_values]
+        prm_values = [(name, prm_values[name]) for name in prm_values]
     all_combination = []
     varied = []
     for name, values in prm_values:
