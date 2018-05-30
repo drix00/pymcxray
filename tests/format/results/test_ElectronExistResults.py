@@ -94,7 +94,7 @@ class TestElectronExistResults(unittest.TestCase):
 
         .. todo:: Replace scipy.stats.histogram with numpy method.
         """
-        raise SkipTest
+        raise SkipTest("Test test_energyDistribution not implemented")
 
         energies_keV, histogram = self.results.getEnergyDistribution()
 

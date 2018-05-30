@@ -21,7 +21,8 @@ import copy
 # Local modules.
 
 # Project modules
-import mcxray.format.Version as Version
+import mcxray.format.version as Version
+from mcxray.format.text.version import read_from_file, write_line
 
 # Globals and constants variables.
 KEY_COMPUTE_XRAY_CHARACTERISTIC = "ComputeXrayCharacteristic"
@@ -69,7 +70,7 @@ class ResultsParameters(object):
         return bool(int(itemStr))
 
     def read(self, filepath):
-        self.version.readFromFile(filepath)
+        read_from_file(self.version, filepath)
 
         lines = open(filepath, 'r').readlines()
 
@@ -88,7 +89,7 @@ class ResultsParameters(object):
 
         self._writeHeader(outputFile)
 
-        self.version.writeLine(outputFile)
+        write_line(self.version, outputFile)
 
         keys = self._createKeys()
         if self.version < Version.VERSION_1_4_3:

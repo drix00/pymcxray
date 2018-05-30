@@ -27,7 +27,8 @@ import copy
 import mcxray.format.MCXRayModel as MCXRayModel
 
 # Project modules
-import mcxray.format.Version as Version
+import mcxray.format.version as Version
+from mcxray.format.text.version import read_from_file, write_line
 
 # Globals and constants variables.
 
@@ -46,7 +47,7 @@ KEY_ATOM_COLLISION_SCREENING_MODEL = "AtomCollisionScreeningModel"
 KEY_ATOM_ELECTRON_RANGE_MODEL = "AtomElectronRangeModel"
 KEY_XRAY_CS_CHARACTERISTIC_MODEL = "XRayCSCharacteristicModel"
 XRAY_CS_CHARACTERISTIC_MODEL_CASNATI = 0
-XRAY_CS_CHARACTERISTIC_MODEL_BOTE = 1 
+XRAY_CS_CHARACTERISTIC_MODEL_BOTE = 1
 KEY_XRAY_CS_BREMSSTRAHLUNG_MODEL = "XRayCSBremsstrahlungModel"
 XRAY_CS_BREMSSTRAHLUNG_MODEL_BETHE_HEITLER = 0
 XRAY_CS_BREMSSTRAHLUNG_MODEL_KIRPATRICK_WIEDMAN = 1
@@ -112,7 +113,7 @@ class Models(object):
         return modelList
 
     def read(self, filepath):
-        self.version.readFromFile(filepath)
+        read_from_file(self.version, filepath)
 
         lines = open(filepath, 'r').readlines()
 
@@ -132,7 +133,7 @@ class Models(object):
 
         self._writeHeader(outputFile)
 
-        self.version.writeLine(outputFile)
+        write_line(self.version, outputFile)
 
         keys = self._createKeys()
 

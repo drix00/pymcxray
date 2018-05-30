@@ -61,7 +61,7 @@ class TestXraySpectraRegionsEmitted(unittest.TestCase):
         filename = "SimulationNanoparticleAg_Au_SpectraPerElectron_1_srkeV_Region_0.csv"
         filepath = os.path.join(self.testDataPath, filename)
         if not os.path.isfile(filepath):
-            raise SkipTest
+            raise SkipTest("Test file not found: {}".format(filepath))
 
         spectra = XraySpectraRegionsEmitted()
         spectra.path = self.testDataPath
@@ -112,7 +112,7 @@ class TestXraySpectraRegionsEmitted(unittest.TestCase):
         filename = "SimulationNanoparticleAg_Au_SpectraPerElectron_1_srkeV_Region_1.csv"
         filepath = os.path.join(self.testDataPath, filename)
         if not os.path.isfile(filepath):
-            raise SkipTest
+            raise SkipTest("Test file not found: {}".format(filepath))
 
         spectra = XraySpectraRegionsEmitted()
         spectra.path = self.testDataPath

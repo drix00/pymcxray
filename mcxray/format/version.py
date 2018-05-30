@@ -1,17 +1,28 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 """
-.. py:currentmodule:: format.Version
+.. py:currentmodule:: format.version
 .. moduleauthor:: Hendrix Demers <hendrix.demers@mail.mcgill.ca>
 
 MCXray version information.
 """
 
-# Script information for the file.
-__author__ = "Hendrix Demers (hendrix.demers@mail.mcgill.ca)"
-__version__ = ""
-__date__ = ""
-__copyright__ = "Copyright (c) 2012 Hendrix Demers"
-__license__ = ""
+###############################################################################
+# Copyright 2018 Hendrix Demers
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+###############################################################################
 
 # Standard library modules.
 import copy
@@ -24,42 +35,22 @@ import copy
 
 # Globals and constants variables.
 
-class Version(object):
-    key = "Version"
 
+class Version(object):
     def __init__(self, major, minor, revision):
         self.major = major
         self.minor = minor
         self.revision = revision
 
-    def toString(self):
+    def to_string(self):
         text = "%s.%s.%s" % (self.major, self.minor, self.revision)
         return text
 
-    def fromString(self, versionString):
-        items = versionString.split('.')
+    def from_string(self, version_string):
+        items = version_string.split('.')
         self.major = items[0]
         self.minor = items[1]
         self.revision = items[2]
-
-    def writeLine(self, outputFile):
-        line = "%s=%s\n" % (self.key, self.toString())
-        outputFile.write(line)
-
-    def readFromFile(self, filepath):
-        lines = open(filepath, 'r').readlines()
-
-        for line in lines:
-            line = line.strip()
-
-            if line.startswith(self.key):
-                items = line.split('=')
-                self.fromString((items[-1]))
-                return
-        else:
-            self.major = 1
-            self.minor = 1
-            self.revision = 1
 
     def __eq__(self, other):
         if self.major == other.major and self.minor == other.minor and self.revision == other.revision:
@@ -97,6 +88,7 @@ class Version(object):
     @property
     def major(self):
         return self._major
+
     @major.setter
     def major(self, major):
         self._major = int(major)
@@ -104,6 +96,7 @@ class Version(object):
     @property
     def minor(self):
         return self._minor
+
     @minor.setter
     def minor(self, minor):
         self._minor = int(minor)
@@ -111,9 +104,11 @@ class Version(object):
     @property
     def revision(self):
         return self._revision
+
     @revision.setter
     def revision(self, revision):
         self._revision = int(revision)
+
 
 VERSION_1_1_1 = Version(1, 1, 1)
 

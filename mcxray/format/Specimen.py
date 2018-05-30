@@ -25,9 +25,10 @@ import copy
 
 # Local modules.
 import mcxray.format.Region as Region
-import mcxray.format.Version as Version
+import mcxray.format.version as Version
 
 # Project modules
+from mcxray.format.text.version import read_from_file, write_line
 
 # Globals and constants variables.
 KEY_NAME = "Name"
@@ -67,7 +68,7 @@ class Specimen(object):
     def read(self, filepath):
         self.clear()
 
-        self.version.readFromFile(filepath)
+        read_from_file(self.version, filepath)
 
         if self.version == Version.BEFORE_VERSION:
             self._readOldVersion(filepath)
@@ -125,7 +126,7 @@ class Specimen(object):
 
         self._writeHeader(outputFile)
 
-        self.version.writeLine(outputFile)
+        write_line(self.version, outputFile)
 
         key = KEY_NUMBER_REGIONS
         value = self.numberRegions

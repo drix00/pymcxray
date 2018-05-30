@@ -31,7 +31,7 @@ from nose.plugins.skip import SkipTest
 # Project modules
 import mcxray.format.MicroscopeParameters as MicroscopeParameters
 import tests.format.testUtilities as testUtilities
-import mcxray.format.Version as Version
+import mcxray.format.version as Version
 
 # Globals and constants variables.
 
@@ -331,7 +331,7 @@ class TestMicroscopeParameters(unittest.TestCase):
         """
         Tests for method `write`.
         """
-        raise SkipTest
+        raise SkipTest("Test test_write not implemented")
 
         for title in testUtilities.getSimulationTitles():
             microscopeParametersRef = self.getMicroscopeParametersReference(title)
@@ -382,7 +382,7 @@ class TestMicroscopeParameters(unittest.TestCase):
         """
         Tests for method `write`.
         """
-        raise SkipTest
+        raise SkipTest("Test test_write_1_1_1 not implemented")
 
         self.maxDiff = None
 
@@ -434,7 +434,7 @@ class TestMicroscopeParameters(unittest.TestCase):
         """
         Tests for method `write`.
         """
-        raise SkipTest
+        raise SkipTest("Test test_write_1_2_0 not implemented")
 
         self.maxDiff = None
 
@@ -487,7 +487,7 @@ class TestMicroscopeParameters(unittest.TestCase):
         """
         Tests for method `write`.
         """
-        raise SkipTest
+        raise SkipTest("Test test_write_1_2_1 not implemented")
 
         self.maxDiff = None
 

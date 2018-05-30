@@ -36,7 +36,7 @@ import mcxray.format.Region as Region
 import mcxray.format.Element as Element
 import mcxray.format.RegionType as RegionType
 import mcxray.format.RegionDimensions as RegionDimensions
-import mcxray.format.Version as Version
+import mcxray.format.version as Version
 
 # Globals and constants variables.
 
@@ -385,7 +385,7 @@ class TestSpecimen(unittest.TestCase):
         """
         Tests for method `write`.
         """
-        raise SkipTest
+        raise SkipTest("Test test_write not implemented")
 
         self.maxDiff = None
 
@@ -419,7 +419,7 @@ class TestSpecimen(unittest.TestCase):
         """
         Tests for method `write`.
         """
-        raise SkipTest
+        raise SkipTest("Test test_write_1_1_1 not implemented")
 
         self.maxDiff = None
 

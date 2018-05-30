@@ -25,7 +25,7 @@ from nose.plugins.skip import SkipTest
 # Project modules
 import mcxray.format.ResultsParameters as ResultsParameters
 import tests.format.testUtilities as testUtilities
-import mcxray.format.Version as Version
+import mcxray.format.version as Version
 
 # Globals and constants variables.
 
@@ -65,7 +65,7 @@ class TestResultsParameters(unittest.TestCase):
         """
         Tests for method `read`.
         """
-        raise SkipTest
+        raise SkipTest("Test test_read not implemented")
 
         for title in testUtilities.getSimulationTitles():
             resultsParameters = ResultsParameters.ResultsParameters()
@@ -163,7 +163,7 @@ class TestResultsParameters(unittest.TestCase):
         """
         Tests for method `write`.
         """
-        raise SkipTest
+        raise SkipTest("Test test_write not implemented")
 
         self.maxDiff = None
 

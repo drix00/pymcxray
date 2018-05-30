@@ -27,7 +27,8 @@ import copy
 
 # Project modules
 import mcxray.format.MCXRayModel as MCXRayModel
-import mcxray.format.Version as Version
+import mcxray.format.version as Version
+from mcxray.format.text.version import read_from_file, write_line
 
 # Globals and constants variables.
 KEY_BASE_FILENAME = "BaseFileName"
@@ -135,7 +136,7 @@ class SimulationParameters(object):
         return model
 
     def read(self, filepath):
-        self.version.readFromFile(filepath)
+        read_from_file(self.version, filepath)
 
         lines = open(filepath, 'r').readlines()
 
@@ -154,7 +155,7 @@ class SimulationParameters(object):
 
         self._writeHeader(outputFile)
 
-        self.version.writeLine(outputFile)
+        write_line(self.version, outputFile)
 
         formatMethods = self._createFormatMethod()
         keys = self._createKeys()

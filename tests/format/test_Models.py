@@ -31,7 +31,7 @@ from nose.plugins.skip import SkipTest
 import mcxray.format.Models as Models
 import mcxray.format.MCXRayModel as MCXRayModel
 import tests.format.testUtilities as testUtilities
-import mcxray.format.Version as Version
+import mcxray.format.version as Version
 
 # Globals and constants variables.
 
@@ -273,7 +273,7 @@ class TestModels(unittest.TestCase):
         """
         Tests for method `write`.
         """
-        raise SkipTest
+        raise SkipTest("Test test_write not implemented")
 
         self.maxDiff = None
 
@@ -297,7 +297,7 @@ class TestModels(unittest.TestCase):
         """
         Tests for method `write`.
         """
-        raise SkipTest
+        raise SkipTest("Test test_write_1_1_1 not implemented")
 
         self.maxDiff = None
 

@@ -26,7 +26,8 @@ import copy
 # Local modules.
 
 # Project modules
-import mcxray.format.Version as Version
+from mcxray.format.version import CURRENT_VERSION
+from mcxray.format.text.version import read_from_file, write_line
 from mcxray.format.FileReaderWriterTools import reduceAfterDot
 
 # Globals and constants variables.
@@ -58,7 +59,7 @@ KEY_DETECTOR_HAADF_HIGH_rad = "DetectorHAADFHigh"
 
 class MicroscopeParameters(object):
     def __init__(self):
-        self.version = copy.deepcopy(Version.CURRENT_VERSION)
+        self.version = copy.deepcopy(CURRENT_VERSION)
 
         self._keys = self._createKeys()
 
@@ -86,7 +87,7 @@ class MicroscopeParameters(object):
         keys.append(KEY_DETECTOR_SURFACE_QUALITY)
         keys.append(KEY_DETECTOR_NOISE_eV)
         keys.append(KEY_DETECTOR_TOA_deg)
-        #keys.append(KEY_DETECTOR_CHANNEL_WIDTH_eV)
+        # keys.append(KEY_DETECTOR_CHANNEL_WIDTH_eV)
         keys.append(KEY_DETECTOR_PITCH_deg)
         keys.append(KEY_DETECTOR_BF_LOW_rad)
         keys.append(KEY_DETECTOR_BF_HIGH_RAD)
@@ -156,7 +157,7 @@ class MicroscopeParameters(object):
         return extractMethods
 
     def read(self, filepath):
-        self.version.readFromFile(filepath)
+        read_from_file(self.version, filepath)
 
         lines = open(filepath, 'r').readlines()
 
@@ -175,7 +176,7 @@ class MicroscopeParameters(object):
 
         self._writeHeader(outputFile)
 
-        self.version.writeLine(outputFile)
+        write_line(self.version, outputFile)
 
         formats = self._createFormats()
 
