@@ -2,11 +2,11 @@
 # -*- coding: utf-8 -*-
 
 """
-.. py:currentmodule:: tests.simulation
+.. py:currentmodule:: mcxray.format.text.test_read
 
 .. moduleauthor:: Hendrix Demers <hendrix.demers@mail.mcgill.ca>
 
-Tests for the module :py:mod:`mcxray.simulation`.
+Tests for the module :py:mod:`mcxray.format.text.read`.
 """
 
 ###############################################################################
@@ -35,15 +35,16 @@ from nose import SkipTest
 # Local modules.
 
 # Project modules.
-from mcxray.simulation import Simulation, read_text_input, read_text_output, read_hdf5_input, read_hdf5_output
+from mcxray.format.text.read import read_text_input, read_text_output
 from mcxray import get_current_module_path
+from tests.format.test_io import get_simulation_input_ref, get_simulation_text_output_ref
 
 # Globals and constants variables.
 
 
-class TestSimulation(unittest.TestCase):
+class TestRead(unittest.TestCase):
     """
-    TestCase class for the module `mcxray.simulation`.
+    TestCase class for the module `mcxray.format.text.read`.
     """
 
     def setUp(self):
@@ -73,7 +74,7 @@ class TestSimulation(unittest.TestCase):
         Test method read_text_input.
         """
 
-        file_path = r"..\test_data\format\text\options\CuFeGrainBoundary20kV_5um\CuFeGrainBoundary20kV_5um.sim"
+        file_path = r"..\..\..\test_data\format\text\options\CuFeGrainBoundary20kV_5um\CuFeGrainBoundary20kV_5um.sim"
         file_path = get_current_module_path(__file__, file_path)
         if not os.path.isfile(file_path):
             raise SkipTest("Test file not found: {}".format(file_path))
@@ -92,7 +93,7 @@ class TestSimulation(unittest.TestCase):
         Test method read_text_output.
         """
 
-        path = r"..\test_data\format\text\results\CuFeGrainBoundary20kV_5um"
+        path = r"..\..\..\test_data\format\text\results\CuFeGrainBoundary20kV_5um"
         basename = "CuFeGrainBoundary20kV"
         path = get_current_module_path(__file__, path)
         file_path = os.path.join(path, basename + "_Options.txt")
@@ -107,92 +108,6 @@ class TestSimulation(unittest.TestCase):
 
         # self.fail("Test if the testcase is working.")
         self.assert_(True)
-
-    def test_convert_text_input_to_hdf5(self):
-        """
-        Test method convert_text_input_to_hdf5.
-
-        .. todo:: Implement this test.
-        """
-
-        raise SkipTest("Test test_convert_text_input_to_hdf5 not implemented")
-
-        self.fail("Test if the testcase is working.")
-        self.assert_(True)
-
-    def test_convert_text_output_to_hdf5(self):
-        """
-        Test method convert_text_output_to_hdf5.
-
-        .. todo:: Implement this test.
-        """
-
-        raise SkipTest("Test test_convert_text_output_to_hdf5 not implemented")
-
-        self.fail("Test if the testcase is working.")
-        self.assert_(True)
-
-    def test_read_hdf5_input(self):
-        """
-        Test method read_hdf5_input.
-        """
-
-        file_path = r"..\test_data\format\hdf5\options\CuFeGrainBoundary20kV_5um.mcxray"
-        file_path = get_current_module_path(__file__, file_path)
-        if not os.path.isfile(file_path):
-            raise SkipTest("Test file not found: {}".format(file_path))
-
-        simulation = read_hdf5_input(file_path)
-
-        simulation_ref = get_simulation_input_ref()
-
-        self.assertEqual(simulation_ref, simulation)
-
-        # self.fail("Test if the testcase is working.")
-        self.assert_(True)
-
-    def test_read_hdf5_output(self):
-        """
-        Test method read_hdf5_output.
-        """
-
-        file_path = r"..\test_data\format\hdf5\results\CuFeGrainBoundary20kV_5um_results.mcxray"
-        file_path = get_current_module_path(__file__, file_path)
-        if not os.path.isfile(file_path):
-            raise SkipTest("Test file not found: {}".format(file_path))
-
-        simulation = read_hdf5_output(file_path)
-
-        simulation_ref = get_simulation_hdf5_output_ref()
-
-        self.assertEqual(simulation_ref, simulation)
-
-        # self.fail("Test if the testcase is working.")
-        self.assert_(True)
-
-
-def get_simulation_input_ref():
-    simulation = Simulation()
-
-    simulation.name = "CuFeGrainBoundary20kV_5um"
-
-    return simulation
-
-
-def get_simulation_text_output_ref():
-    simulation = Simulation()
-
-    simulation.name = "CuFeGrainBoundary20kV"
-
-    return simulation
-
-
-def get_simulation_hdf5_output_ref():
-    simulation = Simulation()
-
-    simulation.name = "CuFeGrainBoundary20kV_5um_results"
-
-    return simulation
 
 
 if __name__ == '__main__':  # pragma: no cover

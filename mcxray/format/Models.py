@@ -27,8 +27,8 @@ import copy
 import mcxray.format.MCXRayModel as MCXRayModel
 
 # Project modules
-import mcxray.format.version as Version
 from mcxray.format.text.version import read_from_file, write_line
+import mcxray.format.version as version
 
 # Globals and constants variables.
 
@@ -68,7 +68,7 @@ MASS_ABSORPTION_COEFFICIENT_MODEL_CHANTLER = 3
 
 class Models(object):
     def __init__(self):
-        self.version = copy.deepcopy(Version.CURRENT_VERSION)
+        self.version = copy.deepcopy(version.CURRENT_VERSION)
 
         self._keys = self._createKeys()
 
@@ -137,7 +137,7 @@ class Models(object):
 
         keys = self._createKeys()
 
-        if self.version >= Version.VERSION_1_4_1:
+        if self.version >= version.VERSION_1_4_1:
             keys.remove(KEY_SAMPLE_ENERGY_LOSS_MODEL)
         else:
             keys.remove(KEY_REGION_ENERGY_LOSS_MODEL)
@@ -163,7 +163,7 @@ class Models(object):
         headerLines.append("***                                          2 Gauvin")
         headerLines.append("***    AtomCollisionScreeningModel         = 0 Henoc & Maurice")
         headerLines.append("***    AtomElectronRangeModel              = 0 Kanaya & Okayama")
-        if self.version >= Version.VERSION_1_2_2:
+        if self.version >= version.VERSION_1_2_2:
             headerLines.append("***    XRayCSCharacteristicModel           = 0 Casnati")
         else:
             headerLines.append("***    XRayCSCharacteristicModel           = 0 Castani")
@@ -171,7 +171,7 @@ class Models(object):
         headerLines.append("***                                          1 Kirkpatrick & Wiedman")
         headerLines.append("***                                          2 Ding")
         headerLines.append("***                                          3 Gauvin")
-        if self.version >= Version.VERSION_1_4_1:
+        if self.version >= version.VERSION_1_4_1:
             headerLines.append("***    RegionEnergyLossModel               = 0 Bethe & Joy & Luo")
             headerLines.append("***                                          1 Bethe")
             headerLines.append("***                                          2 Bethe Relativistic")
@@ -192,6 +192,7 @@ class Models(object):
     @property
     def version(self):
         return self._version
+
     @version.setter
     def version(self, version):
         self._version = version
@@ -199,6 +200,7 @@ class Models(object):
     @property
     def modelSampleEnergyLoss(self):
         return self._modelList[KEY_REGION_ENERGY_LOSS_MODEL].getModel()
+
     @modelSampleEnergyLoss.setter
     def modelSampleEnergyLoss(self, modelSampleEnergyLoss):
         self._modelList[KEY_REGION_ENERGY_LOSS_MODEL].setModel(modelSampleEnergyLoss)
@@ -206,6 +208,7 @@ class Models(object):
     @property
     def modelXrayCharacteristic(self):
         return self._modelList[KEY_XRAY_CS_CHARACTERISTIC_MODEL].getModel()
+
     @modelXrayCharacteristic.setter
     def modelXrayCharacteristic(self, modelXrayCharacteristic):
         self._modelList[KEY_XRAY_CS_CHARACTERISTIC_MODEL].setModel(modelXrayCharacteristic)
@@ -213,6 +216,7 @@ class Models(object):
     @property
     def modelXrayBremsstrahlung(self):
         return self._modelList[KEY_XRAY_CS_BREMSSTRAHLUNG_MODEL].getModel()
+
     @modelXrayBremsstrahlung.setter
     def modelXrayBremsstrahlung(self, modelXrayBremsstrahlung):
         self._modelList[KEY_XRAY_CS_BREMSSTRAHLUNG_MODEL].setModel(modelXrayBremsstrahlung)
@@ -220,6 +224,7 @@ class Models(object):
     @property
     def modelAtomCrossSection(self):
         return self._modelList[KEY_ATOM_CROSS_SECTION_MODEL].getModel()
+
     @modelAtomCrossSection.setter
     def modelAtomCrossSection(self, modelAtomCrossSection):
         self._modelList[KEY_ATOM_CROSS_SECTION_MODEL].setModel(modelAtomCrossSection)
@@ -227,6 +232,7 @@ class Models(object):
     @property
     def modelAtomCollision(self):
         return self._modelList[KEY_ATOM_COLLISION_MODEL].getModel()
+
     @modelAtomCollision.setter
     def modelAtomCollision(self, modelAtomCollision):
         self._modelList[KEY_ATOM_COLLISION_MODEL].setModel(modelAtomCollision)
@@ -234,6 +240,7 @@ class Models(object):
     @property
     def modelAtomMac(self):
         return self._modelList[KEY_MASS_ABSORPTION_COEFFICIENT_MODEL].getModel()
+
     @modelAtomMac.setter
     def modelAtomMac(self, modelAtomMac):
         self._modelList[KEY_MASS_ABSORPTION_COEFFICIENT_MODEL].setModel(modelAtomMac)

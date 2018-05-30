@@ -31,7 +31,7 @@ from nose.plugins.skip import SkipTest
 # Project modules
 import mcxray.format.SimulationParameters as SimulationParameters
 import tests.format.testUtilities as testUtilities
-import mcxray.format.version as Version
+import mcxray.format.version as version
 
 # Globals and constants variables.
 
@@ -104,10 +104,10 @@ class TestSimulationParameters(unittest.TestCase):
         filepath = os.path.abspath(os.path.join(self.testDataPath, "inputs", "%s.par" % (title)))
         simulationParameters.read(filepath)
 
-        self.assertEquals(Version.VERSION_1_1_1.major, simulationParameters.version.major)
-        self.assertEquals(Version.VERSION_1_1_1.minor, simulationParameters.version.minor)
-        self.assertEquals(Version.VERSION_1_1_1.revision, simulationParameters.version.revision)
-        self.assertEquals(Version.VERSION_1_1_1, simulationParameters.version)
+        self.assertEquals(version.VERSION_1_1_1.major, simulationParameters.version.major)
+        self.assertEquals(version.VERSION_1_1_1.minor, simulationParameters.version.minor)
+        self.assertEquals(version.VERSION_1_1_1.revision, simulationParameters.version.revision)
+        self.assertEquals(version.VERSION_1_1_1, simulationParameters.version)
 
         simulationParametersRef = self.getSimulationParametersReference(title)
         self.assertEquals(simulationParametersRef.version.major, simulationParameters.version.major)
@@ -140,10 +140,10 @@ class TestSimulationParameters(unittest.TestCase):
         filepath = os.path.abspath(os.path.join(self.testDataPath, "inputs", "%s.par" % (title)))
         simulationParameters.read(filepath)
 
-        self.assertEquals(Version.VERSION_1_2_0.major, simulationParameters.version.major)
-        self.assertEquals(Version.VERSION_1_2_0.minor, simulationParameters.version.minor)
-        self.assertEquals(Version.VERSION_1_2_0.revision, simulationParameters.version.revision)
-        self.assertEquals(Version.VERSION_1_2_0, simulationParameters.version)
+        self.assertEquals(version.VERSION_1_2_0.major, simulationParameters.version.major)
+        self.assertEquals(version.VERSION_1_2_0.minor, simulationParameters.version.minor)
+        self.assertEquals(version.VERSION_1_2_0.revision, simulationParameters.version.revision)
+        self.assertEquals(version.VERSION_1_2_0, simulationParameters.version)
 
         simulationParametersRef = self.getSimulationParametersReference(title)
         self.assertEquals(simulationParametersRef.version.major, simulationParameters.version.major)
@@ -176,10 +176,10 @@ class TestSimulationParameters(unittest.TestCase):
         filepath = os.path.abspath(os.path.join(self.testDataPath, "inputs", "%s.par" % (title)))
         simulationParameters.read(filepath)
 
-        self.assertEquals(Version.VERSION_1_2_1.major, simulationParameters.version.major)
-        self.assertEquals(Version.VERSION_1_2_1.minor, simulationParameters.version.minor)
-        self.assertEquals(Version.VERSION_1_2_1.revision, simulationParameters.version.revision)
-        self.assertEquals(Version.VERSION_1_2_1, simulationParameters.version)
+        self.assertEquals(version.VERSION_1_2_1.major, simulationParameters.version.major)
+        self.assertEquals(version.VERSION_1_2_1.minor, simulationParameters.version.minor)
+        self.assertEquals(version.VERSION_1_2_1.revision, simulationParameters.version.revision)
+        self.assertEquals(version.VERSION_1_2_1, simulationParameters.version)
 
         simulationParametersRef = self.getSimulationParametersReference(title)
         self.assertEquals(simulationParametersRef.version.major, simulationParameters.version.major)
@@ -212,10 +212,10 @@ class TestSimulationParameters(unittest.TestCase):
         filepath = os.path.abspath(os.path.join(self.testDataPath, "inputs", "%s.par" % (title)))
         simulationParameters.read(filepath)
 
-        self.assertEquals(Version.VERSION_1_4_1.major, simulationParameters.version.major)
-        self.assertEquals(Version.VERSION_1_4_1.minor, simulationParameters.version.minor)
-        self.assertEquals(Version.VERSION_1_4_1.revision, simulationParameters.version.revision)
-        self.assertEquals(Version.VERSION_1_4_1, simulationParameters.version)
+        self.assertEquals(version.VERSION_1_4_1.major, simulationParameters.version.major)
+        self.assertEquals(version.VERSION_1_4_1.minor, simulationParameters.version.minor)
+        self.assertEquals(version.VERSION_1_4_1.revision, simulationParameters.version.revision)
+        self.assertEquals(version.VERSION_1_4_1, simulationParameters.version)
 
         simulationParametersRef = self.getSimulationParametersReference(title)
         self.assertEquals(simulationParametersRef.version.major, simulationParameters.version.major)
@@ -248,10 +248,10 @@ class TestSimulationParameters(unittest.TestCase):
         filepath = os.path.abspath(os.path.join(self.testDataPath, "inputs", "%s.par" % (title)))
         simulationParameters.read(filepath)
 
-        self.assertEquals(Version.VERSION_1_4_4.major, simulationParameters.version.major)
-        self.assertEquals(Version.VERSION_1_4_4.minor, simulationParameters.version.minor)
-        self.assertEquals(Version.VERSION_1_4_4.revision, simulationParameters.version.revision)
-        self.assertEquals(Version.VERSION_1_4_4, simulationParameters.version)
+        self.assertEquals(version.VERSION_1_4_4.major, simulationParameters.version.major)
+        self.assertEquals(version.VERSION_1_4_4.minor, simulationParameters.version.minor)
+        self.assertEquals(version.VERSION_1_4_4.revision, simulationParameters.version.revision)
+        self.assertEquals(version.VERSION_1_4_4, simulationParameters.version)
 
         simulationParametersRef = self.getSimulationParametersReference(title)
         self.assertEquals(simulationParametersRef.version.major, simulationParameters.version.major)
@@ -329,7 +329,7 @@ class TestSimulationParameters(unittest.TestCase):
         elif title == "AlMgBulk5keV_version_1_1_1":
             baseFilenameRef = r"Results\%s" % ("AlMgBulk5keV")
             simulationParameters.baseFilename = baseFilenameRef
-            simulationParameters.version = Version.Version(1, 1, 1)
+            simulationParameters.version = version.Version(1, 1, 1)
             simulationParameters.numberElectrons = 1000
             simulationParameters.numberPhotons = 127678
             simulationParameters.numberWindows = 64
@@ -342,7 +342,7 @@ class TestSimulationParameters(unittest.TestCase):
         elif title == "AlMgBulk5keV_version_1_2_0":
             baseFilenameRef = r"Results\%s" % ("AlMgBulk5keV_1_2_0")
             simulationParameters.baseFilename = baseFilenameRef
-            simulationParameters.version = Version.Version(1, 2, 0)
+            simulationParameters.version = version.Version(1, 2, 0)
             simulationParameters.numberElectrons = 10000
             simulationParameters.numberPhotons = 1000
             simulationParameters.numberWindows = 128
@@ -355,7 +355,7 @@ class TestSimulationParameters(unittest.TestCase):
         elif title == "AlMgBulk5keV_version_1_2_1":
             baseFilenameRef = r"Results\%s" % ("AlMgBulk5keV_1_2_1")
             simulationParameters.baseFilename = baseFilenameRef
-            simulationParameters.version = Version.Version(1, 2, 1)
+            simulationParameters.version = version.Version(1, 2, 1)
             simulationParameters.numberElectrons = 10000
             simulationParameters.numberPhotons = 1000
             simulationParameters.numberWindows = 128
@@ -368,7 +368,7 @@ class TestSimulationParameters(unittest.TestCase):
         elif title == "AlMgBulk5keV_version_1_4_1":
             baseFilenameRef = r"Results\%s" % ("AlMgBulk5keV_1_4_1")
             simulationParameters.baseFilename = baseFilenameRef
-            simulationParameters.version = Version.Version(1, 4, 1)
+            simulationParameters.version = version.Version(1, 4, 1)
             simulationParameters.numberElectrons = 10000
             simulationParameters.numberPhotons = 1000
             simulationParameters.numberWindows = 128
@@ -381,7 +381,7 @@ class TestSimulationParameters(unittest.TestCase):
         elif title == "AlMgBulk5keV_version_1_4_4":
             baseFilenameRef = r"Results\%s" % ("AlMgBulk5keV_1_4_4")
             simulationParameters.baseFilename = baseFilenameRef
-            simulationParameters.version = Version.Version(1, 4, 4)
+            simulationParameters.version = version.Version(1, 4, 4)
             simulationParameters.numberElectrons = 10000
             simulationParameters.numberPhotons = 1000
             simulationParameters.numberWindows = 128
@@ -403,12 +403,12 @@ class TestSimulationParameters(unittest.TestCase):
 
         simulationParameters = SimulationParameters.SimulationParameters()
 
-        simulationParameters.version = copy.deepcopy(Version.VERSION_1_4_3)
+        simulationParameters.version = copy.deepcopy(version.VERSION_1_4_3)
         numberKeys = 10
         keys = simulationParameters._createKeys()
         self.assertEquals(numberKeys, len(keys))
 
-        simulationParameters.version = copy.deepcopy(Version.VERSION_1_4_4)
+        simulationParameters.version = copy.deepcopy(version.VERSION_1_4_4)
         numberKeys = 12
         keys = simulationParameters._createKeys()
         self.assertEquals(numberKeys, len(keys))
@@ -508,7 +508,7 @@ class TestSimulationParameters(unittest.TestCase):
 
         filepath = os.path.join(self.tempDataPath, "%s.par" % (title))
         simulationParameters = simulationParametersRef
-        simulationParameters.version = copy.deepcopy(Version.VERSION_1_2_0)
+        simulationParameters.version = copy.deepcopy(version.VERSION_1_2_0)
         simulationParameters.write(filepath)
 
         self.assertEquals(simulationParametersRef.baseFilename, simulationParameters.baseFilename)
@@ -548,7 +548,7 @@ class TestSimulationParameters(unittest.TestCase):
 
         filepath = os.path.join(self.tempDataPath, "%s.par" % (title))
         simulationParameters = simulationParametersRef
-        simulationParameters.version = copy.deepcopy(Version.VERSION_1_2_1)
+        simulationParameters.version = copy.deepcopy(version.VERSION_1_2_1)
 
         simulationParameters.write(filepath)
 
@@ -589,7 +589,7 @@ class TestSimulationParameters(unittest.TestCase):
 
         filepath = os.path.join(self.tempDataPath, "%s.par" % (title))
         simulationParameters = simulationParametersRef
-        simulationParameters.version = copy.deepcopy(Version.VERSION_1_4_1)
+        simulationParameters.version = copy.deepcopy(version.VERSION_1_4_1)
 
         simulationParameters.write(filepath)
 
@@ -630,7 +630,7 @@ class TestSimulationParameters(unittest.TestCase):
 
         filepath = os.path.join(self.tempDataPath, "%s.par" % (title))
         simulationParameters = simulationParametersRef
-        simulationParameters.version = copy.deepcopy(Version.VERSION_1_4_4)
+        simulationParameters.version = copy.deepcopy(version.VERSION_1_4_4)
 
         simulationParameters.write(filepath)
 

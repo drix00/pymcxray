@@ -31,7 +31,8 @@ from nose.plugins.skip import SkipTest
 import mcxray.format.Models as Models
 import mcxray.format.MCXRayModel as MCXRayModel
 import tests.format.testUtilities as testUtilities
-import mcxray.format.version as Version
+import mcxray.format.version as version
+
 
 # Globals and constants variables.
 
@@ -111,10 +112,10 @@ class TestModels(unittest.TestCase):
         filepath = os.path.abspath(os.path.join(self.testDataPath, "inputs", "%s.mdl" % (title)))
         models.read(filepath)
 
-        self.assertEquals(Version.VERSION_1_1_1.major, models.version.major)
-        self.assertEquals(Version.VERSION_1_1_1.minor, models.version.minor)
-        self.assertEquals(Version.VERSION_1_1_1.revision, models.version.revision)
-        self.assertEquals(Version.VERSION_1_1_1, models.version)
+        self.assertEquals(version.VERSION_1_1_1.major, models.version.major)
+        self.assertEquals(version.VERSION_1_1_1.minor, models.version.minor)
+        self.assertEquals(version.VERSION_1_1_1.revision, models.version.revision)
+        self.assertEquals(version.VERSION_1_1_1, models.version)
 
         modelList = models.getModelList()
         self.assertEquals(self.numberModels, len(modelList))
@@ -144,10 +145,10 @@ class TestModels(unittest.TestCase):
         filepath = os.path.abspath(os.path.join(self.testDataPath, "inputs", "%s.mdl" % (title)))
         models.read(filepath)
 
-        self.assertEquals(Version.VERSION_1_2_0.major, models.version.major)
-        self.assertEquals(Version.VERSION_1_2_0.minor, models.version.minor)
-        self.assertEquals(Version.VERSION_1_2_0.revision, models.version.revision)
-        self.assertEquals(Version.VERSION_1_2_0, models.version)
+        self.assertEquals(version.VERSION_1_2_0.major, models.version.major)
+        self.assertEquals(version.VERSION_1_2_0.minor, models.version.minor)
+        self.assertEquals(version.VERSION_1_2_0.revision, models.version.revision)
+        self.assertEquals(version.VERSION_1_2_0, models.version)
 
         modelList = models.getModelList()
         self.assertEquals(self.numberModels, len(modelList))
@@ -177,10 +178,10 @@ class TestModels(unittest.TestCase):
         filepath = os.path.abspath(os.path.join(self.testDataPath, "inputs", "%s.mdl" % (title)))
         models.read(filepath)
 
-        self.assertEquals(Version.VERSION_1_2_1.major, models.version.major)
-        self.assertEquals(Version.VERSION_1_2_1.minor, models.version.minor)
-        self.assertEquals(Version.VERSION_1_2_1.revision, models.version.revision)
-        self.assertEquals(Version.VERSION_1_2_1, models.version)
+        self.assertEquals(version.VERSION_1_2_1.major, models.version.major)
+        self.assertEquals(version.VERSION_1_2_1.minor, models.version.minor)
+        self.assertEquals(version.VERSION_1_2_1.revision, models.version.revision)
+        self.assertEquals(version.VERSION_1_2_1, models.version)
 
         modelList = models.getModelList()
         self.assertEquals(self.numberModels, len(modelList))
@@ -210,10 +211,10 @@ class TestModels(unittest.TestCase):
         filepath = os.path.abspath(os.path.join(self.testDataPath, "inputs", "%s.mdl" % (title)))
         models.read(filepath)
 
-        self.assertEquals(Version.VERSION_1_4_1.major, models.version.major)
-        self.assertEquals(Version.VERSION_1_4_1.minor, models.version.minor)
-        self.assertEquals(Version.VERSION_1_4_1.revision, models.version.revision)
-        self.assertEquals(Version.VERSION_1_4_1, models.version)
+        self.assertEquals(version.VERSION_1_4_1.major, models.version.major)
+        self.assertEquals(version.VERSION_1_4_1.minor, models.version.minor)
+        self.assertEquals(version.VERSION_1_4_1.revision, models.version.revision)
+        self.assertEquals(version.VERSION_1_4_1, models.version)
 
         modelList = models.getModelList()
         self.assertEquals(self.numberModels, len(modelList))
@@ -330,7 +331,7 @@ class TestModels(unittest.TestCase):
 
         filepath = os.path.join(self.tempDataPath, "%s.par" % (title))
         models = Models.Models()
-        models.version = Version.VERSION_1_2_0
+        models.version = version.VERSION_1_2_0
         models._modelList[Models.KEY_XRAY_CS_CHARACTERISTIC_MODEL].setModel(MCXRayModel.XRayCSCharacteristicModel.TYPE_CASTANI1982)
         models._modelList[Models.KEY_XRAY_CS_BREMSSTRAHLUNG_MODEL].setModel(MCXRayModel.XRayCSBremsstrahlungModel.TYPE_DING)
         models._modelList[Models.KEY_ATOM_CROSS_SECTION_MODEL].setModel(MCXRayModel.AtomCrossSectionModel.TYPE_GAUVIN_DROUIN)
@@ -357,7 +358,7 @@ class TestModels(unittest.TestCase):
 
         filepath = os.path.join(self.tempDataPath, "%s.par" % (title))
         models = Models.Models()
-        models.version = Version.VERSION_1_2_1
+        models.version = version.VERSION_1_2_1
         models._modelList[Models.KEY_XRAY_CS_CHARACTERISTIC_MODEL].setModel(MCXRayModel.XRayCSCharacteristicModel.TYPE_CASTANI1982)
         models._modelList[Models.KEY_XRAY_CS_BREMSSTRAHLUNG_MODEL].setModel(MCXRayModel.XRayCSBremsstrahlungModel.TYPE_DING)
         models._modelList[Models.KEY_ATOM_CROSS_SECTION_MODEL].setModel(MCXRayModel.AtomCrossSectionModel.TYPE_GAUVIN_DROUIN)
@@ -384,7 +385,7 @@ class TestModels(unittest.TestCase):
 
         filepath = os.path.join(self.tempDataPath, "%s.par" % (title))
         models = Models.Models()
-        models.version = Version.VERSION_1_4_1
+        models.version = version.VERSION_1_4_1
         models._modelList[Models.KEY_XRAY_CS_CHARACTERISTIC_MODEL].setModel(MCXRayModel.XRayCSCharacteristicModel.TYPE_CASTANI1982)
         models._modelList[Models.KEY_XRAY_CS_BREMSSTRAHLUNG_MODEL].setModel(MCXRayModel.XRayCSBremsstrahlungModel.TYPE_DING)
         models._modelList[Models.KEY_ATOM_CROSS_SECTION_MODEL].setModel(MCXRayModel.AtomCrossSectionModel.TYPE_GAUVIN_DROUIN)

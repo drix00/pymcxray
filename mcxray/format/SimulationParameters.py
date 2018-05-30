@@ -27,8 +27,8 @@ import copy
 
 # Project modules
 import mcxray.format.MCXRayModel as MCXRayModel
-import mcxray.format.version as Version
 from mcxray.format.text.version import read_from_file, write_line
+import mcxray.format.version as version
 
 # Globals and constants variables.
 KEY_BASE_FILENAME = "BaseFileName"
@@ -47,7 +47,7 @@ KEY_ENERGY_LOSS_SCALING_FACTOR = "EnergyLossScalingFactor"
 
 class SimulationParameters(object):
     def __init__(self):
-        self.version = copy.deepcopy(Version.CURRENT_VERSION)
+        self.version = copy.deepcopy(version.CURRENT_VERSION)
 
         self._keys = self._createKeys()
 
@@ -65,13 +65,13 @@ class SimulationParameters(object):
         keys.append(KEY_NUMBER_FILMS_X)
         keys.append(KEY_NUMBER_FILMS_Y)
         keys.append(KEY_NUMBER_FILMS_Z)
-        if self.version == Version.BEFORE_VERSION:
+        if self.version == version.BEFORE_VERSION:
             keys.append(KEY_NUMBER_CHANNELS)
         else:
             keys.append(KEY_ENERGY_CHANNEL_WIDTH)
         keys.append(KEY_SPECTRA_INTERPOLATION_MODEL)
         keys.append(KEY_VOXEL_SIMPLIFICATION)
-        if self.version >= Version.VERSION_1_4_4:
+        if self.version >= version.VERSION_1_4_4:
             keys.append(KEY_ELASTIC_CROSS_SECTION_SCALING_FACTOR)
             keys.append(KEY_ENERGY_LOSS_SCALING_FACTOR)
 
@@ -185,7 +185,7 @@ class SimulationParameters(object):
                             "***    VoxelSimplification  = Use only middle voxel of trajectories to store energy",
                             "***",
                             "********************************************************************************"]
-        elif self.version == Version.BEFORE_VERSION:
+        elif self.version == version.BEFORE_VERSION:
             headerLines = [ "********************************************************************************",
                             "***                           SIMULATION PARAMETERS",
                             "***",
@@ -200,7 +200,7 @@ class SimulationParameters(object):
                             "***    SpectraInterpolation = Interpolation type for spectras",
                             "***",
                             "********************************************************************************"]
-        elif self.version >= Version.VERSION_1_4_4:
+        elif self.version >= version.VERSION_1_4_4:
             headerLines = [ "********************************************************************************",
                             "***                           SIMULATION PARAMETERS",
                             "***",

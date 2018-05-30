@@ -21,8 +21,8 @@ import copy
 # Local modules.
 
 # Project modules
-import mcxray.format.version as Version
 from mcxray.format.text.version import read_from_file, write_line
+import mcxray.format.version as version
 
 # Globals and constants variables.
 KEY_COMPUTE_XRAY_CHARACTERISTIC = "ComputeXrayCharacteristic"
@@ -32,7 +32,7 @@ KEY_COMPUTE_XRAY_SIMULATED_SPECTRUM = "ComputeXraySimulatedSpectrum"
 
 class ResultsParameters(object):
     def __init__(self):
-        self.version = copy.deepcopy(Version.CURRENT_VERSION)
+        self.version = copy.deepcopy(version.CURRENT_VERSION)
 
         self._keys = self._createKeys()
 
@@ -92,7 +92,7 @@ class ResultsParameters(object):
         write_line(self.version, outputFile)
 
         keys = self._createKeys()
-        if self.version < Version.VERSION_1_4_3:
+        if self.version < version.VERSION_1_4_3:
             keys.remove(KEY_COMPUTE_XRAY_SIMULATED_SPECTRUM)
 
         for key in keys:

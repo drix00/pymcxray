@@ -36,7 +36,7 @@ import mcxray.format.Region as Region
 import mcxray.format.Element as Element
 import mcxray.format.RegionType as RegionType
 import mcxray.format.RegionDimensions as RegionDimensions
-import mcxray.format.version as Version
+import mcxray.format.version as version
 
 # Globals and constants variables.
 
@@ -85,10 +85,10 @@ class TestSpecimen(unittest.TestCase):
             filepath = os.path.abspath(os.path.join(self.testDataPath, "%s/%s.sam" % (title, title)))
             specimen.read(filepath)
 
-            self.assertEquals(Version.VERSION_1_1_1.major, specimen.version.major)
-            self.assertEquals(Version.VERSION_1_1_1.minor, specimen.version.minor)
-            self.assertEquals(Version.VERSION_1_1_1.revision, specimen.version.revision)
-            self.assertEquals(Version.VERSION_1_1_1, specimen.version)
+            self.assertEquals(version.VERSION_1_1_1.major, specimen.version.major)
+            self.assertEquals(version.VERSION_1_1_1.minor, specimen.version.minor)
+            self.assertEquals(version.VERSION_1_1_1.revision, specimen.version.revision)
+            self.assertEquals(version.VERSION_1_1_1, specimen.version)
 
             specimenRef = self.getSpecimenReference(title)
 
@@ -112,10 +112,10 @@ class TestSpecimen(unittest.TestCase):
         filepath = os.path.abspath(os.path.join(self.testDataPath, "inputs", "%s.sam" % (title)))
         specimen.read(filepath)
 
-        self.assertEquals(Version.VERSION_1_1_1.major, specimen.version.major)
-        self.assertEquals(Version.VERSION_1_1_1.minor, specimen.version.minor)
-        self.assertEquals(Version.VERSION_1_1_1.revision, specimen.version.revision)
-        self.assertEquals(Version.VERSION_1_1_1, specimen.version)
+        self.assertEquals(version.VERSION_1_1_1.major, specimen.version.major)
+        self.assertEquals(version.VERSION_1_1_1.minor, specimen.version.minor)
+        self.assertEquals(version.VERSION_1_1_1.revision, specimen.version.revision)
+        self.assertEquals(version.VERSION_1_1_1, specimen.version)
 
         specimenRef = self.getSpecimenReference(title)
         self.assertEquals(specimenRef.version.major, specimen.version.major)
@@ -182,10 +182,10 @@ class TestSpecimen(unittest.TestCase):
         filepath = os.path.abspath(os.path.join(self.testDataPath, "inputs", "%s.sam" % (title)))
         specimen.read(filepath)
 
-        self.assertEquals(Version.VERSION_1_2_0.major, specimen.version.major)
-        self.assertEquals(Version.VERSION_1_2_0.minor, specimen.version.minor)
-        self.assertEquals(Version.VERSION_1_2_0.revision, specimen.version.revision)
-        self.assertEquals(Version.VERSION_1_2_0, specimen.version)
+        self.assertEquals(version.VERSION_1_2_0.major, specimen.version.major)
+        self.assertEquals(version.VERSION_1_2_0.minor, specimen.version.minor)
+        self.assertEquals(version.VERSION_1_2_0.revision, specimen.version.revision)
+        self.assertEquals(version.VERSION_1_2_0, specimen.version)
 
         specimenRef = self.getSpecimenReference(title)
         self.assertEquals(specimenRef.version.major, specimen.version.major)
@@ -252,10 +252,10 @@ class TestSpecimen(unittest.TestCase):
         filepath = os.path.abspath(os.path.join(self.testDataPath, "inputs", "%s.sam" % (title)))
         specimen.read(filepath)
 
-        self.assertEquals(Version.VERSION_1_2_1.major, specimen.version.major)
-        self.assertEquals(Version.VERSION_1_2_1.minor, specimen.version.minor)
-        self.assertEquals(Version.VERSION_1_2_1.revision, specimen.version.revision)
-        self.assertEquals(Version.VERSION_1_2_1, specimen.version)
+        self.assertEquals(version.VERSION_1_2_1.major, specimen.version.major)
+        self.assertEquals(version.VERSION_1_2_1.minor, specimen.version.minor)
+        self.assertEquals(version.VERSION_1_2_1.revision, specimen.version.revision)
+        self.assertEquals(version.VERSION_1_2_1, specimen.version)
 
         specimenRef = self.getSpecimenReference(title)
         self.assertEquals(specimenRef.version.major, specimen.version.major)
@@ -322,10 +322,10 @@ class TestSpecimen(unittest.TestCase):
         filepath = os.path.abspath(os.path.join(self.testDataPath, "inputs", "%s.sam" % (title)))
         specimen.read(filepath)
 
-        self.assertEquals(Version.VERSION_1_4_1.major, specimen.version.major)
-        self.assertEquals(Version.VERSION_1_4_1.minor, specimen.version.minor)
-        self.assertEquals(Version.VERSION_1_4_1.revision, specimen.version.revision)
-        self.assertEquals(Version.VERSION_1_4_1, specimen.version)
+        self.assertEquals(version.VERSION_1_4_1.major, specimen.version.major)
+        self.assertEquals(version.VERSION_1_4_1.minor, specimen.version.minor)
+        self.assertEquals(version.VERSION_1_4_1.revision, specimen.version.revision)
+        self.assertEquals(version.VERSION_1_4_1, specimen.version)
 
         specimenRef = self.getSpecimenReference(title)
         self.assertEquals(specimenRef.version.major, specimen.version.major)
@@ -461,7 +461,7 @@ class TestSpecimen(unittest.TestCase):
         filepath = os.path.join(self.tempDataPath, "%s.sam" % (title))
 
         specimen = specimenRef
-        specimen.version = copy.deepcopy(Version.VERSION_1_2_0)
+        specimen.version = copy.deepcopy(version.VERSION_1_2_0)
         specimen.write(filepath)
 
         linesRef = open(filepathReference, 'r').readlines()
@@ -491,7 +491,7 @@ class TestSpecimen(unittest.TestCase):
         filepath = os.path.join(self.tempDataPath, "%s.sam" % (title))
 
         specimen = specimenRef
-        specimen.version = copy.deepcopy(Version.VERSION_1_2_1)
+        specimen.version = copy.deepcopy(version.VERSION_1_2_1)
         specimen.write(filepath)
 
         linesRef = open(filepathReference, 'r').readlines()
@@ -542,7 +542,7 @@ class TestSpecimen(unittest.TestCase):
 
         if title == "AuBC cyl":
             specimen.numberRegions = 4
-            specimen.version = Version.Version(1, 1, 1)
+            specimen.version = version.Version(1, 1, 1)
 
             region = Region.Region()
             region.numberElements = 1
@@ -582,7 +582,7 @@ class TestSpecimen(unittest.TestCase):
 
         elif title == "BioRitchieNew111017":
             specimen.numberRegions = 7
-            specimen.version = Version.Version(1, 1, 1)
+            specimen.version = version.Version(1, 1, 1)
 
             region = Region.Region()
             region.numberElements = 3
@@ -692,7 +692,7 @@ class TestSpecimen(unittest.TestCase):
 
         elif title == "Bug Al Zr Sphere":
             specimen.numberRegions = 2
-            specimen.version = Version.Version(1, 1, 1)
+            specimen.version = version.Version(1, 1, 1)
 
             region = Region.Region()
             region.numberElements = 1
@@ -714,7 +714,7 @@ class TestSpecimen(unittest.TestCase):
 
         elif title == "Mg2SiAlCube3kev":
             specimen.numberRegions = 2
-            specimen.version = Version.Version(1, 1, 1)
+            specimen.version = version.Version(1, 1, 1)
 
             region = Region.Region()
             region.numberElements = 2
@@ -738,7 +738,7 @@ class TestSpecimen(unittest.TestCase):
 
         elif title == "AlMgBulk5keV_version_1_1_1":
             specimen.numberRegions = 3
-            specimen.version = Version.Version(1, 1, 1)
+            specimen.version = version.Version(1, 1, 1)
 
             region = Region.Region()
             region.numberElements = 2
@@ -771,7 +771,7 @@ class TestSpecimen(unittest.TestCase):
 
         elif title == "AlMgBulk5keV_version_1_2_0":
             specimen.numberRegions = 3
-            specimen.version = Version.Version(1, 2, 0)
+            specimen.version = version.Version(1, 2, 0)
 
             region = Region.Region()
             region.numberElements = 2
@@ -805,7 +805,7 @@ class TestSpecimen(unittest.TestCase):
 
         elif title == "AlMgBulk5keV_version_1_2_1":
             specimen.numberRegions = 3
-            specimen.version = Version.Version(1, 2, 1)
+            specimen.version = version.Version(1, 2, 1)
 
             region = Region.Region()
             region.numberElements = 2
@@ -839,7 +839,7 @@ class TestSpecimen(unittest.TestCase):
 
         elif title == "AlMgBulk5keV_version_1_4_1":
             specimen.numberRegions = 3
-            specimen.version = Version.Version(1, 4, 1)
+            specimen.version = version.Version(1, 4, 1)
 
             region = Region.Region()
             region.numberElements = 2

@@ -2,10 +2,10 @@
 # -*- coding: utf-8 -*-
 
 """
-.. py:currentmodule:: format.test_version
+.. py:currentmodule:: tests.format.test_version
 .. moduleauthor:: Hendrix Demers <hendrix.demers@mail.mcgill.ca>
 
-Tests for module `version`.
+Tests for module `mcxray.format.version`.
 """
 
 ###############################################################################
@@ -26,10 +26,10 @@ Tests for module `version`.
 
 # Standard library modules.
 import unittest
-import logging
 import os.path
 
 # Third party modules.
+from nose import SkipTest
 
 # Local modules.
 
@@ -42,7 +42,7 @@ import tests.format.testUtilities as testUtilities
 
 class TestVersion(unittest.TestCase):
     """
-    TestCase class for the module `version`.
+    TestCase class for the module `mcxray.format.version`.
     """
 
     def setUp(self):
@@ -52,8 +52,11 @@ class TestVersion(unittest.TestCase):
 
         unittest.TestCase.setUp(self)
 
-        self.testDataPath = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../test_data"))
-        self.tempDataPath = testUtilities.createTempDataPath(self.testDataPath)
+        self.test_data_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../test_data"))
+        if not os.path.isdir(self.test_data_path):
+            raise SkipTest("Test file not found: {}".format(self.test_data_path))
+
+        self.tempDataPath = testUtilities.createTempDataPath(self.test_data_path)
 
     def tearDown(self):
         """

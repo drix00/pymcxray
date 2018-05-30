@@ -22,8 +22,8 @@ import copy
 # Local modules.
 
 # Project modules
-import mcxray.format.version as Version
 from mcxray.format.text.version import read_from_file, write_line
+import mcxray.format.version as version
 
 # Globals and constants variables.
 
@@ -42,7 +42,7 @@ class SimulationInputs(object):
 
         self._title = ""
 
-        self.version = copy.deepcopy(Version.CURRENT_VERSION)
+        self.version = copy.deepcopy(version.CURRENT_VERSION)
 
     def _createKeys(self):
         keys = []
@@ -80,7 +80,7 @@ class SimulationInputs(object):
         write_line(self.version, outputFile)
 
         keys = self._createKeys()
-        if self.version < Version.VERSION_1_4_0:
+        if self.version < version.VERSION_1_4_0:
             keys.remove(KEY_RESULTS)
 
         for key in keys:

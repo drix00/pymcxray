@@ -25,7 +25,7 @@ from nose.plugins.skip import SkipTest
 # Project modules
 import mcxray.format.ResultsParameters as ResultsParameters
 import tests.format.testUtilities as testUtilities
-import mcxray.format.version as Version
+import mcxray.format.version as version
 
 # Globals and constants variables.
 
@@ -91,10 +91,10 @@ class TestResultsParameters(unittest.TestCase):
         filepath = os.path.abspath(os.path.join(self.testDataPath, "inputs", "%s.rp" % (title)))
         resultsParameters.read(filepath)
 
-        self.assertEquals(Version.VERSION_1_4_1.major, resultsParameters.version.major)
-        self.assertEquals(Version.VERSION_1_4_1.minor, resultsParameters.version.minor)
-        self.assertEquals(Version.VERSION_1_4_1.revision, resultsParameters.version.revision)
-        self.assertEquals(Version.VERSION_1_4_1, resultsParameters.version)
+        self.assertEquals(version.VERSION_1_4_1.major, resultsParameters.version.major)
+        self.assertEquals(version.VERSION_1_4_1.minor, resultsParameters.version.minor)
+        self.assertEquals(version.VERSION_1_4_1.revision, resultsParameters.version.revision)
+        self.assertEquals(version.VERSION_1_4_1, resultsParameters.version)
 
         resultsParametersRef = self.getSimulationParametersReference(title)
         self.assertEquals(resultsParametersRef.version.major, resultsParameters.version.major)
@@ -119,10 +119,10 @@ class TestResultsParameters(unittest.TestCase):
         filepath = os.path.abspath(os.path.join(self.testDataPath, "inputs", "%s.rp" % (title)))
         resultsParameters.read(filepath)
 
-        self.assertEquals(Version.VERSION_1_4_3.major, resultsParameters.version.major)
-        self.assertEquals(Version.VERSION_1_4_3.minor, resultsParameters.version.minor)
-        self.assertEquals(Version.VERSION_1_4_3.revision, resultsParameters.version.revision)
-        self.assertEquals(Version.VERSION_1_4_3, resultsParameters.version)
+        self.assertEquals(version.VERSION_1_4_3.major, resultsParameters.version.major)
+        self.assertEquals(version.VERSION_1_4_3.minor, resultsParameters.version.minor)
+        self.assertEquals(version.VERSION_1_4_3.revision, resultsParameters.version.revision)
+        self.assertEquals(version.VERSION_1_4_3, resultsParameters.version)
 
         resultsParametersRef = self.getSimulationParametersReference(title)
         self.assertEquals(resultsParametersRef.version.major, resultsParameters.version.major)
@@ -141,17 +141,17 @@ class TestResultsParameters(unittest.TestCase):
         resultsParameters = ResultsParameters.ResultsParameters()
 
         if title == "AlMgBulk5keV_version_1_2_1":
-            resultsParameters.version = Version.Version(1, 2, 1)
+            resultsParameters.version = version.Version(1, 2, 1)
             resultsParameters.isComputeXrayCharacteristic = None
             resultsParameters.isComputeXrayBremsstrahlung = None
             resultsParameters.isComputeXrayPhirhoz = None
         elif title == "AlMgBulk5keV_version_1_4_1":
-            resultsParameters.version = Version.Version(1, 4, 1)
+            resultsParameters.version = version.Version(1, 4, 1)
             resultsParameters.isComputeXrayCharacteristic = True
             resultsParameters.isComputeXrayBremsstrahlung = True
             resultsParameters.isComputeXrayPhirhoz = True
         elif title == "AlMgBulk5keV_version_1_4_3":
-            resultsParameters.version = Version.Version(1, 4, 3)
+            resultsParameters.version = version.Version(1, 4, 3)
             resultsParameters.isComputeXrayCharacteristic = True
             resultsParameters.isComputeXrayBremsstrahlung = False
             resultsParameters.isComputeXrayPhirhoz = False
@@ -202,7 +202,7 @@ class TestResultsParameters(unittest.TestCase):
 
         filepath = os.path.join(self.tempDataPath, "%s.rp" % (title))
         resultsParameters = resultsParametersRef
-        resultsParameters.version = Version.VERSION_1_4_1
+        resultsParameters.version = version.VERSION_1_4_1
 
         resultsParameters.write(filepath)
 
@@ -235,7 +235,7 @@ class TestResultsParameters(unittest.TestCase):
 
         filepath = os.path.join(self.tempDataPath, "%s.rp" % (title))
         resultsParameters = resultsParametersRef
-        resultsParameters.version = Version.VERSION_1_4_3
+        resultsParameters.version = version.VERSION_1_4_3
 
         resultsParameters.write(filepath)
 

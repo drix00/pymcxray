@@ -31,7 +31,7 @@ from nose.plugins.skip import SkipTest
 # Project modules
 import mcxray.format.MicroscopeParameters as MicroscopeParameters
 import tests.format.testUtilities as testUtilities
-import mcxray.format.version as Version
+import mcxray.format.version as version
 
 # Globals and constants variables.
 
@@ -134,10 +134,10 @@ class TestMicroscopeParameters(unittest.TestCase):
         filepath = os.path.abspath(os.path.join(self.testDataPath, "inputs", "%s.mic" % (title)))
         microscopeParameters.read(filepath)
 
-        self.assertEquals(Version.VERSION_1_1_1.major, microscopeParameters.version.major)
-        self.assertEquals(Version.VERSION_1_1_1.minor, microscopeParameters.version.minor)
-        self.assertEquals(Version.VERSION_1_1_1.revision, microscopeParameters.version.revision)
-        self.assertEquals(Version.VERSION_1_1_1, microscopeParameters.version)
+        self.assertEquals(version.VERSION_1_1_1.major, microscopeParameters.version.major)
+        self.assertEquals(version.VERSION_1_1_1.minor, microscopeParameters.version.minor)
+        self.assertEquals(version.VERSION_1_1_1.revision, microscopeParameters.version.revision)
+        self.assertEquals(version.VERSION_1_1_1, microscopeParameters.version)
 
         microscopeParametersRef = self.getMicroscopeParametersReference(title)
         self.assertEquals(microscopeParametersRef.version.major, microscopeParameters.version.major)
@@ -185,10 +185,10 @@ class TestMicroscopeParameters(unittest.TestCase):
         filepath = os.path.abspath(os.path.join(self.testDataPath, "inputs", "%s.mic" % (title)))
         microscopeParameters.read(filepath)
 
-        self.assertEquals(Version.VERSION_1_2_0.major, microscopeParameters.version.major)
-        self.assertEquals(Version.VERSION_1_2_0.minor, microscopeParameters.version.minor)
-        self.assertEquals(Version.VERSION_1_2_0.revision, microscopeParameters.version.revision)
-        self.assertEquals(Version.VERSION_1_2_0, microscopeParameters.version)
+        self.assertEquals(version.VERSION_1_2_0.major, microscopeParameters.version.major)
+        self.assertEquals(version.VERSION_1_2_0.minor, microscopeParameters.version.minor)
+        self.assertEquals(version.VERSION_1_2_0.revision, microscopeParameters.version.revision)
+        self.assertEquals(version.VERSION_1_2_0, microscopeParameters.version)
 
         microscopeParametersRef = self.getMicroscopeParametersReference(title)
         self.assertEquals(microscopeParametersRef.version.major, microscopeParameters.version.major)
@@ -236,10 +236,10 @@ class TestMicroscopeParameters(unittest.TestCase):
         filepath = os.path.abspath(os.path.join(self.testDataPath, "inputs", "%s.mic" % (title)))
         microscopeParameters.read(filepath)
 
-        self.assertEquals(Version.VERSION_1_2_1.major, microscopeParameters.version.major)
-        self.assertEquals(Version.VERSION_1_2_1.minor, microscopeParameters.version.minor)
-        self.assertEquals(Version.VERSION_1_2_1.revision, microscopeParameters.version.revision)
-        self.assertEquals(Version.VERSION_1_2_1, microscopeParameters.version)
+        self.assertEquals(version.VERSION_1_2_1.major, microscopeParameters.version.major)
+        self.assertEquals(version.VERSION_1_2_1.minor, microscopeParameters.version.minor)
+        self.assertEquals(version.VERSION_1_2_1.revision, microscopeParameters.version.revision)
+        self.assertEquals(version.VERSION_1_2_1, microscopeParameters.version)
 
         microscopeParametersRef = self.getMicroscopeParametersReference(title)
         self.assertEquals(microscopeParametersRef.version.major, microscopeParameters.version.major)
@@ -287,10 +287,10 @@ class TestMicroscopeParameters(unittest.TestCase):
         filepath = os.path.abspath(os.path.join(self.testDataPath, "inputs", "%s.mic" % (title)))
         microscopeParameters.read(filepath)
 
-        self.assertEquals(Version.VERSION_1_4_1.major, microscopeParameters.version.major)
-        self.assertEquals(Version.VERSION_1_4_1.minor, microscopeParameters.version.minor)
-        self.assertEquals(Version.VERSION_1_4_1.revision, microscopeParameters.version.revision)
-        self.assertEquals(Version.VERSION_1_4_1, microscopeParameters.version)
+        self.assertEquals(version.VERSION_1_4_1.major, microscopeParameters.version.major)
+        self.assertEquals(version.VERSION_1_4_1.minor, microscopeParameters.version.minor)
+        self.assertEquals(version.VERSION_1_4_1.revision, microscopeParameters.version.revision)
+        self.assertEquals(version.VERSION_1_4_1, microscopeParameters.version)
 
         microscopeParametersRef = self.getMicroscopeParametersReference(title)
         self.assertEquals(microscopeParametersRef.version.major, microscopeParameters.version.major)
@@ -445,7 +445,7 @@ class TestMicroscopeParameters(unittest.TestCase):
 
         filepath = os.path.join(self.tempDataPath, "%s.mic" % (title))
         microscopeParameters = microscopeParametersRef
-        microscopeParameters.version = Version.VERSION_1_2_0
+        microscopeParameters.version = version.VERSION_1_2_0
 
         microscopeParameters.write(filepath)
 
@@ -498,7 +498,7 @@ class TestMicroscopeParameters(unittest.TestCase):
 
         filepath = os.path.join(self.tempDataPath, "%s.mic" % (title))
         microscopeParameters = microscopeParametersRef
-        microscopeParameters.version = Version.VERSION_1_2_1
+        microscopeParameters.version = version.VERSION_1_2_1
 
         microscopeParameters.write(filepath)
 
@@ -549,7 +549,7 @@ class TestMicroscopeParameters(unittest.TestCase):
 
         filepath = os.path.join(self.tempDataPath, "%s.mic" % (title))
         microscopeParameters = microscopeParametersRef
-        microscopeParameters.version = Version.VERSION_1_4_1
+        microscopeParameters.version = version.VERSION_1_4_1
 
         microscopeParameters.write(filepath)
 
@@ -689,7 +689,7 @@ class TestMicroscopeParameters(unittest.TestCase):
             microscopeParameters.detectorHAADFLow_rad = 0.15
             microscopeParameters.detectorHAADFHigh_rad = 0.3
         elif title == "AlMgBulk5keV_version_1_1_1":
-            microscopeParameters.version = Version.Version(1, 1, 1)
+            microscopeParameters.version = version.Version(1, 1, 1)
             microscopeParameters.beamEnergy_keV = 5.0
             microscopeParameters.beamCurrent_A = 1e-10
             microscopeParameters.beamDiameter_A = 0.0
@@ -714,7 +714,7 @@ class TestMicroscopeParameters(unittest.TestCase):
             microscopeParameters.detectorHAADFLow_rad = 0.15
             microscopeParameters.detectorHAADFHigh_rad = 0.3
         elif title == "AlMgBulk5keV_version_1_2_0":
-            microscopeParameters.version = Version.Version(1, 2, 0)
+            microscopeParameters.version = version.Version(1, 2, 0)
             microscopeParameters.beamEnergy_keV = 4.0
             microscopeParameters.beamCurrent_A = 2e-10
             microscopeParameters.beamDiameter_A = 1.0
@@ -739,7 +739,7 @@ class TestMicroscopeParameters(unittest.TestCase):
             microscopeParameters.detectorHAADFLow_rad = 0.16
             microscopeParameters.detectorHAADFHigh_rad = 0.6
         elif title == "AlMgBulk5keV_version_1_2_1":
-            microscopeParameters.version = Version.Version(1, 2, 1)
+            microscopeParameters.version = version.Version(1, 2, 1)
             microscopeParameters.beamEnergy_keV = 4.0
             microscopeParameters.beamCurrent_A = 2e-10
             microscopeParameters.beamDiameter_A = 1.7458717472684776e-007
@@ -764,7 +764,7 @@ class TestMicroscopeParameters(unittest.TestCase):
             microscopeParameters.detectorHAADFLow_rad = 0.16
             microscopeParameters.detectorHAADFHigh_rad = 0.6
         elif title == "AlMgBulk5keV_version_1_4_1":
-            microscopeParameters.version = Version.Version(1, 4, 1)
+            microscopeParameters.version = version.Version(1, 4, 1)
             microscopeParameters.beamEnergy_keV = 4.0
             microscopeParameters.beamCurrent_A = 2e-10
             microscopeParameters.beamDiameter_A = 1.7458717472684776e-007

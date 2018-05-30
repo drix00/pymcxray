@@ -31,7 +31,7 @@ from nose.plugins.skip import SkipTest
 # Project modules
 import mcxray.format.SimulationInputs as SimulationInputs
 import tests.format.testUtilities as testUtilities
-import mcxray.format.version as Version
+import mcxray.format.version as version
 
 # Globals and constants variables.
 
@@ -100,10 +100,10 @@ class TestSimulationInputs(unittest.TestCase):
 
         self.assertEquals(title, simulationInputs.title)
 
-        self.assertEquals(Version.VERSION_1_1_1.major, simulationInputs.version.major)
-        self.assertEquals(Version.VERSION_1_1_1.minor, simulationInputs.version.minor)
-        self.assertEquals(Version.VERSION_1_1_1.revision, simulationInputs.version.revision)
-        self.assertEquals(Version.VERSION_1_1_1, simulationInputs.version)
+        self.assertEquals(version.VERSION_1_1_1.major, simulationInputs.version.major)
+        self.assertEquals(version.VERSION_1_1_1.minor, simulationInputs.version.minor)
+        self.assertEquals(version.VERSION_1_1_1.revision, simulationInputs.version.revision)
+        self.assertEquals(version.VERSION_1_1_1, simulationInputs.version)
 
         self.assertEquals("%s.sam" % (title), simulationInputs.specimenFilename)
         self.assertEquals("%s.mdl" % (title), simulationInputs.modelFilename)
@@ -125,10 +125,10 @@ class TestSimulationInputs(unittest.TestCase):
 
         self.assertEquals(title, simulationInputs.title)
 
-        self.assertEquals(Version.VERSION_1_2_0.major, simulationInputs.version.major)
-        self.assertEquals(Version.VERSION_1_2_0.minor, simulationInputs.version.minor)
-        self.assertEquals(Version.VERSION_1_2_0.revision, simulationInputs.version.revision)
-        self.assertEquals(Version.VERSION_1_2_0, simulationInputs.version)
+        self.assertEquals(version.VERSION_1_2_0.major, simulationInputs.version.major)
+        self.assertEquals(version.VERSION_1_2_0.minor, simulationInputs.version.minor)
+        self.assertEquals(version.VERSION_1_2_0.revision, simulationInputs.version.revision)
+        self.assertEquals(version.VERSION_1_2_0, simulationInputs.version)
 
         self.assertEquals("%s.sam" % (title), simulationInputs.specimenFilename)
         self.assertEquals("%s.mdl" % (title), simulationInputs.modelFilename)
@@ -150,10 +150,10 @@ class TestSimulationInputs(unittest.TestCase):
 
         self.assertEquals(title, simulationInputs.title)
 
-        self.assertEquals(Version.VERSION_1_2_1.major, simulationInputs.version.major)
-        self.assertEquals(Version.VERSION_1_2_1.minor, simulationInputs.version.minor)
-        self.assertEquals(Version.VERSION_1_2_1.revision, simulationInputs.version.revision)
-        self.assertEquals(Version.VERSION_1_2_1, simulationInputs.version)
+        self.assertEquals(version.VERSION_1_2_1.major, simulationInputs.version.major)
+        self.assertEquals(version.VERSION_1_2_1.minor, simulationInputs.version.minor)
+        self.assertEquals(version.VERSION_1_2_1.revision, simulationInputs.version.revision)
+        self.assertEquals(version.VERSION_1_2_1, simulationInputs.version)
 
         self.assertEquals("%s.sam" % (title), simulationInputs.specimenFilename)
         self.assertEquals("%s.mdl" % (title), simulationInputs.modelFilename)
@@ -176,10 +176,10 @@ class TestSimulationInputs(unittest.TestCase):
 
         self.assertEquals(title, simulationInputs.title)
 
-        self.assertEquals(Version.VERSION_1_4_1.major, simulationInputs.version.major)
-        self.assertEquals(Version.VERSION_1_4_1.minor, simulationInputs.version.minor)
-        self.assertEquals(Version.VERSION_1_4_1.revision, simulationInputs.version.revision)
-        self.assertEquals(Version.VERSION_1_4_1, simulationInputs.version)
+        self.assertEquals(version.VERSION_1_4_1.major, simulationInputs.version.major)
+        self.assertEquals(version.VERSION_1_4_1.minor, simulationInputs.version.minor)
+        self.assertEquals(version.VERSION_1_4_1.revision, simulationInputs.version.revision)
+        self.assertEquals(version.VERSION_1_4_1, simulationInputs.version)
 
         self.assertEquals("%s.sam" % (title), simulationInputs.specimenFilename)
         self.assertEquals("%s.mdl" % (title), simulationInputs.modelFilename)
@@ -239,7 +239,7 @@ class TestSimulationInputs(unittest.TestCase):
         self.maxDiff = None
 
         simulationInputsRef = SimulationInputs.SimulationInputs()
-        simulationInputsRef.version = copy.deepcopy(Version.VERSION_1_1_1)
+        simulationInputsRef.version = copy.deepcopy(version.VERSION_1_1_1)
 
         title = "AlMgBulk5keV_version_1_1_1"
         filepathReference = os.path.abspath(os.path.join(self.testDataPath, "inputs", "%s.sim" % (title)))
@@ -249,7 +249,7 @@ class TestSimulationInputs(unittest.TestCase):
 
         filepath = os.path.join(self.tempDataPath, "%s.sim" % (title))
         simulationInputs = SimulationInputs.SimulationInputs()
-        simulationInputs.version = copy.deepcopy(Version.VERSION_1_1_1)
+        simulationInputs.version = copy.deepcopy(version.VERSION_1_1_1)
         simulationInputs.write(filepath)
 
         self.assertEquals("%s.sam" % (title), simulationInputs.specimenFilename)
@@ -276,7 +276,7 @@ class TestSimulationInputs(unittest.TestCase):
         self.maxDiff = None
 
         simulationInputsRef = SimulationInputs.SimulationInputs()
-        simulationInputsRef.version = copy.deepcopy(Version.VERSION_1_2_0)
+        simulationInputsRef.version = copy.deepcopy(version.VERSION_1_2_0)
 
         title = "AlMgBulk5keV_version_1_2_0"
         filepathReference = os.path.abspath(os.path.join(self.testDataPath, "inputs", "%s.sim" % (title)))
@@ -286,7 +286,7 @@ class TestSimulationInputs(unittest.TestCase):
 
         filepath = os.path.join(self.tempDataPath, "%s.sim" % (title))
         simulationInputs = SimulationInputs.SimulationInputs()
-        simulationInputs.version = copy.deepcopy(Version.VERSION_1_2_0)
+        simulationInputs.version = copy.deepcopy(version.VERSION_1_2_0)
         simulationInputs.write(filepath)
 
         self.assertEquals("%s.sam" % (title), simulationInputs.specimenFilename)
@@ -313,7 +313,7 @@ class TestSimulationInputs(unittest.TestCase):
         self.maxDiff = None
 
         simulationInputsRef = SimulationInputs.SimulationInputs()
-        simulationInputsRef.version = copy.deepcopy(Version.VERSION_1_2_1)
+        simulationInputsRef.version = copy.deepcopy(version.VERSION_1_2_1)
 
         title = "AlMgBulk5keV_version_1_2_1"
         filepathReference = os.path.abspath(os.path.join(self.testDataPath, "inputs", "%s.sim" % (title)))
@@ -323,7 +323,7 @@ class TestSimulationInputs(unittest.TestCase):
 
         filepath = os.path.join(self.tempDataPath, "%s.sim" % (title))
         simulationInputs = SimulationInputs.SimulationInputs()
-        simulationInputs.version = copy.deepcopy(Version.VERSION_1_2_1)
+        simulationInputs.version = copy.deepcopy(version.VERSION_1_2_1)
         simulationInputs.write(filepath)
 
         self.assertEquals("%s.sam" % (title), simulationInputs.specimenFilename)
@@ -350,7 +350,7 @@ class TestSimulationInputs(unittest.TestCase):
         self.maxDiff = None
 
         simulationInputsRef = SimulationInputs.SimulationInputs()
-        simulationInputsRef.version = copy.deepcopy(Version.VERSION_1_4_1)
+        simulationInputsRef.version = copy.deepcopy(version.VERSION_1_4_1)
 
         title = "AlMgBulk5keV_version_1_4_1"
         filepathReference = os.path.abspath(os.path.join(self.testDataPath, "inputs", "%s.sim" % (title)))
@@ -360,7 +360,7 @@ class TestSimulationInputs(unittest.TestCase):
 
         filepath = os.path.join(self.tempDataPath, "%s.sim" % (title))
         simulationInputs = SimulationInputs.SimulationInputs()
-        simulationInputs.version = Version.Version(1, 4, 1)
+        simulationInputs.version = version.Version(1, 4, 1)
         simulationInputs.write(filepath)
 
         self.assertEquals("%s.sam" % (title), simulationInputs.specimenFilename)

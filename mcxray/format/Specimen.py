@@ -25,10 +25,10 @@ import copy
 
 # Local modules.
 import mcxray.format.Region as Region
-import mcxray.format.version as Version
 
 # Project modules
 from mcxray.format.text.version import read_from_file, write_line
+import mcxray.format.version as version
 
 # Globals and constants variables.
 KEY_NAME = "Name"
@@ -37,7 +37,7 @@ KEY_REGIONS = "Regions"
 
 class Specimen(object):
     def __init__(self):
-        self.version = copy.deepcopy(Version.CURRENT_VERSION)
+        self.version = copy.deepcopy(version.CURRENT_VERSION)
 
         self._keys = self._createKeys()
 
@@ -70,7 +70,7 @@ class Specimen(object):
 
         read_from_file(self.version, filepath)
 
-        if self.version == Version.BEFORE_VERSION:
+        if self.version == version.BEFORE_VERSION:
             self._readOldVersion(filepath)
         else:
             self._readWithVersion(filepath)
@@ -146,7 +146,7 @@ class Specimen(object):
             headerLines = \
 """********************************************************************************
 """.splitlines()
-        elif self.version == Version.BEFORE_VERSION:
+        elif self.version == version.BEFORE_VERSION:
             headerLines = \
 """********************************************************************************
 ***                                  SPECIMEN

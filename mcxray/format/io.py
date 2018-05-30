@@ -2,11 +2,11 @@
 # -*- coding: utf-8 -*-
 
 """
-.. py:currentmodule:: mcxray.simulation
+.. py:currentmodule:: mcxray.format.read
 
 .. moduleauthor:: Hendrix Demers <hendrix.demers@mail.mcgill.ca>
 
-Simulation data structure for mcxray Monte Carlo simulation program.
+Read input and output mcxray files.
 """
 
 ###############################################################################
@@ -32,26 +32,11 @@ Simulation data structure for mcxray Monte Carlo simulation program.
 # Local modules.
 
 # Project modules.
+import mcxray.format.text.read
+from mcxray.format.simulation import Simulation
 from mcxray.format.text import extract_basename
 
 # Globals and constants variables.
-
-
-class Simulation(object):
-    def __init__(self):
-        """
-        Constructor.
-        """
-        self.name = ""
-
-    def __eq__(self, other):
-        """
-        Comparison between two objects.
-
-        :param other:
-        :return: if two objects are equal.
-        """
-        return self.name == other.name
 
 
 def read_text_input(file_path):
@@ -61,10 +46,7 @@ def read_text_input(file_path):
     :param file_path: path of the text file.
     :return: :py:`Simulation` object.
     """
-    simulation = Simulation()
-
-    basename = extract_basename(file_path)
-    simulation.name = basename
+    simulation = mcxray.format.text.read.read_text_input(file_path)
 
     return simulation
 
@@ -77,9 +59,7 @@ def read_text_output(path, basename):
     :param basename:
     :return: :py:`Simulation` object.
     """
-    simulation = Simulation()
-
-    simulation.name = basename
+    simulation = mcxray.format.text.read.read_text_output(path, basename)
 
     return simulation
 
