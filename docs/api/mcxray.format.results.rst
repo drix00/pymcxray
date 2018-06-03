@@ -1,11 +1,6 @@
 mcxray.format.results package
 =============================
 
-.. automodule:: mcxray.format.results
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
 Subpackages
 -----------
 
@@ -55,3 +50,10 @@ Submodules
    mcxray.format.results.XraySpectraSpecimen
    mcxray.format.results.XraySpectraSpecimenEmittedDetected
 
+Module contents
+---------------
+
+.. automodule:: mcxray.format.results
+    :members:
+    :undoc-members:
+    :show-inheritance:

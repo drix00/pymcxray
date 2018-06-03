@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-.. py:currentmodule:: mcxray.format.read
+.. py:currentmodule:: mcxray.format.io
 
 .. moduleauthor:: Hendrix Demers <hendrix.demers@mail.mcgill.ca>
 
@@ -33,8 +33,7 @@ Read input and output mcxray files.
 
 # Project modules.
 import mcxray.format.text.read
-from mcxray.format.simulation import Simulation
-from mcxray.format.text import extract_basename
+import mcxray.format.hdf5.read
 
 # Globals and constants variables.
 
@@ -90,6 +89,7 @@ def convert_text_output_to_hdf5(text_file_path, hdf5_file_path=None):
     :return: :py:`Simulation` object.
     """
     simulation = read_text_output(text_file_path)
+
     return simulation
 
 
@@ -100,10 +100,7 @@ def read_hdf5_input(file_path):
     :param file_path:
     :return: :py:`Simulation` object.
     """
-    simulation = Simulation()
-
-    basename = extract_basename(file_path)
-    simulation.name = basename
+    simulation = mcxray.format.hdf5.read.read_hdf5_input(file_path)
 
     return simulation
 
@@ -115,9 +112,6 @@ def read_hdf5_output(file_path):
     :param file_path:
     :return: :py:`Simulation` object.
     """
-    simulation = Simulation()
-
-    basename = extract_basename(file_path)
-    simulation.name = basename
+    simulation = mcxray.format.hdf5.read.read_hdf5_output(file_path)
 
     return simulation

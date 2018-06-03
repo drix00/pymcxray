@@ -2,11 +2,11 @@
 # -*- coding: utf-8 -*-
 
 """
-.. py:currentmodule:: mcxray.format.simulation
+.. py:currentmodule:: tests.format.hdf5.test_version
 
 .. moduleauthor:: Hendrix Demers <hendrix.demers@mail.mcgill.ca>
 
-Simulation data structure for mcxray Monte Carlo simulation program.
+Tests for the module :py:mod:`mcxray.format.hdf5.version`.
 """
 
 ###############################################################################
@@ -26,34 +26,48 @@ Simulation data structure for mcxray Monte Carlo simulation program.
 ###############################################################################
 
 # Standard library modules.
+import unittest
 
 # Third party modules.
 
 # Local modules.
 
 # Project modules.
-from mcxray.format.version import CURRENT_VERSION
+import mcxray.format.hdf5.version
+
 
 # Globals and constants variables.
 
 
-class Simulation(object):
-    def __init__(self):
-        """
-        Constructor.
+class TestVersion(unittest.TestCase):
+    """
+    TestCase class for the module :py:mod:`mcxray.format.hdf5.version`.
+    """
 
+    def setUp(self):
         """
-        self.name = ""
-        self.version = CURRENT_VERSION
-
-    def __eq__(self, other):
+        Setup method.
         """
-        Comparison between two objects.
 
-        :param other:
-        :return: if two objects are equal.
+        unittest.TestCase.setUp(self)
+
+    def tearDown(self):
         """
-        is_equal = self.name == other.name and \
-                   self.version == other.version
+        Teardown method.
+        """
 
-        return is_equal
+        unittest.TestCase.tearDown(self)
+
+    def testSkeleton(self):
+        """
+        First test to check if the testcase is working with the testing framework.
+        """
+
+        # self.fail("Test if the testcase is working.")
+        self.assert_(True)
+
+
+if __name__ == '__main__':  # pragma: no cover
+    import nose
+
+    nose.runmodule()

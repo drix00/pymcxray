@@ -200,7 +200,7 @@ class SpectraEDS(object):
         self._parameters[key] = int(value)
         indexLine += 1
 
-        # todo: extract values from lines.
+        # .. todo:: extract values from lines.
         indexLine = lines.index(SECTION_ICC_FROM_XRAY_SPECTRA) + 1
         for line in lines[indexLine:]:
             line = line.strip()
@@ -209,7 +209,7 @@ class SpectraEDS(object):
             else:
                 break
 
-        # todo: extract values from lines.
+        # .. todo:: extract values from lines.
         indexLine = lines.index(SECTION_ICC_FROM_ELECTRON_TRAJECTORIES) + 1
         for line in lines[indexLine:]:
             line = line.strip()
@@ -218,7 +218,7 @@ class SpectraEDS(object):
             else:
                 break
 
-        # todo: extract values from lines.
+        # .. todo:: extract values from lines.
         indexLine = lines.index(SECTION_EIDEAL_EDETECTED_RATIO) + 1
         for line in lines[indexLine:]:
             line = line.strip()

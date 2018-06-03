@@ -102,6 +102,12 @@ class TestVersion(unittest.TestCase):
         self.assertEquals(5, version.minor)
         self.assertEquals(6, version.revision)
 
+        # Test function
+        version_ref = Version(1, 2, 3)
+        version_string = "1.2.3"
+        version = from_string(version_string)
+        self.assertEquals(version_ref, version)
+
         # self.fail("Test if the testcase is working.")
 
     def test_VersionConstants(self):
@@ -196,14 +202,14 @@ class TestVersion(unittest.TestCase):
         self.assertEquals(VERSION_1_1_1, BEFORE_VERSION)
         self.assertNotEquals(VERSION_1_1_1, CURRENT_VERSION)
 
-        string_ref = "1.5.2"
+        string_ref = "2.1.1"
         version_string = CURRENT_VERSION.to_string()
         self.assertEquals(string_ref, version_string)
-        self.assertEquals(1, CURRENT_VERSION.major)
-        self.assertEquals(5, CURRENT_VERSION.minor)
-        self.assertEquals(2, CURRENT_VERSION.revision)
+        self.assertEquals(2, CURRENT_VERSION.major)
+        self.assertEquals(1, CURRENT_VERSION.minor)
+        self.assertEquals(1, CURRENT_VERSION.revision)
 
-        self.assertEquals(VERSION_1_5_2, CURRENT_VERSION)
+        self.assertEquals(VERSION_2_1_1, CURRENT_VERSION)
         self.assertNotEquals(VERSION_1_5_2, BEFORE_VERSION)
         self.assertFalse(VERSION_1_5_2 == BEFORE_VERSION)
 

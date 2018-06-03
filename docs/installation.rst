@@ -58,7 +58,7 @@ Add or modify the API documentation:
 .. code-block:: console
 
     $ cd docs
-    $ phinx-apidoc -o api -e -f -P ../mcxray
+    $ sphinx-apidoc -o api -e -f -P ../mcxray
     $ make html
 
 From sources

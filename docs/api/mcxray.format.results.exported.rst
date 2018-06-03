@@ -1,11 +1,6 @@
 mcxray.format.results.exported package
 ======================================
 
-.. automodule:: mcxray.format.results.exported
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
 Submodules
 ----------
 
@@ -14,3 +9,10 @@ Submodules
    mcxray.format.results.exported.DataMap
    mcxray.format.results.exported.XrayIntensityXY
 
+Module contents
+---------------
+
+.. automodule:: mcxray.format.results.exported
+    :members:
+    :undoc-members:
+    :show-inheritance:

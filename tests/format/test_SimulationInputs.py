@@ -210,7 +210,7 @@ class TestSimulationInputs(unittest.TestCase):
 
         self.maxDiff = None
 
-        # todo: make test pass using testUtilities.getSimulationTitles().
+        # .. todo:: make test pass using testUtilities.getSimulationTitles().
         for title in ["BioRitchieNew111017"]:
             filepathReference = os.path.abspath(os.path.join(self.testDataPath, "%s/%s.sim" % (title, title)))
 

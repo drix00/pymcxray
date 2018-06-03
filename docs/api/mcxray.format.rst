@@ -1,11 +1,6 @@
 mcxray.format package
 =====================
 
-.. automodule:: mcxray.format
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
 Subpackages
 -----------
 
@@ -34,5 +29,14 @@ Submodules
    mcxray.format.SimulationParameters
    mcxray.format.SnrParameters
    mcxray.format.Specimen
-   mcxray.format.Version
+   mcxray.format.io
+   mcxray.format.simulation
+   mcxray.format.version
 
+Module contents
+---------------
+
+.. automodule:: mcxray.format
+    :members:
+    :undoc-members:
+    :show-inheritance:

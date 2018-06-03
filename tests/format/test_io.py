@@ -2,11 +2,11 @@
 # -*- coding: utf-8 -*-
 
 """
-.. py:currentmodule:: tests.format.test_read
+.. py:currentmodule:: tests.format.test_io
 
 .. moduleauthor:: Hendrix Demers <hendrix.demers@mail.mcgill.ca>
 
-Tests for the module :py:mod:`mcxray.format.read`.
+Tests for the module :py:mod:`mcxray.format.io`.
 """
 
 ###############################################################################
@@ -36,15 +36,16 @@ from nose import SkipTest
 
 # Project modules.
 from mcxray.format.io import read_text_input, read_text_output, read_hdf5_input, read_hdf5_output
-from mcxray.format.simulation import Simulation
 from mcxray import get_current_module_path
 
 # Globals and constants variables.
+from tests.format.test_simulation import get_simulation_text_input_ref, get_simulation_text_output_ref, \
+    get_simulation_hdf5_input_ref, get_simulation_hdf5_output_ref
 
 
 class TestRead(unittest.TestCase):
     """
-    TestCase class for the module `mcxray.format.read`.
+    TestCase class for the module :py:mod:`mcxray.format.io`.
     """
 
     def setUp(self):
@@ -81,7 +82,7 @@ class TestRead(unittest.TestCase):
 
         simulation = read_text_input(file_path)
 
-        simulation_ref = get_simulation_input_ref()
+        simulation_ref = get_simulation_text_input_ref()
 
         self.assertEqual(simulation_ref, simulation)
 
@@ -145,7 +146,7 @@ class TestRead(unittest.TestCase):
 
         simulation = read_hdf5_input(file_path)
 
-        simulation_ref = get_simulation_input_ref()
+        simulation_ref = get_simulation_hdf5_input_ref()
 
         self.assertEqual(simulation_ref, simulation)
 
@@ -170,30 +171,6 @@ class TestRead(unittest.TestCase):
 
         # self.fail("Test if the testcase is working.")
         self.assert_(True)
-
-
-def get_simulation_input_ref():
-    simulation = Simulation()
-
-    simulation.name = "CuFeGrainBoundary20kV_5um"
-
-    return simulation
-
-
-def get_simulation_text_output_ref():
-    simulation = Simulation()
-
-    simulation.name = "CuFeGrainBoundary20kV"
-
-    return simulation
-
-
-def get_simulation_hdf5_output_ref():
-    simulation = Simulation()
-
-    simulation.name = "CuFeGrainBoundary20kV_5um_results"
-
-    return simulation
 
 
 if __name__ == '__main__':  # pragma: no cover

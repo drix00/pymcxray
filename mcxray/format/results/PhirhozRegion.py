@@ -74,7 +74,7 @@ class PhirhozRegion(object):
         lineIndex = 0
 
         regionVolume = RegionVolume.RegionVolume()
-        # todo read region volume info.
+        # .. todo:: read region volume info.
         lineIndex += 8
         return lineIndex
 
@@ -88,7 +88,7 @@ class PhirhozRegion(object):
             message = "Cannot find the section header in the liens: %s" % (KEY_PHIRHOZ_DISTISTRIBUTION)
             raise ValueError(message)
 
-        # todo read phirhoz distribution.
+        # .. todo:: read phirhoz distribution.
         indexLine += 2
 
         return indexLine

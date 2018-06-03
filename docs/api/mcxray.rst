@@ -1,11 +1,6 @@
 mcxray package
 ==============
 
-.. automodule:: mcxray
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
 Subpackages
 -----------
 
@@ -29,5 +24,11 @@ Submodules
    mcxray.SimulationsParameters
    mcxray.mcxray
    mcxray.multipleloop
-   mcxray.simulation
 
+Module contents
+---------------
+
+.. automodule:: mcxray
+    :members:
+    :undoc-members:
+    :show-inheritance:

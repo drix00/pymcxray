@@ -2,11 +2,11 @@
 # -*- coding: utf-8 -*-
 
 """
-.. py:currentmodule:: mcxray.format.text.read
+.. py:currentmodule:: mcxray.format.hdf5.read
 
 .. moduleauthor:: Hendrix Demers <hendrix.demers@mail.mcgill.ca>
 
-Read mcxray input output text files.
+Read mcxray input output HDF5 files.
 """
 
 ###############################################################################
@@ -28,47 +28,51 @@ Read mcxray input output text files.
 # Standard library modules.
 
 # Third party modules.
+import h5py
 
 # Local modules.
 
 # Project modules.
 from mcxray.format.simulation import Simulation
 from mcxray.format.text import extract_basename
-import mcxray.format.text.version
-from mcxray.format.version import Version
+import mcxray.format.hdf5.version
 
 # Globals and constants variables.
 
+GROUP_SIMULATION = "Simulation"
 
-def read_text_input(file_path):
+
+def read_hdf5_input(file_path):
     """
-    Read simulation input from a text file.
+    Read simulation input from a hdf5 file.
 
-    :param file_path: path of the text file.
+    :param file_path: file path of the hdf5 file.
     :return: :py:`Simulation` object.
     """
     simulation = Simulation()
 
-    basename = extract_basename(file_path)
-    simulation.name = basename
+    with h5py.File(file_path, 'r', driver='core') as hdf5_file:
+        simulation.name = extract_basename(file_path)
 
-    version = Version(0, 0, 0)
-    mcxray.format.text.version.read_from_file(version, file_path)
-    simulation.version = version
+        simulation_group = hdf5_file[GROUP_SIMULATION]
+        simulation.version = mcxray.format.hdf5.version.read_from_file(simulation_group)
 
     return simulation
 
 
-def read_text_output(path, basename):
+def read_hdf5_output(file_path):
     """
-    Read simulation output from a text file.
+    Read simulation output from a hdf5 file.
 
-    :param path: path of the text files
-    :param basename:
+    :param file_path: file path of the hdf5 file.
     :return: :py:`Simulation` object.
     """
     simulation = Simulation()
 
-    simulation.name = basename
-    simulation.version = mcxray.format.text.version.read_from_output_file(path, basename)
+    with h5py.File(file_path, 'r', driver='core') as hdf5_file:
+        simulation.name = extract_basename(file_path)
+
+        simulation_group = hdf5_file[GROUP_SIMULATION]
+        simulation.version = mcxray.format.hdf5.version.read_from_output_file(simulation_group)
+
     return simulation

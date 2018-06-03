@@ -1,7 +1,7 @@
-mcxray.format.Version module
+mcxray.format.version module
 ============================
 
-.. automodule:: mcxray.format.Version
+.. automodule:: mcxray.format.version
     :members:
     :undoc-members:
     :show-inheritance:

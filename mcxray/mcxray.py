@@ -32,7 +32,7 @@ from apscheduler.schedulers.blocking import BlockingScheduler
 
 # Local modules.
 from mcxray import get_current_module_path, create_path, get_results_mcgill_path, get_mcxray_program_path, get_mcxray_program_name, get_mcxray_archive_path, get_mcxray_archive_name
-import mcxray.serialization.SerializationPickle as SerializationPickle
+# import mcxray.serialization.SerializationPickle as SerializationPickle
 
 # Project modules
 import mcxray.SimulationOld as Simulation
@@ -415,84 +415,84 @@ class _Simulations(object):
         else:
             self._readAllResultsNoSerialization(isResultsKeep)
 
-    def _readResultsSerialization(self, serializationFilename):
-        logging.info("_readAllResultsSerialization")
+    # def _readResultsSerialization(self, serializationFilename):
+    #     logging.info("_readAllResultsSerialization")
+    #
+    #     simulationsResults = SerializationPickle.SerializationPickle()
+    #     simulationsResults.setPathname(self.getResultsPath())
+    #     simulationsResults.setFilename(serializationFilename)
+    #
+    #     if self.resetCache:
+    #         simulationsResults.deleteFile()
+    #
+    #     simulationResultsList = {}
+    #     if simulationsResults.isFile():
+    #         simulationResultsList = simulationsResults.load()
+    #
+    #     self._simulationResultsList = simulationResultsList
+    #     logging.info("Number of simulation results: %i", len(self._simulationResultsList))
 
-        simulationsResults = SerializationPickle.SerializationPickle()
-        simulationsResults.setPathname(self.getResultsPath())
-        simulationsResults.setFilename(serializationFilename)
-
-        if self.resetCache:
-            simulationsResults.deleteFile()
-
-        simulationResultsList = {}
-        if simulationsResults.isFile():
-            simulationResultsList = simulationsResults.load()
-
-        self._simulationResultsList = simulationResultsList
-        logging.info("Number of simulation results: %i", len(self._simulationResultsList))
-
-    def _readAllResultsSerialization(self, serializationFilename, isResultsKeep):
-        logging.info("_readAllResultsSerialization")
-
-        simulationsResults = SerializationPickle.SerializationPickle()
-        simulationsResults.setPathname(self.getResultsPath())
-        simulationsResults.setFilename(serializationFilename)
-
-        if self.createBackup:
-            simulationsResults.backupFile()
-
-        newResults = False
-        if self.resetCache:
-            simulationsResults.deleteFile()
-
-        simulationResultsList = {}
-        if simulationsResults.isFile():
-            simulationResultsList = simulationsResults.load()
-
-        _numberError = 0
-        simulations = self.getAllSimulationParameters()
-        total = len(simulations)
-        for index, simulation in enumerate(simulations):
-            if simulation.isDone(self.getSimulationsPath()):
-                try:
-                    key = self.generateResultsKey(simulation)
-                    filepath = simulation.getProgramVersionFilepath(self.getSimulationsPath())
-                    if simulationsResults.isOlderThan(filepath) or key not in simulationResultsList:
-                        logging.info("Processing file %i/%i", (index+1), total)
-                        if os.path.isfile(filepath):
-                            logging.debug(filepath)
-                            simulationResultsList[key] = self.readOneResults(simulation)
-                            newResults = True
-                            if index % SAVE_EVERY_SIMULATIONS == 0:
-                                simulationsResults.save(simulationResultsList)
-                        else:
-                            logging.warning("File not found: %s", filepath)
-                except UnboundLocalError as message:
-                    logging.error("UnboundLocalError in %s for %s", "_readAllResultsSerialization", filepath)
-                    logging.error(message)
-                except ValueError as message:
-                    logging.error("ValueError in %s for %s", "_readAllResultsSerialization", filepath)
-                    logging.error(message)
-                except AssertionError as message:
-                    logging.error("AssertionError in %s for %s", "_readAllResultsSerialization", filepath)
-                    logging.error(message)
-                except IOError as message:
-                    logging.warning(message)
-                    logging.warning(simulation.name)
-                    _numberError += 1
-
-        if _numberError > 0:
-            logging.info("Number of IO error: %i", _numberError)
-
-        if newResults:
-            simulationsResults.save(simulationResultsList)
-
-        if isResultsKeep:
-            self._simulationResultsList = simulationResultsList
-            logging.info("Number of simulation results: %i", len(self._simulationResultsList))
-        else:
-            del simulationResultsList
+    # def _readAllResultsSerialization(self, serializationFilename, isResultsKeep):
+    #     logging.info("_readAllResultsSerialization")
+    #
+    #     simulationsResults = SerializationPickle.SerializationPickle()
+    #     simulationsResults.setPathname(self.getResultsPath())
+    #     simulationsResults.setFilename(serializationFilename)
+    #
+    #     if self.createBackup:
+    #         simulationsResults.backupFile()
+    #
+    #     newResults = False
+    #     if self.resetCache:
+    #         simulationsResults.deleteFile()
+    #
+    #     simulationResultsList = {}
+    #     if simulationsResults.isFile():
+    #         simulationResultsList = simulationsResults.load()
+    #
+    #     _numberError = 0
+    #     simulations = self.getAllSimulationParameters()
+    #     total = len(simulations)
+    #     for index, simulation in enumerate(simulations):
+    #         if simulation.isDone(self.getSimulationsPath()):
+    #             try:
+    #                 key = self.generateResultsKey(simulation)
+    #                 filepath = simulation.getProgramVersionFilepath(self.getSimulationsPath())
+    #                 if simulationsResults.isOlderThan(filepath) or key not in simulationResultsList:
+    #                     logging.info("Processing file %i/%i", (index+1), total)
+    #                     if os.path.isfile(filepath):
+    #                         logging.debug(filepath)
+    #                         simulationResultsList[key] = self.readOneResults(simulation)
+    #                         newResults = True
+    #                         if index % SAVE_EVERY_SIMULATIONS == 0:
+    #                             simulationsResults.save(simulationResultsList)
+    #                     else:
+    #                         logging.warning("File not found: %s", filepath)
+    #             except UnboundLocalError as message:
+    #                 logging.error("UnboundLocalError in %s for %s", "_readAllResultsSerialization", filepath)
+    #                 logging.error(message)
+    #             except ValueError as message:
+    #                 logging.error("ValueError in %s for %s", "_readAllResultsSerialization", filepath)
+    #                 logging.error(message)
+    #             except AssertionError as message:
+    #                 logging.error("AssertionError in %s for %s", "_readAllResultsSerialization", filepath)
+    #                 logging.error(message)
+    #             except IOError as message:
+    #                 logging.warning(message)
+    #                 logging.warning(simulation.name)
+    #                 _numberError += 1
+    #
+    #     if _numberError > 0:
+    #         logging.info("Number of IO error: %i", _numberError)
+    #
+    #     if newResults:
+    #         simulationsResults.save(simulationResultsList)
+    #
+    #     if isResultsKeep:
+    #         self._simulationResultsList = simulationResultsList
+    #         logging.info("Number of simulation results: %i", len(self._simulationResultsList))
+    #     else:
+    #         del simulationResultsList
 
     def _readAllResultsNoSerialization(self, isResultsKeep):
         logging.info("_readAllResultsNoSerialization")

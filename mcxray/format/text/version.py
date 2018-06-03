@@ -25,13 +25,15 @@ MCXray version information.
 ###############################################################################
 
 # Standard library modules.
-import copy
+import os.path
 
 # Third party modules.
 
 # Local modules.
 
 # Project modules
+from mcxray.format.version import from_string
+
 # Globals and constants variables.
 
 
@@ -57,3 +59,15 @@ def read_from_file(version, file_path):
         version.major = 1
         version.minor = 1
         version.revision = 1
+
+
+def read_from_output_file(path, basename):
+    file_name = "{}_ProgramVersion.dat".format(basename)
+    file_path = os.path.join(path, file_name)
+
+    with open(file_path) as version_file:
+        version_line = version_file.readline()
+
+        version_string = version_line.split('=')[-1]
+        version = from_string(version_string)
+        return version

@@ -15,7 +15,7 @@ import unittest
 import logging
 if __name__ == '__main__': #pragma: no cover
     print("Python version: %s" % sys.version)
-# TODO: Remove this module after removing the two filters.
+# .. todo:: Remove this module after removing the two filters.
 import warnings
 
 # Third party modules.
@@ -233,7 +233,7 @@ class Testings(object):
         return basepaths
 
     def _initFilterWarnings(self):
-        # TODO: Remove this filter.
+        # .. todo:: Remove this filter.
         warnings.filterwarnings("ignore", category=UserWarning)
 
     def _createIgnoredPatterns(self):
@@ -253,7 +253,7 @@ class Testings(object):
     def runTestSuite(self, options='-a !slow,!ignore'):
         _logPythonInfo()
 
-        # TODO: nose '--with-isolation' options does not work with all projects, disable for now.
+        # .. todo:: nose '--with-isolation' options does not work with all projects, disable for now.
         argv = sys.argv
         argv.extend(options.split())
         #argv.append('-w')
@@ -282,7 +282,7 @@ class Testings(object):
     def runTestSuiteByProjects(self, options='-a !slow,!ignore'):
         _logPythonInfo()
 
-        # TODO: nose '--with-isolation' options does not work with all projects, disable for now.
+        # .. todo:: nose '--with-isolation' options does not work with all projects, disable for now.
         originalArguments = []
 
         for basepath in self._basepaths:

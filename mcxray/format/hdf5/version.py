@@ -2,11 +2,10 @@
 # -*- coding: utf-8 -*-
 
 """
-.. py:currentmodule:: mcxray.format.simulation
-
+.. py:currentmodule:: mcxray.format.hdf5.version
 .. moduleauthor:: Hendrix Demers <hendrix.demers@mail.mcgill.ca>
 
-Simulation data structure for mcxray Monte Carlo simulation program.
+MCXray version information.
 """
 
 ###############################################################################
@@ -31,29 +30,32 @@ Simulation data structure for mcxray Monte Carlo simulation program.
 
 # Local modules.
 
-# Project modules.
-from mcxray.format.version import CURRENT_VERSION
+# Project modules
+from mcxray.format.version import Version
 
 # Globals and constants variables.
 
 
-class Simulation(object):
-    def __init__(self):
-        """
-        Constructor.
+GROUP_VERSION = "version"
+GROUP_RESULTS = "results"
 
-        """
-        self.name = ""
-        self.version = CURRENT_VERSION
+ATTRIBUTE_MAJOR = "major"
+ATTRIBUTE_MINOR = "minor"
+ATTRIBUTE_REVISION = "revision"
 
-    def __eq__(self, other):
-        """
-        Comparison between two objects.
 
-        :param other:
-        :return: if two objects are equal.
-        """
-        is_equal = self.name == other.name and \
-                   self.version == other.version
+def read_from_file(group):
+    version_group = group[GROUP_VERSION]
 
-        return is_equal
+    version = Version(0, 0, 0)
+    version.major = version_group.attrs[ATTRIBUTE_MAJOR]
+    version.minor = version_group.attrs[ATTRIBUTE_MINOR]
+    version.revision = version_group.attrs[ATTRIBUTE_REVISION]
+
+    return version
+
+
+def read_from_output_file(group):
+    group = group[GROUP_RESULTS]
+    version = read_from_file(group)
+    return version

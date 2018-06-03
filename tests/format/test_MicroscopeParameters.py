@@ -584,7 +584,7 @@ class TestMicroscopeParameters(unittest.TestCase):
         lines = open(filepath, 'r').readlines()
 
         self.assertEquals(len(linesRef), len(lines))
-        # todo make this assert pass
+        # .. todo:: make this assert pass.
         #self.assertListEqual(linesRef, lines)
 
         #self.fail("Test if the testcase is working.")

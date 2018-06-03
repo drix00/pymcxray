@@ -37,7 +37,8 @@ from nose import SkipTest
 # Project modules.
 from mcxray.format.text.read import read_text_input, read_text_output
 from mcxray import get_current_module_path
-from tests.format.test_io import get_simulation_input_ref, get_simulation_text_output_ref
+from tests.format.test_simulation import get_simulation_text_input_ref, get_simulation_text_output_ref
+
 
 # Globals and constants variables.
 
@@ -81,7 +82,7 @@ class TestRead(unittest.TestCase):
 
         simulation = read_text_input(file_path)
 
-        simulation_ref = get_simulation_input_ref()
+        simulation_ref = get_simulation_text_input_ref()
 
         self.assertEqual(simulation_ref, simulation)
 
