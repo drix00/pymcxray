@@ -291,8 +291,11 @@ VERSION_2_1_0 = Version(2, 1, 0)
 #: Height option in semi-sphere.
 VERSION_2_1_1 = Version(2, 1, 1)
 
+#: Refactor hdf5 structure.
+VERSION_2_2_0 = Version(2, 2, 0)
+
 #: Dummy version for file before version number was used in the project.
 BEFORE_VERSION = copy.deepcopy(VERSION_1_1_1)
 
 #: Current version of MCXRay.
-CURRENT_VERSION = copy.deepcopy(VERSION_2_1_1)
+CURRENT_VERSION = copy.deepcopy(VERSION_2_2_0)

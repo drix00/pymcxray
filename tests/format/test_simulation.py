@@ -36,7 +36,7 @@ import unittest
 
 # Globals and constants variables.
 from mcxray.format.simulation import Simulation
-from mcxray.format.version import VERSION_1_6_7, VERSION_1_7_1, VERSION_2_0_0
+from mcxray.format.version import VERSION_1_6_7, VERSION_1_7_1, VERSION_2_0_0, VERSION_2_2_0
 
 
 class TestSimulation(unittest.TestCase):
@@ -126,6 +126,6 @@ def get_simulation_hdf5_output_ref():
     simulation = Simulation()
 
     simulation.name = "CuFeGrainBoundary20kV_5um_results"
-    simulation.version = VERSION_2_0_0
+    simulation.version = VERSION_2_2_0
 
     return simulation

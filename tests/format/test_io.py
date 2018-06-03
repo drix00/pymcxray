@@ -35,7 +35,8 @@ from nose import SkipTest
 # Local modules.
 
 # Project modules.
-from mcxray.format.io import read_text_input, read_text_output, read_hdf5_input, read_hdf5_output
+from mcxray.format.io import read_text_input, read_text_output, read_hdf5_input, read_hdf5_output, \
+    convert_text_input_to_hdf5, convert_text_output_to_hdf5
 from mcxray import get_current_module_path
 
 # Globals and constants variables.
@@ -55,12 +56,18 @@ class TestRead(unittest.TestCase):
 
         unittest.TestCase.setUp(self)
 
+        self.hdf5_file_path = r"..\..\test_data\format\hdf5\test_write_hdf5.mcxray"
+        self.hdf5_file_path = get_current_module_path(__file__, self.hdf5_file_path)
+
     def tearDown(self):
         """
         Teardown method.
         """
 
         unittest.TestCase.tearDown(self)
+
+        if os.path.isfile(self.hdf5_file_path):
+            os.remove(self.hdf5_file_path)
 
     def testSkeleton(self):
         """
@@ -114,24 +121,43 @@ class TestRead(unittest.TestCase):
         """
         Test method convert_text_input_to_hdf5.
 
-        .. todo:: Implement this test.
         """
+        file_path = r"..\..\test_data\format\text\options\CuFeGrainBoundary20kV_5um\CuFeGrainBoundary20kV_5um.sim"
+        file_path = get_current_module_path(__file__, file_path)
+        if not os.path.isfile(file_path):
+            raise SkipTest("Test file not found: {}".format(file_path))
 
-        raise SkipTest("Test test_convert_text_input_to_hdf5 not implemented")
+        convert_text_input_to_hdf5(file_path, self.hdf5_file_path)
 
-        self.fail("Test if the testcase is working.")
+        simulation_ref = get_simulation_text_input_ref()
+        simulation = read_hdf5_input(self.hdf5_file_path)
+
+        self.assertEqual(simulation_ref, simulation)
+
+        # self.fail("Test if the testcase is working.")
         self.assert_(True)
 
     def test_convert_text_output_to_hdf5(self):
         """
         Test method convert_text_output_to_hdf5.
 
-        .. todo:: Implement this test.
         """
 
-        raise SkipTest("Test test_convert_text_output_to_hdf5 not implemented")
+        path = r"..\..\test_data\format\text\results\CuFeGrainBoundary20kV_5um"
+        basename = "CuFeGrainBoundary20kV"
+        path = get_current_module_path(__file__, path)
+        file_path = os.path.join(path, basename + "_Options.txt")
+        if not os.path.isdir(path) or not os.path.isfile(file_path):
+            raise SkipTest("Test file not found: {}".format(file_path))
 
-        self.fail("Test if the testcase is working.")
+        convert_text_output_to_hdf5(path, basename, self.hdf5_file_path)
+
+        simulation_ref = get_simulation_text_output_ref()
+        simulation = read_hdf5_output(self.hdf5_file_path)
+
+        self.assertEqual(simulation_ref, simulation)
+
+        # self.fail("Test if the testcase is working.")
         self.assert_(True)
 
     def test_read_hdf5_input(self):

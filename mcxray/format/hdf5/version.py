@@ -37,7 +37,6 @@ from mcxray.format.version import Version
 
 
 GROUP_VERSION = "version"
-GROUP_RESULTS = "results"
 
 ATTRIBUTE_MAJOR = "major"
 ATTRIBUTE_MINOR = "minor"
@@ -55,7 +54,9 @@ def read_from_file(group):
     return version
 
 
-def read_from_output_file(group):
-    group = group[GROUP_RESULTS]
-    version = read_from_file(group)
-    return version
+def write_file(group, version):
+    version_group = group.require_group(GROUP_VERSION)
+
+    version_group.attrs[ATTRIBUTE_MAJOR] = version.major
+    version_group.attrs[ATTRIBUTE_MINOR] = version.minor
+    version_group.attrs[ATTRIBUTE_REVISION] = version.revision

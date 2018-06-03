@@ -192,6 +192,13 @@ class TestVersion(unittest.TestCase):
         self.assertEquals(4, VERSION_1_4_2.minor)
         self.assertEquals(2, VERSION_1_4_2.revision)
 
+        string_ref = "2.1.1"
+        version_string = VERSION_2_1_1.to_string()
+        self.assertEquals(string_ref, version_string)
+        self.assertEquals(2, VERSION_2_1_1.major)
+        self.assertEquals(1, VERSION_2_1_1.minor)
+        self.assertEquals(1, VERSION_2_1_1.revision)
+
         string_ref = "1.1.1"
         version_string = BEFORE_VERSION.to_string()
         self.assertEquals(string_ref, version_string)
@@ -202,14 +209,14 @@ class TestVersion(unittest.TestCase):
         self.assertEquals(VERSION_1_1_1, BEFORE_VERSION)
         self.assertNotEquals(VERSION_1_1_1, CURRENT_VERSION)
 
-        string_ref = "2.1.1"
+        string_ref = "2.2.0"
         version_string = CURRENT_VERSION.to_string()
         self.assertEquals(string_ref, version_string)
         self.assertEquals(2, CURRENT_VERSION.major)
-        self.assertEquals(1, CURRENT_VERSION.minor)
-        self.assertEquals(1, CURRENT_VERSION.revision)
+        self.assertEquals(2, CURRENT_VERSION.minor)
+        self.assertEquals(0, CURRENT_VERSION.revision)
 
-        self.assertEquals(VERSION_2_1_1, CURRENT_VERSION)
+        self.assertEquals(VERSION_2_2_0, CURRENT_VERSION)
         self.assertNotEquals(VERSION_1_5_2, BEFORE_VERSION)
         self.assertFalse(VERSION_1_5_2 == BEFORE_VERSION)
 

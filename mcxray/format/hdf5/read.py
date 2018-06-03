@@ -41,6 +41,8 @@ import mcxray.format.hdf5.version
 
 GROUP_SIMULATION = "Simulation"
 
+ATTRIBUTE_NAME = "name"
+
 
 def read_hdf5_input(file_path):
     """
@@ -55,6 +57,9 @@ def read_hdf5_input(file_path):
         simulation.name = extract_basename(file_path)
 
         simulation_group = hdf5_file[GROUP_SIMULATION]
+
+        if ATTRIBUTE_NAME in simulation_group.attrs:
+            simulation.name = simulation_group.attrs[ATTRIBUTE_NAME]
         simulation.version = mcxray.format.hdf5.version.read_from_file(simulation_group)
 
     return simulation
@@ -73,6 +78,39 @@ def read_hdf5_output(file_path):
         simulation.name = extract_basename(file_path)
 
         simulation_group = hdf5_file[GROUP_SIMULATION]
-        simulation.version = mcxray.format.hdf5.version.read_from_output_file(simulation_group)
+
+        if ATTRIBUTE_NAME in simulation_group.attrs:
+            simulation.name = simulation_group.attrs[ATTRIBUTE_NAME]
+        simulation.version = mcxray.format.hdf5.version.read_from_file(simulation_group)
 
     return simulation
+
+
+def write_hdf5_input(simulation, file_path):
+    """
+    Write simulation input into a hdf5 file.
+
+    :param simulation:
+    :param file_path:
+    """
+
+    with h5py.File(file_path, 'w', driver='core') as hdf5_file:
+        simulation_group = hdf5_file.require_group(GROUP_SIMULATION)
+
+        simulation_group.attrs[ATTRIBUTE_NAME] = simulation.name
+        mcxray.format.hdf5.version.write_file(simulation_group, simulation.version)
+
+
+def write_hdf5_output(simulation, file_path):
+    """
+    Write simulation output into a hdf5 file.
+
+    :param simulation:
+    :param file_path:
+    """
+
+    with h5py.File(file_path, 'w', driver='core') as hdf5_file:
+        simulation_group = hdf5_file.require_group(GROUP_SIMULATION)
+
+        simulation_group.attrs[ATTRIBUTE_NAME] = simulation.name
+        mcxray.format.hdf5.version.write_file(simulation_group, simulation.version)

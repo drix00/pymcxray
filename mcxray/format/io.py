@@ -67,30 +67,26 @@ def convert_text_input_to_hdf5(text_file_path, hdf5_file_path=None):
     """
     Convert a text input files into a hdf5.
 
-    .. todo:: Implement this method.
-
     :param text_file_path:
     :param hdf5_file_path:
     :return: :py:`Simulation` object.
     """
     simulation = read_text_input(text_file_path)
 
-    return simulation
+    write_hdf5_input(simulation, hdf5_file_path)
 
 
-def convert_text_output_to_hdf5(text_file_path, hdf5_file_path=None):
+def convert_text_output_to_hdf5(path, basename, hdf5_file_path=None):
     """
     Convert a text output files into a hdf5.
 
-    .. todo:: Implement this method.
-
-    :param text_file_path:
+    :param path: path of the text files
+    :param basename:
     :param hdf5_file_path:
-    :return: :py:`Simulation` object.
     """
-    simulation = read_text_output(text_file_path)
+    simulation = read_text_output(path, basename)
 
-    return simulation
+    write_hdf5_input(simulation, hdf5_file_path)
 
 
 def read_hdf5_input(file_path):
@@ -115,3 +111,23 @@ def read_hdf5_output(file_path):
     simulation = mcxray.format.hdf5.read.read_hdf5_output(file_path)
 
     return simulation
+
+
+def write_hdf5_input(simulation, file_path):
+    """
+    Write simulation input into a hdf5 file.
+
+    :param simulation:
+    :param file_path:
+    """
+    mcxray.format.hdf5.read.write_hdf5_input(simulation, file_path)
+
+
+def write_hdf5_output(simulation, file_path):
+    """
+    Write simulation output into a hdf5 file.
+
+    :param simulation:
+    :param file_path:
+    """
+    mcxray.format.hdf5.read.write_hdf5_output(simulation, file_path)
