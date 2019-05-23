@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-.. py:currentmodule:: mcxray.format.text.test_read
+.. py:currentmodule:: tests.format.text.test_read
 
 .. moduleauthor:: Hendrix Demers <hendrix.demers@mail.mcgill.ca>
 
@@ -30,7 +30,6 @@ import unittest
 import os.path
 
 # Third party modules.
-from nose import SkipTest
 
 # Local modules.
 
@@ -45,7 +44,7 @@ from tests.format.test_simulation import get_simulation_text_input_ref, get_simu
 
 class TestRead(unittest.TestCase):
     """
-    TestCase class for the module `mcxray.format.text.read`.
+    TestCase class for the module :py:mod:`mcxray.format.text.read`.
     """
 
     def setUp(self):
@@ -78,7 +77,7 @@ class TestRead(unittest.TestCase):
         file_path = r"..\..\..\test_data\format\text\options\CuFeGrainBoundary20kV_5um\CuFeGrainBoundary20kV_5um.sim"
         file_path = get_current_module_path(__file__, file_path)
         if not os.path.isfile(file_path):
-            raise SkipTest("Test file not found: {}".format(file_path))
+            raise unittest.SkipTest("Test file not found: {}".format(file_path))
 
         simulation = read_text_input(file_path)
 
@@ -99,7 +98,7 @@ class TestRead(unittest.TestCase):
         path = get_current_module_path(__file__, path)
         file_path = os.path.join(path, basename + "_Options.txt")
         if not os.path.isdir(path) or not os.path.isfile(file_path):
-            raise SkipTest("Test file not found: {}".format(file_path))
+            raise unittest.SkipTest("Test file not found: {}".format(file_path))
 
         simulation = read_text_output(path, basename)
 

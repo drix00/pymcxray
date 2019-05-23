@@ -30,7 +30,6 @@ import unittest
 import os.path
 
 # Third party modules.
-from nose import SkipTest
 
 # Local modules.
 
@@ -85,7 +84,7 @@ class TestRead(unittest.TestCase):
         file_path = r"..\..\test_data\format\text\options\CuFeGrainBoundary20kV_5um\CuFeGrainBoundary20kV_5um.sim"
         file_path = get_current_module_path(__file__, file_path)
         if not os.path.isfile(file_path):
-            raise SkipTest("Test file not found: {}".format(file_path))
+            raise unittest.SkipTest("Test file not found: {}".format(file_path))
 
         simulation = read_text_input(file_path)
 
@@ -106,7 +105,7 @@ class TestRead(unittest.TestCase):
         path = get_current_module_path(__file__, path)
         file_path = os.path.join(path, basename + "_Options.txt")
         if not os.path.isdir(path) or not os.path.isfile(file_path):
-            raise SkipTest("Test file not found: {}".format(file_path))
+            raise unittest.SkipTest("Test file not found: {}".format(file_path))
 
         simulation = read_text_output(path, basename)
 
@@ -125,7 +124,7 @@ class TestRead(unittest.TestCase):
         file_path = r"..\..\test_data\format\text\options\CuFeGrainBoundary20kV_5um\CuFeGrainBoundary20kV_5um.sim"
         file_path = get_current_module_path(__file__, file_path)
         if not os.path.isfile(file_path):
-            raise SkipTest("Test file not found: {}".format(file_path))
+            raise unittest.SkipTest("Test file not found: {}".format(file_path))
 
         convert_text_input_to_hdf5(file_path, self.hdf5_file_path)
 
@@ -148,7 +147,7 @@ class TestRead(unittest.TestCase):
         path = get_current_module_path(__file__, path)
         file_path = os.path.join(path, basename + "_Options.txt")
         if not os.path.isdir(path) or not os.path.isfile(file_path):
-            raise SkipTest("Test file not found: {}".format(file_path))
+            raise unittest.SkipTest("Test file not found: {}".format(file_path))
 
         convert_text_output_to_hdf5(path, basename, self.hdf5_file_path)
 
@@ -168,7 +167,7 @@ class TestRead(unittest.TestCase):
         file_path = r"..\..\test_data\format\hdf5\options\CuFeGrainBoundary20kV_5um.mcxray"
         file_path = get_current_module_path(__file__, file_path)
         if not os.path.isfile(file_path):
-            raise SkipTest("Test file not found: {}".format(file_path))
+            raise unittest.SkipTest("Test file not found: {}".format(file_path))
 
         simulation = read_hdf5_input(file_path)
 
@@ -187,7 +186,7 @@ class TestRead(unittest.TestCase):
         file_path = r"..\..\test_data\format\hdf5\results\CuFeGrainBoundary20kV_5um_results.mcxray"
         file_path = get_current_module_path(__file__, file_path)
         if not os.path.isfile(file_path):
-            raise SkipTest("Test file not found: {}".format(file_path))
+            raise unittest.SkipTest("Test file not found: {}".format(file_path))
 
         simulation = read_hdf5_output(file_path)
 

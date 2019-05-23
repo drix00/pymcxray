@@ -1,24 +1,35 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 """
-.. py:currentmodule:: format.test_ResultsParameters
+.. py:currentmodule:: tests.format.test_ResultsParameters
+
 .. moduleauthor:: Hendrix Demers <hendrix.demers@mail.mcgill.ca>
 
-Tests for module `ResultsParameters`.
+Tests for module :py:mod:`mcxray.format.ResultsParameters`.
 """
 
-# Script information for the file.
-__author__ = "Hendrix Demers (hendrix.demers@mail.mcgill.ca)"
-__version__ = ""
-__date__ = ""
-__copyright__ = "Copyright (c) 2012 Hendrix Demers"
-__license__ = ""
+###############################################################################
+# Copyright 2019 Hendrix Demers
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+###############################################################################
 
 # Standard library modules.
 import unittest
 import os.path
 
 # Third party modules.
-from nose.plugins.skip import SkipTest
 
 # Local modules.
 
@@ -29,9 +40,10 @@ import mcxray.format.version as version
 
 # Globals and constants variables.
 
+
 class TestResultsParameters(unittest.TestCase):
     """
-    TestCase class for the module `ResultsParameters`.
+    TestCase class for the module :py:mod:`mcxray.format.ResultsParameters`.
     """
 
     def setUp(self):
@@ -58,24 +70,26 @@ class TestResultsParameters(unittest.TestCase):
         First test to check if the testcase is working with the testing framework.
         """
 
-        #self.fail("Test if the testcase is working.")
+        # self.fail("Test if the testcase is working.")
         self.assert_(True)
 
     def test_read(self):
         """
         Tests for method `read`.
         """
-        raise SkipTest("Test test_read not implemented")
+        raise unittest.SkipTest("Test test_read not implemented")
 
         for title in testUtilities.getSimulationTitles():
             resultsParameters = ResultsParameters.ResultsParameters()
 
-            filepath = os.path.abspath(os.path.join(self.testDataPath, "%s/%s.rp" % (title, title)))
+            filepath = os.path.abspath(os.path.join(self.testDataPath, "{}/{}.rp".format(title, title)))
             resultsParameters.read(filepath)
 
-            resultsParametersRef = self.getSimulationParametersReference(title)
-            self.assertEquals(resultsParametersRef.isComputeXrayCharacteristic, resultsParameters.isComputeXrayCharacteristic)
-            self.assertEquals(resultsParametersRef.isComputeXrayBremsstrahlung, resultsParameters.isComputeXrayBremsstrahlung)
+            resultsParametersRef = get_simulation_parameters_reference(title)
+            self.assertEquals(resultsParametersRef.isComputeXrayCharacteristic,
+                              resultsParameters.isComputeXrayCharacteristic)
+            self.assertEquals(resultsParametersRef.isComputeXrayBremsstrahlung,
+                              resultsParameters.isComputeXrayBremsstrahlung)
             self.assertEquals(resultsParametersRef.isComputeXrayPhirhoz, resultsParameters.isComputeXrayPhirhoz)
 
         self.fail("Test if the testcase is working.")
@@ -88,7 +102,7 @@ class TestResultsParameters(unittest.TestCase):
         resultsParameters = ResultsParameters.ResultsParameters()
 
         title = "AlMgBulk5keV_version_1_4_1"
-        filepath = os.path.abspath(os.path.join(self.testDataPath, "inputs", "%s.rp" % (title)))
+        filepath = os.path.abspath(os.path.join(self.testDataPath, "inputs", "{}.rp".format(title)))
         resultsParameters.read(filepath)
 
         self.assertEquals(version.VERSION_1_4_1.major, resultsParameters.version.major)
@@ -96,17 +110,19 @@ class TestResultsParameters(unittest.TestCase):
         self.assertEquals(version.VERSION_1_4_1.revision, resultsParameters.version.revision)
         self.assertEquals(version.VERSION_1_4_1, resultsParameters.version)
 
-        resultsParametersRef = self.getSimulationParametersReference(title)
+        resultsParametersRef = get_simulation_parameters_reference(title)
         self.assertEquals(resultsParametersRef.version.major, resultsParameters.version.major)
         self.assertEquals(resultsParametersRef.version.minor, resultsParameters.version.minor)
         self.assertEquals(resultsParametersRef.version.revision, resultsParameters.version.revision)
         self.assertEquals(resultsParametersRef.version, resultsParameters.version)
 
-        self.assertEquals(resultsParametersRef.isComputeXrayCharacteristic, resultsParameters.isComputeXrayCharacteristic)
-        self.assertEquals(resultsParametersRef.isComputeXrayBremsstrahlung, resultsParameters.isComputeXrayBremsstrahlung)
+        self.assertEquals(resultsParametersRef.isComputeXrayCharacteristic,
+                          resultsParameters.isComputeXrayCharacteristic)
+        self.assertEquals(resultsParametersRef.isComputeXrayBremsstrahlung,
+                          resultsParameters.isComputeXrayBremsstrahlung)
         self.assertEquals(resultsParametersRef.isComputeXrayPhirhoz, resultsParameters.isComputeXrayPhirhoz)
 
-        #self.fail("Test if the testcase is working.")
+        # self.fail("Test if the testcase is working.")
 
     def test_read_1_4_3(self):
         """
@@ -116,7 +132,7 @@ class TestResultsParameters(unittest.TestCase):
         resultsParameters = ResultsParameters.ResultsParameters()
 
         title = "AlMgBulk5keV_version_1_4_3"
-        filepath = os.path.abspath(os.path.join(self.testDataPath, "inputs", "%s.rp" % (title)))
+        filepath = os.path.abspath(os.path.join(self.testDataPath, "inputs", "{}.rp".format(title)))
         resultsParameters.read(filepath)
 
         self.assertEquals(version.VERSION_1_4_3.major, resultsParameters.version.major)
@@ -124,62 +140,45 @@ class TestResultsParameters(unittest.TestCase):
         self.assertEquals(version.VERSION_1_4_3.revision, resultsParameters.version.revision)
         self.assertEquals(version.VERSION_1_4_3, resultsParameters.version)
 
-        resultsParametersRef = self.getSimulationParametersReference(title)
+        resultsParametersRef = get_simulation_parameters_reference(title)
         self.assertEquals(resultsParametersRef.version.major, resultsParameters.version.major)
         self.assertEquals(resultsParametersRef.version.minor, resultsParameters.version.minor)
         self.assertEquals(resultsParametersRef.version.revision, resultsParameters.version.revision)
         self.assertEquals(resultsParametersRef.version, resultsParameters.version)
 
-        self.assertEquals(resultsParametersRef.isComputeXrayCharacteristic, resultsParameters.isComputeXrayCharacteristic)
-        self.assertEquals(resultsParametersRef.isComputeXrayBremsstrahlung, resultsParameters.isComputeXrayBremsstrahlung)
+        self.assertEquals(resultsParametersRef.isComputeXrayCharacteristic,
+                          resultsParameters.isComputeXrayCharacteristic)
+        self.assertEquals(resultsParametersRef.isComputeXrayBremsstrahlung,
+                          resultsParameters.isComputeXrayBremsstrahlung)
         self.assertEquals(resultsParametersRef.isComputeXrayPhirhoz, resultsParameters.isComputeXrayPhirhoz)
-        self.assertEquals(resultsParametersRef.isComputeXraySimulatedSpectrum, resultsParameters.isComputeXraySimulatedSpectrum)
+        self.assertEquals(resultsParametersRef.isComputeXraySimulatedSpectrum,
+                          resultsParameters.isComputeXraySimulatedSpectrum)
 
-        #self.fail("Test if the testcase is working.")
-
-    def getSimulationParametersReference(self, title):
-        resultsParameters = ResultsParameters.ResultsParameters()
-
-        if title == "AlMgBulk5keV_version_1_2_1":
-            resultsParameters.version = version.Version(1, 2, 1)
-            resultsParameters.isComputeXrayCharacteristic = None
-            resultsParameters.isComputeXrayBremsstrahlung = None
-            resultsParameters.isComputeXrayPhirhoz = None
-        elif title == "AlMgBulk5keV_version_1_4_1":
-            resultsParameters.version = version.Version(1, 4, 1)
-            resultsParameters.isComputeXrayCharacteristic = True
-            resultsParameters.isComputeXrayBremsstrahlung = True
-            resultsParameters.isComputeXrayPhirhoz = True
-        elif title == "AlMgBulk5keV_version_1_4_3":
-            resultsParameters.version = version.Version(1, 4, 3)
-            resultsParameters.isComputeXrayCharacteristic = True
-            resultsParameters.isComputeXrayBremsstrahlung = False
-            resultsParameters.isComputeXrayPhirhoz = False
-            resultsParameters.isComputeXraySimulatedSpectrum = False
-
-        return resultsParameters
+        # self.fail("Test if the testcase is working.")
 
     def test_write(self):
         """
         Tests for method `write`.
         """
-        raise SkipTest("Test test_write not implemented")
+        raise unittest.SkipTest("Test test_write not implemented")
 
         self.maxDiff = None
 
         for title in testUtilities.getSimulationTitles():
-            resultsParametersRef = self.getSimulationParametersReference(title)
+            resultsParametersRef = get_simulation_parameters_reference(title)
 
-            filepathReference = os.path.abspath(os.path.join(self.testDataPath, "%s/%s.rp" % (title, title)))
+            filepathReference = os.path.abspath(os.path.join(self.testDataPath, "{}/{}.rp".format(title, title)))
 
-            filepath = os.path.join(self.tempDataPath, "%s.rp" % (title))
-            resultsParameters = ResultsParameters.ResultsParameters()
+            filepath = os.path.join(self.tempDataPath, "{}.rp".format(title))
+            # resultsParameters = ResultsParameters.ResultsParameters()
             resultsParameters = resultsParametersRef
 
             resultsParameters.write(filepath)
 
-            self.assertEquals(resultsParametersRef.isComputeXrayCharacteristic, resultsParameters.isComputeXrayCharacteristic)
-            self.assertEquals(resultsParametersRef.isComputeXrayBremsstrahlung, resultsParameters.isComputeXrayBremsstrahlung)
+            self.assertEquals(resultsParametersRef.isComputeXrayCharacteristic,
+                              resultsParameters.isComputeXrayCharacteristic)
+            self.assertEquals(resultsParametersRef.isComputeXrayBremsstrahlung,
+                              resultsParameters.isComputeXrayBremsstrahlung)
             self.assertEquals(resultsParametersRef.isComputeXrayPhirhoz, resultsParameters.isComputeXrayPhirhoz)
 
             linesRef = open(filepathReference, 'r').readlines()
@@ -196,18 +195,20 @@ class TestResultsParameters(unittest.TestCase):
         self.maxDiff = None
 
         title = "AlMgBulk5keV_version_1_4_1"
-        resultsParametersRef = self.getSimulationParametersReference(title)
+        resultsParametersRef = get_simulation_parameters_reference(title)
 
-        filepathReference = os.path.abspath(os.path.join(self.testDataPath, "inputs", "%s.rp" % (title)))
+        filepathReference = os.path.abspath(os.path.join(self.testDataPath, "inputs", "{}.rp".format(title)))
 
-        filepath = os.path.join(self.tempDataPath, "%s.rp" % (title))
+        filepath = os.path.join(self.tempDataPath, "{}.rp".format(title))
         resultsParameters = resultsParametersRef
         resultsParameters.version = version.VERSION_1_4_1
 
         resultsParameters.write(filepath)
 
-        self.assertEquals(resultsParametersRef.isComputeXrayCharacteristic, resultsParameters.isComputeXrayCharacteristic)
-        self.assertEquals(resultsParametersRef.isComputeXrayBremsstrahlung, resultsParameters.isComputeXrayBremsstrahlung)
+        self.assertEquals(resultsParametersRef.isComputeXrayCharacteristic,
+                          resultsParameters.isComputeXrayCharacteristic)
+        self.assertEquals(resultsParametersRef.isComputeXrayBremsstrahlung,
+                          resultsParameters.isComputeXrayBremsstrahlung)
         self.assertEquals(resultsParametersRef.isComputeXrayPhirhoz, resultsParameters.isComputeXrayPhirhoz)
 
         self.assertEquals(resultsParametersRef.version.major, resultsParameters.version.major)
@@ -220,7 +221,7 @@ class TestResultsParameters(unittest.TestCase):
 
         self.assertListEqual(linesRef, lines)
 
-        #self.fail("Test if the testcase is working.")
+        # self.fail("Test if the testcase is working.")
 
     def test_write_1_4_3(self):
         """
@@ -229,20 +230,23 @@ class TestResultsParameters(unittest.TestCase):
         self.maxDiff = None
 
         title = "AlMgBulk5keV_version_1_4_3"
-        resultsParametersRef = self.getSimulationParametersReference(title)
+        resultsParametersRef = get_simulation_parameters_reference(title)
 
-        filepathReference = os.path.abspath(os.path.join(self.testDataPath, "inputs", "%s.rp" % (title)))
+        filepathReference = os.path.abspath(os.path.join(self.testDataPath, "inputs", "{}.rp".format(title)))
 
-        filepath = os.path.join(self.tempDataPath, "%s.rp" % (title))
+        filepath = os.path.join(self.tempDataPath, "{}.rp".format(title))
         resultsParameters = resultsParametersRef
         resultsParameters.version = version.VERSION_1_4_3
 
         resultsParameters.write(filepath)
 
-        self.assertEquals(resultsParametersRef.isComputeXrayCharacteristic, resultsParameters.isComputeXrayCharacteristic)
-        self.assertEquals(resultsParametersRef.isComputeXrayBremsstrahlung, resultsParameters.isComputeXrayBremsstrahlung)
+        self.assertEquals(resultsParametersRef.isComputeXrayCharacteristic,
+                          resultsParameters.isComputeXrayCharacteristic)
+        self.assertEquals(resultsParametersRef.isComputeXrayBremsstrahlung,
+                          resultsParameters.isComputeXrayBremsstrahlung)
         self.assertEquals(resultsParametersRef.isComputeXrayPhirhoz, resultsParameters.isComputeXrayPhirhoz)
-        self.assertEquals(resultsParametersRef.isComputeXraySimulatedSpectrum, resultsParameters.isComputeXraySimulatedSpectrum)
+        self.assertEquals(resultsParametersRef.isComputeXraySimulatedSpectrum,
+                          resultsParameters.isComputeXraySimulatedSpectrum)
 
         self.assertEquals(resultsParametersRef.version.major, resultsParameters.version.major)
         self.assertEquals(resultsParametersRef.version.minor, resultsParameters.version.minor)
@@ -254,8 +258,27 @@ class TestResultsParameters(unittest.TestCase):
 
         self.assertListEqual(linesRef, lines)
 
-        #self.fail("Test if the testcase is working.")
+        # self.fail("Test if the testcase is working.")
 
-if __name__ == '__main__':  #pragma: no cover
-    import nose
-    nose.runmodule()
+
+def get_simulation_parameters_reference(title):
+    resultsParameters = ResultsParameters.ResultsParameters()
+
+    if title == "AlMgBulk5keV_version_1_2_1":
+        resultsParameters.version = version.Version(1, 2, 1)
+        resultsParameters.isComputeXrayCharacteristic = None
+        resultsParameters.isComputeXrayBremsstrahlung = None
+        resultsParameters.isComputeXrayPhirhoz = None
+    elif title == "AlMgBulk5keV_version_1_4_1":
+        resultsParameters.version = version.Version(1, 4, 1)
+        resultsParameters.isComputeXrayCharacteristic = True
+        resultsParameters.isComputeXrayBremsstrahlung = True
+        resultsParameters.isComputeXrayPhirhoz = True
+    elif title == "AlMgBulk5keV_version_1_4_3":
+        resultsParameters.version = version.Version(1, 4, 3)
+        resultsParameters.isComputeXrayCharacteristic = True
+        resultsParameters.isComputeXrayBremsstrahlung = False
+        resultsParameters.isComputeXrayPhirhoz = False
+        resultsParameters.isComputeXraySimulatedSpectrum = False
+
+    return resultsParameters

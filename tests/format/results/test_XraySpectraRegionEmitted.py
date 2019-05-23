@@ -1,24 +1,35 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 """
-.. py:currentmodule:: mcxray.format.results.test_XraySpectraRegionEmitted
+.. py:currentmodule:: tests.format.results.test_XraySpectraRegionEmitted
+
 .. moduleauthor:: Hendrix Demers <hendrix.demers@mail.mcgill.ca>
 
-Tests for the module `XraySpectraRegionEmitted`.
+Tests for the module :py:mod:`mcxray.format.results.XraySpectraRegionEmitted`.
 """
 
-# Script information for the file.
-__author__ = "Hendrix Demers (hendrix.demers@mail.mcgill.ca)"
-__version__ = "0.1"
-__date__ = "Feb 12, 2015"
-__copyright__ = "Copyright (c) 2015 Hendrix Demers"
-__license__ = "GPL 3"
+###############################################################################
+# Copyright 2019 Hendrix Demers
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+###############################################################################
 
 # Standard library modules.
 import unittest
 import os.path
 
 # Third party modules.
-from nose import SkipTest
 
 # Local modules.
 
@@ -27,9 +38,10 @@ from mcxray.format.results.XraySpectraRegionEmitted import XraySpectraRegionEmit
 
 # Globals and constants variables.
 
+
 class TestXraySpectraRegionEmitted(unittest.TestCase):
     """
-    TestCase class for the module `XraySpectraRegionEmitted`.
+    TestCase class for the module :py:mod:`mcxray.format.results.XraySpectraRegionEmitted`.
     """
 
     def setUp(self):
@@ -52,7 +64,7 @@ class TestXraySpectraRegionEmitted(unittest.TestCase):
         First test to check if the testcase is working with the testing framework.
         """
 
-        #self.fail("Test if the testcase is working.")
+        # self.fail("Test if the testcase is working.")
 
     def test_readRegion_0_30kV(self):
         """
@@ -61,7 +73,7 @@ class TestXraySpectraRegionEmitted(unittest.TestCase):
         filename = "SimulationNanoparticleAg_Au_SpectraPerElectron_1_srkeV_Region_0.csv"
         filepath = os.path.join(self.testDataPath, filename)
         if not os.path.isfile(filepath):
-            raise SkipTest("Test file not found: {}".format(filepath))
+            raise unittest.SkipTest("Test file not found: {}".format(filepath))
 
         spectra = XraySpectraRegionEmitted()
         spectra.path = self.testDataPath
@@ -103,7 +115,7 @@ class TestXraySpectraRegionEmitted(unittest.TestCase):
         self.assertAlmostEqual(0.0, spectra.characteristic_1_ekeVsr[596], 12)
         self.assertAlmostEqual(0.0, spectra.bremsstrahlung_1_ekeVsr[596], 12)
 
-        #self.fail("Test if the testcase is working.")
+        # self.fail("Test if the testcase is working.")
 
     def test_readRegion_1_30kV(self):
         """
@@ -112,7 +124,7 @@ class TestXraySpectraRegionEmitted(unittest.TestCase):
         filename = "SimulationNanoparticleAg_Au_SpectraPerElectron_1_srkeV_Region_1.csv"
         filepath = os.path.join(self.testDataPath, filename)
         if not os.path.isfile(filepath):
-            raise SkipTest("Test file not found: {}".format(filepath))
+            raise unittest.SkipTest("Test file not found: {}".format(filepath))
 
         spectra = XraySpectraRegionEmitted()
         spectra.path = self.testDataPath
@@ -154,7 +166,7 @@ class TestXraySpectraRegionEmitted(unittest.TestCase):
         self.assertAlmostEqual(0.0, spectra.characteristic_1_ekeVsr[596], 12)
         self.assertAlmostEqual(8.64716e-008, spectra.bremsstrahlung_1_ekeVsr[596], 12)
 
-        #self.fail("Test if the testcase is working.")
+        # self.fail("Test if the testcase is working.")
 
     def test_readRegion_2_30kV(self):
         """
@@ -163,8 +175,7 @@ class TestXraySpectraRegionEmitted(unittest.TestCase):
         filename = "SimulationNanoparticleAg_Au_SpectraPerElectron_1_srkeV_Region_2.csv"
         filepath = os.path.join(self.testDataPath, filename)
         if not os.path.isfile(filepath):
-            raise SkipTest("Test file not found: {}".format(filepath))
-
+            raise unittest.SkipTest("Test file not found: {}".format(filepath))
 
         spectra = XraySpectraRegionEmitted()
         spectra.path = self.testDataPath
@@ -206,7 +217,7 @@ class TestXraySpectraRegionEmitted(unittest.TestCase):
         self.assertAlmostEqual(0.031818, spectra.characteristic_1_ekeVsr[596], 12)
         self.assertAlmostEqual(8.31376e-005, spectra.bremsstrahlung_1_ekeVsr[596], 12)
 
-        #self.fail("Test if the testcase is working.")
+        # self.fail("Test if the testcase is working.")
 
     def test_readRegion_1_200kV(self):
         """
@@ -215,8 +226,7 @@ class TestXraySpectraRegionEmitted(unittest.TestCase):
         filename = "SimulationNanoparticleAg_C_SpectraPerElectron_1_srkeV_Region_1.csv"
         filepath = os.path.join(self.testDataPath, filename)
         if not os.path.isfile(filepath):
-            raise SkipTest("Test file not found: {}".format(filepath))
-
+            raise unittest.SkipTest("Test file not found: {}".format(filepath))
 
         spectra = XraySpectraRegionEmitted()
         spectra.path = self.testDataPath
@@ -258,16 +268,16 @@ class TestXraySpectraRegionEmitted(unittest.TestCase):
         self.assertAlmostEqual(0.0, spectra.characteristic_1_ekeVsr[596], 17)
         self.assertAlmostEqual(7.2569e-009, spectra.bremsstrahlung_1_ekeVsr[596], 17)
 
-        #self.fail("Test if the testcase is working.")
+        # self.fail("Test if the testcase is working.")
 
-    def test__indice(self):
+    def test__indices(self):
         """
         Tests for method `_indice`.
         """
         filename = "SimulationNanoparticleAg_Au_SpectraPerElectron_1_srkeV_Region_1.csv"
         filepath = os.path.join(self.testDataPath, filename)
         if not os.path.isfile(filepath):
-            raise SkipTest("Test file not found: {}".format(filepath))
+            raise unittest.SkipTest("Test file not found: {}".format(filepath))
 
         spectra = XraySpectraRegionEmitted()
         spectra.path = self.testDataPath
@@ -313,8 +323,4 @@ class TestXraySpectraRegionEmitted(unittest.TestCase):
         self.assertEqual(13363, spectra._indice(66.82))
         self.assertAlmostEqual(0.0, spectra.characteristicValue_1_ekeVsr(66.82), 12)
 
-        #self.fail("Test if the testcase is working.")
-
-if __name__ == '__main__':  #pragma: no cover
-    import nose
-    nose.runmodule()
+        # self.fail("Test if the testcase is working.")

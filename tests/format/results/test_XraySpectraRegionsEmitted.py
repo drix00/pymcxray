@@ -1,24 +1,35 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 """
-.. py:currentmodule:: mcxray.format.results.test_XraySpectraRegionsEmitted
+.. py:currentmodule:: tests.format.results.test_XraySpectraRegionsEmitted
+
 .. moduleauthor:: Hendrix Demers <hendrix.demers@mail.mcgill.ca>
 
-Tests for the module `XraySpectraRegionsEmitted`.
+Tests for the module :py:mod:`mcxray.format.results.XraySpectraRegionsEmitted`.
 """
 
-# Script information for the file.
-__author__ = "Hendrix Demers (hendrix.demers@mail.mcgill.ca)"
-__version__ = "0.1"
-__date__ = "Feb 12, 2015"
-__copyright__ = "Copyright (c) 2015 Hendrix Demers"
-__license__ = "GPL 3"
+###############################################################################
+# Copyright 2019 Hendrix Demers
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+###############################################################################
 
 # Standard library modules.
 import unittest
 import os.path
 
 # Third party modules.
-from nose import SkipTest
 
 # Local modules.
 
@@ -27,9 +38,10 @@ from mcxray.format.results.XraySpectraRegionsEmitted import XraySpectraRegionsEm
 
 # Globals and constants variables.
 
+
 class TestXraySpectraRegionsEmitted(unittest.TestCase):
     """
-    TestCase class for the module `XraySpectraRegionsEmitted`.
+    TestCase class for the module :py:mod:`mcxray.format.results.XraySpectraRegionsEmitted`.
     """
 
     def setUp(self):
@@ -52,7 +64,7 @@ class TestXraySpectraRegionsEmitted(unittest.TestCase):
         First test to check if the testcase is working with the testing framework.
         """
 
-        #self.fail("Test if the testcase is working.")
+        # self.fail("Test if the testcase is working.")
 
     def test_readRegions_30kV(self):
         """
@@ -61,7 +73,7 @@ class TestXraySpectraRegionsEmitted(unittest.TestCase):
         filename = "SimulationNanoparticleAg_Au_SpectraPerElectron_1_srkeV_Region_0.csv"
         filepath = os.path.join(self.testDataPath, filename)
         if not os.path.isfile(filepath):
-            raise SkipTest("Test file not found: {}".format(filepath))
+            raise unittest.SkipTest("Test file not found: {}".format(filepath))
 
         spectra = XraySpectraRegionsEmitted()
         spectra.path = self.testDataPath
@@ -103,16 +115,16 @@ class TestXraySpectraRegionsEmitted(unittest.TestCase):
         self.assertAlmostEqual(0.0+0.0+0.031818, spectra.characteristic_1_ekeVsr[596], 12)
         self.assertAlmostEqual(0.0+8.64716e-008+8.31376e-005, spectra.bremsstrahlung_1_ekeVsr[596], 12)
 
-        #self.fail("Test if the testcase is working.")
+        # self.fail("Test if the testcase is working.")
 
-    def test__indice(self):
+    def test__indices(self):
         """
         Tests for method `_indice`.
         """
         filename = "SimulationNanoparticleAg_Au_SpectraPerElectron_1_srkeV_Region_1.csv"
         filepath = os.path.join(self.testDataPath, filename)
         if not os.path.isfile(filepath):
-            raise SkipTest("Test file not found: {}".format(filepath))
+            raise unittest.SkipTest("Test file not found: {}".format(filepath))
 
         spectra = XraySpectraRegionsEmitted()
         spectra.path = self.testDataPath
@@ -133,7 +145,7 @@ class TestXraySpectraRegionsEmitted(unittest.TestCase):
 
         self.assertEqual(5999, spectra._indice(29.999))
         self.assertEqual(5999, spectra._indice(30.0))
-        #self.assertRaises(IndexError, spectra._indice, 30.0)
+        # self.assertRaises(IndexError, spectra._indice, 30.0)
         self.assertRaises(IndexError, spectra._indice, 31.0)
 
         self.assertAlmostEqual(1.12879e-006+0.000126745, spectra.totalValue_1_ekeVsr(0.282), 12)
@@ -148,8 +160,4 @@ class TestXraySpectraRegionsEmitted(unittest.TestCase):
         self.assertAlmostEqual(1.25179e-007+8.165e-005, spectra.bremsstrahlungValue_1_ekeVsr(2.123), 12)
         self.assertAlmostEqual(8.64716e-008+8.31376e-005, spectra.bremsstrahlungValue_1_ekeVsr(2.984), 12)
 
-        #self.fail("Test if the testcase is working.")
-
-if __name__ == '__main__':  #pragma: no cover
-    import nose
-    nose.runmodule()
+        # self.fail("Test if the testcase is working.")

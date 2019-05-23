@@ -3,9 +3,10 @@
 
 """
 .. py:currentmodule:: tests.format.test_version
+
 .. moduleauthor:: Hendrix Demers <hendrix.demers@mail.mcgill.ca>
 
-Tests for module `mcxray.format.version`.
+Tests for module :py:mod:`mcxray.format.version`.
 """
 
 ###############################################################################
@@ -29,7 +30,6 @@ import unittest
 import os.path
 
 # Third party modules.
-from nose import SkipTest
 
 # Local modules.
 
@@ -42,7 +42,7 @@ import tests.format.testUtilities as testUtilities
 
 class TestVersion(unittest.TestCase):
     """
-    TestCase class for the module `mcxray.format.version`.
+    TestCase class for the module :py:mod:`mcxray.format.version`.
     """
 
     def setUp(self):
@@ -54,7 +54,7 @@ class TestVersion(unittest.TestCase):
 
         self.test_data_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../test_data"))
         if not os.path.isdir(self.test_data_path):
-            raise SkipTest("Test file not found: {}".format(self.test_data_path))
+            raise unittest.SkipTest("Test file not found: {}".format(self.test_data_path))
 
         self.tempDataPath = testUtilities.createTempDataPath(self.test_data_path)
 

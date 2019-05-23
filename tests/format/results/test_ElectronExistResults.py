@@ -1,25 +1,35 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 """
-.. py:currentmodule:: format.results.test_ElectronExistResults
+.. py:currentmodule:: tests.format.results.test_ElectronExistResults
+
 .. moduleauthor:: Hendrix Demers <hendrix.demers@mail.mcgill.ca>
 
-Tests for the module `ElectronExistResults`.
+Tests for the module :py:mod:`mcxray.format.results.ElectronExistResults`.
 """
 
-# Script information for the file.
-__author__ = "Hendrix Demers (hendrix.demers@mail.mcgill.ca)"
-__version__ = ""
-__date__ = ""
-__copyright__ = "Copyright (c) 2012 Hendrix Demers"
-__license__ = ""
+###############################################################################
+# Copyright 2019 Hendrix Demers
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+###############################################################################
 
 # Standard library modules.
 import unittest
-import logging
 import os.path
 
 # Third party modules.
-from nose import SkipTest
 
 # Local modules.
 
@@ -28,9 +38,10 @@ import mcxray.format.results.ElectronExistResults as ElectronExistResults
 
 # Globals and constants variables.
 
+
 class TestElectronExistResults(unittest.TestCase):
     """
-    TestCase class for the module `ElectronExistResults`.
+    TestCase class for the module :py:mod:`mcxray.format.results.ElectronExistResults`.
     """
 
     def setUp(self):
@@ -40,10 +51,12 @@ class TestElectronExistResults(unittest.TestCase):
 
         unittest.TestCase.setUp(self)
 
-        #SimulationBseReciprocity_Ag_E1d0keV_N10000e_dB1d0nm_tB15d0deg_ElectronExitResults.csv
+        # SimulationBseReciprocity_Ag_E1d0keV_N10000e_dB1d0nm_tB15d0deg_ElectronExitResults.csv
         self.testDataPath = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../test_data"))
 
-        self.results = ElectronExistResults.ElectronExistResults(path=os.path.join(self.testDataPath, "results"), basename="SimulationBseReciprocity_Ag_E1d0keV_N10000e_dB1d0nm_tB15d0deg")
+        basename = "SimulationBseReciprocity_Ag_E1d0keV_N10000e_dB1d0nm_tB15d0deg"
+        self.results = ElectronExistResults.ElectronExistResults(path=os.path.join(self.testDataPath, "results"),
+                                                                 basename=basename)
 
     def tearDown(self):
         """
@@ -57,7 +70,7 @@ class TestElectronExistResults(unittest.TestCase):
         First test to check if the testcase is working with the testing framework.
         """
 
-        #self.fail("Test if the testcase is working.")
+        # self.fail("Test if the testcase is working.")
         self.assert_(True)
 
     def test_dataFileExist(self):
@@ -71,10 +84,9 @@ class TestElectronExistResults(unittest.TestCase):
 
         self.assertTrue(os.path.isfile(results.filepath))
 
-
         self.assertTrue(os.path.isfile(self.results.filepath))
 
-        #self.fail("Test if the testcase is working.")
+        # self.fail("Test if the testcase is working.")
         self.assert_(True)
 
     def test_read(self):
@@ -86,7 +98,7 @@ class TestElectronExistResults(unittest.TestCase):
         self.results.read()
         self.assertEquals(4036, self.results.numberData)
 
-        #self.fail("Test if the testcase is working.")
+        # self.fail("Test if the testcase is working.")
 
     def test_energyDistribution(self):
         """
@@ -94,7 +106,7 @@ class TestElectronExistResults(unittest.TestCase):
 
         .. todo:: Replace scipy.stats.histogram with numpy method.
         """
-        raise SkipTest("Test test_energyDistribution not implemented")
+        raise unittest.SkipTest("Test test_energyDistribution not implemented")
 
         energies_keV, histogram = self.results.getEnergyDistribution()
 
@@ -121,8 +133,3 @@ class TestElectronExistResults(unittest.TestCase):
         self.assertEquals(461, histogram[-1])
 
         # self.fail("Test if the testcase is working.")
-
-if __name__ == '__main__':  #pragma: no cover
-    logging.getLogger().setLevel(logging.DEBUG)
-    from tests.testings import runTestModuleWithCoverage
-    runTestModuleWithCoverage(__file__)

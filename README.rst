@@ -36,13 +36,9 @@ Features
 
 .. todo:: Refactor data structure and io code organization
 
-.. todo:: Update API documentations
-
-.. todo:: Correct documentation warnings
+.. todo:: Implement __eq__ for all data structure
 
 .. todo:: Correct skipped tests
-
-.. todo:: Replace nose.SkipTest with unittest.SkipTest
 
 .. todo:: Remove nose in test
 
@@ -51,6 +47,18 @@ Features
 .. todo:: Refactor testing utilities
 
 .. todo:: Improve code coverage
+
+.. todo:: Improve project setup
+
+.. todo:: Improve project release
+
+.. todo:: Improve Travis CI integration
+
+.. todo:: Update API documentations
+
+.. todo:: Correct documentation warnings
+
+.. todo:: Update and improve documentations
 
 Credits
 ---------
