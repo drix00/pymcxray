@@ -34,7 +34,23 @@ Python scripts for using mcxray software
 Features
 --------
 
-* TODO
+.. todo:: Refactor data structure and io code organization
+
+.. todo:: Update API documentations
+
+.. todo:: Correct documentation warnings
+
+.. todo:: Correct skipped tests
+
+.. todo:: Replace nose.SkipTest with unittest.SkipTest
+
+.. todo:: Remove nose in test
+
+.. todo:: Add and reorganize test data
+
+.. todo:: Refactor testing utilities
+
+.. todo:: Improve code coverage
 
 Credits
 ---------
