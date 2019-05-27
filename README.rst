@@ -60,8 +60,8 @@ Features
 
 .. todo:: Update and improve documentations
 
-Credits
----------
+Acknowledgment
+--------------
 
 This package was created with Cookiecutter_ and the `audreyr/cookiecutter-pypackage`_ project template.
 

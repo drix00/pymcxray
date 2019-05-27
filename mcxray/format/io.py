@@ -43,7 +43,7 @@ def read_text_input(file_path):
     Read simulation input from a text file.
 
     :param file_path: path of the text file.
-    :return: :py:`Simulation` object.
+    :return: :py:class:`Simulation` object.
     """
     simulation = mcxray.format.text.read.read_text_input(file_path)
 
@@ -56,7 +56,7 @@ def read_text_output(path, basename):
 
     :param path: path of the text files
     :param basename:
-    :return: :py:`Simulation` object.
+    :return: :py:class:`Simulation` object.
     """
     simulation = mcxray.format.text.read.read_text_output(path, basename)
 
@@ -69,7 +69,7 @@ def convert_text_input_to_hdf5(text_file_path, hdf5_file_path=None):
 
     :param text_file_path:
     :param hdf5_file_path:
-    :return: :py:`Simulation` object.
+    :return: :py:class:`Simulation` object.
     """
     simulation = read_text_input(text_file_path)
 
@@ -94,7 +94,7 @@ def read_hdf5_input(file_path):
     Read simulation input from a hdf5 file.
 
     :param file_path:
-    :return: :py:`Simulation` object.
+    :return: :py:class:`Simulation` object.
     """
     simulation = mcxray.format.hdf5.read.read_hdf5_input(file_path)
 
@@ -106,7 +106,7 @@ def read_hdf5_output(file_path):
     Read simulation output from a hdf5 file.
 
     :param file_path:
-    :return: :py:`Simulation` object.
+    :return: :py:class:`Simulation` object.
     """
     simulation = mcxray.format.hdf5.read.read_hdf5_output(file_path)
 

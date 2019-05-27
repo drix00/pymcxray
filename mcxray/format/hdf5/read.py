@@ -49,7 +49,7 @@ def read_hdf5_input(file_path):
     Read simulation input from a hdf5 file.
 
     :param file_path: file path of the hdf5 file.
-    :return: :py:`Simulation` object.
+    :return: :py:class:`Simulation` object.
     """
     simulation = Simulation()
 
@@ -70,7 +70,7 @@ def read_hdf5_output(file_path):
     Read simulation output from a hdf5 file.
 
     :param file_path: file path of the hdf5 file.
-    :return: :py:`Simulation` object.
+    :return: :py:class:`Simulation` object.
     """
     simulation = Simulation()
 

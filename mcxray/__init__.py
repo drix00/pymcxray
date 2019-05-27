@@ -2,7 +2,8 @@
 # -*- coding: utf-8 -*-
 
 """
-.. py:currentmodule:: __init__
+.. py:currentmodule:: mcxray
+
 .. moduleauthor:: Hendrix Demers <hendrix.demers@mail.mcgill.ca>
 
 """
@@ -61,13 +62,13 @@ def create_path(path):
     return path
 
 
-def _read_path_from_configuration_file(configurationFile, relativePath, sectionName, keyName):
-    path = read_value_from_configuration_file(configurationFile, sectionName, keyName)
+def _read_path_from_configuration_file(configuration_file, relative_path, section_name, key_name):
+    path = read_value_from_configuration_file(configuration_file, section_name, key_name)
 
-    if relativePath.startswith('/'):
-        relativePath = relativePath[1:]
+    if relative_path.startswith('/'):
+        relative_path = relative_path[1:]
 
-    filepath = os.path.join(path, relativePath)
+    filepath = os.path.join(path, relative_path)
     filepath = os.path.normpath(filepath)
     return filepath
 
@@ -83,21 +84,22 @@ def read_value_from_configuration_file(configuration_file, section_name, key_nam
     :return: The value read or default value
     :rtype: str
     """
-    config = configparser.SafeConfigParser()
-    config.readfp(open(configuration_file))
+    config = configparser.ConfigParser()
+    config.read_file(open(configuration_file))
     if config.has_section(section_name):
         if config.has_option(section_name, key_name):
             value = config.get(section_name, key_name)
             return value
         else:
-            logging.error("Configuration file (%s) does not have this option in section %s: %s", configuration_file, key_name, section_name)
-            if default == None:
+            logging.error("Configuration file (%s) does not have this option in section %s: %s", configuration_file,
+                          key_name, section_name)
+            if default is None:
                 raise configparser.NoOptionError(key_name, section_name)
             else:
                 return default
     else:
         logging.error("Configuration file (%s) does not have this section: %s", configuration_file, section_name)
-        if default == None:
+        if default is None:
             raise configparser.NoSectionError(section_name)
         else:
             return default
@@ -139,8 +141,8 @@ def find_all_files(root, patterns='*', ignore_path_patterns='', ignore_name_patt
             for pattern in patterns:
                 if fnmatch.fnmatch(name, pattern):
                     addName = True
-                    for ignorePattern in ignore_name_patterns:
-                        if fnmatch.fnmatch(name, ignore_name_patterns):
+                    for ignore_pattern in ignore_name_patterns:
+                        if fnmatch.fnmatch(name, ignore_pattern):
                             addName = False
 
                     if addPath and addName:
@@ -167,7 +169,7 @@ def get_mcxray_program_name(configuration_file_path, default=None):
         [Paths]
         mcxrayProgramName=console_mcxray_x64.exe
 
-    :param str configuration_file_path: The fule path of the configuration file
+    :param str configuration_file_path: The full path of the configuration file
     :param str default: Default value to use if the entry is not found
     :return: The MCXRay program name
     :rtype: str
@@ -181,7 +183,7 @@ def get_mcxray_program_name(configuration_file_path, default=None):
 
 
 def get_results_mcgill_path(configuration_file_path, relative_path=""):
-    """
+    r"""
     Read the results path for McGill in the configuration file.
     The results path read in the configuration file is combine with the `relative_path` and return.
 
@@ -207,7 +209,7 @@ def get_results_mcgill_path(configuration_file_path, relative_path=""):
 
 
 def get_mcxray_program_path(configuration_file_path, relative_path=""):
-    """
+    r"""
     Read the MCXRay program path in the configuration file.
 
     The configuration file need to have this entry in the section [Paths]:
@@ -235,7 +237,7 @@ def get_mcxray_program_path(configuration_file_path, relative_path=""):
 
 
 def get_mcxray_archive_path(configuration_file_path, relative_path=""):
-    """
+    r"""
     Read the MCXRay archive path in the configuration file.
 
     The configuration file need to have this entry in the section [Paths]:

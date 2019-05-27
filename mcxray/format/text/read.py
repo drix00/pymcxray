@@ -45,7 +45,7 @@ def read_text_input(file_path):
     Read simulation input from a text file.
 
     :param file_path: path of the text file.
-    :return: :py:`Simulation` object.
+    :return: :py:class:`Simulation` object.
     """
     simulation = Simulation()
 
@@ -65,7 +65,7 @@ def read_text_output(path, basename):
 
     :param path: path of the text files
     :param basename:
-    :return: :py:`Simulation` object.
+    :return: :py:class:`Simulation` object.
     """
     simulation = Simulation()
 

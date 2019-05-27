@@ -45,9 +45,12 @@ def _outer(a, b):
     b is a one-dimensional list, tuple, NumPy array or scalar (new parameter)
     Return:  outer combination 'all_combination'.
 
-    The function is to be called repeatedly::
+    The function is to be called repeatedly:
 
-        all = _outer(all, p)
+    .. code-block:: python
+
+    all = _outer(all, p)
+
     """
     all_combination = []
     if not isinstance(a, list):
@@ -78,9 +81,10 @@ def combine(prm_values):
     Compute the combination of all parameter values in the prm_values
     (nested) list. Main function in this module.
 
-    param prm_values: nested list ``(parameter_name, list_of_parameter_values)``
-    or dictionary ``prm_values[parameter_name] = list_of_parameter_values``.
-    return: (all, names, varied) where
+    :param list or dict prm_values: nested list ``(parameter_name, list_of_parameter_values)`` or
+        dictionary ``prm_values[parameter_name] = list_of_parameter_values``.
+
+    :return: (all, names, varied) where
 
       - all contains all combinations (experiments)
         all[i] is the list of individual parameter values in
@@ -94,6 +98,7 @@ def combine(prm_values):
 
 
     Code example:
+
     >>> dx = list([1.0/2**k for k in range(2,5)])
     >>> dt = 3*dx;  dt = dt[:-1]
     >>> p = {'dx': dx, 'dt': dt}
@@ -102,7 +107,8 @@ def combine(prm_values):
     >>> all_combination, names, varied = combine(p)
     >>> all_combination
     [[0.75, 0.25], [0.375, 0.25], [0.75, 0.125], [0.375, 0.125],
-     [0.75, 0.0625], [0.375, 0.0625]]
+    [0.75, 0.0625], [0.375, 0.0625]]
+
     """
     if isinstance(prm_values, dict):
         # turn dict into list [(name,values),(name,values),...]:

@@ -9,6 +9,14 @@ Subpackages
     mcxray.format.hdf5.options
     mcxray.format.hdf5.results
 
+Submodules
+----------
+
+.. toctree::
+
+   mcxray.format.hdf5.read
+   mcxray.format.hdf5.version
+
 Module contents
 ---------------
 
