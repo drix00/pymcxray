@@ -1,21 +1,32 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 """
-.. py:currentmodule:: format.test_Snr
+.. py:currentmodule:: tests.format.test_SnrParameters
+
 .. moduleauthor:: Hendrix Demers <hendrix.demers@mail.mcgill.ca>
 
 Tests for the module `SnrParameters`.
 """
 
-# Script information for the file.
-__author__ = "Hendrix Demers (hendrix.demers@mail.mcgill.ca)"
-__version__ = ""
-__date__ = ""
-__copyright__ = "Copyright (c) 2012 Hendrix Demers"
-__license__ = ""
+###############################################################################
+# Copyright 2019 Hendrix Demers
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+###############################################################################
 
 # Standard library modules.
 import unittest
-import logging
 import os.path
 
 # Third party modules.
@@ -27,6 +38,7 @@ import mcxray.format.SnrParameters as SnrParameters
 import tests.format.testUtilities as testUtilities
 
 # Globals and constants variables.
+
 
 class TestSnrParameters(unittest.TestCase):
     """
@@ -57,7 +69,7 @@ class TestSnrParameters(unittest.TestCase):
         First test to check if the testcase is working with the testing framework.
         """
 
-        #self.fail("Test if the testcase is working.")
+        # self.fail("Test if the testcase is working.")
         self.assert_(True)
 
     def test_read(self):
@@ -71,7 +83,7 @@ class TestSnrParameters(unittest.TestCase):
             filepath = os.path.abspath(os.path.join(self.testDataPath, "%s/%s.snp" % (title, title)))
             snrParameters.read(filepath)
 
-            snrParametersRef = self.getSnrParametersReference(title)
+            snrParametersRef = get_snr_parameters_reference(title)
             self.assertEquals(snrParametersRef.snrType, snrParameters.snrType)
             self.assertEquals(snrParametersRef.energyStart_keV, snrParameters.energyStart_keV)
             self.assertEquals(snrParametersRef.energyEnd_keV, snrParameters.energyEnd_keV)
@@ -79,24 +91,11 @@ class TestSnrParameters(unittest.TestCase):
             self.assertEquals(snrParametersRef.backgroundEnergyWindowsSize, snrParameters.backgroundEnergyWindowsSize)
             self.assertEquals(snrParametersRef.spectrumEnergyWindowsSize, snrParameters.spectrumEnergyWindowsSize)
 
-        #self.fail("Test if the testcase is working.")
-
-    def getSnrParametersReference(self, title):
-        snrParameters = SnrParameters.SnrParameters()
-
-        if title == "BioRitchieNew111017":
-            snrParameters.snrType = 0
-            snrParameters.energyStart_keV = 1.0
-            snrParameters.energyEnd_keV = 20.0
-            snrParameters.numberEnergySteps = 100
-            snrParameters.backgroundEnergyWindowsSize = 5.0e-3
-            snrParameters.spectrumEnergyWindowsSize = 40.0
-
-        return snrParameters
+        # self.fail("Test if the testcase is working.")
 
     def test__createKeys(self):
         """
-        Tests for method `_createKeys`.
+        Tests for method `_create_keys`.
         """
 
         numberKeys = 6
@@ -104,7 +103,7 @@ class TestSnrParameters(unittest.TestCase):
         keys = SnrParameters.SnrParameters()._createKeys()
         self.assertEquals(numberKeys, len(keys))
 
-        #self.fail("Test if the testcase is working.")
+        # self.fail("Test if the testcase is working.")
 
     def test_write(self):
         """
@@ -113,12 +112,11 @@ class TestSnrParameters(unittest.TestCase):
         self.maxDiff = None
 
         for title in ["BioRitchieNew111017"]:
-            snrParametersRef = self.getSnrParametersReference(title)
+            snrParametersRef = get_snr_parameters_reference(title)
 
             filepathReference = os.path.abspath(os.path.join(self.testDataPath, "%s/%s.snp" % (title, title)))
 
-            filepath = os.path.join(self.tempDataPath, "%s.snp" % (title))
-            snrParameters = SnrParameters.SnrParameters()
+            filepath = os.path.join(self.tempDataPath, "{}.snp".format(title))
             snrParameters = snrParametersRef
 
             snrParameters.write(filepath)
@@ -135,9 +133,18 @@ class TestSnrParameters(unittest.TestCase):
 
             self.assertListEqual(linesRef, lines)
 
-        #self.fail("Test if the testcase is working.")
+        # self.fail("Test if the testcase is working.")
 
-if __name__ == '__main__':  #pragma: no cover
-    logging.getLogger().setLevel(logging.DEBUG)
-    from tests.testings import runTestModuleWithCoverage
-    runTestModuleWithCoverage(__file__)
+
+def get_snr_parameters_reference(title):
+    snrParameters = SnrParameters.SnrParameters()
+
+    if title == "BioRitchieNew111017":
+        snrParameters.snrType = 0
+        snrParameters.energyStart_keV = 1.0
+        snrParameters.energyEnd_keV = 20.0
+        snrParameters.numberEnergySteps = 100
+        snrParameters.backgroundEnergyWindowsSize = 5.0e-3
+        snrParameters.spectrumEnergyWindowsSize = 40.0
+
+    return snrParameters

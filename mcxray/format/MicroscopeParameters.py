@@ -1,22 +1,29 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 """
-.. py:currentmodule:: format.MicroscopeParameters
+.. py:currentmodule:: mcxray.format.MicroscopeParameters
+
 .. moduleauthor:: Hendrix Demers <hendrix.demers@mail.mcgill.ca>
 
 MCXRay microscope parameters input file.
 """
 
-# Script information for the file.
-__author__ = "Hendrix Demers (hendrix.demers@mail.mcgill.ca)"
-__version__ = ""
-__date__ = ""
-__copyright__ = "Copyright (c) 2012 Hendrix Demers"
-__license__ = ""
-
-# Subversion informations for the file.
-__svnRevision__ = "$Revision$"
-__svnDate__ = "$Date$"
-__svnId__ = "$Id$"
+###############################################################################
+# Copyright 2019 Hendrix Demers
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+###############################################################################
 
 # Standard library modules.
 import copy
@@ -26,9 +33,9 @@ import copy
 # Local modules.
 
 # Project modules
-from mcxray.format.version import CURRENT_VERSION
-from mcxray.format.text.version import read_from_file, write_line
+from mcxray.format.version import CURRENT_VERSION, BEFORE_VERSION
 from mcxray.format.FileReaderWriterTools import reduceAfterDot
+from mcxray.format.text.version import read_from_file, write_line
 
 # Globals and constants variables.
 KEY_BEAM_ENERGY_keV = "BeamEnergy"
@@ -57,48 +64,50 @@ KEY_DETECTOR_DF_HIGH_rad = "DetectorDFHigh"
 KEY_DETECTOR_HAADF_LOW_rad = "DetectorHAADFLow"
 KEY_DETECTOR_HAADF_HIGH_rad = "DetectorHAADFHigh"
 
+
+def _create_keys():
+    keys = [
+        KEY_BEAM_ENERGY_keV,
+        KEY_BEAM_CURRENT_A,
+        KEY_BEAM_TIME_s,
+        KEY_BEAM_DIAMETER_A,
+        KEY_BEAM_POSITION_X_A,
+        KEY_BEAM_POSITION_Y_A,
+        KEY_BEAM_TILT_deg,
+        KEY_BEAM_STANDARD_DEVIATION_A,
+        KEY_DETECTOR_CRYSTAL_ATOM,
+        KEY_DETECTOR_CRYSTAL_THICKNESS_cm,
+        KEY_DETECTOR_CRYSTAL_RADIUS_cm,
+        KEY_DETECTOR_CRYSTAL_DISTANCE_cm,
+        KEY_DETECTOR_DEAD_LAYER_A,
+        KEY_DETECTOR_DIFFUSION_LENGHT_A,
+        KEY_DETECTOR_SURFACE_QUALITY,
+        KEY_DETECTOR_NOISE_eV,
+        KEY_DETECTOR_TOA_deg,
+        # KEY_DETECTOR_CHANNEL_WIDTH_eV,
+        KEY_DETECTOR_PITCH_deg,
+        KEY_DETECTOR_BF_LOW_rad,
+        KEY_DETECTOR_BF_HIGH_RAD,
+        KEY_DETECTOR_DF_LOW_rad,
+        KEY_DETECTOR_DF_HIGH_rad,
+        KEY_DETECTOR_HAADF_LOW_rad,
+        KEY_DETECTOR_HAADF_HIGH_rad
+    ]
+
+    return keys
+
+
 class MicroscopeParameters(object):
     def __init__(self):
         self.version = copy.deepcopy(CURRENT_VERSION)
 
-        self._keys = self._createKeys()
+        self._keys = _create_keys()
 
         self._parameters = {}
 
-        self.defaultValues()
+        self.default_values()
 
-    def _createKeys(self):
-        keys = []
-
-        keys.append(KEY_BEAM_ENERGY_keV)
-        keys.append(KEY_BEAM_CURRENT_A)
-        keys.append(KEY_BEAM_TIME_s)
-        keys.append(KEY_BEAM_DIAMETER_A)
-        keys.append(KEY_BEAM_POSITION_X_A)
-        keys.append(KEY_BEAM_POSITION_Y_A)
-        keys.append(KEY_BEAM_TILT_deg)
-        keys.append(KEY_BEAM_STANDARD_DEVIATION_A)
-        keys.append(KEY_DETECTOR_CRYSTAL_ATOM)
-        keys.append(KEY_DETECTOR_CRYSTAL_THICKNESS_cm)
-        keys.append(KEY_DETECTOR_CRYSTAL_RADIUS_cm)
-        keys.append(KEY_DETECTOR_CRYSTAL_DISTANCE_cm)
-        keys.append(KEY_DETECTOR_DEAD_LAYER_A)
-        keys.append(KEY_DETECTOR_DIFFUSION_LENGHT_A)
-        keys.append(KEY_DETECTOR_SURFACE_QUALITY)
-        keys.append(KEY_DETECTOR_NOISE_eV)
-        keys.append(KEY_DETECTOR_TOA_deg)
-        # keys.append(KEY_DETECTOR_CHANNEL_WIDTH_eV)
-        keys.append(KEY_DETECTOR_PITCH_deg)
-        keys.append(KEY_DETECTOR_BF_LOW_rad)
-        keys.append(KEY_DETECTOR_BF_HIGH_RAD)
-        keys.append(KEY_DETECTOR_DF_LOW_rad)
-        keys.append(KEY_DETECTOR_DF_HIGH_rad)
-        keys.append(KEY_DETECTOR_HAADF_LOW_rad)
-        keys.append(KEY_DETECTOR_HAADF_HIGH_rad)
-
-        return keys
-
-    def defaultValues(self):
+    def default_values(self):
         self.beamEnergy_keV = 20.0
         self.beamCurrent_A = 1e-10
         self.time_s = 100.0
@@ -125,43 +134,12 @@ class MicroscopeParameters(object):
         self.detectorHAADFHigh_rad = 0.3
         self.detectorChannelWidth_eV = 5.0
 
-    def _createExtractMethod(self):
-        extractMethods = {}
-
-        extractMethods[KEY_BEAM_ENERGY_keV] = float
-        extractMethods[KEY_BEAM_CURRENT_A] = float
-        extractMethods[KEY_BEAM_TIME_s] = float
-        extractMethods[KEY_BEAM_DIAMETER_A] = float
-        extractMethods[KEY_BEAM_POSITION_X_A] = float
-        extractMethods[KEY_BEAM_POSITION_Y_A] = float
-        extractMethods[KEY_BEAM_TILT_deg] = float
-        extractMethods[KEY_BEAM_STANDARD_DEVIATION_A] = float
-        extractMethods[KEY_DETECTOR_CRYSTAL_ATOM] = str
-        extractMethods[KEY_DETECTOR_CRYSTAL_THICKNESS_cm] = float
-        extractMethods[KEY_DETECTOR_CRYSTAL_RADIUS_cm] = float
-        extractMethods[KEY_DETECTOR_CRYSTAL_DISTANCE_cm] = float
-        extractMethods[KEY_DETECTOR_DEAD_LAYER_A] = float
-        extractMethods[KEY_DETECTOR_DIFFUSION_LENGHT_A] = float
-        extractMethods[KEY_DETECTOR_SURFACE_QUALITY] = float
-        extractMethods[KEY_DETECTOR_NOISE_eV] = float
-        extractMethods[KEY_DETECTOR_TOA_deg] = float
-        extractMethods[KEY_DETECTOR_CHANNEL_WIDTH_eV] = float
-        extractMethods[KEY_DETECTOR_PITCH_deg] = float
-        extractMethods[KEY_DETECTOR_BF_LOW_rad] = float
-        extractMethods[KEY_DETECTOR_BF_HIGH_RAD] = float
-        extractMethods[KEY_DETECTOR_DF_LOW_rad] = float
-        extractMethods[KEY_DETECTOR_DF_HIGH_rad] = float
-        extractMethods[KEY_DETECTOR_HAADF_LOW_rad] = float
-        extractMethods[KEY_DETECTOR_HAADF_HIGH_rad] = float
-
-        return extractMethods
-
     def read(self, filepath):
         read_from_file(self.version, filepath)
 
         lines = open(filepath, 'r').readlines()
 
-        extractMethods = self._createExtractMethod()
+        extractMethods = _create_extract_method()
 
         for line in lines:
             line = line.strip()
@@ -172,15 +150,16 @@ class MicroscopeParameters(object):
                     self._parameters[key] = extractMethods[key](items[-1])
 
     def write(self, filepath):
-        outputFile = open(filepath, 'w')
+        output_file = open(filepath, 'w')
 
-        self._writeHeader(outputFile)
+        _write_header(output_file)
 
-        write_line(self.version, outputFile)
+        if self.version > BEFORE_VERSION:
+            write_line(self.version, output_file)
 
-        formats = self._createFormats()
+        formats = _create_formats()
 
-        for key in self._createKeys():
+        for key in _create_keys():
             value = formats[key](self._parameters[key])
             if "e-" in value:
                 value = value.replace('e-', 'e-0')
@@ -188,75 +167,12 @@ class MicroscopeParameters(object):
                 value = value.replace('e+', 'e+0')
 
             line = "%s=%s\n" % (key, value)
-            outputFile.write(line)
-
-    def _writeHeader(self, outputFile):
-        headerLines = [ "********************************************************************************",
-                        "***                                MICROSCOPE",
-                        "***",
-                        "***    BeamEnergy                  = Tension of the collimated electrons",
-                        "***    BeamCurrent                 = Current of the electron beam",
-                        "***    BeamDiameter                = Diameter at 90% of the electron beam",
-                        "***    BeamPosX                    = Position in X of the electron beam",
-                        "***    BeamPosY                    = Position in Y of the electron beam",
-                        "***    BeamTilt                    = Theta angle of the electron beam (deg)",
-                        "***    BeamStandardDeviation       = Standard deviation of the Gaussian distribution of the electrons in the beam",
-                        "***    DetectorCrystalAtom         = Atomic symbol, name or number of the detector crystal",
-                        "***    DetectorCrystalThickness    = Thickness of the detector crystal",
-                        "***    DetectorCrystalRadius       = Radius of the detector crystal",
-                        "***    DetectorCrystalDistance     = Distance of the detector crystal to the sample",
-                        "***    DetectorDeadLayer           = Thickness of the detector dead layer",
-                        "***    DetectorDiffusionLenght     = Diffusion lenght of the detector",
-                        "***    DetectorSurfaceQuality      = Surface quality of the detector",
-                        "***    DetectorNoise               = Noise at EDS",
-                        "***    DetectorTOA                 = Take off angle of the detector (deg)",
-                        "***    DetectorPitch               = Phi angle of the detector (deg)",
-                        "***    DetectorBFLow               = Bright Field low angle (rad)",
-                        "***    DetectorBFHigh              = Bright Field high angle (rad)",
-                        "***    DetectorDFLow               = Dark Field low angle (rad)",
-                        "***    DetectorDFHigh              = Dark Field high angle (rad)",
-                        "***    DetectorHAADFLow            = High Angle Annular Dark Field low angle (rad)",
-                        "***    DetectorHAADFHigh           = High Angle Annular Dark Field high angle (rad)",
-                        "***",
-                        "********************************************************************************"]
-
-        for line in headerLines:
-            outputFile.write(line+'\n')
-
-    def _createFormats(self):
-        formats = {}
-
-        formats[KEY_BEAM_ENERGY_keV] = lambda value: "%.6f" % (value)
-        formats[KEY_BEAM_CURRENT_A] = lambda value: "%.16g" % (value)
-        formats[KEY_BEAM_TIME_s] = lambda value: "%.16g" % (value)
-        formats[KEY_BEAM_DIAMETER_A] = lambda value: "%.16g" % (value)
-        formats[KEY_BEAM_POSITION_X_A] = lambda value: reduceAfterDot("%.6f" % (value))
-        formats[KEY_BEAM_POSITION_Y_A] = lambda value: reduceAfterDot("%.6f" % (value))
-        formats[KEY_BEAM_TILT_deg] = lambda value: "%.6f" % (value)
-        formats[KEY_BEAM_STANDARD_DEVIATION_A] = lambda value: reduceAfterDot("%.6g" % (value))
-        formats[KEY_DETECTOR_CRYSTAL_ATOM] = lambda value: "%s" % (value)
-        formats[KEY_DETECTOR_CRYSTAL_THICKNESS_cm] = lambda value: "%.6f" % (value)
-        formats[KEY_DETECTOR_CRYSTAL_RADIUS_cm] = lambda value: reduceAfterDot("%.6f" % (value))
-        formats[KEY_DETECTOR_CRYSTAL_DISTANCE_cm] = lambda value: reduceAfterDot("%.6f" % (value))
-        formats[KEY_DETECTOR_DEAD_LAYER_A] = lambda value: reduceAfterDot("%.6f" % (value))
-        formats[KEY_DETECTOR_DIFFUSION_LENGHT_A] = lambda value: reduceAfterDot("%.6f" % (value))
-        formats[KEY_DETECTOR_SURFACE_QUALITY] = lambda value: "%.6f" % (value)
-        formats[KEY_DETECTOR_NOISE_eV] = lambda value: reduceAfterDot("%.6f" % (value))
-        formats[KEY_DETECTOR_TOA_deg] = lambda value: "%.6f" % (value)
-        formats[KEY_DETECTOR_CHANNEL_WIDTH_eV] = lambda value: "%.6f" % (value)
-        formats[KEY_DETECTOR_PITCH_deg] = lambda value: "%.6f" % (value)
-        formats[KEY_DETECTOR_BF_LOW_rad] = lambda value: "%.6f" % (value)
-        formats[KEY_DETECTOR_BF_HIGH_RAD] = lambda value: "%.6f" % (value)
-        formats[KEY_DETECTOR_DF_LOW_rad] = lambda value: "%.6f" % (value)
-        formats[KEY_DETECTOR_DF_HIGH_rad] = lambda value: "%.6f" % (value)
-        formats[KEY_DETECTOR_HAADF_LOW_rad] = lambda value: "%.6f" % (value)
-        formats[KEY_DETECTOR_HAADF_HIGH_rad] = lambda value: "%.6f" % (value)
-
-        return formats
+            output_file.write(line)
 
     @property
     def version(self):
         return self._version
+
     @version.setter
     def version(self, version):
         self._version = version
@@ -264,6 +180,7 @@ class MicroscopeParameters(object):
     @property
     def beamEnergy_keV(self):
         return self._parameters[KEY_BEAM_ENERGY_keV]
+
     @beamEnergy_keV.setter
     def beamEnergy_keV(self, beamEnergy_keV):
         self._parameters[KEY_BEAM_ENERGY_keV] = beamEnergy_keV
@@ -271,6 +188,7 @@ class MicroscopeParameters(object):
     @property
     def beamCurrent_A(self):
         return self._parameters[KEY_BEAM_CURRENT_A]
+
     @beamCurrent_A.setter
     def beamCurrent_A(self, beamCurrent_A):
         self._parameters[KEY_BEAM_CURRENT_A] = beamCurrent_A
@@ -278,6 +196,7 @@ class MicroscopeParameters(object):
     @property
     def time_s(self):
         return self._parameters[KEY_BEAM_TIME_s]
+
     @time_s.setter
     def time_s(self, time_s):
         self._parameters[KEY_BEAM_TIME_s] = time_s
@@ -285,6 +204,7 @@ class MicroscopeParameters(object):
     @property
     def beamDiameter_A(self):
         return self._parameters[KEY_BEAM_DIAMETER_A]
+
     @beamDiameter_A.setter
     def beamDiameter_A(self, beamDiameter_A):
         self._parameters[KEY_BEAM_DIAMETER_A] = beamDiameter_A
@@ -292,6 +212,7 @@ class MicroscopeParameters(object):
     @property
     def beamPositionX_A(self):
         return self._parameters[KEY_BEAM_POSITION_X_A]
+
     @beamPositionX_A.setter
     def beamPositionX_A(self, beamPositionX_A):
         self._parameters[KEY_BEAM_POSITION_X_A] = beamPositionX_A
@@ -299,6 +220,7 @@ class MicroscopeParameters(object):
     @property
     def beamPositionY_A(self):
         return self._parameters[KEY_BEAM_POSITION_Y_A]
+
     @beamPositionY_A.setter
     def beamPositionY_A(self, beamPositionY_A):
         self._parameters[KEY_BEAM_POSITION_Y_A] = beamPositionY_A
@@ -306,6 +228,7 @@ class MicroscopeParameters(object):
     @property
     def beamTilt_deg(self):
         return self._parameters[KEY_BEAM_TILT_deg]
+
     @beamTilt_deg.setter
     def beamTilt_deg(self, beamTilt_deg):
         self._parameters[KEY_BEAM_TILT_deg] = beamTilt_deg
@@ -313,6 +236,7 @@ class MicroscopeParameters(object):
     @property
     def beamStandardDeviation_A(self):
         return self._parameters[KEY_BEAM_STANDARD_DEVIATION_A]
+
     @beamStandardDeviation_A.setter
     def beamStandardDeviation_A(self, beamStandardDeviation_A):
         self._parameters[KEY_BEAM_STANDARD_DEVIATION_A] = beamStandardDeviation_A
@@ -320,6 +244,7 @@ class MicroscopeParameters(object):
     @property
     def detectorCrystalAtomSymbol(self):
         return self._parameters[KEY_DETECTOR_CRYSTAL_ATOM]
+
     @detectorCrystalAtomSymbol.setter
     def detectorCrystalAtomSymbol(self, detectorCrystalAtomSymbol):
         self._parameters[KEY_DETECTOR_CRYSTAL_ATOM] = detectorCrystalAtomSymbol
@@ -327,6 +252,7 @@ class MicroscopeParameters(object):
     @property
     def detectorCrystalThickness_cm(self):
         return self._parameters[KEY_DETECTOR_CRYSTAL_THICKNESS_cm]
+
     @detectorCrystalThickness_cm.setter
     def detectorCrystalThickness_cm(self, detectorCrystalThickness_cm):
         self._parameters[KEY_DETECTOR_CRYSTAL_THICKNESS_cm] = detectorCrystalThickness_cm
@@ -334,6 +260,7 @@ class MicroscopeParameters(object):
     @property
     def detectorCrystalRadius_cm(self):
         return self._parameters[KEY_DETECTOR_CRYSTAL_RADIUS_cm]
+
     @detectorCrystalRadius_cm.setter
     def detectorCrystalRadius_cm(self, detectorCrystalRadius_cm):
         self._parameters[KEY_DETECTOR_CRYSTAL_RADIUS_cm] = detectorCrystalRadius_cm
@@ -341,6 +268,7 @@ class MicroscopeParameters(object):
     @property
     def detectorCrystalDistance_cm(self):
         return self._parameters[KEY_DETECTOR_CRYSTAL_DISTANCE_cm]
+
     @detectorCrystalDistance_cm.setter
     def detectorCrystalDistance_cm(self, detectorCrystalDistance_cm):
         self._parameters[KEY_DETECTOR_CRYSTAL_DISTANCE_cm] = detectorCrystalDistance_cm
@@ -348,6 +276,7 @@ class MicroscopeParameters(object):
     @property
     def detectorDeadLayer_A(self):
         return self._parameters[KEY_DETECTOR_DEAD_LAYER_A]
+
     @detectorDeadLayer_A.setter
     def detectorDeadLayer_A(self, detectorDeadLayer_A):
         self._parameters[KEY_DETECTOR_DEAD_LAYER_A] = detectorDeadLayer_A
@@ -355,6 +284,7 @@ class MicroscopeParameters(object):
     @property
     def detectorDiffusionLenght_A(self):
         return self._parameters[KEY_DETECTOR_DIFFUSION_LENGHT_A]
+
     @detectorDiffusionLenght_A.setter
     def detectorDiffusionLenght_A(self, detectorDiffusionLenght_A):
         self._parameters[KEY_DETECTOR_DIFFUSION_LENGHT_A] = detectorDiffusionLenght_A
@@ -362,6 +292,7 @@ class MicroscopeParameters(object):
     @property
     def detectorSurfaceQuality(self):
         return self._parameters[KEY_DETECTOR_SURFACE_QUALITY]
+
     @detectorSurfaceQuality.setter
     def detectorSurfaceQuality(self, detectorSurfaceQuality):
         self._parameters[KEY_DETECTOR_SURFACE_QUALITY] = detectorSurfaceQuality
@@ -369,6 +300,7 @@ class MicroscopeParameters(object):
     @property
     def detectorNoise_eV(self):
         return self._parameters[KEY_DETECTOR_NOISE_eV]
+
     @detectorNoise_eV.setter
     def detectorNoise_eV(self, detectorNoise_eV):
         self._parameters[KEY_DETECTOR_NOISE_eV] = detectorNoise_eV
@@ -376,6 +308,7 @@ class MicroscopeParameters(object):
     @property
     def detectorTOA_deg(self):
         return self._parameters[KEY_DETECTOR_TOA_deg]
+
     @detectorTOA_deg.setter
     def detectorTOA_deg(self, detectorTOA_deg):
         self._parameters[KEY_DETECTOR_TOA_deg] = detectorTOA_deg
@@ -383,6 +316,7 @@ class MicroscopeParameters(object):
     @property
     def detectorAzimuthalAngle_deg(self):
         return self._parameters[KEY_DETECTOR_PITCH_deg]
+
     @detectorAzimuthalAngle_deg.setter
     def detectorAzimuthalAngle_deg(self, detectorAzimuthalAngle_deg):
         self._parameters[KEY_DETECTOR_PITCH_deg] = detectorAzimuthalAngle_deg
@@ -390,6 +324,7 @@ class MicroscopeParameters(object):
     @property
     def detectorChannelWidth_eV(self):
         return self._parameters[KEY_DETECTOR_CHANNEL_WIDTH_eV]
+
     @detectorChannelWidth_eV.setter
     def detectorChannelWidth_eV(self, detectorChannelWidth_eV):
         self._parameters[KEY_DETECTOR_CHANNEL_WIDTH_eV] = detectorChannelWidth_eV
@@ -397,6 +332,7 @@ class MicroscopeParameters(object):
     @property
     def detectorPitch_deg(self):
         return self._parameters[KEY_DETECTOR_PITCH_deg]
+
     @detectorPitch_deg.setter
     def detectorPitch_deg(self, detectorPitch_deg):
         self._parameters[KEY_DETECTOR_PITCH_deg] = detectorPitch_deg
@@ -404,6 +340,7 @@ class MicroscopeParameters(object):
     @property
     def detectorBFLow_rad(self):
         return self._parameters[KEY_DETECTOR_BF_LOW_rad]
+
     @detectorBFLow_rad.setter
     def detectorBFLow_rad(self, detectorBFLow_rad):
         self._parameters[KEY_DETECTOR_BF_LOW_rad] = detectorBFLow_rad
@@ -411,6 +348,7 @@ class MicroscopeParameters(object):
     @property
     def detectorBFHigh_rad(self):
         return self._parameters[KEY_DETECTOR_BF_HIGH_RAD]
+
     @detectorBFHigh_rad.setter
     def detectorBFHigh_rad(self, detectorBFHigh_rad):
         self._parameters[KEY_DETECTOR_BF_HIGH_RAD] = detectorBFHigh_rad
@@ -418,6 +356,7 @@ class MicroscopeParameters(object):
     @property
     def detectorDFLow_rad(self):
         return self._parameters[KEY_DETECTOR_DF_LOW_rad]
+
     @detectorDFLow_rad.setter
     def detectorDFLow_rad(self, detectorDFLow_rad):
         self._parameters[KEY_DETECTOR_DF_LOW_rad] = detectorDFLow_rad
@@ -425,6 +364,7 @@ class MicroscopeParameters(object):
     @property
     def detectorDFHigh_rad(self):
         return self._parameters[KEY_DETECTOR_DF_HIGH_rad]
+
     @detectorDFHigh_rad.setter
     def detectorDFHigh_rad(self, detectorDFHigh_rad):
         self._parameters[KEY_DETECTOR_DF_HIGH_rad] = detectorDFHigh_rad
@@ -432,6 +372,7 @@ class MicroscopeParameters(object):
     @property
     def detectorHAADFLow_rad(self):
         return self._parameters[KEY_DETECTOR_HAADF_LOW_rad]
+
     @detectorHAADFLow_rad.setter
     def detectorHAADFLow_rad(self, detectorHAADFLow_rad):
         self._parameters[KEY_DETECTOR_HAADF_LOW_rad] = detectorHAADFLow_rad
@@ -439,6 +380,105 @@ class MicroscopeParameters(object):
     @property
     def detectorHAADFHigh_rad(self):
         return self._parameters[KEY_DETECTOR_HAADF_HIGH_rad]
+
     @detectorHAADFHigh_rad.setter
     def detectorHAADFHigh_rad(self, detectorHAADFHigh_rad):
         self._parameters[KEY_DETECTOR_HAADF_HIGH_rad] = detectorHAADFHigh_rad
+
+
+def _create_formats():
+    formats = {
+        KEY_BEAM_ENERGY_keV: lambda value: "{:.6f}".format(value),
+        KEY_BEAM_CURRENT_A: lambda value: "{:.6g}".format(value),
+        KEY_BEAM_TIME_s: lambda value: "{:.6g}".format(value),
+        KEY_BEAM_DIAMETER_A: lambda value: "{:.6g}".format(value),
+        KEY_BEAM_POSITION_X_A: lambda value: reduceAfterDot("{:.6f}".format(value)),
+        KEY_BEAM_POSITION_Y_A: lambda value: reduceAfterDot("{:.6f}".format(value)),
+        KEY_BEAM_TILT_deg: lambda value: "{:.6f}".format(value),
+        KEY_BEAM_STANDARD_DEVIATION_A: lambda value: reduceAfterDot("{:.6g}".format(value)),
+        KEY_DETECTOR_CRYSTAL_ATOM: lambda value: "{}".format(value),
+        KEY_DETECTOR_CRYSTAL_THICKNESS_cm: lambda value: "{:.6f}".format(value),
+        KEY_DETECTOR_CRYSTAL_RADIUS_cm: lambda value: reduceAfterDot("{:.6f}".format(value)),
+        KEY_DETECTOR_CRYSTAL_DISTANCE_cm: lambda value: reduceAfterDot("{:.6f}".format(value)),
+        KEY_DETECTOR_DEAD_LAYER_A: lambda value: reduceAfterDot("{:.6f}".format(value)),
+        KEY_DETECTOR_DIFFUSION_LENGHT_A: lambda value: reduceAfterDot("{:.6f}".format(value)),
+        KEY_DETECTOR_SURFACE_QUALITY: lambda value: "{:.6f}".format(value),
+        KEY_DETECTOR_NOISE_eV: lambda value: reduceAfterDot("{:.6f}".format(value)),
+        KEY_DETECTOR_TOA_deg: lambda value: "{:.6f}".format(value),
+        KEY_DETECTOR_CHANNEL_WIDTH_eV: lambda value: "{:.6f}".format(value),
+        KEY_DETECTOR_PITCH_deg: lambda value: "{:.6f}".format(value),
+        KEY_DETECTOR_BF_LOW_rad: lambda value: "{:.6f}".format(value),
+        KEY_DETECTOR_BF_HIGH_RAD: lambda value: "{:.6f}".format(value),
+        KEY_DETECTOR_DF_LOW_rad: lambda value: "{:.6f}".format(value),
+        KEY_DETECTOR_DF_HIGH_rad: lambda value: "{:.6f}".format(value),
+        KEY_DETECTOR_HAADF_LOW_rad: lambda value: "{:.6f}".format(value),
+        KEY_DETECTOR_HAADF_HIGH_rad: lambda value: "{:.6f}".format(value)
+    }
+
+    return formats
+
+
+def _create_extract_method():
+    extractMethods = {
+        KEY_BEAM_ENERGY_keV: float,
+        KEY_BEAM_CURRENT_A: float,
+        KEY_BEAM_TIME_s: float,
+        KEY_BEAM_DIAMETER_A: float,
+        KEY_BEAM_POSITION_X_A: float,
+        KEY_BEAM_POSITION_Y_A: float,
+        KEY_BEAM_TILT_deg: float,
+        KEY_BEAM_STANDARD_DEVIATION_A: float,
+        KEY_DETECTOR_CRYSTAL_ATOM: str,
+        KEY_DETECTOR_CRYSTAL_THICKNESS_cm: float,
+        KEY_DETECTOR_CRYSTAL_RADIUS_cm: float,
+        KEY_DETECTOR_CRYSTAL_DISTANCE_cm: float,
+        KEY_DETECTOR_DEAD_LAYER_A: float,
+        KEY_DETECTOR_DIFFUSION_LENGHT_A: float,
+        KEY_DETECTOR_SURFACE_QUALITY: float,
+        KEY_DETECTOR_NOISE_eV: float,
+        KEY_DETECTOR_TOA_deg: float,
+        KEY_DETECTOR_CHANNEL_WIDTH_eV: float,
+        KEY_DETECTOR_PITCH_deg: float,
+        KEY_DETECTOR_BF_LOW_rad: float,
+        KEY_DETECTOR_BF_HIGH_RAD: float,
+        KEY_DETECTOR_DF_LOW_rad: float,
+        KEY_DETECTOR_DF_HIGH_rad: float,
+        KEY_DETECTOR_HAADF_LOW_rad: float,
+        KEY_DETECTOR_HAADF_HIGH_rad: float
+    }
+
+    return extractMethods
+
+
+def _write_header(output_file):
+    header_lines = ["********************************************************************************",
+                    "***                                MICROSCOPE",
+                    "***",
+                    "***    BeamEnergy                  = Tension of the collimated electrons",
+                    "***    BeamCurrent                 = Current of the electron beam",
+                    "***    BeamDiameter                = Diameter at 90% of the electron beam",
+                    "***    BeamPosX                    = Position in X of the electron beam",
+                    "***    BeamPosY                    = Position in Y of the electron beam",
+                    "***    BeamTilt                    = Theta angle of the electron beam (deg)",
+                    "***    BeamStandardDeviation       = Standard deviation of the Gaussian distribution of the electrons in the beam",
+                    "***    DetectorCrystalAtom         = Atomic symbol, name or number of the detector crystal",
+                    "***    DetectorCrystalThickness    = Thickness of the detector crystal",
+                    "***    DetectorCrystalRadius       = Radius of the detector crystal",
+                    "***    DetectorCrystalDistance     = Distance of the detector crystal to the sample",
+                    "***    DetectorDeadLayer           = Thickness of the detector dead layer",
+                    "***    DetectorDiffusionLenght     = Diffusion lenght of the detector",
+                    "***    DetectorSurfaceQuality      = Surface quality of the detector",
+                    "***    DetectorNoise               = Noise at EDS",
+                    "***    DetectorTOA                 = Take off angle of the detector (deg)",
+                    "***    DetectorPitch               = Phi angle of the detector (deg)",
+                    "***    DetectorBFLow               = Bright Field low angle (rad)",
+                    "***    DetectorBFHigh              = Bright Field high angle (rad)",
+                    "***    DetectorDFLow               = Dark Field low angle (rad)",
+                    "***    DetectorDFHigh              = Dark Field high angle (rad)",
+                    "***    DetectorHAADFLow            = High Angle Annular Dark Field low angle (rad)",
+                    "***    DetectorHAADFHigh           = High Angle Annular Dark Field high angle (rad)",
+                    "***",
+                    "********************************************************************************"]
+
+    for line in header_lines:
+        output_file.write(line + '\n')

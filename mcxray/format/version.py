@@ -3,6 +3,7 @@
 
 """
 .. py:currentmodule:: mcxray.format.version
+
 .. moduleauthor:: Hendrix Demers <hendrix.demers@mail.mcgill.ca>
 
 MCXray version information.
@@ -198,6 +199,7 @@ VERSION_1_3_0 = Version(1, 3, 0)
 #: Correct bug in Henke 1993 MAC implementation.
 #: Refactor old ionization energy code.
 #: Add Chantler 2005 ionization energy model.
+#: Add results parameters file.
 VERSION_1_4_0 = Version(1, 4, 0)
 
 #: Add MAC Model option in file.

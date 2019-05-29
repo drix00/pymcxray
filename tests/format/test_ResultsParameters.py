@@ -73,27 +73,6 @@ class TestResultsParameters(unittest.TestCase):
         # self.fail("Test if the testcase is working.")
         self.assert_(True)
 
-    def test_read(self):
-        """
-        Tests for method `read`.
-        """
-        raise unittest.SkipTest("Test test_read not implemented")
-
-        for title in testUtilities.getSimulationTitles():
-            resultsParameters = ResultsParameters.ResultsParameters()
-
-            filepath = os.path.abspath(os.path.join(self.testDataPath, "{}/{}.rp".format(title, title)))
-            resultsParameters.read(filepath)
-
-            resultsParametersRef = get_simulation_parameters_reference(title)
-            self.assertEquals(resultsParametersRef.isComputeXrayCharacteristic,
-                              resultsParameters.isComputeXrayCharacteristic)
-            self.assertEquals(resultsParametersRef.isComputeXrayBremsstrahlung,
-                              resultsParameters.isComputeXrayBremsstrahlung)
-            self.assertEquals(resultsParametersRef.isComputeXrayPhirhoz, resultsParameters.isComputeXrayPhirhoz)
-
-        self.fail("Test if the testcase is working.")
-
     def test_read_1_4_1(self):
         """
         Tests for method `read`.
@@ -155,38 +134,6 @@ class TestResultsParameters(unittest.TestCase):
                           resultsParameters.isComputeXraySimulatedSpectrum)
 
         # self.fail("Test if the testcase is working.")
-
-    def test_write(self):
-        """
-        Tests for method `write`.
-        """
-        raise unittest.SkipTest("Test test_write not implemented")
-
-        self.maxDiff = None
-
-        for title in testUtilities.getSimulationTitles():
-            resultsParametersRef = get_simulation_parameters_reference(title)
-
-            filepathReference = os.path.abspath(os.path.join(self.testDataPath, "{}/{}.rp".format(title, title)))
-
-            filepath = os.path.join(self.tempDataPath, "{}.rp".format(title))
-            # resultsParameters = ResultsParameters.ResultsParameters()
-            resultsParameters = resultsParametersRef
-
-            resultsParameters.write(filepath)
-
-            self.assertEquals(resultsParametersRef.isComputeXrayCharacteristic,
-                              resultsParameters.isComputeXrayCharacteristic)
-            self.assertEquals(resultsParametersRef.isComputeXrayBremsstrahlung,
-                              resultsParameters.isComputeXrayBremsstrahlung)
-            self.assertEquals(resultsParametersRef.isComputeXrayPhirhoz, resultsParameters.isComputeXrayPhirhoz)
-
-            linesRef = open(filepathReference, 'r').readlines()
-            lines = open(filepath, 'r').readlines()
-
-            self.assertListEqual(linesRef, lines)
-
-        self.fail("Test if the testcase is working.")
 
     def test_write_1_4_1(self):
         """

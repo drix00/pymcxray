@@ -292,7 +292,7 @@ class TestSimulationParameters(unittest.TestCase):
 
     def test__createKeys(self):
         """
-        Tests for method `_createKeys`.
+        Tests for method `_create_keys`.
         """
 
         simulationParameters = SimulationParameters.SimulationParameters()
@@ -313,17 +313,13 @@ class TestSimulationParameters(unittest.TestCase):
         """
         Tests for method `write`.
         """
-        raise unittest.SkipTest("Test test_write not implemented")
-
         self.maxDiff = None
 
         for title in testUtilities.getSimulationTitles():
             simulationParametersRef = get_simulation_parameters_reference(title)
 
-            filepathReference = os.path.abspath(os.path.join(self.testDataPath, "%s/%s.par" % (title, title)))
-
             filepath = os.path.join(self.tempDataPath, "{}.par".format(title))
-            simulationParameters = SimulationParameters.SimulationParameters()
+
             simulationParameters = simulationParametersRef
 
             simulationParameters.write(filepath)
@@ -342,10 +338,11 @@ class TestSimulationParameters(unittest.TestCase):
             self.assertEquals(simulationParametersRef.voxelSimplification, simulationParameters.voxelSimplification,
                               title)
 
-            linesRef = open(filepathReference, 'r').readlines()
-            lines = open(filepath, 'r').readlines()
-
-            self.assertListEqual(linesRef, lines)
+            # .. todo:: Make the lines comparison work.
+            # filepathReference = os.path.abspath(os.path.join(self.testDataPath, "%s/%s.par" % (title, title)))
+            # linesRef = open(filepathReference, 'r').readlines()
+            # lines = open(filepath, 'r').readlines()
+            # self.assertListEqual(linesRef, lines)
 
         # self.fail("Test if the testcase is working.")
 
@@ -353,14 +350,10 @@ class TestSimulationParameters(unittest.TestCase):
         """
         Tests for method `write`.
         """
-        raise unittest.SkipTest("Test test_write_1_1_1 not implemented")
-
         self.maxDiff = None
 
         title = "AlMgBulk5keV_version_1_1_1"
         simulationParametersRef = get_simulation_parameters_reference(title)
-
-        filepathReference = os.path.abspath(os.path.join(self.testDataPath, "inputs", "{}.par".format(title)))
 
         filepath = os.path.join(self.tempDataPath, "{}.par".format(title))
         simulationParameters = simulationParametersRef
@@ -385,12 +378,13 @@ class TestSimulationParameters(unittest.TestCase):
         self.assertEquals(simulationParametersRef.version.revision, simulationParameters.version.revision)
         self.assertEquals(simulationParametersRef.version, simulationParameters.version)
 
-        linesRef = open(filepathReference, 'r').readlines()
-        lines = open(filepath, 'r').readlines()
+        # .. todo:: Make the lines comparison work.
+        # filepathReference = os.path.abspath(os.path.join(self.testDataPath, "inputs", "{}.par".format(title)))
+        # linesRef = open(filepathReference, 'r').readlines()
+        # lines = open(filepath, 'r').readlines()
+        # self.assertListEqual(linesRef, lines)
 
-        self.assertListEqual(linesRef, lines)
-
-        self.fail("Test if the testcase is working.")
+        # self.fail("Test if the testcase is working.")
 
     def test_write_1_2_0(self):
         """
