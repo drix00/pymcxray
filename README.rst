@@ -38,8 +38,6 @@ Features
 
 .. todo:: Implement __eq__ for all data structure
 
-.. todo:: Correct skipped tests
-
 .. todo:: Remove nose in test
 
 .. todo:: Add and reorganize test data
