@@ -6,11 +6,22 @@
 # https://github.com/travis-ci/travis-ci/issues/2389
 sudo: false
 
+
+dist: bionic
+
 language: python
+cache: pip
 python:
-    - 3.4
-    - 3.5
-    - 3.6
+  - '3.6'
+  - '3.7'
+  - '3.8'
+
+matrix:
+  include:
+    - python: 3.5
+      dist: xenial
+  allow_failures:
+    - python: 3.8
 
 before_install:
     - echo -e "machine github.com\n  login ed880e956e8dee3515e1794d98314e321d571656" >> ~/.netrc
@@ -32,7 +43,9 @@ after_success:
   - codecov
 
 notifications:
-  email: false
+  email:
+    on_success: never
+    on_failure: always
 
 git:
   lfs_skip_smudge: true
@@ -48,4 +61,4 @@ deploy:
   on:
     tags: true
     repo: drix00/pymcxray
-    condition: $TOXENV == py36
+    condition: $TOXENV == py38
