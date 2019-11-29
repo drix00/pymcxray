@@ -21,7 +21,7 @@ import fnmatch
 # Globals and constants variables.
 __author__ = """Hendrix Demers"""
 __email__ = 'hendrix.demers@mail.mcgill.ca'
-__version__ = '0.1.3'
+__version__ = '0.1.4'
 
 def get_current_module_path(module_path, relative_path=""):
     """
