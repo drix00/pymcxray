@@ -33,7 +33,8 @@ import unittest
 
 # Project modules
 # import pymcxray.Simulation as Simulation
-from pymcxray.Simulation import create_weight_fractions, Layer, create_multi_horizontal_layer
+from pymcxray.Simulation import create_weight_fractions, create_weight_fractions_trace
+from pymcxray.Simulation import Layer, create_multi_horizontal_layer
 
 # Globals and constants variables.
 
@@ -67,7 +68,6 @@ class TestSimulation(unittest.TestCase):
 
     def test_create_weight_fractions(self):
         """
-        First test to check if the testcase is working with the testing framework.
         """
 
         weight_fraction_ref = [0, 0.25, 0.5, 0.75, 1.0]
@@ -165,6 +165,73 @@ class TestSimulation(unittest.TestCase):
                                (1.0, 0.0, 0.0, 0.0)]
         weight_fraction_values = create_weight_fractions(0.50, 4)
         self.assertListEqual(weight_fraction_ref, weight_fraction_values)
+
+        # self.fail("Test if the testcase is working.")
+
+    def test_create_weight_fractions_trace(self):
+        """
+        """
+
+        weight_fraction_ref = [0, 0.25]
+        weight_fraction_values = create_weight_fractions_trace(0.25, 1, 0, 0.25)
+        self.assertListEqual(weight_fraction_ref, list(weight_fraction_values))
+
+        weight_fraction_ref = [(0.0, 1.0),
+                               (0.25, 0.75)]
+        weight_fraction_values = create_weight_fractions_trace(0.25, 2, 0, 0.25)
+        self.assertListEqual(weight_fraction_ref, weight_fraction_values)
+
+        weight_fraction_ref = [(0.0, 0.0, 1.0),
+                               (0.0, 0.25, 0.75),
+                               (0.25, 0.0, 0.75),
+                               (0.25, 0.25, 0.5)]
+        weight_fraction_values = create_weight_fractions_trace(0.25, 3, 0, 0.25)
+        self.assertListEqual(weight_fraction_ref, weight_fraction_values)
+
+        weight_fraction_ref = [(0.0, 0.0, 0.0, 1.0),
+                               (0.0, 0.0, 0.25, 0.75),
+                               (0.0, 0.25, 0.0, 0.75),
+                               (0.0, 0.25, 0.25, 0.5),
+                               (0.25, 0.0, 0.0, 0.75),
+                               (0.25, 0.0, 0.25, 0.50),
+                               (0.25, 0.25, 0.0, 0.50),
+                               (0.25, 0.25, 0.25, 0.25)]
+        weight_fraction_values = create_weight_fractions_trace(0.25, 4, 0, 0.25)
+        self.assertListEqual(weight_fraction_ref, weight_fraction_values)
+
+        weight_fraction_ref = [(0.0, 1.0)]
+        weight_fraction_values = create_weight_fractions_trace(0.50, 2, 0, 0.25)
+        self.assertListEqual(weight_fraction_ref, weight_fraction_values)
+
+        weight_fraction_ref = [(0.0, 0.0, 1.0)]
+        weight_fraction_values = create_weight_fractions_trace(0.50, 3, 0, 0.25)
+        self.assertListEqual(weight_fraction_ref, weight_fraction_values)
+
+        weight_fraction_ref = [(0.0, 0.0, 0.0, 1.0)]
+        weight_fraction_values = create_weight_fractions_trace(0.50, 4, 0, 0.25)
+        self.assertListEqual(weight_fraction_ref, weight_fraction_values)
+
+        # self.fail("Test if the testcase is working.")
+
+    def test_create_weight_fractions_trace_speed_test_two_elements(self):
+        number_weight_fractions_ref = 41
+        weight_fraction_values = create_weight_fractions_trace(0.00005, 2, 0.0, 0.002)
+        self.assertEqual(number_weight_fractions_ref, len(weight_fraction_values))
+
+        number_weight_fractions_ref = 201
+        weight_fraction_values = create_weight_fractions_trace(0.00001, 2, 0.0, 0.002)
+        self.assertEqual(number_weight_fractions_ref, len(weight_fraction_values))
+
+        # self.fail("Test if the testcase is working.")
+
+    def test_create_weight_fractions_trace_speed_test_three_elements(self):
+        number_weight_fractions_ref = 1681
+        weight_fraction_values = create_weight_fractions_trace(0.00005, 3, 0.0, 0.002)
+        self.assertEqual(number_weight_fractions_ref, len(weight_fraction_values))
+
+        number_weight_fractions_ref = 40401
+        weight_fraction_values = create_weight_fractions_trace(0.00001, 3, 0.0, 0.002)
+        self.assertEqual(number_weight_fractions_ref, len(weight_fraction_values))
 
         # self.fail("Test if the testcase is working.")
 
