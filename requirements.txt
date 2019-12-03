@@ -1,6 +1,6 @@
+matplotlib
 numpy
 scipy
-matplotlib
 h5py
 apscheduler
 Pillow
