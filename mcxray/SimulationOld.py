@@ -28,7 +28,7 @@ MCXRay simulation parameters.
 # Standard library modules.
 import logging
 import os.path
-from itertools import combinations_with_replacement, product, combinations
+from itertools import product
 
 # Third party modules.
 import numpy as np
@@ -62,15 +62,15 @@ from mcxray.SimulationsParameters import PARAMETER_INCIDENT_ENERGY_keV, PARAMETE
 # Globals and constants variables.
 
 
-def createPureBulkSample(atomicNumber):
+def createPureBulkSample(atomic_number):
     specimen = Specimen.Specimen()
 
-    specimen.name = AtomData.getAtomSymbol(atomicNumber)
+    specimen.name = AtomData.getAtomSymbol(atomic_number)
 
     specimen.numberRegions = 1
     region = Region.Region()
     region.numberElements = 1
-    element = Element.Element(atomicNumber)
+    element = Element.Element(atomic_number)
     region.elements.append(element)
     region.regionType = RegionType.REGION_TYPE_BOX
     parameters = [-10000000000.0, 10000000000.0, -10000000000.0, 10000000000.0, 0.0, 20000000000.0]
@@ -119,12 +119,12 @@ def createAlloyThinFilm(elements, filmThickness_nm):
         element = Element.Element(atomicNumber, massFraction=weightFraction)
         region.elements.append(element)
 
-    filmThickness_A = filmThickness_nm*10.0
-    name += "T%iA" % (filmThickness_A)
+    film_thickness_A = filmThickness_nm*10.0
+    name += "T%iA" % (film_thickness_A)
 
     specimen.name = name
     region.regionType = RegionType.REGION_TYPE_BOX
-    parameters = [-10000000000.0, 10000000000.0, -10000000000.0, 10000000000.0, 0.0, filmThickness_A]
+    parameters = [-10000000000.0, 10000000000.0, -10000000000.0, 10000000000.0, 0.0, film_thickness_A]
     region.regionDimensions = RegionDimensions.RegionDimensionsBox(parameters)
     specimen.regions.append(region)
 
@@ -376,7 +376,7 @@ def createFilmInSubstrate(atomicNumberFilm, atomicNumberSubstrate,
 def createPhirhozSpecimens(atomicNumberTracer, atomicNumberMatrix, tracerThickness_nm, maximumThickness_nm):
     specimens = []
 
-    # Create thin film unsuported.
+    # Create thin film unsupported.
     elements = [(atomicNumberTracer, 1.0)]
     filmThickness_nm = tracerThickness_nm
     specimen = createAlloyThinFilm(elements, filmThickness_nm)
@@ -476,7 +476,7 @@ def createParticleOnSubstrate(atomicNumberParticle, atomicNumberSubstrate, parti
 
 def createParticleOnFilm(atomicNumberParticle, atomicNumberSubstrate, particleDiameter_nm, filmThiskness_nm):
     particleDiameter_A = particleDiameter_nm*10.0
-    filmThiskness_A = filmThiskness_nm*10.0
+    film_thickness_A = filmThiskness_nm*10.0
     specimen = Specimen.Specimen()
 
     symbolParticle = AtomData.getAtomSymbol(atomicNumberParticle)
@@ -489,7 +489,7 @@ def createParticleOnFilm(atomicNumberParticle, atomicNumberSubstrate, particleDi
     region = Region.Region()
     region.numberElements = 0
     region.regionType = RegionType.REGION_TYPE_BOX
-    parameters = [-10000000000.0, 10000000000.0, -10000000000.0, 10000000000.0, 0.0, particleDiameter_A+filmThiskness_A + 100.0]
+    parameters = [-10000000000.0, 10000000000.0, -10000000000.0, 10000000000.0, 0.0, particleDiameter_A+film_thickness_A + 100.0]
     region.regionDimensions = RegionDimensions.RegionDimensionsBox(parameters)
     specimen.regions.append(region)
 
@@ -513,7 +513,7 @@ def createParticleOnFilm(atomicNumberParticle, atomicNumberSubstrate, particleDi
     element = Element.Element(atomicNumberSubstrate)
     region.elements.append(element)
     region.regionType = RegionType.REGION_TYPE_BOX
-    parameters = [-10000000000.0, 10000000000.0, -10000000000.0, 10000000000.0, particleDiameter_A+0.2, particleDiameter_A+0.2+filmThiskness_A]
+    parameters = [-10000000000.0, 10000000000.0, -10000000000.0, 10000000000.0, particleDiameter_A+0.2, particleDiameter_A+0.2+film_thickness_A]
     region.regionDimensions = RegionDimensions.RegionDimensionsBox(parameters)
     specimen.regions.append(region)
 
@@ -869,10 +869,35 @@ def create_weight_fractions(weight_fraction_step, number_elements):
         return weight_fractions.tolist()
 
     items = product(weight_fractions.tolist(), repeat=number_elements)
+    # data = np.array(list(items))
 
     weight_fractions_data = []
     for item in items:
         if 1.0-weight_fraction_step/2.0 <= sum(item) <= 1.0+weight_fraction_step/2.0:
+            weight_fractions_data.append(tuple(item))
+
+    return list(weight_fractions_data)
+
+
+def create_weight_fractions_trace(weight_fraction_step, number_elements, min_weight_fraction, max_weight_fraction):
+    weight_fractions = np.arange(min_weight_fraction, max_weight_fraction+weight_fraction_step, weight_fraction_step)
+    if number_elements == 1:
+        return weight_fractions.tolist()
+    trace_data = []
+    for _ in range(number_elements-1):
+        trace_data.append(weight_fractions.tolist())
+
+    if weight_fraction_step <= max_weight_fraction:
+        matrix_weight_fractions = np.arange(1.0-(max_weight_fraction*(number_elements-1)), 1.0 + weight_fraction_step, weight_fraction_step)
+    else:
+        matrix_weight_fractions = np.arange(1.0-weight_fraction_step, 1.0 + weight_fraction_step, weight_fraction_step)
+    trace_data.append(matrix_weight_fractions.tolist())
+
+    items = product(*trace_data)
+
+    weight_fractions_data = []
+    for item in items:
+        if 1.0-weight_fraction_step/2.0 <= sum(item) <= 1.0+weight_fraction_step/2.0 and max(item[:-1]) <= max_weight_fraction:
             weight_fractions_data.append(tuple(item))
 
     return list(weight_fractions_data)
@@ -926,22 +951,22 @@ class Simulation(object):
         self._simulationInputs.write(simulationInputsFilepath)
 
     def removeInputsFiles(self):
-        filepaths = []
+        file_paths = []
 
         filepath = os.path.join(self._path, self.name + ".sim")
-        filepaths.append(filepath)
+        file_paths.append(filepath)
         filepath = os.path.join(self._path, self._simulationInputs.specimenFilename)
-        filepaths.append(filepath)
+        file_paths.append(filepath)
         filepath = os.path.join(self._path, self._simulationInputs.modelFilename)
-        filepaths.append(filepath)
+        file_paths.append(filepath)
         filepath = os.path.join(self._path, self._simulationInputs.microsopeFilename)
-        filepaths.append(filepath)
+        file_paths.append(filepath)
         filepath = os.path.join(self._path, self._simulationInputs.simulationParametersFilename)
-        filepaths.append(filepath)
+        file_paths.append(filepath)
         filepath = os.path.join(self._path, self._simulationInputs.resultParametersFilename)
-        filepaths.append(filepath)
+        file_paths.append(filepath)
 
-        for filepath in filepaths:
+        for filepath in file_paths:
             if os.path.exists(filepath):
                 os.remove(filepath)
 

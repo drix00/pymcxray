@@ -7,6 +7,11 @@ History
 
 * Refactor project for new version of mcxray (hdf5 file).
 
+0.1.4 (2019-11-29)
+------------------
+
+* Add calculation of weight fractions for trace elements.
+
 0.1.2 (2017-06-26)
 ------------------
 
