@@ -70,7 +70,7 @@ class TestSnrParameters(unittest.TestCase):
         """
 
         # self.fail("Test if the testcase is working.")
-        self.assert_(True)
+        self.assertTrue(True)
 
     def test_read(self):
         """
@@ -84,12 +84,12 @@ class TestSnrParameters(unittest.TestCase):
             snrParameters.read(filepath)
 
             snrParametersRef = get_snr_parameters_reference(title)
-            self.assertEquals(snrParametersRef.snrType, snrParameters.snrType)
-            self.assertEquals(snrParametersRef.energyStart_keV, snrParameters.energyStart_keV)
-            self.assertEquals(snrParametersRef.energyEnd_keV, snrParameters.energyEnd_keV)
-            self.assertEquals(snrParametersRef.numberEnergySteps, snrParameters.numberEnergySteps)
-            self.assertEquals(snrParametersRef.backgroundEnergyWindowsSize, snrParameters.backgroundEnergyWindowsSize)
-            self.assertEquals(snrParametersRef.spectrumEnergyWindowsSize, snrParameters.spectrumEnergyWindowsSize)
+            self.assertEqual(snrParametersRef.snrType, snrParameters.snrType)
+            self.assertEqual(snrParametersRef.energyStart_keV, snrParameters.energyStart_keV)
+            self.assertEqual(snrParametersRef.energyEnd_keV, snrParameters.energyEnd_keV)
+            self.assertEqual(snrParametersRef.numberEnergySteps, snrParameters.numberEnergySteps)
+            self.assertEqual(snrParametersRef.backgroundEnergyWindowsSize, snrParameters.backgroundEnergyWindowsSize)
+            self.assertEqual(snrParametersRef.spectrumEnergyWindowsSize, snrParameters.spectrumEnergyWindowsSize)
 
         # self.fail("Test if the testcase is working.")
 
@@ -101,7 +101,7 @@ class TestSnrParameters(unittest.TestCase):
         numberKeys = 6
 
         keys = SnrParameters.SnrParameters()._createKeys()
-        self.assertEquals(numberKeys, len(keys))
+        self.assertEqual(numberKeys, len(keys))
 
         # self.fail("Test if the testcase is working.")
 
@@ -121,12 +121,12 @@ class TestSnrParameters(unittest.TestCase):
 
             snrParameters.write(filepath)
 
-            self.assertEquals(snrParametersRef.snrType, snrParameters.snrType)
-            self.assertEquals(snrParametersRef.energyStart_keV, snrParameters.energyStart_keV)
-            self.assertEquals(snrParametersRef.energyEnd_keV, snrParameters.energyEnd_keV)
-            self.assertEquals(snrParametersRef.numberEnergySteps, snrParameters.numberEnergySteps)
-            self.assertEquals(snrParametersRef.backgroundEnergyWindowsSize, snrParameters.backgroundEnergyWindowsSize)
-            self.assertEquals(snrParametersRef.spectrumEnergyWindowsSize, snrParameters.spectrumEnergyWindowsSize)
+            self.assertEqual(snrParametersRef.snrType, snrParameters.snrType)
+            self.assertEqual(snrParametersRef.energyStart_keV, snrParameters.energyStart_keV)
+            self.assertEqual(snrParametersRef.energyEnd_keV, snrParameters.energyEnd_keV)
+            self.assertEqual(snrParametersRef.numberEnergySteps, snrParameters.numberEnergySteps)
+            self.assertEqual(snrParametersRef.backgroundEnergyWindowsSize, snrParameters.backgroundEnergyWindowsSize)
+            self.assertEqual(snrParametersRef.spectrumEnergyWindowsSize, snrParameters.spectrumEnergyWindowsSize)
 
             linesRef = open(filepathReference, 'r').readlines()
             lines = open(filepath, 'r').readlines()

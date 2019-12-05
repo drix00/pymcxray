@@ -56,7 +56,7 @@ class TestMCXRayModel(unittest.TestCase):
         """
 
         #self.fail("Test if the testcase is working.")
-        self.assert_(True)
+        self.assertTrue(True)
 
     def test_MCXRayModel(self):
         """

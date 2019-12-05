@@ -74,7 +74,7 @@ class TestRead(unittest.TestCase):
         """
 
         # self.fail("Test if the testcase is working.")
-        self.assert_(True)
+        self.assertTrue(True)
 
     def test_read_text_input(self):
         """
@@ -93,7 +93,7 @@ class TestRead(unittest.TestCase):
         self.assertEqual(simulation_ref, simulation)
 
         # self.fail("Test if the testcase is working.")
-        self.assert_(True)
+        self.assertTrue(True)
 
     def test_read_text_output(self):
         """
@@ -114,7 +114,7 @@ class TestRead(unittest.TestCase):
         self.assertEqual(simulation_ref, simulation)
 
         # self.fail("Test if the testcase is working.")
-        self.assert_(True)
+        self.assertTrue(True)
 
     def test_convert_text_input_to_hdf5(self):
         """
@@ -134,7 +134,7 @@ class TestRead(unittest.TestCase):
         self.assertEqual(simulation_ref, simulation)
 
         # self.fail("Test if the testcase is working.")
-        self.assert_(True)
+        self.assertTrue(True)
 
     def test_convert_text_output_to_hdf5(self):
         """
@@ -157,7 +157,7 @@ class TestRead(unittest.TestCase):
         self.assertEqual(simulation_ref, simulation)
 
         # self.fail("Test if the testcase is working.")
-        self.assert_(True)
+        self.assertTrue(True)
 
     def test_read_hdf5_input(self):
         """
@@ -176,7 +176,7 @@ class TestRead(unittest.TestCase):
         self.assertEqual(simulation_ref, simulation)
 
         # self.fail("Test if the testcase is working.")
-        self.assert_(True)
+        self.assertTrue(True)
 
     def test_read_hdf5_output(self):
         """
@@ -195,10 +195,4 @@ class TestRead(unittest.TestCase):
         self.assertEqual(simulation_ref, simulation)
 
         # self.fail("Test if the testcase is working.")
-        self.assert_(True)
-
-
-if __name__ == '__main__':  # pragma: no cover
-    import nose
-
-    nose.runmodule()
+        self.assertTrue(True)

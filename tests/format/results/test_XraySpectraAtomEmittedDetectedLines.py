@@ -52,7 +52,7 @@ class TestXraySpectraAtomEmittedDetectedLines(unittest.TestCase):
         """
 
         #self.fail("Test if the testcase is working.")
-        self.assert_(True)
+        self.assertTrue(True)
 
     def test_read(self):
         """
@@ -67,11 +67,11 @@ class TestXraySpectraAtomEmittedDetectedLines(unittest.TestCase):
         regionID = 1
         spectrumFile.read(regionID)
 
-        self.assertEquals(0.0025, spectrumFile.energies_keV[0])
-        self.assertEquals(4.9975, spectrumFile.energies_keV[-1])
-        self.assertEquals(1000, len(spectrumFile.energies_keV))
-        self.assertEquals(1, len(spectrumFile.characteristics))
-        self.assertEquals(1000, len(spectrumFile.characteristics['Au']))
+        self.assertEqual(0.0025, spectrumFile.energies_keV[0])
+        self.assertEqual(4.9975, spectrumFile.energies_keV[-1])
+        self.assertEqual(1000, len(spectrumFile.energies_keV))
+        self.assertEqual(1, len(spectrumFile.characteristics))
+        self.assertEqual(1000, len(spectrumFile.characteristics['Au']))
 
         #self.fail("Test if the testcase is working.")
 

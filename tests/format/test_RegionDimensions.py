@@ -57,7 +57,7 @@ class TestRegionDimensions(unittest.TestCase):
         """
 
         #self.fail("Test if the testcase is working.")
-        self.assert_(True)
+        self.assertTrue(True)
 
     def test_createRegionDimensions(self):
         """
@@ -84,17 +84,17 @@ class TestRegionDimensions(unittest.TestCase):
         regionDimensions = RegionDimensions.RegionDimensionsBox()
 
         numberParameters = 6
-        self.assertEquals(numberParameters, len(regionDimensions._keys))
+        self.assertEqual(numberParameters, len(regionDimensions._keys))
 
         line = "0.000000 10000000000.000000 -10000000000.000000 10000000000.000000 0.000000 20000000000.000000"
         regionDimensions.extractFromLineOldVersion(line)
 
-        self.assertEquals(0.0, regionDimensions.minimumX)
-        self.assertEquals(10000000000.0, regionDimensions.maximumX)
-        self.assertEquals(-10000000000.0, regionDimensions.minimumY)
-        self.assertEquals(10000000000.0, regionDimensions.maximumY)
-        self.assertEquals(0.0, regionDimensions.minimumZ)
-        self.assertEquals(20000000000.0, regionDimensions.maximumZ)
+        self.assertEqual(0.0, regionDimensions.minimumX)
+        self.assertEqual(10000000000.0, regionDimensions.maximumX)
+        self.assertEqual(-10000000000.0, regionDimensions.minimumY)
+        self.assertEqual(10000000000.0, regionDimensions.maximumY)
+        self.assertEqual(0.0, regionDimensions.minimumZ)
+        self.assertEqual(20000000000.0, regionDimensions.maximumZ)
 
         #self.fail("Test if the testcase is working.")
 
@@ -106,19 +106,19 @@ class TestRegionDimensions(unittest.TestCase):
         regionDimensions = RegionDimensions.RegionDimensionsCylinder()
 
         numberParameters = 8
-        self.assertEquals(numberParameters, len(regionDimensions._keys))
+        self.assertEqual(numberParameters, len(regionDimensions._keys))
 
         line = "-500.000000 -500.000000 300.000000 0.000000 1.000000 0.350000 1000.000000 300.000000"
         regionDimensions.extractFromLineOldVersion(line)
 
-        self.assertEquals(-500.0, regionDimensions.positionX)
-        self.assertEquals(-500.0, regionDimensions.positionY)
-        self.assertEquals(300.0, regionDimensions.positionZ)
-        self.assertEquals(0.0, regionDimensions.directionX)
-        self.assertEquals(1.0, regionDimensions.directionY)
-        self.assertEquals(0.35, regionDimensions.directionZ)
-        self.assertEquals(1000.0, regionDimensions.length)
-        self.assertEquals(300.0, regionDimensions.radius)
+        self.assertEqual(-500.0, regionDimensions.positionX)
+        self.assertEqual(-500.0, regionDimensions.positionY)
+        self.assertEqual(300.0, regionDimensions.positionZ)
+        self.assertEqual(0.0, regionDimensions.directionX)
+        self.assertEqual(1.0, regionDimensions.directionY)
+        self.assertEqual(0.35, regionDimensions.directionZ)
+        self.assertEqual(1000.0, regionDimensions.length)
+        self.assertEqual(300.0, regionDimensions.radius)
 
         #self.fail("Test if the testcase is working.")
 
@@ -130,15 +130,15 @@ class TestRegionDimensions(unittest.TestCase):
         regionDimensions = RegionDimensions.RegionDimensionsSphere()
 
         numberParameters = 4
-        self.assertEquals(numberParameters, len(regionDimensions._keys))
+        self.assertEqual(numberParameters, len(regionDimensions._keys))
 
         line = "500.000000 500.000000 300.000000 300.000000"
         regionDimensions.extractFromLineOldVersion(line)
 
-        self.assertEquals(500.0, regionDimensions.positionX)
-        self.assertEquals(500.0, regionDimensions.positionY)
-        self.assertEquals(300.0, regionDimensions.positionZ)
-        self.assertEquals(300.0, regionDimensions.radius)
+        self.assertEqual(500.0, regionDimensions.positionX)
+        self.assertEqual(500.0, regionDimensions.positionY)
+        self.assertEqual(300.0, regionDimensions.positionZ)
+        self.assertEqual(300.0, regionDimensions.radius)
 
         #self.fail("Test if the testcase is working.")
 
@@ -150,17 +150,17 @@ class TestRegionDimensions(unittest.TestCase):
         regionDimensions = RegionDimensions.RegionDimensionsBox()
 
         numberParameters = 6
-        self.assertEquals(numberParameters, len(regionDimensions._keys))
+        self.assertEqual(numberParameters, len(regionDimensions._keys))
 
         line = "RegionParameters=0.000000 10000000000.000000 -10000000000.000000 10000000000.000000 0.000000 20000000000.000000"
         regionDimensions.extractFromLinesWithKey(line)
 
-        self.assertEquals(0.0, regionDimensions.minimumX)
-        self.assertEquals(10000000000.0, regionDimensions.maximumX)
-        self.assertEquals(-10000000000.0, regionDimensions.minimumY)
-        self.assertEquals(10000000000.0, regionDimensions.maximumY)
-        self.assertEquals(0.0, regionDimensions.minimumZ)
-        self.assertEquals(20000000000.0, regionDimensions.maximumZ)
+        self.assertEqual(0.0, regionDimensions.minimumX)
+        self.assertEqual(10000000000.0, regionDimensions.maximumX)
+        self.assertEqual(-10000000000.0, regionDimensions.minimumY)
+        self.assertEqual(10000000000.0, regionDimensions.maximumY)
+        self.assertEqual(0.0, regionDimensions.minimumZ)
+        self.assertEqual(20000000000.0, regionDimensions.maximumZ)
 
         #self.fail("Test if the testcase is working.")
 
@@ -172,19 +172,19 @@ class TestRegionDimensions(unittest.TestCase):
         regionDimensions = RegionDimensions.RegionDimensionsCylinder()
 
         numberParameters = 8
-        self.assertEquals(numberParameters, len(regionDimensions._keys))
+        self.assertEqual(numberParameters, len(regionDimensions._keys))
 
         line = "RegionParameters=-500.000000 -500.000000 300.000000 0.000000 1.000000 0.350000 1000.000000 300.000000"
         regionDimensions.extractFromLinesWithKey(line)
 
-        self.assertEquals(-500.0, regionDimensions.positionX)
-        self.assertEquals(-500.0, regionDimensions.positionY)
-        self.assertEquals(300.0, regionDimensions.positionZ)
-        self.assertEquals(0.0, regionDimensions.directionX)
-        self.assertEquals(1.0, regionDimensions.directionY)
-        self.assertEquals(0.35, regionDimensions.directionZ)
-        self.assertEquals(1000.0, regionDimensions.length)
-        self.assertEquals(300.0, regionDimensions.radius)
+        self.assertEqual(-500.0, regionDimensions.positionX)
+        self.assertEqual(-500.0, regionDimensions.positionY)
+        self.assertEqual(300.0, regionDimensions.positionZ)
+        self.assertEqual(0.0, regionDimensions.directionX)
+        self.assertEqual(1.0, regionDimensions.directionY)
+        self.assertEqual(0.35, regionDimensions.directionZ)
+        self.assertEqual(1000.0, regionDimensions.length)
+        self.assertEqual(300.0, regionDimensions.radius)
 
         #self.fail("Test if the testcase is working.")
 
@@ -196,15 +196,15 @@ class TestRegionDimensions(unittest.TestCase):
         regionDimensions = RegionDimensions.RegionDimensionsSphere()
 
         numberParameters = 4
-        self.assertEquals(numberParameters, len(regionDimensions._keys))
+        self.assertEqual(numberParameters, len(regionDimensions._keys))
 
         line = "RegionParameters=500.000000 500.000000 300.000000 300.000000"
         regionDimensions.extractFromLinesWithKey(line)
 
-        self.assertEquals(500.0, regionDimensions.positionX)
-        self.assertEquals(500.0, regionDimensions.positionY)
-        self.assertEquals(300.0, regionDimensions.positionZ)
-        self.assertEquals(300.0, regionDimensions.radius)
+        self.assertEqual(500.0, regionDimensions.positionX)
+        self.assertEqual(500.0, regionDimensions.positionY)
+        self.assertEqual(300.0, regionDimensions.positionZ)
+        self.assertEqual(300.0, regionDimensions.radius)
 
         #self.fail("Test if the testcase is working.")
 
@@ -224,7 +224,7 @@ class TestRegionDimensions(unittest.TestCase):
         regionDimensions.maximumZ = 20000000000.0
 
         line = regionDimensions.createLineOldVersion()
-        self.assertEquals(lineRef, line)
+        self.assertEqual(lineRef, line)
 
         #self.fail("Test if the testcase is working.")
 
@@ -246,7 +246,7 @@ class TestRegionDimensions(unittest.TestCase):
         regionDimensions.radius = 300.0
 
         line = regionDimensions.createLineOldVersion()
-        self.assertEquals(lineRef, line)
+        self.assertEqual(lineRef, line)
 
         #self.fail("Test if the testcase is working.")
 
@@ -264,7 +264,7 @@ class TestRegionDimensions(unittest.TestCase):
         regionDimensions.radius = 300.0
 
         line = regionDimensions.createLineOldVersion()
-        self.assertEquals(lineRef, line)
+        self.assertEqual(lineRef, line)
 
         #self.fail("Test if the testcase is working.")
 
@@ -284,7 +284,7 @@ class TestRegionDimensions(unittest.TestCase):
         regionDimensions.maximumZ = 20000000000.0
 
         line = regionDimensions.createLineWithKey()
-        self.assertEquals(lineRef, line)
+        self.assertEqual(lineRef, line)
 
         #self.fail("Test if the testcase is working.")
 
@@ -306,7 +306,7 @@ class TestRegionDimensions(unittest.TestCase):
         regionDimensions.radius = 300.0
 
         line = regionDimensions.createLineWithKey()
-        self.assertEquals(lineRef, line)
+        self.assertEqual(lineRef, line)
 
         #self.fail("Test if the testcase is working.")
 
@@ -324,7 +324,7 @@ class TestRegionDimensions(unittest.TestCase):
         regionDimensions.radius = 300.0
 
         line = regionDimensions.createLineWithKey()
-        self.assertEquals(lineRef, line)
+        self.assertEqual(lineRef, line)
 
         #self.fail("Test if the testcase is working.")
 

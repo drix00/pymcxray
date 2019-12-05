@@ -56,7 +56,7 @@ class TestElectronParameters(unittest.TestCase):
         """
 
         #self.fail("Test if the testcase is working.")
-        self.assert_(True)
+        self.assertTrue(True)
 
     def test_readFromLines(self):
         """
@@ -68,16 +68,16 @@ class TestElectronParameters(unittest.TestCase):
         electronParameters = ElectronParameters.ElectronParameters()
         electronParameters.readFromLines(lines)
 
-        self.assertEquals(electronParametersRef.numberSimulatedElectrons, electronParameters.numberSimulatedElectrons)
-        self.assertEquals(electronParametersRef.meanNumberCollisionPerElectrons, electronParameters.meanNumberCollisionPerElectrons)
-        self.assertEquals(electronParametersRef.meanDistanceBetweenCollisions_A, electronParameters.meanDistanceBetweenCollisions_A)
-        self.assertEquals(electronParametersRef.meanPolarAngleCollision_deg, electronParameters.meanPolarAngleCollision_deg)
-        self.assertEquals(electronParametersRef.meanAzimuthalAngleCollision_deg, electronParameters.meanAzimuthalAngleCollision_deg)
-        self.assertEquals(electronParametersRef.backscatteredRatio, electronParameters.backscatteredRatio)
-        self.assertEquals(electronParametersRef.internalRatio, electronParameters.internalRatio)
-        self.assertEquals(electronParametersRef.throughRatio, electronParameters.throughRatio)
-        self.assertEquals(electronParametersRef.skirtRatio, electronParameters.skirtRatio)
-        self.assertEquals(electronParametersRef.eRatio, electronParameters.eRatio)
+        self.assertEqual(electronParametersRef.numberSimulatedElectrons, electronParameters.numberSimulatedElectrons)
+        self.assertEqual(electronParametersRef.meanNumberCollisionPerElectrons, electronParameters.meanNumberCollisionPerElectrons)
+        self.assertEqual(electronParametersRef.meanDistanceBetweenCollisions_A, electronParameters.meanDistanceBetweenCollisions_A)
+        self.assertEqual(electronParametersRef.meanPolarAngleCollision_deg, electronParameters.meanPolarAngleCollision_deg)
+        self.assertEqual(electronParametersRef.meanAzimuthalAngleCollision_deg, electronParameters.meanAzimuthalAngleCollision_deg)
+        self.assertEqual(electronParametersRef.backscatteredRatio, electronParameters.backscatteredRatio)
+        self.assertEqual(electronParametersRef.internalRatio, electronParameters.internalRatio)
+        self.assertEqual(electronParametersRef.throughRatio, electronParameters.throughRatio)
+        self.assertEqual(electronParametersRef.skirtRatio, electronParameters.skirtRatio)
+        self.assertEqual(electronParametersRef.eRatio, electronParameters.eRatio)
 
         #self.fail("Test if the testcase is working.")
 

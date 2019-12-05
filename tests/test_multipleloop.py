@@ -64,7 +64,7 @@ class TestMultipleloop(unittest.TestCase):
         """
 
         # self.fail("Test if the testcase is working.")
-        self.assert_(True)
+        self.assertTrue(True)
 
     def test_combine(self):
         """
@@ -87,9 +87,3 @@ class TestMultipleloop(unittest.TestCase):
                               [0.375, 0.125], [0.75, 0.0625], [0.375, 0.0625]], all_combination)
 
         # self.fail("Test if the testcase is working.")
-
-
-if __name__ == '__main__':  # pragma: no cover
-    import nose
-
-    nose.runmodule()

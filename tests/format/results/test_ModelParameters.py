@@ -57,7 +57,7 @@ class TestModelParameters(unittest.TestCase):
         """
 
         #self.fail("Test if the testcase is working.")
-        self.assert_(True)
+        self.assertTrue(True)
 
     def test_readFromLines(self):
         """
@@ -69,17 +69,17 @@ class TestModelParameters(unittest.TestCase):
         modelParameters = ModelParameters.ModelParameters()
         modelParameters.readFromLines(lines)
 
-        self.assertEquals(modelParametersRef.atomEnergyLossModel, modelParameters.atomEnergyLossModel)
-        self.assertEquals(modelParametersRef.atomMeanIonizationPotentialModel, modelParameters.atomMeanIonizationPotentialModel)
-        self.assertEquals(modelParametersRef.atomScreeningModel, modelParameters.atomScreeningModel)
-        self.assertEquals(modelParametersRef.atomCrossSectionModel, modelParameters.atomCrossSectionModel)
-        self.assertEquals(modelParametersRef.atomCrossSectionScreeningModel, modelParameters.atomCrossSectionScreeningModel)
-        self.assertEquals(modelParametersRef.atomCollisionModel, modelParameters.atomCollisionModel)
-        self.assertEquals(modelParametersRef.atomCollisionScreeningModel, modelParameters.atomCollisionScreeningModel)
-        self.assertEquals(modelParametersRef.atomElectronRangeModel, modelParameters.atomElectronRangeModel)
-        self.assertEquals(modelParametersRef.regionEnergyLossModel, modelParameters.regionEnergyLossModel)
-        self.assertEquals(modelParametersRef.characterisitcCrossSectionModel, modelParameters.characterisitcCrossSectionModel)
-        self.assertEquals(modelParametersRef.bremsstrahlungCrossSectionModel, modelParameters.bremsstrahlungCrossSectionModel)
+        self.assertEqual(modelParametersRef.atomEnergyLossModel, modelParameters.atomEnergyLossModel)
+        self.assertEqual(modelParametersRef.atomMeanIonizationPotentialModel, modelParameters.atomMeanIonizationPotentialModel)
+        self.assertEqual(modelParametersRef.atomScreeningModel, modelParameters.atomScreeningModel)
+        self.assertEqual(modelParametersRef.atomCrossSectionModel, modelParameters.atomCrossSectionModel)
+        self.assertEqual(modelParametersRef.atomCrossSectionScreeningModel, modelParameters.atomCrossSectionScreeningModel)
+        self.assertEqual(modelParametersRef.atomCollisionModel, modelParameters.atomCollisionModel)
+        self.assertEqual(modelParametersRef.atomCollisionScreeningModel, modelParameters.atomCollisionScreeningModel)
+        self.assertEqual(modelParametersRef.atomElectronRangeModel, modelParameters.atomElectronRangeModel)
+        self.assertEqual(modelParametersRef.regionEnergyLossModel, modelParameters.regionEnergyLossModel)
+        self.assertEqual(modelParametersRef.characterisitcCrossSectionModel, modelParameters.characterisitcCrossSectionModel)
+        self.assertEqual(modelParametersRef.bremsstrahlungCrossSectionModel, modelParameters.bremsstrahlungCrossSectionModel)
 
         #self.fail("Test if the testcase is working.")
 

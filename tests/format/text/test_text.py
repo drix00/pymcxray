@@ -65,7 +65,7 @@ class TestText(unittest.TestCase):
         """
 
         # self.fail("Test if the testcase is working.")
-        self.assert_(True)
+        self.assertTrue(True)
 
     def test_extract_basename(self):
         """
@@ -88,10 +88,4 @@ class TestText(unittest.TestCase):
             self.assertEqual(basename_ref, basename)
 
         # self.fail("Test if the testcase is working.")
-        self.assert_(True)
-
-
-if __name__ == '__main__':  # pragma: no cover
-    import nose
-
-    nose.runmodule()
+        self.assertTrue(True)

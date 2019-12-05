@@ -56,7 +56,7 @@ class TestTags(unittest.TestCase):
         """
 
         #self.fail("Test if the testcase is working.")
-        self.assert_(True)
+        self.assertTrue(True)
 
     def test_findTag(self):
         """
@@ -67,23 +67,23 @@ class TestTags(unittest.TestCase):
 
         tag = "##### Geometry Setup Start #####"
         index = Tags.findTag(tag, lines)
-        self.assertEquals(0, index)
+        self.assertEqual(0, index)
 
         tag = "--- Volume"
         index = Tags.findTag(tag, lines)
-        self.assertEquals(3, index)
+        self.assertEqual(3, index)
 
         tag = "##### Geometry Setup End #####"
         index = Tags.findTag(tag, lines)
-        self.assertEquals(8, index)
+        self.assertEqual(8, index)
 
         tag = "##### Energy Update Start #####"
         index = Tags.findTag(tag, lines)
-        self.assertEquals(10, index)
+        self.assertEqual(10, index)
 
         tag = "##### Energy Update End #####"
         index = Tags.findTag(tag, lines)
-        self.assertEquals(23, index)
+        self.assertEqual(23, index)
 
         #self.fail("Test if the testcase is working.")
 

@@ -52,7 +52,7 @@ class TestElectronResults(unittest.TestCase):
         """
 
         #self.fail("Test if the testcase is working.")
-        self.assert_(True)
+        self.assertTrue(True)
 
     def test_read(self):
         """
@@ -65,25 +65,25 @@ class TestElectronResults(unittest.TestCase):
 
         electronResults.read()
 
-        self.assertEquals(100000, electronResults.numberSimulatedElectrons)
-        self.assertEquals(0, electronResults.numberInternalElectrons)
-        self.assertEquals(43, electronResults.numberBackscatteredElectrons)
-        self.assertEquals(99956, electronResults.numberTransmittedElectrons)
-        self.assertEquals(0, electronResults.numberSkirtedElectrons)
-        self.assertEquals(458571, electronResults.numberElectronCollisions)
-        self.assertEquals(0, electronResults.fractionInternalElectrons)
-        self.assertEquals(0.00043, electronResults.fractionBackscatteredElectrons)
-        self.assertEquals(0.99956, electronResults.fractionTransmittedElectrons)
-        self.assertEquals(0, electronResults.fractionSkirtedElectrons)
-        #self.assertEquals(1.00306e+009, electronResults.totalElectronPathLength_A)
-        #self.assertEquals(10000, electronResults.maximumPositionZ_A)
-        #self.assertEquals(4.58571, electronResults.meanNumberCollisionsPerElectron)
-        #self.assertEquals(1795.76, electronResults.meanDistanceBetweenCollision_A)
-        #self.assertEquals(402906, electronResults.totalCollisionPolarAngle_deg)
-        #self.assertEquals(8.25569e+007, electronResults.totalCollisionAzimuthalAngle_deg)
-        #self.assertEquals(0.878612, electronResults.meanCollisionPolarAngle_deg)
-        #self.assertEquals(180.031, electronResults.meanCollisionAzimuthalAngle_deg)
-        #self.assertEquals(0.0015828, electronResults.absorbedEnergyRatioPerElectron)
+        self.assertEqual(100000, electronResults.numberSimulatedElectrons)
+        self.assertEqual(0, electronResults.numberInternalElectrons)
+        self.assertEqual(43, electronResults.numberBackscatteredElectrons)
+        self.assertEqual(99956, electronResults.numberTransmittedElectrons)
+        self.assertEqual(0, electronResults.numberSkirtedElectrons)
+        self.assertEqual(458571, electronResults.numberElectronCollisions)
+        self.assertEqual(0, electronResults.fractionInternalElectrons)
+        self.assertEqual(0.00043, electronResults.fractionBackscatteredElectrons)
+        self.assertEqual(0.99956, electronResults.fractionTransmittedElectrons)
+        self.assertEqual(0, electronResults.fractionSkirtedElectrons)
+        #self.assertEqual(1.00306e+009, electronResults.totalElectronPathLength_A)
+        #self.assertEqual(10000, electronResults.maximumPositionZ_A)
+        #self.assertEqual(4.58571, electronResults.meanNumberCollisionsPerElectron)
+        #self.assertEqual(1795.76, electronResults.meanDistanceBetweenCollision_A)
+        #self.assertEqual(402906, electronResults.totalCollisionPolarAngle_deg)
+        #self.assertEqual(8.25569e+007, electronResults.totalCollisionAzimuthalAngle_deg)
+        #self.assertEqual(0.878612, electronResults.meanCollisionPolarAngle_deg)
+        #self.assertEqual(180.031, electronResults.meanCollisionAzimuthalAngle_deg)
+        #self.assertEqual(0.0015828, electronResults.absorbedEnergyRatioPerElectron)
 
         #self.fail("Test if the testcase is working.")
 

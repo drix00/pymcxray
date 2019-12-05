@@ -72,7 +72,7 @@ class TestSimulationInputs(unittest.TestCase):
         """
 
         # self.fail("Test if the testcase is working.")
-        self.assert_(True)
+        self.assertTrue(True)
 
     def test_read(self):
         """
@@ -85,12 +85,12 @@ class TestSimulationInputs(unittest.TestCase):
             filepath = os.path.abspath(os.path.join(self.testDataPath, "{}/{}.sim".format(title, title)))
             simulationInputs.read(filepath)
 
-            self.assertEquals(title, simulationInputs.title)
+            self.assertEqual(title, simulationInputs.title)
 
-            self.assertEquals("{}.sam".format(title), simulationInputs.specimenFilename)
-            self.assertEquals("{}.mdl".format(title), simulationInputs.modelFilename)
-            self.assertEquals("{}.mic".format(title), simulationInputs.microsopeFilename)
-            self.assertEquals("{}.par".format(title), simulationInputs.simulationParametersFilename)
+            self.assertEqual("{}.sam".format(title), simulationInputs.specimenFilename)
+            self.assertEqual("{}.mdl".format(title), simulationInputs.modelFilename)
+            self.assertEqual("{}.mic".format(title), simulationInputs.microsopeFilename)
+            self.assertEqual("{}.par".format(title), simulationInputs.simulationParametersFilename)
 
         # self.fail("Test if the testcase is working.")
 
@@ -105,17 +105,17 @@ class TestSimulationInputs(unittest.TestCase):
         filepath = os.path.abspath(os.path.join(self.testDataPath, "inputs", "{}.sim".format(title)))
         simulationInputs.read(filepath)
 
-        self.assertEquals(title, simulationInputs.title)
+        self.assertEqual(title, simulationInputs.title)
 
-        self.assertEquals(version.VERSION_1_1_1.major, simulationInputs.version.major)
-        self.assertEquals(version.VERSION_1_1_1.minor, simulationInputs.version.minor)
-        self.assertEquals(version.VERSION_1_1_1.revision, simulationInputs.version.revision)
-        self.assertEquals(version.VERSION_1_1_1, simulationInputs.version)
+        self.assertEqual(version.VERSION_1_1_1.major, simulationInputs.version.major)
+        self.assertEqual(version.VERSION_1_1_1.minor, simulationInputs.version.minor)
+        self.assertEqual(version.VERSION_1_1_1.revision, simulationInputs.version.revision)
+        self.assertEqual(version.VERSION_1_1_1, simulationInputs.version)
 
-        self.assertEquals("{}.sam".format(title), simulationInputs.specimenFilename)
-        self.assertEquals("{}.mdl".format(title), simulationInputs.modelFilename)
-        self.assertEquals("{}.mic".format(title), simulationInputs.microsopeFilename)
-        self.assertEquals("{}.par".format(title), simulationInputs.simulationParametersFilename)
+        self.assertEqual("{}.sam".format(title), simulationInputs.specimenFilename)
+        self.assertEqual("{}.mdl".format(title), simulationInputs.modelFilename)
+        self.assertEqual("{}.mic".format(title), simulationInputs.microsopeFilename)
+        self.assertEqual("{}.par".format(title), simulationInputs.simulationParametersFilename)
 
         # self.fail("Test if the testcase is working.")
 
@@ -130,17 +130,17 @@ class TestSimulationInputs(unittest.TestCase):
         filepath = os.path.abspath(os.path.join(self.testDataPath, "inputs", "{}.sim".format(title)))
         simulationInputs.read(filepath)
 
-        self.assertEquals(title, simulationInputs.title)
+        self.assertEqual(title, simulationInputs.title)
 
-        self.assertEquals(version.VERSION_1_2_0.major, simulationInputs.version.major)
-        self.assertEquals(version.VERSION_1_2_0.minor, simulationInputs.version.minor)
-        self.assertEquals(version.VERSION_1_2_0.revision, simulationInputs.version.revision)
-        self.assertEquals(version.VERSION_1_2_0, simulationInputs.version)
+        self.assertEqual(version.VERSION_1_2_0.major, simulationInputs.version.major)
+        self.assertEqual(version.VERSION_1_2_0.minor, simulationInputs.version.minor)
+        self.assertEqual(version.VERSION_1_2_0.revision, simulationInputs.version.revision)
+        self.assertEqual(version.VERSION_1_2_0, simulationInputs.version)
 
-        self.assertEquals("{}.sam".format(title), simulationInputs.specimenFilename)
-        self.assertEquals("{}.mdl".format(title), simulationInputs.modelFilename)
-        self.assertEquals("{}.mic".format(title), simulationInputs.microsopeFilename)
-        self.assertEquals("{}.par".format(title), simulationInputs.simulationParametersFilename)
+        self.assertEqual("{}.sam".format(title), simulationInputs.specimenFilename)
+        self.assertEqual("{}.mdl".format(title), simulationInputs.modelFilename)
+        self.assertEqual("{}.mic".format(title), simulationInputs.microsopeFilename)
+        self.assertEqual("{}.par".format(title), simulationInputs.simulationParametersFilename)
 
         # self.fail("Test if the testcase is working.")
 
@@ -155,18 +155,18 @@ class TestSimulationInputs(unittest.TestCase):
         filepath = os.path.abspath(os.path.join(self.testDataPath, "inputs", "{}.sim".format(title)))
         simulationInputs.read(filepath)
 
-        self.assertEquals(title, simulationInputs.title)
+        self.assertEqual(title, simulationInputs.title)
 
-        self.assertEquals(version.VERSION_1_2_1.major, simulationInputs.version.major)
-        self.assertEquals(version.VERSION_1_2_1.minor, simulationInputs.version.minor)
-        self.assertEquals(version.VERSION_1_2_1.revision, simulationInputs.version.revision)
-        self.assertEquals(version.VERSION_1_2_1, simulationInputs.version)
+        self.assertEqual(version.VERSION_1_2_1.major, simulationInputs.version.major)
+        self.assertEqual(version.VERSION_1_2_1.minor, simulationInputs.version.minor)
+        self.assertEqual(version.VERSION_1_2_1.revision, simulationInputs.version.revision)
+        self.assertEqual(version.VERSION_1_2_1, simulationInputs.version)
 
-        self.assertEquals("{}.sam".format(title), simulationInputs.specimenFilename)
-        self.assertEquals("{}.mdl".format(title), simulationInputs.modelFilename)
-        self.assertEquals("{}.mic".format(title), simulationInputs.microsopeFilename)
-        self.assertEquals("{}.par".format(title), simulationInputs.simulationParametersFilename)
-        self.assertEquals("{}.mpp".format(title), simulationInputs.mapFilename)
+        self.assertEqual("{}.sam".format(title), simulationInputs.specimenFilename)
+        self.assertEqual("{}.mdl".format(title), simulationInputs.modelFilename)
+        self.assertEqual("{}.mic".format(title), simulationInputs.microsopeFilename)
+        self.assertEqual("{}.par".format(title), simulationInputs.simulationParametersFilename)
+        self.assertEqual("{}.mpp".format(title), simulationInputs.mapFilename)
 
         # self.fail("Test if the testcase is working.")
 
@@ -181,19 +181,19 @@ class TestSimulationInputs(unittest.TestCase):
         filepath = os.path.abspath(os.path.join(self.testDataPath, "inputs", "{}.sim".format(title)))
         simulationInputs.read(filepath)
 
-        self.assertEquals(title, simulationInputs.title)
+        self.assertEqual(title, simulationInputs.title)
 
-        self.assertEquals(version.VERSION_1_4_1.major, simulationInputs.version.major)
-        self.assertEquals(version.VERSION_1_4_1.minor, simulationInputs.version.minor)
-        self.assertEquals(version.VERSION_1_4_1.revision, simulationInputs.version.revision)
-        self.assertEquals(version.VERSION_1_4_1, simulationInputs.version)
+        self.assertEqual(version.VERSION_1_4_1.major, simulationInputs.version.major)
+        self.assertEqual(version.VERSION_1_4_1.minor, simulationInputs.version.minor)
+        self.assertEqual(version.VERSION_1_4_1.revision, simulationInputs.version.revision)
+        self.assertEqual(version.VERSION_1_4_1, simulationInputs.version)
 
-        self.assertEquals("{}.sam".format(title), simulationInputs.specimenFilename)
-        self.assertEquals("{}.mdl".format(title), simulationInputs.modelFilename)
-        self.assertEquals("{}.mic".format(title), simulationInputs.microsopeFilename)
-        self.assertEquals("{}.par".format(title), simulationInputs.simulationParametersFilename)
-        self.assertEquals("{}.mpp".format(title), simulationInputs.mapFilename)
-        self.assertEquals("{}.rp".format(title), simulationInputs.resultParametersFilename)
+        self.assertEqual("{}.sam".format(title), simulationInputs.specimenFilename)
+        self.assertEqual("{}.mdl".format(title), simulationInputs.modelFilename)
+        self.assertEqual("{}.mic".format(title), simulationInputs.microsopeFilename)
+        self.assertEqual("{}.par".format(title), simulationInputs.simulationParametersFilename)
+        self.assertEqual("{}.mpp".format(title), simulationInputs.mapFilename)
+        self.assertEqual("{}.rp".format(title), simulationInputs.resultParametersFilename)
 
         # self.fail("Test if the testcase is working.")
 
@@ -205,7 +205,7 @@ class TestSimulationInputs(unittest.TestCase):
         numberKeys = 6
 
         keys = SimulationInputs.SimulationInputs()._createKeys()
-        self.assertEquals(numberKeys, len(keys))
+        self.assertEqual(numberKeys, len(keys))
 
         # self.fail("Test if the testcase is working.")
 
@@ -221,10 +221,10 @@ class TestSimulationInputs(unittest.TestCase):
             simulationInputs = SimulationInputs.SimulationInputs()
             simulationInputs.write(filepath)
 
-            self.assertEquals("{}.sam".format(title), simulationInputs.specimenFilename)
-            self.assertEquals("{}.mdl".format(title), simulationInputs.modelFilename)
-            self.assertEquals("{}.mic".format(title), simulationInputs.microsopeFilename)
-            self.assertEquals("{}.par".format(title), simulationInputs.simulationParametersFilename)
+            self.assertEqual("{}.sam".format(title), simulationInputs.specimenFilename)
+            self.assertEqual("{}.mdl".format(title), simulationInputs.modelFilename)
+            self.assertEqual("{}.mic".format(title), simulationInputs.microsopeFilename)
+            self.assertEqual("{}.par".format(title), simulationInputs.simulationParametersFilename)
 
             # .. todo:: Make the lines comparison work.
             # filepathReference = os.path.abspath(os.path.join(self.testDataPath, "{}/{}.sim".format(title, title)))
@@ -247,22 +247,22 @@ class TestSimulationInputs(unittest.TestCase):
         filepathReference = os.path.abspath(os.path.join(self.testDataPath, "inputs", "{}.sim".format(title)))
         simulationInputsRef.read(filepathReference)
 
-        self.assertEquals(title, simulationInputsRef.title)
+        self.assertEqual(title, simulationInputsRef.title)
 
         filepath = os.path.join(self.tempDataPath, "{}.sim".format(title))
         simulationInputs = SimulationInputs.SimulationInputs()
         simulationInputs.version = copy.deepcopy(version.VERSION_1_1_1)
         simulationInputs.write(filepath)
 
-        self.assertEquals("{}.sam".format(title), simulationInputs.specimenFilename)
-        self.assertEquals("{}.mdl".format(title), simulationInputs.modelFilename)
-        self.assertEquals("{}.mic".format(title), simulationInputs.microsopeFilename)
-        self.assertEquals("{}.par".format(title), simulationInputs.simulationParametersFilename)
+        self.assertEqual("{}.sam".format(title), simulationInputs.specimenFilename)
+        self.assertEqual("{}.mdl".format(title), simulationInputs.modelFilename)
+        self.assertEqual("{}.mic".format(title), simulationInputs.microsopeFilename)
+        self.assertEqual("{}.par".format(title), simulationInputs.simulationParametersFilename)
 
-        self.assertEquals(simulationInputsRef.version.major, simulationInputs.version.major)
-        self.assertEquals(simulationInputsRef.version.minor, simulationInputs.version.minor)
-        self.assertEquals(simulationInputsRef.version.revision, simulationInputs.version.revision)
-        self.assertEquals(simulationInputsRef.version, simulationInputs.version)
+        self.assertEqual(simulationInputsRef.version.major, simulationInputs.version.major)
+        self.assertEqual(simulationInputsRef.version.minor, simulationInputs.version.minor)
+        self.assertEqual(simulationInputsRef.version.revision, simulationInputs.version.revision)
+        self.assertEqual(simulationInputsRef.version, simulationInputs.version)
 
         # .. todo:: Make the lines comparison work.
         # linesRef = open(filepathReference, 'r').readlines()
@@ -284,22 +284,22 @@ class TestSimulationInputs(unittest.TestCase):
         filepathReference = os.path.abspath(os.path.join(self.testDataPath, "inputs", "{}.sim".format(title)))
         simulationInputsRef.read(filepathReference)
 
-        self.assertEquals(title, simulationInputsRef.title)
+        self.assertEqual(title, simulationInputsRef.title)
 
         filepath = os.path.join(self.tempDataPath, "{}.sim".format(title))
         simulationInputs = SimulationInputs.SimulationInputs()
         simulationInputs.version = copy.deepcopy(version.VERSION_1_2_0)
         simulationInputs.write(filepath)
 
-        self.assertEquals("{}.sam".format(title), simulationInputs.specimenFilename)
-        self.assertEquals("{}.mdl".format(title), simulationInputs.modelFilename)
-        self.assertEquals("{}.mic".format(title), simulationInputs.microsopeFilename)
-        self.assertEquals("{}.par".format(title), simulationInputs.simulationParametersFilename)
+        self.assertEqual("{}.sam".format(title), simulationInputs.specimenFilename)
+        self.assertEqual("{}.mdl".format(title), simulationInputs.modelFilename)
+        self.assertEqual("{}.mic".format(title), simulationInputs.microsopeFilename)
+        self.assertEqual("{}.par".format(title), simulationInputs.simulationParametersFilename)
 
-        self.assertEquals(simulationInputsRef.version.major, simulationInputs.version.major)
-        self.assertEquals(simulationInputsRef.version.minor, simulationInputs.version.minor)
-        self.assertEquals(simulationInputsRef.version.revision, simulationInputs.version.revision)
-        self.assertEquals(simulationInputsRef.version, simulationInputs.version)
+        self.assertEqual(simulationInputsRef.version.major, simulationInputs.version.major)
+        self.assertEqual(simulationInputsRef.version.minor, simulationInputs.version.minor)
+        self.assertEqual(simulationInputsRef.version.revision, simulationInputs.version.revision)
+        self.assertEqual(simulationInputsRef.version, simulationInputs.version)
 
         linesRef = open(filepathReference, 'r').readlines()
         lines = open(filepath, 'r').readlines()
@@ -321,22 +321,22 @@ class TestSimulationInputs(unittest.TestCase):
         filepathReference = os.path.abspath(os.path.join(self.testDataPath, "inputs", "{}.sim".format(title)))
         simulationInputsRef.read(filepathReference)
 
-        self.assertEquals(title, simulationInputsRef.title)
+        self.assertEqual(title, simulationInputsRef.title)
 
         filepath = os.path.join(self.tempDataPath, "{}.sim".format(title))
         simulationInputs = SimulationInputs.SimulationInputs()
         simulationInputs.version = copy.deepcopy(version.VERSION_1_2_1)
         simulationInputs.write(filepath)
 
-        self.assertEquals("{}.sam".format(title), simulationInputs.specimenFilename)
-        self.assertEquals("{}.mdl".format(title), simulationInputs.modelFilename)
-        self.assertEquals("{}.mic".format(title), simulationInputs.microsopeFilename)
-        self.assertEquals("{}.par".format(title), simulationInputs.simulationParametersFilename)
+        self.assertEqual("{}.sam".format(title), simulationInputs.specimenFilename)
+        self.assertEqual("{}.mdl".format(title), simulationInputs.modelFilename)
+        self.assertEqual("{}.mic".format(title), simulationInputs.microsopeFilename)
+        self.assertEqual("{}.par".format(title), simulationInputs.simulationParametersFilename)
 
-        self.assertEquals(simulationInputsRef.version.major, simulationInputs.version.major)
-        self.assertEquals(simulationInputsRef.version.minor, simulationInputs.version.minor)
-        self.assertEquals(simulationInputsRef.version.revision, simulationInputs.version.revision)
-        self.assertEquals(simulationInputsRef.version, simulationInputs.version)
+        self.assertEqual(simulationInputsRef.version.major, simulationInputs.version.major)
+        self.assertEqual(simulationInputsRef.version.minor, simulationInputs.version.minor)
+        self.assertEqual(simulationInputsRef.version.revision, simulationInputs.version.revision)
+        self.assertEqual(simulationInputsRef.version, simulationInputs.version)
 
         linesRef = open(filepathReference, 'r').readlines()
         lines = open(filepath, 'r').readlines()
@@ -358,24 +358,24 @@ class TestSimulationInputs(unittest.TestCase):
         filepathReference = os.path.abspath(os.path.join(self.testDataPath, "inputs", "{}.sim".format(title)))
         simulationInputsRef.read(filepathReference)
 
-        self.assertEquals(title, simulationInputsRef.title)
+        self.assertEqual(title, simulationInputsRef.title)
 
         filepath = os.path.join(self.tempDataPath, "{}.sim".format(title))
         simulationInputs = SimulationInputs.SimulationInputs()
         simulationInputs.version = version.Version(1, 4, 1)
         simulationInputs.write(filepath)
 
-        self.assertEquals("{}.sam".format(title), simulationInputs.specimenFilename)
-        self.assertEquals("{}.mdl".format(title), simulationInputs.modelFilename)
-        self.assertEquals("{}.mic".format(title), simulationInputs.microsopeFilename)
-        self.assertEquals("{}.par".format(title), simulationInputs.simulationParametersFilename)
-        self.assertEquals("{}.mpp".format(title), simulationInputs.mapFilename)
-        self.assertEquals("{}.rp".format(title), simulationInputs.resultParametersFilename)
+        self.assertEqual("{}.sam".format(title), simulationInputs.specimenFilename)
+        self.assertEqual("{}.mdl".format(title), simulationInputs.modelFilename)
+        self.assertEqual("{}.mic".format(title), simulationInputs.microsopeFilename)
+        self.assertEqual("{}.par".format(title), simulationInputs.simulationParametersFilename)
+        self.assertEqual("{}.mpp".format(title), simulationInputs.mapFilename)
+        self.assertEqual("{}.rp".format(title), simulationInputs.resultParametersFilename)
 
-        self.assertEquals(simulationInputsRef.version.major, simulationInputs.version.major)
-        self.assertEquals(simulationInputsRef.version.minor, simulationInputs.version.minor)
-        self.assertEquals(simulationInputsRef.version.revision, simulationInputs.version.revision)
-        self.assertEquals(simulationInputsRef.version, simulationInputs.version)
+        self.assertEqual(simulationInputsRef.version.major, simulationInputs.version.major)
+        self.assertEqual(simulationInputsRef.version.minor, simulationInputs.version.minor)
+        self.assertEqual(simulationInputsRef.version.revision, simulationInputs.version.revision)
+        self.assertEqual(simulationInputsRef.version, simulationInputs.version)
 
         linesRef = open(filepathReference, 'r').readlines()
         lines = open(filepath, 'r').readlines()
@@ -395,6 +395,6 @@ class TestSimulationInputs(unittest.TestCase):
             filepath = os.path.abspath(os.path.join(self.testDataPath, "{}/{}.sim".format(titleRef, titleRef)))
             title = simulationInputs._extractTitleFromFilepath(filepath)
 
-            self.assertEquals(titleRef, title)
+            self.assertEqual(titleRef, title)
 
         # self.fail("Test if the testcase is working.")

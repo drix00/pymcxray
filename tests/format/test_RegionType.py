@@ -56,16 +56,16 @@ class TestRegionType(unittest.TestCase):
         """
 
         #self.fail("Test if the testcase is working.")
-        self.assert_(True)
+        self.assertTrue(True)
 
     def test_Constants(self):
         """
         Tests for method `Constants`.
         """
 
-        self.assertEquals("BOX", RegionType.REGION_TYPE_BOX)
-        self.assertEquals("CYLINDER", RegionType.REGION_TYPE_CYLINDER)
-        self.assertEquals("SPHERE", RegionType.REGION_TYPE_SPHERE)
+        self.assertEqual("BOX", RegionType.REGION_TYPE_BOX)
+        self.assertEqual("CYLINDER", RegionType.REGION_TYPE_CYLINDER)
+        self.assertEqual("SPHERE", RegionType.REGION_TYPE_SPHERE)
 
         #self.fail("Test if the testcase is working.")
 

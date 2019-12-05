@@ -60,7 +60,7 @@ class TestPhirhoz(unittest.TestCase):
         """
 
         #self.fail("Test if the testcase is working.")
-        self.assert_(True)
+        self.assertTrue(True)
 
     def test_readFromLines(self):
         """
@@ -72,18 +72,18 @@ class TestPhirhoz(unittest.TestCase):
         phirhoz = Phirhoz.Phirhoz('Au', SHELL_L)
         phirhoz.readFromLines(lines)
 
-        self.assertEquals(phirhozRef.symbol, phirhoz.symbol)
-        self.assertEquals(phirhozRef.shell, phirhoz.shell)
-        self.assertEquals(phirhozRef.intensity, phirhoz.intensity)
+        self.assertEqual(phirhozRef.symbol, phirhoz.symbol)
+        self.assertEqual(phirhozRef.shell, phirhoz.shell)
+        self.assertEqual(phirhozRef.intensity, phirhoz.intensity)
 
-        self.assertEquals(128, len(phirhoz.depths_A))
-        self.assertEquals(128, len(phirhoz.values))
+        self.assertEqual(128, len(phirhoz.depths_A))
+        self.assertEqual(128, len(phirhoz.values))
 
-        self.assertEquals(0.0, phirhoz.depths_A[0])
-        self.assertEquals(86531.709610, phirhoz.depths_A[-1])
+        self.assertEqual(0.0, phirhoz.depths_A[0])
+        self.assertEqual(86531.709610, phirhoz.depths_A[-1])
 
-        self.assertEquals(1.961092, phirhoz.values[0])
-        self.assertEquals(0.0, phirhoz.values[-1])
+        self.assertEqual(1.961092, phirhoz.values[0])
+        self.assertEqual(0.0, phirhoz.values[-1])
 
         #self.fail("Test if the testcase is working.")
 

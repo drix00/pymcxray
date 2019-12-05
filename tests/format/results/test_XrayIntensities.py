@@ -52,7 +52,7 @@ class TestXrayIntensities(unittest.TestCase):
         """
 
         #self.fail("Test if the testcase is working.")
-        self.assert_(True)
+        self.assertTrue(True)
 
     def test_read(self):
         """
@@ -65,7 +65,7 @@ class TestXrayIntensities(unittest.TestCase):
 
         intensitiesFile.read()
 
-        self.assertEquals(5, intensitiesFile.numberIntensities)
+        self.assertEqual(5, intensitiesFile.numberIntensities)
 
         #self.fail("Test if the testcase is working.")
 

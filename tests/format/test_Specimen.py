@@ -77,7 +77,7 @@ class TestSpecimen(unittest.TestCase):
         """
 
         # self.fail("Test if the testcase is working.")
-        self.assert_(True)
+        self.assertTrue(True)
 
     def test_read(self):
         """
@@ -92,19 +92,19 @@ class TestSpecimen(unittest.TestCase):
             filepath = os.path.abspath(os.path.join(self.testDataPath, "%s/%s.sam" % (title, title)))
             specimen.read(filepath)
 
-            self.assertEquals(version.VERSION_1_1_1.major, specimen.version.major)
-            self.assertEquals(version.VERSION_1_1_1.minor, specimen.version.minor)
-            self.assertEquals(version.VERSION_1_1_1.revision, specimen.version.revision)
-            self.assertEquals(version.VERSION_1_1_1, specimen.version)
+            self.assertEqual(version.VERSION_1_1_1.major, specimen.version.major)
+            self.assertEqual(version.VERSION_1_1_1.minor, specimen.version.minor)
+            self.assertEqual(version.VERSION_1_1_1.revision, specimen.version.revision)
+            self.assertEqual(version.VERSION_1_1_1, specimen.version)
 
             specimen_ref = get_specimen_reference(title)
 
-            self.assertEquals(specimen_ref.version.major, specimen.version.major)
-            self.assertEquals(specimen_ref.version.minor, specimen.version.minor, title)
-            self.assertEquals(specimen_ref.version.revision, specimen.version.revision)
-            self.assertEquals(specimen_ref.version, specimen.version)
+            self.assertEqual(specimen_ref.version.major, specimen.version.major)
+            self.assertEqual(specimen_ref.version.minor, specimen.version.minor, title)
+            self.assertEqual(specimen_ref.version.revision, specimen.version.revision)
+            self.assertEqual(specimen_ref.version, specimen.version)
 
-            self.assertEquals(specimen_ref.numberRegions, specimen.numberRegions)
+            self.assertEqual(specimen_ref.numberRegions, specimen.numberRegions)
 
         # self.fail("Test if the testcase is working.")
 
@@ -119,62 +119,62 @@ class TestSpecimen(unittest.TestCase):
         filepath = os.path.abspath(os.path.join(self.testDataPath, "inputs", "{}.sam".format(title)))
         specimen.read(filepath)
 
-        self.assertEquals(version.VERSION_1_1_1.major, specimen.version.major)
-        self.assertEquals(version.VERSION_1_1_1.minor, specimen.version.minor)
-        self.assertEquals(version.VERSION_1_1_1.revision, specimen.version.revision)
-        self.assertEquals(version.VERSION_1_1_1, specimen.version)
+        self.assertEqual(version.VERSION_1_1_1.major, specimen.version.major)
+        self.assertEqual(version.VERSION_1_1_1.minor, specimen.version.minor)
+        self.assertEqual(version.VERSION_1_1_1.revision, specimen.version.revision)
+        self.assertEqual(version.VERSION_1_1_1, specimen.version)
 
         specimen_ref = get_specimen_reference(title)
-        self.assertEquals(specimen_ref.version.major, specimen.version.major)
-        self.assertEquals(specimen_ref.version.minor, specimen.version.minor)
-        self.assertEquals(specimen_ref.version.revision, specimen.version.revision)
-        self.assertEquals(specimen_ref.version, specimen.version)
+        self.assertEqual(specimen_ref.version.major, specimen.version.major)
+        self.assertEqual(specimen_ref.version.minor, specimen.version.minor)
+        self.assertEqual(specimen_ref.version.revision, specimen.version.revision)
+        self.assertEqual(specimen_ref.version, specimen.version)
 
-        self.assertEquals(specimen_ref.numberRegions, specimen.numberRegions)
+        self.assertEqual(specimen_ref.numberRegions, specimen.numberRegions)
 
         index_region = 0
         region = specimen.regions[index_region]
         region_ref = specimen_ref.regions[index_region]
-        self.assertEquals(region_ref.numberElements, region.numberElements)
-        self.assertEquals(region_ref.regionMassDensity_g_cm3, region.regionMassDensity_g_cm3)
-        self.assertEquals(region_ref.regionType, region.regionType)
-        self.assertEquals(region_ref.regionDimensions, region.regionDimensions)
+        self.assertEqual(region_ref.numberElements, region.numberElements)
+        self.assertEqual(region_ref.regionMassDensity_g_cm3, region.regionMassDensity_g_cm3)
+        self.assertEqual(region_ref.regionType, region.regionType)
+        self.assertEqual(region_ref.regionDimensions, region.regionDimensions)
         index_element = 0
         element = region.elements[index_element]
         element_ref = region_ref.elements[index_element]
-        self.assertEquals(element_ref.atomicNumber, element.atomicNumber)
-        self.assertEquals(element_ref.massFraction, element.massFraction)
+        self.assertEqual(element_ref.atomicNumber, element.atomicNumber)
+        self.assertEqual(element_ref.massFraction, element.massFraction)
         index_element = 1
         element = region.elements[index_element]
         element_ref = region_ref.elements[index_element]
-        self.assertEquals(element_ref.atomicNumber, element.atomicNumber)
-        self.assertEquals(element_ref.massFraction, element.massFraction)
+        self.assertEqual(element_ref.atomicNumber, element.atomicNumber)
+        self.assertEqual(element_ref.massFraction, element.massFraction)
 
         index_region = 1
         region = specimen.regions[index_region]
         region_ref = specimen_ref.regions[index_region]
-        self.assertEquals(region_ref.numberElements, region.numberElements)
-        self.assertEquals(region_ref.regionMassDensity_g_cm3, region.regionMassDensity_g_cm3)
-        self.assertEquals(region_ref.regionType, region.regionType)
-        self.assertEquals(region_ref.regionDimensions, region.regionDimensions)
+        self.assertEqual(region_ref.numberElements, region.numberElements)
+        self.assertEqual(region_ref.regionMassDensity_g_cm3, region.regionMassDensity_g_cm3)
+        self.assertEqual(region_ref.regionType, region.regionType)
+        self.assertEqual(region_ref.regionDimensions, region.regionDimensions)
         index_element = 0
         element = region.elements[index_element]
         element_ref = region_ref.elements[index_element]
-        self.assertEquals(element_ref.atomicNumber, element.atomicNumber)
-        self.assertEquals(element_ref.massFraction, element.massFraction)
+        self.assertEqual(element_ref.atomicNumber, element.atomicNumber)
+        self.assertEqual(element_ref.massFraction, element.massFraction)
 
         index_region = 2
         region = specimen.regions[index_region]
         region_ref = specimen_ref.regions[index_region]
-        self.assertEquals(region_ref.numberElements, region.numberElements)
-        self.assertEquals(region_ref.regionMassDensity_g_cm3, region.regionMassDensity_g_cm3)
-        self.assertEquals(region_ref.regionType, region.regionType)
-        self.assertEquals(region_ref.regionDimensions, region.regionDimensions)
+        self.assertEqual(region_ref.numberElements, region.numberElements)
+        self.assertEqual(region_ref.regionMassDensity_g_cm3, region.regionMassDensity_g_cm3)
+        self.assertEqual(region_ref.regionType, region.regionType)
+        self.assertEqual(region_ref.regionDimensions, region.regionDimensions)
         index_element = 0
         element = region.elements[index_element]
         element_ref = region_ref.elements[index_element]
-        self.assertEquals(element_ref.atomicNumber, element.atomicNumber)
-        self.assertEquals(element_ref.massFraction, element.massFraction)
+        self.assertEqual(element_ref.atomicNumber, element.atomicNumber)
+        self.assertEqual(element_ref.massFraction, element.massFraction)
 
         # self.fail("Test if the testcase is working.")
 
@@ -189,62 +189,62 @@ class TestSpecimen(unittest.TestCase):
         filepath = os.path.abspath(os.path.join(self.testDataPath, "inputs", "{}.sam".format(title)))
         specimen.read(filepath)
 
-        self.assertEquals(version.VERSION_1_2_0.major, specimen.version.major)
-        self.assertEquals(version.VERSION_1_2_0.minor, specimen.version.minor)
-        self.assertEquals(version.VERSION_1_2_0.revision, specimen.version.revision)
-        self.assertEquals(version.VERSION_1_2_0, specimen.version)
+        self.assertEqual(version.VERSION_1_2_0.major, specimen.version.major)
+        self.assertEqual(version.VERSION_1_2_0.minor, specimen.version.minor)
+        self.assertEqual(version.VERSION_1_2_0.revision, specimen.version.revision)
+        self.assertEqual(version.VERSION_1_2_0, specimen.version)
 
         specimenRef = get_specimen_reference(title)
-        self.assertEquals(specimenRef.version.major, specimen.version.major)
-        self.assertEquals(specimenRef.version.minor, specimen.version.minor)
-        self.assertEquals(specimenRef.version.revision, specimen.version.revision)
-        self.assertEquals(specimenRef.version, specimen.version)
+        self.assertEqual(specimenRef.version.major, specimen.version.major)
+        self.assertEqual(specimenRef.version.minor, specimen.version.minor)
+        self.assertEqual(specimenRef.version.revision, specimen.version.revision)
+        self.assertEqual(specimenRef.version, specimen.version)
 
-        self.assertEquals(specimenRef.numberRegions, specimen.numberRegions)
+        self.assertEqual(specimenRef.numberRegions, specimen.numberRegions)
 
         indexRegion = 0
         region = specimen.regions[indexRegion]
         regionRef = specimenRef.regions[indexRegion]
-        self.assertEquals(regionRef.numberElements, region.numberElements)
-        self.assertEquals(regionRef.regionMassDensity_g_cm3, region.regionMassDensity_g_cm3)
-        self.assertEquals(regionRef.regionType, region.regionType)
-        self.assertEquals(regionRef.regionDimensions, region.regionDimensions)
+        self.assertEqual(regionRef.numberElements, region.numberElements)
+        self.assertEqual(regionRef.regionMassDensity_g_cm3, region.regionMassDensity_g_cm3)
+        self.assertEqual(regionRef.regionType, region.regionType)
+        self.assertEqual(regionRef.regionDimensions, region.regionDimensions)
         indexElement = 0
         element = region.elements[indexElement]
         elementRef = regionRef.elements[indexElement]
-        self.assertEquals(elementRef.atomicNumber, element.atomicNumber)
-        self.assertEquals(elementRef.massFraction, element.massFraction)
+        self.assertEqual(elementRef.atomicNumber, element.atomicNumber)
+        self.assertEqual(elementRef.massFraction, element.massFraction)
         indexElement = 1
         element = region.elements[indexElement]
         elementRef = regionRef.elements[indexElement]
-        self.assertEquals(elementRef.atomicNumber, element.atomicNumber)
-        self.assertEquals(elementRef.massFraction, element.massFraction)
+        self.assertEqual(elementRef.atomicNumber, element.atomicNumber)
+        self.assertEqual(elementRef.massFraction, element.massFraction)
 
         indexRegion = 1
         region = specimen.regions[indexRegion]
         regionRef = specimenRef.regions[indexRegion]
-        self.assertEquals(regionRef.numberElements, region.numberElements)
-        self.assertEquals(regionRef.regionMassDensity_g_cm3, region.regionMassDensity_g_cm3)
-        self.assertEquals(regionRef.regionType, region.regionType)
-        self.assertEquals(regionRef.regionDimensions, region.regionDimensions)
+        self.assertEqual(regionRef.numberElements, region.numberElements)
+        self.assertEqual(regionRef.regionMassDensity_g_cm3, region.regionMassDensity_g_cm3)
+        self.assertEqual(regionRef.regionType, region.regionType)
+        self.assertEqual(regionRef.regionDimensions, region.regionDimensions)
         indexElement = 0
         element = region.elements[indexElement]
         elementRef = regionRef.elements[indexElement]
-        self.assertEquals(elementRef.atomicNumber, element.atomicNumber)
-        self.assertEquals(elementRef.massFraction, element.massFraction)
+        self.assertEqual(elementRef.atomicNumber, element.atomicNumber)
+        self.assertEqual(elementRef.massFraction, element.massFraction)
 
         indexRegion = 2
         region = specimen.regions[indexRegion]
         regionRef = specimenRef.regions[indexRegion]
-        self.assertEquals(regionRef.numberElements, region.numberElements)
-        self.assertEquals(regionRef.regionMassDensity_g_cm3, region.regionMassDensity_g_cm3)
-        self.assertEquals(regionRef.regionType, region.regionType)
-        self.assertEquals(regionRef.regionDimensions, region.regionDimensions)
+        self.assertEqual(regionRef.numberElements, region.numberElements)
+        self.assertEqual(regionRef.regionMassDensity_g_cm3, region.regionMassDensity_g_cm3)
+        self.assertEqual(regionRef.regionType, region.regionType)
+        self.assertEqual(regionRef.regionDimensions, region.regionDimensions)
         indexElement = 0
         element = region.elements[indexElement]
         elementRef = regionRef.elements[indexElement]
-        self.assertEquals(elementRef.atomicNumber, element.atomicNumber)
-        self.assertEquals(elementRef.massFraction, element.massFraction)
+        self.assertEqual(elementRef.atomicNumber, element.atomicNumber)
+        self.assertEqual(elementRef.massFraction, element.massFraction)
 
         # self.fail("Test if the testcase is working.")
 
@@ -259,62 +259,62 @@ class TestSpecimen(unittest.TestCase):
         filepath = os.path.abspath(os.path.join(self.testDataPath, "inputs", "{}.sam".format(title)))
         specimen.read(filepath)
 
-        self.assertEquals(version.VERSION_1_2_1.major, specimen.version.major)
-        self.assertEquals(version.VERSION_1_2_1.minor, specimen.version.minor)
-        self.assertEquals(version.VERSION_1_2_1.revision, specimen.version.revision)
-        self.assertEquals(version.VERSION_1_2_1, specimen.version)
+        self.assertEqual(version.VERSION_1_2_1.major, specimen.version.major)
+        self.assertEqual(version.VERSION_1_2_1.minor, specimen.version.minor)
+        self.assertEqual(version.VERSION_1_2_1.revision, specimen.version.revision)
+        self.assertEqual(version.VERSION_1_2_1, specimen.version)
 
         specimenRef = get_specimen_reference(title)
-        self.assertEquals(specimenRef.version.major, specimen.version.major)
-        self.assertEquals(specimenRef.version.minor, specimen.version.minor)
-        self.assertEquals(specimenRef.version.revision, specimen.version.revision)
-        self.assertEquals(specimenRef.version, specimen.version)
+        self.assertEqual(specimenRef.version.major, specimen.version.major)
+        self.assertEqual(specimenRef.version.minor, specimen.version.minor)
+        self.assertEqual(specimenRef.version.revision, specimen.version.revision)
+        self.assertEqual(specimenRef.version, specimen.version)
 
-        self.assertEquals(specimenRef.numberRegions, specimen.numberRegions)
+        self.assertEqual(specimenRef.numberRegions, specimen.numberRegions)
 
         indexRegion = 0
         region = specimen.regions[indexRegion]
         regionRef = specimenRef.regions[indexRegion]
-        self.assertEquals(regionRef.numberElements, region.numberElements)
-        self.assertEquals(regionRef.regionMassDensity_g_cm3, region.regionMassDensity_g_cm3)
-        self.assertEquals(regionRef.regionType, region.regionType)
-        self.assertEquals(regionRef.regionDimensions, region.regionDimensions)
+        self.assertEqual(regionRef.numberElements, region.numberElements)
+        self.assertEqual(regionRef.regionMassDensity_g_cm3, region.regionMassDensity_g_cm3)
+        self.assertEqual(regionRef.regionType, region.regionType)
+        self.assertEqual(regionRef.regionDimensions, region.regionDimensions)
         indexElement = 0
         element = region.elements[indexElement]
         elementRef = regionRef.elements[indexElement]
-        self.assertEquals(elementRef.atomicNumber, element.atomicNumber)
-        self.assertEquals(elementRef.massFraction, element.massFraction)
+        self.assertEqual(elementRef.atomicNumber, element.atomicNumber)
+        self.assertEqual(elementRef.massFraction, element.massFraction)
         indexElement = 1
         element = region.elements[indexElement]
         elementRef = regionRef.elements[indexElement]
-        self.assertEquals(elementRef.atomicNumber, element.atomicNumber)
-        self.assertEquals(elementRef.massFraction, element.massFraction)
+        self.assertEqual(elementRef.atomicNumber, element.atomicNumber)
+        self.assertEqual(elementRef.massFraction, element.massFraction)
 
         indexRegion = 1
         region = specimen.regions[indexRegion]
         regionRef = specimenRef.regions[indexRegion]
-        self.assertEquals(regionRef.numberElements, region.numberElements)
-        self.assertEquals(regionRef.regionMassDensity_g_cm3, region.regionMassDensity_g_cm3)
-        self.assertEquals(regionRef.regionType, region.regionType)
-        self.assertEquals(regionRef.regionDimensions, region.regionDimensions)
+        self.assertEqual(regionRef.numberElements, region.numberElements)
+        self.assertEqual(regionRef.regionMassDensity_g_cm3, region.regionMassDensity_g_cm3)
+        self.assertEqual(regionRef.regionType, region.regionType)
+        self.assertEqual(regionRef.regionDimensions, region.regionDimensions)
         indexElement = 0
         element = region.elements[indexElement]
         elementRef = regionRef.elements[indexElement]
-        self.assertEquals(elementRef.atomicNumber, element.atomicNumber)
-        self.assertEquals(elementRef.massFraction, element.massFraction)
+        self.assertEqual(elementRef.atomicNumber, element.atomicNumber)
+        self.assertEqual(elementRef.massFraction, element.massFraction)
 
         indexRegion = 2
         region = specimen.regions[indexRegion]
         regionRef = specimenRef.regions[indexRegion]
-        self.assertEquals(regionRef.numberElements, region.numberElements)
-        self.assertEquals(regionRef.regionMassDensity_g_cm3, region.regionMassDensity_g_cm3)
-        self.assertEquals(regionRef.regionType, region.regionType)
-        self.assertEquals(regionRef.regionDimensions, region.regionDimensions)
+        self.assertEqual(regionRef.numberElements, region.numberElements)
+        self.assertEqual(regionRef.regionMassDensity_g_cm3, region.regionMassDensity_g_cm3)
+        self.assertEqual(regionRef.regionType, region.regionType)
+        self.assertEqual(regionRef.regionDimensions, region.regionDimensions)
         indexElement = 0
         element = region.elements[indexElement]
         elementRef = regionRef.elements[indexElement]
-        self.assertEquals(elementRef.atomicNumber, element.atomicNumber)
-        self.assertEquals(elementRef.massFraction, element.massFraction)
+        self.assertEqual(elementRef.atomicNumber, element.atomicNumber)
+        self.assertEqual(elementRef.massFraction, element.massFraction)
 
         # self.fail("Test if the testcase is working.")
 
@@ -329,62 +329,62 @@ class TestSpecimen(unittest.TestCase):
         filepath = os.path.abspath(os.path.join(self.testDataPath, "inputs", "{}.sam".format(title)))
         specimen.read(filepath)
 
-        self.assertEquals(version.VERSION_1_4_1.major, specimen.version.major)
-        self.assertEquals(version.VERSION_1_4_1.minor, specimen.version.minor)
-        self.assertEquals(version.VERSION_1_4_1.revision, specimen.version.revision)
-        self.assertEquals(version.VERSION_1_4_1, specimen.version)
+        self.assertEqual(version.VERSION_1_4_1.major, specimen.version.major)
+        self.assertEqual(version.VERSION_1_4_1.minor, specimen.version.minor)
+        self.assertEqual(version.VERSION_1_4_1.revision, specimen.version.revision)
+        self.assertEqual(version.VERSION_1_4_1, specimen.version)
 
         specimenRef = get_specimen_reference(title)
-        self.assertEquals(specimenRef.version.major, specimen.version.major)
-        self.assertEquals(specimenRef.version.minor, specimen.version.minor)
-        self.assertEquals(specimenRef.version.revision, specimen.version.revision)
-        self.assertEquals(specimenRef.version, specimen.version)
+        self.assertEqual(specimenRef.version.major, specimen.version.major)
+        self.assertEqual(specimenRef.version.minor, specimen.version.minor)
+        self.assertEqual(specimenRef.version.revision, specimen.version.revision)
+        self.assertEqual(specimenRef.version, specimen.version)
 
-        self.assertEquals(specimenRef.numberRegions, specimen.numberRegions)
+        self.assertEqual(specimenRef.numberRegions, specimen.numberRegions)
 
         indexRegion = 0
         region = specimen.regions[indexRegion]
         regionRef = specimenRef.regions[indexRegion]
-        self.assertEquals(regionRef.numberElements, region.numberElements)
-        self.assertEquals(regionRef.regionMassDensity_g_cm3, region.regionMassDensity_g_cm3)
-        self.assertEquals(regionRef.regionType, region.regionType)
-        self.assertEquals(regionRef.regionDimensions, region.regionDimensions)
+        self.assertEqual(regionRef.numberElements, region.numberElements)
+        self.assertEqual(regionRef.regionMassDensity_g_cm3, region.regionMassDensity_g_cm3)
+        self.assertEqual(regionRef.regionType, region.regionType)
+        self.assertEqual(regionRef.regionDimensions, region.regionDimensions)
         indexElement = 0
         element = region.elements[indexElement]
         elementRef = regionRef.elements[indexElement]
-        self.assertEquals(elementRef.atomicNumber, element.atomicNumber)
-        self.assertEquals(elementRef.massFraction, element.massFraction)
+        self.assertEqual(elementRef.atomicNumber, element.atomicNumber)
+        self.assertEqual(elementRef.massFraction, element.massFraction)
         indexElement = 1
         element = region.elements[indexElement]
         elementRef = regionRef.elements[indexElement]
-        self.assertEquals(elementRef.atomicNumber, element.atomicNumber)
-        self.assertEquals(elementRef.massFraction, element.massFraction)
+        self.assertEqual(elementRef.atomicNumber, element.atomicNumber)
+        self.assertEqual(elementRef.massFraction, element.massFraction)
 
         indexRegion = 1
         region = specimen.regions[indexRegion]
         regionRef = specimenRef.regions[indexRegion]
-        self.assertEquals(regionRef.numberElements, region.numberElements)
-        self.assertEquals(regionRef.regionMassDensity_g_cm3, region.regionMassDensity_g_cm3)
-        self.assertEquals(regionRef.regionType, region.regionType)
-        self.assertEquals(regionRef.regionDimensions, region.regionDimensions)
+        self.assertEqual(regionRef.numberElements, region.numberElements)
+        self.assertEqual(regionRef.regionMassDensity_g_cm3, region.regionMassDensity_g_cm3)
+        self.assertEqual(regionRef.regionType, region.regionType)
+        self.assertEqual(regionRef.regionDimensions, region.regionDimensions)
         indexElement = 0
         element = region.elements[indexElement]
         elementRef = regionRef.elements[indexElement]
-        self.assertEquals(elementRef.atomicNumber, element.atomicNumber)
-        self.assertEquals(elementRef.massFraction, element.massFraction)
+        self.assertEqual(elementRef.atomicNumber, element.atomicNumber)
+        self.assertEqual(elementRef.massFraction, element.massFraction)
 
         indexRegion = 2
         region = specimen.regions[indexRegion]
         regionRef = specimenRef.regions[indexRegion]
-        self.assertEquals(regionRef.numberElements, region.numberElements)
-        self.assertEquals(regionRef.regionMassDensity_g_cm3, region.regionMassDensity_g_cm3)
-        self.assertEquals(regionRef.regionType, region.regionType)
-        self.assertEquals(regionRef.regionDimensions, region.regionDimensions)
+        self.assertEqual(regionRef.numberElements, region.numberElements)
+        self.assertEqual(regionRef.regionMassDensity_g_cm3, region.regionMassDensity_g_cm3)
+        self.assertEqual(regionRef.regionType, region.regionType)
+        self.assertEqual(regionRef.regionDimensions, region.regionDimensions)
         indexElement = 0
         element = region.elements[indexElement]
         elementRef = regionRef.elements[indexElement]
-        self.assertEquals(elementRef.atomicNumber, element.atomicNumber)
-        self.assertEquals(elementRef.massFraction, element.massFraction)
+        self.assertEqual(elementRef.atomicNumber, element.atomicNumber)
+        self.assertEqual(elementRef.massFraction, element.massFraction)
 
         # self.fail("Test if the testcase is working.")
 
@@ -461,7 +461,7 @@ class TestSpecimen(unittest.TestCase):
             lineRef = linesRef[index]
             line = lines[index]
             message = "%i:\n%s\n%s" % (index, lineRef, line)
-            self.assertEquals(lineRef, line, message)
+            self.assertEqual(lineRef, line, message)
 
         self.assertListEqual(linesRef, lines)
 
@@ -491,7 +491,7 @@ class TestSpecimen(unittest.TestCase):
             lineRef = linesRef[index]
             line = lines[index]
             message = "%i:\n%s\n%s" % (index, lineRef, line)
-            self.assertEquals(lineRef, line, message)
+            self.assertEqual(lineRef, line, message)
 
         self.assertListEqual(linesRef, lines)
 
@@ -521,7 +521,7 @@ class TestSpecimen(unittest.TestCase):
             lineRef = linesRef[index]
             line = lines[index]
             message = "%i:\n%s\n%s" % (index, lineRef, line)
-            self.assertEquals(lineRef, line, message)
+            self.assertEqual(lineRef, line, message)
 
         self.assertListEqual(linesRef, lines)
 

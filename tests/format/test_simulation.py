@@ -64,7 +64,7 @@ class TestSimulation(unittest.TestCase):
         """
 
         # self.fail("Test if the testcase is working.")
-        self.assert_(True)
+        self.assertTrue(True)
 
     def test_equality(self):
         """
@@ -92,7 +92,7 @@ class TestSimulation(unittest.TestCase):
         self.assertEqual(get_simulation_hdf5_output_ref(), get_simulation_hdf5_output_ref())
 
         # self.fail("Test if the testcase is working.")
-        self.assert_(True)
+        self.assertTrue(True)
 
 
 def get_simulation_text_input_ref():

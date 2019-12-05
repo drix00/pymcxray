@@ -54,7 +54,7 @@ class TestDataMap(unittest.TestCase):
         """
 
         #self.fail("Test if the testcase is working.")
-        self.assert_(True)
+        self.assertTrue(True)
 
     def test_init(self):
         """
@@ -62,7 +62,7 @@ class TestDataMap(unittest.TestCase):
         """
         dataMap = DataMap.DataMap(self.filepath)
 
-        self.assertEquals(self.filepath, dataMap._filepath)
+        self.assertEqual(self.filepath, dataMap._filepath)
 
         #self.fail("Test if the testcase is working.")
 
@@ -74,10 +74,10 @@ class TestDataMap(unittest.TestCase):
         dataMap = DataMap.DataMap(self.filepath)
         dataMap.read()
 
-        self.assertEquals("Bright Field Image", dataMap.imageName)
-        self.assertEquals((100, 100), dataMap.size)
+        self.assertEqual("Bright Field Image", dataMap.imageName)
+        self.assertEqual((100, 100), dataMap.size)
 
-        self.assertEquals(34.0, dataMap.pixels[50][50])
+        self.assertEqual(34.0, dataMap.pixels[50][50])
 
         #self.fail("Test if the testcase is working.")
 

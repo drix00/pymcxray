@@ -59,7 +59,7 @@ class TestPhirhozRegion(unittest.TestCase):
         """
 
         #self.fail("Test if the testcase is working.")
-        self.assert_(True)
+        self.assertTrue(True)
 
     def test_readFromLines(self):
         """
@@ -71,7 +71,7 @@ class TestPhirhozRegion(unittest.TestCase):
         phirhozRegion = PhirhozRegion.PhirhozRegion(64, 128)
         phirhozRegion.readFromLines(lines)
 
-        self.assertEquals(phirhozRegionRef.regionID, phirhozRegion.regionID)
+        self.assertEqual(phirhozRegionRef.regionID, phirhozRegion.regionID)
 
         #self.fail("Test if the testcase is working.")
 

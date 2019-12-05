@@ -22,6 +22,8 @@ import fnmatch
 __author__ = """Hendrix Demers"""
 __email__ = 'hendrix.demers@mail.mcgill.ca'
 __version__ = '2.0.0'
+__copyright__ = '2019, ' + __author__
+__project_name__ = 'pymcxray'
 
 
 def get_current_module_path(module_path, relative_path=""):

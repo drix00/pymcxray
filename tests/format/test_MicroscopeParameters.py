@@ -72,7 +72,7 @@ class TestMicroscopeParameters(unittest.TestCase):
         """
 
         # self.fail("Test if the testcase is working.")
-        self.assert_(True)
+        self.assertTrue(True)
 
     def test__createKeys(self):
         """
@@ -82,7 +82,7 @@ class TestMicroscopeParameters(unittest.TestCase):
         numberKeys = 24
 
         keys = MicroscopeParameters._create_keys()
-        self.assertEquals(numberKeys, len(keys))
+        self.assertEqual(numberKeys, len(keys))
 
         # self.fail("Test if the testcase is working.")
 
@@ -101,39 +101,39 @@ class TestMicroscopeParameters(unittest.TestCase):
 
             microscopeParametersRef = get_microscope_parameters_reference(title)
 
-            self.assertEquals(microscopeParametersRef.beamEnergy_keV, microscopeParameters.beamEnergy_keV)
-            self.assertEquals(microscopeParametersRef.beamCurrent_A, microscopeParameters.beamCurrent_A)
-            self.assertEquals(microscopeParametersRef.beamDiameter_A, microscopeParameters.beamDiameter_A)
-            self.assertEquals(microscopeParametersRef.beamPositionX_A, microscopeParameters.beamPositionX_A)
-            self.assertEquals(microscopeParametersRef.beamPositionY_A, microscopeParameters.beamPositionY_A)
-            self.assertEquals(microscopeParametersRef.beamTilt_deg, microscopeParameters.beamTilt_deg)
-            self.assertEquals(microscopeParametersRef.beamStandardDeviation_A,
+            self.assertEqual(microscopeParametersRef.beamEnergy_keV, microscopeParameters.beamEnergy_keV)
+            self.assertEqual(microscopeParametersRef.beamCurrent_A, microscopeParameters.beamCurrent_A)
+            self.assertEqual(microscopeParametersRef.beamDiameter_A, microscopeParameters.beamDiameter_A)
+            self.assertEqual(microscopeParametersRef.beamPositionX_A, microscopeParameters.beamPositionX_A)
+            self.assertEqual(microscopeParametersRef.beamPositionY_A, microscopeParameters.beamPositionY_A)
+            self.assertEqual(microscopeParametersRef.beamTilt_deg, microscopeParameters.beamTilt_deg)
+            self.assertEqual(microscopeParametersRef.beamStandardDeviation_A,
                               microscopeParameters.beamStandardDeviation_A)
 
-            self.assertEquals(microscopeParametersRef.detectorCrystalAtomSymbol,
+            self.assertEqual(microscopeParametersRef.detectorCrystalAtomSymbol,
                               microscopeParameters.detectorCrystalAtomSymbol)
-            self.assertEquals(microscopeParametersRef.detectorCrystalThickness_cm,
+            self.assertEqual(microscopeParametersRef.detectorCrystalThickness_cm,
                               microscopeParameters.detectorCrystalThickness_cm)
-            self.assertEquals(microscopeParametersRef.detectorCrystalRadius_cm,
+            self.assertEqual(microscopeParametersRef.detectorCrystalRadius_cm,
                               microscopeParameters.detectorCrystalRadius_cm)
-            self.assertEquals(microscopeParametersRef.detectorCrystalDistance_cm,
+            self.assertEqual(microscopeParametersRef.detectorCrystalDistance_cm,
                               microscopeParameters.detectorCrystalDistance_cm)
 
-            self.assertEquals(microscopeParametersRef.detectorDeadLayer_A, microscopeParameters.detectorDeadLayer_A)
-            self.assertEquals(microscopeParametersRef.detectorDiffusionLenght_A,
+            self.assertEqual(microscopeParametersRef.detectorDeadLayer_A, microscopeParameters.detectorDeadLayer_A)
+            self.assertEqual(microscopeParametersRef.detectorDiffusionLenght_A,
                               microscopeParameters.detectorDiffusionLenght_A)
-            self.assertEquals(microscopeParametersRef.detectorSurfaceQuality,
+            self.assertEqual(microscopeParametersRef.detectorSurfaceQuality,
                               microscopeParameters.detectorSurfaceQuality)
-            self.assertEquals(microscopeParametersRef.detectorNoise_eV, microscopeParameters.detectorNoise_eV)
-            self.assertEquals(microscopeParametersRef.detectorTOA_deg, microscopeParameters.detectorTOA_deg)
-            self.assertEquals(microscopeParametersRef.detectorPitch_deg, microscopeParameters.detectorPitch_deg)
+            self.assertEqual(microscopeParametersRef.detectorNoise_eV, microscopeParameters.detectorNoise_eV)
+            self.assertEqual(microscopeParametersRef.detectorTOA_deg, microscopeParameters.detectorTOA_deg)
+            self.assertEqual(microscopeParametersRef.detectorPitch_deg, microscopeParameters.detectorPitch_deg)
 
-            self.assertEquals(microscopeParametersRef.detectorBFLow_rad, microscopeParameters.detectorBFLow_rad)
-            self.assertEquals(microscopeParametersRef.detectorBFHigh_rad, microscopeParameters.detectorBFHigh_rad)
-            self.assertEquals(microscopeParametersRef.detectorDFLow_rad, microscopeParameters.detectorDFLow_rad)
-            self.assertEquals(microscopeParametersRef.detectorDFHigh_rad, microscopeParameters.detectorDFHigh_rad)
-            self.assertEquals(microscopeParametersRef.detectorHAADFLow_rad, microscopeParameters.detectorHAADFLow_rad)
-            self.assertEquals(microscopeParametersRef.detectorHAADFHigh_rad, microscopeParameters.detectorHAADFHigh_rad)
+            self.assertEqual(microscopeParametersRef.detectorBFLow_rad, microscopeParameters.detectorBFLow_rad)
+            self.assertEqual(microscopeParametersRef.detectorBFHigh_rad, microscopeParameters.detectorBFHigh_rad)
+            self.assertEqual(microscopeParametersRef.detectorDFLow_rad, microscopeParameters.detectorDFLow_rad)
+            self.assertEqual(microscopeParametersRef.detectorDFHigh_rad, microscopeParameters.detectorDFHigh_rad)
+            self.assertEqual(microscopeParametersRef.detectorHAADFLow_rad, microscopeParameters.detectorHAADFLow_rad)
+            self.assertEqual(microscopeParametersRef.detectorHAADFHigh_rad, microscopeParameters.detectorHAADFHigh_rad)
 
         # self.fail("Test if the testcase is working.")
 
@@ -148,48 +148,48 @@ class TestMicroscopeParameters(unittest.TestCase):
         filepath = os.path.abspath(os.path.join(self.testDataPath, "inputs", "{}.mic".format(title)))
         microscopeParameters.read(filepath)
 
-        self.assertEquals(version.VERSION_1_1_1.major, microscopeParameters.version.major)
-        self.assertEquals(version.VERSION_1_1_1.minor, microscopeParameters.version.minor)
-        self.assertEquals(version.VERSION_1_1_1.revision, microscopeParameters.version.revision)
-        self.assertEquals(version.VERSION_1_1_1, microscopeParameters.version)
+        self.assertEqual(version.VERSION_1_1_1.major, microscopeParameters.version.major)
+        self.assertEqual(version.VERSION_1_1_1.minor, microscopeParameters.version.minor)
+        self.assertEqual(version.VERSION_1_1_1.revision, microscopeParameters.version.revision)
+        self.assertEqual(version.VERSION_1_1_1, microscopeParameters.version)
 
         microscopeParametersRef = get_microscope_parameters_reference(title)
-        self.assertEquals(microscopeParametersRef.version.major, microscopeParameters.version.major)
-        self.assertEquals(microscopeParametersRef.version.minor, microscopeParameters.version.minor)
-        self.assertEquals(microscopeParametersRef.version.revision, microscopeParameters.version.revision)
-        self.assertEquals(microscopeParametersRef.version, microscopeParameters.version)
+        self.assertEqual(microscopeParametersRef.version.major, microscopeParameters.version.major)
+        self.assertEqual(microscopeParametersRef.version.minor, microscopeParameters.version.minor)
+        self.assertEqual(microscopeParametersRef.version.revision, microscopeParameters.version.revision)
+        self.assertEqual(microscopeParametersRef.version, microscopeParameters.version)
 
-        self.assertEquals(microscopeParametersRef.beamEnergy_keV, microscopeParameters.beamEnergy_keV)
-        self.assertEquals(microscopeParametersRef.beamCurrent_A, microscopeParameters.beamCurrent_A)
-        self.assertEquals(microscopeParametersRef.beamDiameter_A, microscopeParameters.beamDiameter_A)
-        self.assertEquals(microscopeParametersRef.beamPositionX_A, microscopeParameters.beamPositionX_A)
-        self.assertEquals(microscopeParametersRef.beamPositionY_A, microscopeParameters.beamPositionY_A)
-        self.assertEquals(microscopeParametersRef.beamTilt_deg, microscopeParameters.beamTilt_deg)
-        self.assertEquals(microscopeParametersRef.beamStandardDeviation_A, microscopeParameters.beamStandardDeviation_A)
+        self.assertEqual(microscopeParametersRef.beamEnergy_keV, microscopeParameters.beamEnergy_keV)
+        self.assertEqual(microscopeParametersRef.beamCurrent_A, microscopeParameters.beamCurrent_A)
+        self.assertEqual(microscopeParametersRef.beamDiameter_A, microscopeParameters.beamDiameter_A)
+        self.assertEqual(microscopeParametersRef.beamPositionX_A, microscopeParameters.beamPositionX_A)
+        self.assertEqual(microscopeParametersRef.beamPositionY_A, microscopeParameters.beamPositionY_A)
+        self.assertEqual(microscopeParametersRef.beamTilt_deg, microscopeParameters.beamTilt_deg)
+        self.assertEqual(microscopeParametersRef.beamStandardDeviation_A, microscopeParameters.beamStandardDeviation_A)
 
-        self.assertEquals(microscopeParametersRef.detectorCrystalAtomSymbol,
+        self.assertEqual(microscopeParametersRef.detectorCrystalAtomSymbol,
                           microscopeParameters.detectorCrystalAtomSymbol)
-        self.assertEquals(microscopeParametersRef.detectorCrystalThickness_cm,
+        self.assertEqual(microscopeParametersRef.detectorCrystalThickness_cm,
                           microscopeParameters.detectorCrystalThickness_cm)
-        self.assertEquals(microscopeParametersRef.detectorCrystalRadius_cm,
+        self.assertEqual(microscopeParametersRef.detectorCrystalRadius_cm,
                           microscopeParameters.detectorCrystalRadius_cm)
-        self.assertEquals(microscopeParametersRef.detectorCrystalDistance_cm,
+        self.assertEqual(microscopeParametersRef.detectorCrystalDistance_cm,
                           microscopeParameters.detectorCrystalDistance_cm)
 
-        self.assertEquals(microscopeParametersRef.detectorDeadLayer_A, microscopeParameters.detectorDeadLayer_A)
-        self.assertEquals(microscopeParametersRef.detectorDiffusionLenght_A,
+        self.assertEqual(microscopeParametersRef.detectorDeadLayer_A, microscopeParameters.detectorDeadLayer_A)
+        self.assertEqual(microscopeParametersRef.detectorDiffusionLenght_A,
                           microscopeParameters.detectorDiffusionLenght_A)
-        self.assertEquals(microscopeParametersRef.detectorSurfaceQuality, microscopeParameters.detectorSurfaceQuality)
-        self.assertEquals(microscopeParametersRef.detectorNoise_eV, microscopeParameters.detectorNoise_eV)
-        self.assertEquals(microscopeParametersRef.detectorTOA_deg, microscopeParameters.detectorTOA_deg)
-        self.assertEquals(microscopeParametersRef.detectorPitch_deg, microscopeParameters.detectorPitch_deg)
+        self.assertEqual(microscopeParametersRef.detectorSurfaceQuality, microscopeParameters.detectorSurfaceQuality)
+        self.assertEqual(microscopeParametersRef.detectorNoise_eV, microscopeParameters.detectorNoise_eV)
+        self.assertEqual(microscopeParametersRef.detectorTOA_deg, microscopeParameters.detectorTOA_deg)
+        self.assertEqual(microscopeParametersRef.detectorPitch_deg, microscopeParameters.detectorPitch_deg)
 
-        self.assertEquals(microscopeParametersRef.detectorBFLow_rad, microscopeParameters.detectorBFLow_rad)
-        self.assertEquals(microscopeParametersRef.detectorBFHigh_rad, microscopeParameters.detectorBFHigh_rad)
-        self.assertEquals(microscopeParametersRef.detectorDFLow_rad, microscopeParameters.detectorDFLow_rad)
-        self.assertEquals(microscopeParametersRef.detectorDFHigh_rad, microscopeParameters.detectorDFHigh_rad)
-        self.assertEquals(microscopeParametersRef.detectorHAADFLow_rad, microscopeParameters.detectorHAADFLow_rad)
-        self.assertEquals(microscopeParametersRef.detectorHAADFHigh_rad, microscopeParameters.detectorHAADFHigh_rad)
+        self.assertEqual(microscopeParametersRef.detectorBFLow_rad, microscopeParameters.detectorBFLow_rad)
+        self.assertEqual(microscopeParametersRef.detectorBFHigh_rad, microscopeParameters.detectorBFHigh_rad)
+        self.assertEqual(microscopeParametersRef.detectorDFLow_rad, microscopeParameters.detectorDFLow_rad)
+        self.assertEqual(microscopeParametersRef.detectorDFHigh_rad, microscopeParameters.detectorDFHigh_rad)
+        self.assertEqual(microscopeParametersRef.detectorHAADFLow_rad, microscopeParameters.detectorHAADFLow_rad)
+        self.assertEqual(microscopeParametersRef.detectorHAADFHigh_rad, microscopeParameters.detectorHAADFHigh_rad)
 
         # self.fail("Test if the testcase is working.")
 
@@ -204,48 +204,48 @@ class TestMicroscopeParameters(unittest.TestCase):
         filepath = os.path.abspath(os.path.join(self.testDataPath, "inputs", "{}.mic".format(title)))
         microscopeParameters.read(filepath)
 
-        self.assertEquals(version.VERSION_1_2_0.major, microscopeParameters.version.major)
-        self.assertEquals(version.VERSION_1_2_0.minor, microscopeParameters.version.minor)
-        self.assertEquals(version.VERSION_1_2_0.revision, microscopeParameters.version.revision)
-        self.assertEquals(version.VERSION_1_2_0, microscopeParameters.version)
+        self.assertEqual(version.VERSION_1_2_0.major, microscopeParameters.version.major)
+        self.assertEqual(version.VERSION_1_2_0.minor, microscopeParameters.version.minor)
+        self.assertEqual(version.VERSION_1_2_0.revision, microscopeParameters.version.revision)
+        self.assertEqual(version.VERSION_1_2_0, microscopeParameters.version)
 
         microscopeParametersRef = get_microscope_parameters_reference(title)
-        self.assertEquals(microscopeParametersRef.version.major, microscopeParameters.version.major)
-        self.assertEquals(microscopeParametersRef.version.minor, microscopeParameters.version.minor)
-        self.assertEquals(microscopeParametersRef.version.revision, microscopeParameters.version.revision)
-        self.assertEquals(microscopeParametersRef.version, microscopeParameters.version)
+        self.assertEqual(microscopeParametersRef.version.major, microscopeParameters.version.major)
+        self.assertEqual(microscopeParametersRef.version.minor, microscopeParameters.version.minor)
+        self.assertEqual(microscopeParametersRef.version.revision, microscopeParameters.version.revision)
+        self.assertEqual(microscopeParametersRef.version, microscopeParameters.version)
 
-        self.assertEquals(microscopeParametersRef.beamEnergy_keV, microscopeParameters.beamEnergy_keV)
-        self.assertEquals(microscopeParametersRef.beamCurrent_A, microscopeParameters.beamCurrent_A)
-        self.assertEquals(microscopeParametersRef.beamDiameter_A, microscopeParameters.beamDiameter_A)
-        self.assertEquals(microscopeParametersRef.beamPositionX_A, microscopeParameters.beamPositionX_A)
-        self.assertEquals(microscopeParametersRef.beamPositionY_A, microscopeParameters.beamPositionY_A)
-        self.assertEquals(microscopeParametersRef.beamTilt_deg, microscopeParameters.beamTilt_deg)
-        self.assertEquals(microscopeParametersRef.beamStandardDeviation_A, microscopeParameters.beamStandardDeviation_A)
+        self.assertEqual(microscopeParametersRef.beamEnergy_keV, microscopeParameters.beamEnergy_keV)
+        self.assertEqual(microscopeParametersRef.beamCurrent_A, microscopeParameters.beamCurrent_A)
+        self.assertEqual(microscopeParametersRef.beamDiameter_A, microscopeParameters.beamDiameter_A)
+        self.assertEqual(microscopeParametersRef.beamPositionX_A, microscopeParameters.beamPositionX_A)
+        self.assertEqual(microscopeParametersRef.beamPositionY_A, microscopeParameters.beamPositionY_A)
+        self.assertEqual(microscopeParametersRef.beamTilt_deg, microscopeParameters.beamTilt_deg)
+        self.assertEqual(microscopeParametersRef.beamStandardDeviation_A, microscopeParameters.beamStandardDeviation_A)
 
-        self.assertEquals(microscopeParametersRef.detectorCrystalAtomSymbol,
+        self.assertEqual(microscopeParametersRef.detectorCrystalAtomSymbol,
                           microscopeParameters.detectorCrystalAtomSymbol)
-        self.assertEquals(microscopeParametersRef.detectorCrystalThickness_cm,
+        self.assertEqual(microscopeParametersRef.detectorCrystalThickness_cm,
                           microscopeParameters.detectorCrystalThickness_cm)
-        self.assertEquals(microscopeParametersRef.detectorCrystalRadius_cm,
+        self.assertEqual(microscopeParametersRef.detectorCrystalRadius_cm,
                           microscopeParameters.detectorCrystalRadius_cm)
-        self.assertEquals(microscopeParametersRef.detectorCrystalDistance_cm,
+        self.assertEqual(microscopeParametersRef.detectorCrystalDistance_cm,
                           microscopeParameters.detectorCrystalDistance_cm)
 
-        self.assertEquals(microscopeParametersRef.detectorDeadLayer_A, microscopeParameters.detectorDeadLayer_A)
-        self.assertEquals(microscopeParametersRef.detectorDiffusionLenght_A,
+        self.assertEqual(microscopeParametersRef.detectorDeadLayer_A, microscopeParameters.detectorDeadLayer_A)
+        self.assertEqual(microscopeParametersRef.detectorDiffusionLenght_A,
                           microscopeParameters.detectorDiffusionLenght_A)
-        self.assertEquals(microscopeParametersRef.detectorSurfaceQuality, microscopeParameters.detectorSurfaceQuality)
-        self.assertEquals(microscopeParametersRef.detectorNoise_eV, microscopeParameters.detectorNoise_eV)
-        self.assertEquals(microscopeParametersRef.detectorTOA_deg, microscopeParameters.detectorTOA_deg)
-        self.assertEquals(microscopeParametersRef.detectorPitch_deg, microscopeParameters.detectorPitch_deg)
+        self.assertEqual(microscopeParametersRef.detectorSurfaceQuality, microscopeParameters.detectorSurfaceQuality)
+        self.assertEqual(microscopeParametersRef.detectorNoise_eV, microscopeParameters.detectorNoise_eV)
+        self.assertEqual(microscopeParametersRef.detectorTOA_deg, microscopeParameters.detectorTOA_deg)
+        self.assertEqual(microscopeParametersRef.detectorPitch_deg, microscopeParameters.detectorPitch_deg)
 
-        self.assertEquals(microscopeParametersRef.detectorBFLow_rad, microscopeParameters.detectorBFLow_rad)
-        self.assertEquals(microscopeParametersRef.detectorBFHigh_rad, microscopeParameters.detectorBFHigh_rad)
-        self.assertEquals(microscopeParametersRef.detectorDFLow_rad, microscopeParameters.detectorDFLow_rad)
-        self.assertEquals(microscopeParametersRef.detectorDFHigh_rad, microscopeParameters.detectorDFHigh_rad)
-        self.assertEquals(microscopeParametersRef.detectorHAADFLow_rad, microscopeParameters.detectorHAADFLow_rad)
-        self.assertEquals(microscopeParametersRef.detectorHAADFHigh_rad, microscopeParameters.detectorHAADFHigh_rad)
+        self.assertEqual(microscopeParametersRef.detectorBFLow_rad, microscopeParameters.detectorBFLow_rad)
+        self.assertEqual(microscopeParametersRef.detectorBFHigh_rad, microscopeParameters.detectorBFHigh_rad)
+        self.assertEqual(microscopeParametersRef.detectorDFLow_rad, microscopeParameters.detectorDFLow_rad)
+        self.assertEqual(microscopeParametersRef.detectorDFHigh_rad, microscopeParameters.detectorDFHigh_rad)
+        self.assertEqual(microscopeParametersRef.detectorHAADFLow_rad, microscopeParameters.detectorHAADFLow_rad)
+        self.assertEqual(microscopeParametersRef.detectorHAADFHigh_rad, microscopeParameters.detectorHAADFHigh_rad)
 
         # self.fail("Test if the testcase is working.")
 
@@ -260,48 +260,48 @@ class TestMicroscopeParameters(unittest.TestCase):
         filepath = os.path.abspath(os.path.join(self.testDataPath, "inputs", "{}.mic".format(title)))
         microscopeParameters.read(filepath)
 
-        self.assertEquals(version.VERSION_1_2_1.major, microscopeParameters.version.major)
-        self.assertEquals(version.VERSION_1_2_1.minor, microscopeParameters.version.minor)
-        self.assertEquals(version.VERSION_1_2_1.revision, microscopeParameters.version.revision)
-        self.assertEquals(version.VERSION_1_2_1, microscopeParameters.version)
+        self.assertEqual(version.VERSION_1_2_1.major, microscopeParameters.version.major)
+        self.assertEqual(version.VERSION_1_2_1.minor, microscopeParameters.version.minor)
+        self.assertEqual(version.VERSION_1_2_1.revision, microscopeParameters.version.revision)
+        self.assertEqual(version.VERSION_1_2_1, microscopeParameters.version)
 
         microscopeParametersRef = get_microscope_parameters_reference(title)
-        self.assertEquals(microscopeParametersRef.version.major, microscopeParameters.version.major)
-        self.assertEquals(microscopeParametersRef.version.minor, microscopeParameters.version.minor)
-        self.assertEquals(microscopeParametersRef.version.revision, microscopeParameters.version.revision)
-        self.assertEquals(microscopeParametersRef.version, microscopeParameters.version)
+        self.assertEqual(microscopeParametersRef.version.major, microscopeParameters.version.major)
+        self.assertEqual(microscopeParametersRef.version.minor, microscopeParameters.version.minor)
+        self.assertEqual(microscopeParametersRef.version.revision, microscopeParameters.version.revision)
+        self.assertEqual(microscopeParametersRef.version, microscopeParameters.version)
 
-        self.assertEquals(microscopeParametersRef.beamEnergy_keV, microscopeParameters.beamEnergy_keV)
-        self.assertAlmostEquals(microscopeParametersRef.beamCurrent_A, microscopeParameters.beamCurrent_A)
-        self.assertEquals(microscopeParametersRef.beamDiameter_A, microscopeParameters.beamDiameter_A)
-        self.assertEquals(microscopeParametersRef.beamPositionX_A, microscopeParameters.beamPositionX_A)
-        self.assertEquals(microscopeParametersRef.beamPositionY_A, microscopeParameters.beamPositionY_A)
-        self.assertEquals(microscopeParametersRef.beamTilt_deg, microscopeParameters.beamTilt_deg)
-        self.assertEquals(microscopeParametersRef.beamStandardDeviation_A, microscopeParameters.beamStandardDeviation_A)
+        self.assertEqual(microscopeParametersRef.beamEnergy_keV, microscopeParameters.beamEnergy_keV)
+        self.assertAlmostEqual(microscopeParametersRef.beamCurrent_A, microscopeParameters.beamCurrent_A)
+        self.assertEqual(microscopeParametersRef.beamDiameter_A, microscopeParameters.beamDiameter_A)
+        self.assertEqual(microscopeParametersRef.beamPositionX_A, microscopeParameters.beamPositionX_A)
+        self.assertEqual(microscopeParametersRef.beamPositionY_A, microscopeParameters.beamPositionY_A)
+        self.assertEqual(microscopeParametersRef.beamTilt_deg, microscopeParameters.beamTilt_deg)
+        self.assertEqual(microscopeParametersRef.beamStandardDeviation_A, microscopeParameters.beamStandardDeviation_A)
 
-        self.assertEquals(microscopeParametersRef.detectorCrystalAtomSymbol,
+        self.assertEqual(microscopeParametersRef.detectorCrystalAtomSymbol,
                           microscopeParameters.detectorCrystalAtomSymbol)
-        self.assertEquals(microscopeParametersRef.detectorCrystalThickness_cm,
+        self.assertEqual(microscopeParametersRef.detectorCrystalThickness_cm,
                           microscopeParameters.detectorCrystalThickness_cm)
-        self.assertEquals(microscopeParametersRef.detectorCrystalRadius_cm,
+        self.assertEqual(microscopeParametersRef.detectorCrystalRadius_cm,
                           microscopeParameters.detectorCrystalRadius_cm)
-        self.assertEquals(microscopeParametersRef.detectorCrystalDistance_cm,
+        self.assertEqual(microscopeParametersRef.detectorCrystalDistance_cm,
                           microscopeParameters.detectorCrystalDistance_cm)
 
-        self.assertEquals(microscopeParametersRef.detectorDeadLayer_A, microscopeParameters.detectorDeadLayer_A)
-        self.assertEquals(microscopeParametersRef.detectorDiffusionLenght_A,
+        self.assertEqual(microscopeParametersRef.detectorDeadLayer_A, microscopeParameters.detectorDeadLayer_A)
+        self.assertEqual(microscopeParametersRef.detectorDiffusionLenght_A,
                           microscopeParameters.detectorDiffusionLenght_A)
-        self.assertEquals(microscopeParametersRef.detectorSurfaceQuality, microscopeParameters.detectorSurfaceQuality)
-        self.assertEquals(microscopeParametersRef.detectorNoise_eV, microscopeParameters.detectorNoise_eV)
-        self.assertEquals(microscopeParametersRef.detectorTOA_deg, microscopeParameters.detectorTOA_deg)
-        self.assertEquals(microscopeParametersRef.detectorPitch_deg, microscopeParameters.detectorPitch_deg)
+        self.assertEqual(microscopeParametersRef.detectorSurfaceQuality, microscopeParameters.detectorSurfaceQuality)
+        self.assertEqual(microscopeParametersRef.detectorNoise_eV, microscopeParameters.detectorNoise_eV)
+        self.assertEqual(microscopeParametersRef.detectorTOA_deg, microscopeParameters.detectorTOA_deg)
+        self.assertEqual(microscopeParametersRef.detectorPitch_deg, microscopeParameters.detectorPitch_deg)
 
-        self.assertEquals(microscopeParametersRef.detectorBFLow_rad, microscopeParameters.detectorBFLow_rad)
-        self.assertEquals(microscopeParametersRef.detectorBFHigh_rad, microscopeParameters.detectorBFHigh_rad)
-        self.assertEquals(microscopeParametersRef.detectorDFLow_rad, microscopeParameters.detectorDFLow_rad)
-        self.assertEquals(microscopeParametersRef.detectorDFHigh_rad, microscopeParameters.detectorDFHigh_rad)
-        self.assertEquals(microscopeParametersRef.detectorHAADFLow_rad, microscopeParameters.detectorHAADFLow_rad)
-        self.assertEquals(microscopeParametersRef.detectorHAADFHigh_rad, microscopeParameters.detectorHAADFHigh_rad)
+        self.assertEqual(microscopeParametersRef.detectorBFLow_rad, microscopeParameters.detectorBFLow_rad)
+        self.assertEqual(microscopeParametersRef.detectorBFHigh_rad, microscopeParameters.detectorBFHigh_rad)
+        self.assertEqual(microscopeParametersRef.detectorDFLow_rad, microscopeParameters.detectorDFLow_rad)
+        self.assertEqual(microscopeParametersRef.detectorDFHigh_rad, microscopeParameters.detectorDFHigh_rad)
+        self.assertEqual(microscopeParametersRef.detectorHAADFLow_rad, microscopeParameters.detectorHAADFLow_rad)
+        self.assertEqual(microscopeParametersRef.detectorHAADFHigh_rad, microscopeParameters.detectorHAADFHigh_rad)
 
         # self.fail("Test if the testcase is working.")
 
@@ -316,48 +316,48 @@ class TestMicroscopeParameters(unittest.TestCase):
         filepath = os.path.abspath(os.path.join(self.testDataPath, "inputs", "{}.mic".format(title)))
         microscopeParameters.read(filepath)
 
-        self.assertEquals(version.VERSION_1_4_1.major, microscopeParameters.version.major)
-        self.assertEquals(version.VERSION_1_4_1.minor, microscopeParameters.version.minor)
-        self.assertEquals(version.VERSION_1_4_1.revision, microscopeParameters.version.revision)
-        self.assertEquals(version.VERSION_1_4_1, microscopeParameters.version)
+        self.assertEqual(version.VERSION_1_4_1.major, microscopeParameters.version.major)
+        self.assertEqual(version.VERSION_1_4_1.minor, microscopeParameters.version.minor)
+        self.assertEqual(version.VERSION_1_4_1.revision, microscopeParameters.version.revision)
+        self.assertEqual(version.VERSION_1_4_1, microscopeParameters.version)
 
         microscopeParametersRef = get_microscope_parameters_reference(title)
-        self.assertEquals(microscopeParametersRef.version.major, microscopeParameters.version.major)
-        self.assertEquals(microscopeParametersRef.version.minor, microscopeParameters.version.minor)
-        self.assertEquals(microscopeParametersRef.version.revision, microscopeParameters.version.revision)
-        self.assertEquals(microscopeParametersRef.version, microscopeParameters.version)
+        self.assertEqual(microscopeParametersRef.version.major, microscopeParameters.version.major)
+        self.assertEqual(microscopeParametersRef.version.minor, microscopeParameters.version.minor)
+        self.assertEqual(microscopeParametersRef.version.revision, microscopeParameters.version.revision)
+        self.assertEqual(microscopeParametersRef.version, microscopeParameters.version)
 
-        self.assertEquals(microscopeParametersRef.beamEnergy_keV, microscopeParameters.beamEnergy_keV)
-        self.assertAlmostEquals(microscopeParametersRef.beamCurrent_A, microscopeParameters.beamCurrent_A)
-        self.assertEquals(microscopeParametersRef.beamDiameter_A, microscopeParameters.beamDiameter_A)
-        self.assertEquals(microscopeParametersRef.beamPositionX_A, microscopeParameters.beamPositionX_A)
-        self.assertEquals(microscopeParametersRef.beamPositionY_A, microscopeParameters.beamPositionY_A)
-        self.assertEquals(microscopeParametersRef.beamTilt_deg, microscopeParameters.beamTilt_deg)
-        self.assertEquals(microscopeParametersRef.beamStandardDeviation_A, microscopeParameters.beamStandardDeviation_A)
+        self.assertEqual(microscopeParametersRef.beamEnergy_keV, microscopeParameters.beamEnergy_keV)
+        self.assertAlmostEqual(microscopeParametersRef.beamCurrent_A, microscopeParameters.beamCurrent_A)
+        self.assertEqual(microscopeParametersRef.beamDiameter_A, microscopeParameters.beamDiameter_A)
+        self.assertEqual(microscopeParametersRef.beamPositionX_A, microscopeParameters.beamPositionX_A)
+        self.assertEqual(microscopeParametersRef.beamPositionY_A, microscopeParameters.beamPositionY_A)
+        self.assertEqual(microscopeParametersRef.beamTilt_deg, microscopeParameters.beamTilt_deg)
+        self.assertEqual(microscopeParametersRef.beamStandardDeviation_A, microscopeParameters.beamStandardDeviation_A)
 
-        self.assertEquals(microscopeParametersRef.detectorCrystalAtomSymbol,
+        self.assertEqual(microscopeParametersRef.detectorCrystalAtomSymbol,
                           microscopeParameters.detectorCrystalAtomSymbol)
-        self.assertEquals(microscopeParametersRef.detectorCrystalThickness_cm,
+        self.assertEqual(microscopeParametersRef.detectorCrystalThickness_cm,
                           microscopeParameters.detectorCrystalThickness_cm)
-        self.assertEquals(microscopeParametersRef.detectorCrystalRadius_cm,
+        self.assertEqual(microscopeParametersRef.detectorCrystalRadius_cm,
                           microscopeParameters.detectorCrystalRadius_cm)
-        self.assertEquals(microscopeParametersRef.detectorCrystalDistance_cm,
+        self.assertEqual(microscopeParametersRef.detectorCrystalDistance_cm,
                           microscopeParameters.detectorCrystalDistance_cm)
 
-        self.assertEquals(microscopeParametersRef.detectorDeadLayer_A, microscopeParameters.detectorDeadLayer_A)
-        self.assertEquals(microscopeParametersRef.detectorDiffusionLenght_A,
+        self.assertEqual(microscopeParametersRef.detectorDeadLayer_A, microscopeParameters.detectorDeadLayer_A)
+        self.assertEqual(microscopeParametersRef.detectorDiffusionLenght_A,
                           microscopeParameters.detectorDiffusionLenght_A)
-        self.assertEquals(microscopeParametersRef.detectorSurfaceQuality, microscopeParameters.detectorSurfaceQuality)
-        self.assertEquals(microscopeParametersRef.detectorNoise_eV, microscopeParameters.detectorNoise_eV)
-        self.assertEquals(microscopeParametersRef.detectorTOA_deg, microscopeParameters.detectorTOA_deg)
-        self.assertEquals(microscopeParametersRef.detectorPitch_deg, microscopeParameters.detectorPitch_deg)
+        self.assertEqual(microscopeParametersRef.detectorSurfaceQuality, microscopeParameters.detectorSurfaceQuality)
+        self.assertEqual(microscopeParametersRef.detectorNoise_eV, microscopeParameters.detectorNoise_eV)
+        self.assertEqual(microscopeParametersRef.detectorTOA_deg, microscopeParameters.detectorTOA_deg)
+        self.assertEqual(microscopeParametersRef.detectorPitch_deg, microscopeParameters.detectorPitch_deg)
 
-        self.assertEquals(microscopeParametersRef.detectorBFLow_rad, microscopeParameters.detectorBFLow_rad)
-        self.assertEquals(microscopeParametersRef.detectorBFHigh_rad, microscopeParameters.detectorBFHigh_rad)
-        self.assertEquals(microscopeParametersRef.detectorDFLow_rad, microscopeParameters.detectorDFLow_rad)
-        self.assertEquals(microscopeParametersRef.detectorDFHigh_rad, microscopeParameters.detectorDFHigh_rad)
-        self.assertEquals(microscopeParametersRef.detectorHAADFLow_rad, microscopeParameters.detectorHAADFLow_rad)
-        self.assertEquals(microscopeParametersRef.detectorHAADFHigh_rad, microscopeParameters.detectorHAADFHigh_rad)
+        self.assertEqual(microscopeParametersRef.detectorBFLow_rad, microscopeParameters.detectorBFLow_rad)
+        self.assertEqual(microscopeParametersRef.detectorBFHigh_rad, microscopeParameters.detectorBFHigh_rad)
+        self.assertEqual(microscopeParametersRef.detectorDFLow_rad, microscopeParameters.detectorDFLow_rad)
+        self.assertEqual(microscopeParametersRef.detectorDFHigh_rad, microscopeParameters.detectorDFHigh_rad)
+        self.assertEqual(microscopeParametersRef.detectorHAADFLow_rad, microscopeParameters.detectorHAADFLow_rad)
+        self.assertEqual(microscopeParametersRef.detectorHAADFHigh_rad, microscopeParameters.detectorHAADFHigh_rad)
 
         # self.fail("Test if the testcase is working.")
 
@@ -374,39 +374,39 @@ class TestMicroscopeParameters(unittest.TestCase):
 
             microscopeParameters.write(filepath)
 
-            self.assertEquals(microscopeParametersRef.beamEnergy_keV, microscopeParameters.beamEnergy_keV)
-            self.assertEquals(microscopeParametersRef.beamCurrent_A, microscopeParameters.beamCurrent_A)
-            self.assertEquals(microscopeParametersRef.beamDiameter_A, microscopeParameters.beamDiameter_A)
-            self.assertEquals(microscopeParametersRef.beamPositionX_A, microscopeParameters.beamPositionX_A)
-            self.assertEquals(microscopeParametersRef.beamPositionY_A, microscopeParameters.beamPositionY_A)
-            self.assertEquals(microscopeParametersRef.beamTilt_deg, microscopeParameters.beamTilt_deg)
-            self.assertEquals(microscopeParametersRef.beamStandardDeviation_A,
+            self.assertEqual(microscopeParametersRef.beamEnergy_keV, microscopeParameters.beamEnergy_keV)
+            self.assertEqual(microscopeParametersRef.beamCurrent_A, microscopeParameters.beamCurrent_A)
+            self.assertEqual(microscopeParametersRef.beamDiameter_A, microscopeParameters.beamDiameter_A)
+            self.assertEqual(microscopeParametersRef.beamPositionX_A, microscopeParameters.beamPositionX_A)
+            self.assertEqual(microscopeParametersRef.beamPositionY_A, microscopeParameters.beamPositionY_A)
+            self.assertEqual(microscopeParametersRef.beamTilt_deg, microscopeParameters.beamTilt_deg)
+            self.assertEqual(microscopeParametersRef.beamStandardDeviation_A,
                               microscopeParameters.beamStandardDeviation_A)
 
-            self.assertEquals(microscopeParametersRef.detectorCrystalAtomSymbol,
+            self.assertEqual(microscopeParametersRef.detectorCrystalAtomSymbol,
                               microscopeParameters.detectorCrystalAtomSymbol)
-            self.assertEquals(microscopeParametersRef.detectorCrystalThickness_cm,
+            self.assertEqual(microscopeParametersRef.detectorCrystalThickness_cm,
                               microscopeParameters.detectorCrystalThickness_cm)
-            self.assertEquals(microscopeParametersRef.detectorCrystalRadius_cm,
+            self.assertEqual(microscopeParametersRef.detectorCrystalRadius_cm,
                               microscopeParameters.detectorCrystalRadius_cm)
-            self.assertEquals(microscopeParametersRef.detectorCrystalDistance_cm,
+            self.assertEqual(microscopeParametersRef.detectorCrystalDistance_cm,
                               microscopeParameters.detectorCrystalDistance_cm)
 
-            self.assertEquals(microscopeParametersRef.detectorDeadLayer_A, microscopeParameters.detectorDeadLayer_A)
-            self.assertEquals(microscopeParametersRef.detectorDiffusionLenght_A,
+            self.assertEqual(microscopeParametersRef.detectorDeadLayer_A, microscopeParameters.detectorDeadLayer_A)
+            self.assertEqual(microscopeParametersRef.detectorDiffusionLenght_A,
                               microscopeParameters.detectorDiffusionLenght_A)
-            self.assertEquals(microscopeParametersRef.detectorSurfaceQuality,
+            self.assertEqual(microscopeParametersRef.detectorSurfaceQuality,
                               microscopeParameters.detectorSurfaceQuality)
-            self.assertEquals(microscopeParametersRef.detectorNoise_eV, microscopeParameters.detectorNoise_eV)
-            self.assertEquals(microscopeParametersRef.detectorTOA_deg, microscopeParameters.detectorTOA_deg)
-            self.assertEquals(microscopeParametersRef.detectorPitch_deg, microscopeParameters.detectorPitch_deg)
+            self.assertEqual(microscopeParametersRef.detectorNoise_eV, microscopeParameters.detectorNoise_eV)
+            self.assertEqual(microscopeParametersRef.detectorTOA_deg, microscopeParameters.detectorTOA_deg)
+            self.assertEqual(microscopeParametersRef.detectorPitch_deg, microscopeParameters.detectorPitch_deg)
 
-            self.assertEquals(microscopeParametersRef.detectorBFLow_rad, microscopeParameters.detectorBFLow_rad)
-            self.assertEquals(microscopeParametersRef.detectorBFHigh_rad, microscopeParameters.detectorBFHigh_rad)
-            self.assertEquals(microscopeParametersRef.detectorDFLow_rad, microscopeParameters.detectorDFLow_rad)
-            self.assertEquals(microscopeParametersRef.detectorDFHigh_rad, microscopeParameters.detectorDFHigh_rad)
-            self.assertEquals(microscopeParametersRef.detectorHAADFLow_rad, microscopeParameters.detectorHAADFLow_rad)
-            self.assertEquals(microscopeParametersRef.detectorHAADFHigh_rad, microscopeParameters.detectorHAADFHigh_rad)
+            self.assertEqual(microscopeParametersRef.detectorBFLow_rad, microscopeParameters.detectorBFLow_rad)
+            self.assertEqual(microscopeParametersRef.detectorBFHigh_rad, microscopeParameters.detectorBFHigh_rad)
+            self.assertEqual(microscopeParametersRef.detectorDFLow_rad, microscopeParameters.detectorDFLow_rad)
+            self.assertEqual(microscopeParametersRef.detectorDFHigh_rad, microscopeParameters.detectorDFHigh_rad)
+            self.assertEqual(microscopeParametersRef.detectorHAADFLow_rad, microscopeParameters.detectorHAADFLow_rad)
+            self.assertEqual(microscopeParametersRef.detectorHAADFHigh_rad, microscopeParameters.detectorHAADFHigh_rad)
 
             # .. todo:: Make the lines comparison work.
             # filepathReference = os.path.abspath(os.path.join(self.testDataPath, "{}/{}.mic".format(title, title)))
@@ -430,37 +430,37 @@ class TestMicroscopeParameters(unittest.TestCase):
 
         microscopeParameters.write(filepath)
 
-        self.assertEquals(microscopeParametersRef.beamEnergy_keV, microscopeParameters.beamEnergy_keV)
-        self.assertEquals(microscopeParametersRef.beamCurrent_A, microscopeParameters.beamCurrent_A)
-        self.assertEquals(microscopeParametersRef.beamDiameter_A, microscopeParameters.beamDiameter_A)
-        self.assertEquals(microscopeParametersRef.beamPositionX_A, microscopeParameters.beamPositionX_A)
-        self.assertEquals(microscopeParametersRef.beamPositionY_A, microscopeParameters.beamPositionY_A)
-        self.assertEquals(microscopeParametersRef.beamTilt_deg, microscopeParameters.beamTilt_deg)
-        self.assertEquals(microscopeParametersRef.beamStandardDeviation_A, microscopeParameters.beamStandardDeviation_A)
+        self.assertEqual(microscopeParametersRef.beamEnergy_keV, microscopeParameters.beamEnergy_keV)
+        self.assertEqual(microscopeParametersRef.beamCurrent_A, microscopeParameters.beamCurrent_A)
+        self.assertEqual(microscopeParametersRef.beamDiameter_A, microscopeParameters.beamDiameter_A)
+        self.assertEqual(microscopeParametersRef.beamPositionX_A, microscopeParameters.beamPositionX_A)
+        self.assertEqual(microscopeParametersRef.beamPositionY_A, microscopeParameters.beamPositionY_A)
+        self.assertEqual(microscopeParametersRef.beamTilt_deg, microscopeParameters.beamTilt_deg)
+        self.assertEqual(microscopeParametersRef.beamStandardDeviation_A, microscopeParameters.beamStandardDeviation_A)
 
-        self.assertEquals(microscopeParametersRef.detectorCrystalAtomSymbol,
+        self.assertEqual(microscopeParametersRef.detectorCrystalAtomSymbol,
                           microscopeParameters.detectorCrystalAtomSymbol)
-        self.assertEquals(microscopeParametersRef.detectorCrystalThickness_cm,
+        self.assertEqual(microscopeParametersRef.detectorCrystalThickness_cm,
                           microscopeParameters.detectorCrystalThickness_cm)
-        self.assertEquals(microscopeParametersRef.detectorCrystalRadius_cm,
+        self.assertEqual(microscopeParametersRef.detectorCrystalRadius_cm,
                           microscopeParameters.detectorCrystalRadius_cm)
-        self.assertEquals(microscopeParametersRef.detectorCrystalDistance_cm,
+        self.assertEqual(microscopeParametersRef.detectorCrystalDistance_cm,
                           microscopeParameters.detectorCrystalDistance_cm)
 
-        self.assertEquals(microscopeParametersRef.detectorDeadLayer_A, microscopeParameters.detectorDeadLayer_A)
-        self.assertEquals(microscopeParametersRef.detectorDiffusionLenght_A,
+        self.assertEqual(microscopeParametersRef.detectorDeadLayer_A, microscopeParameters.detectorDeadLayer_A)
+        self.assertEqual(microscopeParametersRef.detectorDiffusionLenght_A,
                           microscopeParameters.detectorDiffusionLenght_A)
-        self.assertEquals(microscopeParametersRef.detectorSurfaceQuality, microscopeParameters.detectorSurfaceQuality)
-        self.assertEquals(microscopeParametersRef.detectorNoise_eV, microscopeParameters.detectorNoise_eV)
-        self.assertEquals(microscopeParametersRef.detectorTOA_deg, microscopeParameters.detectorTOA_deg)
-        self.assertEquals(microscopeParametersRef.detectorPitch_deg, microscopeParameters.detectorPitch_deg)
+        self.assertEqual(microscopeParametersRef.detectorSurfaceQuality, microscopeParameters.detectorSurfaceQuality)
+        self.assertEqual(microscopeParametersRef.detectorNoise_eV, microscopeParameters.detectorNoise_eV)
+        self.assertEqual(microscopeParametersRef.detectorTOA_deg, microscopeParameters.detectorTOA_deg)
+        self.assertEqual(microscopeParametersRef.detectorPitch_deg, microscopeParameters.detectorPitch_deg)
 
-        self.assertEquals(microscopeParametersRef.detectorBFLow_rad, microscopeParameters.detectorBFLow_rad)
-        self.assertEquals(microscopeParametersRef.detectorBFHigh_rad, microscopeParameters.detectorBFHigh_rad)
-        self.assertEquals(microscopeParametersRef.detectorDFLow_rad, microscopeParameters.detectorDFLow_rad)
-        self.assertEquals(microscopeParametersRef.detectorDFHigh_rad, microscopeParameters.detectorDFHigh_rad)
-        self.assertEquals(microscopeParametersRef.detectorHAADFLow_rad, microscopeParameters.detectorHAADFLow_rad)
-        self.assertEquals(microscopeParametersRef.detectorHAADFHigh_rad, microscopeParameters.detectorHAADFHigh_rad)
+        self.assertEqual(microscopeParametersRef.detectorBFLow_rad, microscopeParameters.detectorBFLow_rad)
+        self.assertEqual(microscopeParametersRef.detectorBFHigh_rad, microscopeParameters.detectorBFHigh_rad)
+        self.assertEqual(microscopeParametersRef.detectorDFLow_rad, microscopeParameters.detectorDFLow_rad)
+        self.assertEqual(microscopeParametersRef.detectorDFHigh_rad, microscopeParameters.detectorDFHigh_rad)
+        self.assertEqual(microscopeParametersRef.detectorHAADFLow_rad, microscopeParameters.detectorHAADFLow_rad)
+        self.assertEqual(microscopeParametersRef.detectorHAADFHigh_rad, microscopeParameters.detectorHAADFHigh_rad)
 
         # .. todo:: Make the lines comparison work.
         # filepathReference = os.path.abspath(os.path.join(self.testDataPath, "inputs", "{}.mic".format(title)))
@@ -485,37 +485,37 @@ class TestMicroscopeParameters(unittest.TestCase):
 
         microscopeParameters.write(filepath)
 
-        self.assertEquals(microscopeParametersRef.beamEnergy_keV, microscopeParameters.beamEnergy_keV)
-        self.assertEquals(microscopeParametersRef.beamCurrent_A, microscopeParameters.beamCurrent_A)
-        self.assertEquals(microscopeParametersRef.beamDiameter_A, microscopeParameters.beamDiameter_A)
-        self.assertEquals(microscopeParametersRef.beamPositionX_A, microscopeParameters.beamPositionX_A)
-        self.assertEquals(microscopeParametersRef.beamPositionY_A, microscopeParameters.beamPositionY_A)
-        self.assertEquals(microscopeParametersRef.beamTilt_deg, microscopeParameters.beamTilt_deg)
-        self.assertEquals(microscopeParametersRef.beamStandardDeviation_A, microscopeParameters.beamStandardDeviation_A)
+        self.assertEqual(microscopeParametersRef.beamEnergy_keV, microscopeParameters.beamEnergy_keV)
+        self.assertEqual(microscopeParametersRef.beamCurrent_A, microscopeParameters.beamCurrent_A)
+        self.assertEqual(microscopeParametersRef.beamDiameter_A, microscopeParameters.beamDiameter_A)
+        self.assertEqual(microscopeParametersRef.beamPositionX_A, microscopeParameters.beamPositionX_A)
+        self.assertEqual(microscopeParametersRef.beamPositionY_A, microscopeParameters.beamPositionY_A)
+        self.assertEqual(microscopeParametersRef.beamTilt_deg, microscopeParameters.beamTilt_deg)
+        self.assertEqual(microscopeParametersRef.beamStandardDeviation_A, microscopeParameters.beamStandardDeviation_A)
 
-        self.assertEquals(microscopeParametersRef.detectorCrystalAtomSymbol,
+        self.assertEqual(microscopeParametersRef.detectorCrystalAtomSymbol,
                           microscopeParameters.detectorCrystalAtomSymbol)
-        self.assertEquals(microscopeParametersRef.detectorCrystalThickness_cm,
+        self.assertEqual(microscopeParametersRef.detectorCrystalThickness_cm,
                           microscopeParameters.detectorCrystalThickness_cm)
-        self.assertEquals(microscopeParametersRef.detectorCrystalRadius_cm,
+        self.assertEqual(microscopeParametersRef.detectorCrystalRadius_cm,
                           microscopeParameters.detectorCrystalRadius_cm)
-        self.assertEquals(microscopeParametersRef.detectorCrystalDistance_cm,
+        self.assertEqual(microscopeParametersRef.detectorCrystalDistance_cm,
                           microscopeParameters.detectorCrystalDistance_cm)
 
-        self.assertEquals(microscopeParametersRef.detectorDeadLayer_A, microscopeParameters.detectorDeadLayer_A)
-        self.assertEquals(microscopeParametersRef.detectorDiffusionLenght_A,
+        self.assertEqual(microscopeParametersRef.detectorDeadLayer_A, microscopeParameters.detectorDeadLayer_A)
+        self.assertEqual(microscopeParametersRef.detectorDiffusionLenght_A,
                           microscopeParameters.detectorDiffusionLenght_A)
-        self.assertEquals(microscopeParametersRef.detectorSurfaceQuality, microscopeParameters.detectorSurfaceQuality)
-        self.assertEquals(microscopeParametersRef.detectorNoise_eV, microscopeParameters.detectorNoise_eV)
-        self.assertEquals(microscopeParametersRef.detectorTOA_deg, microscopeParameters.detectorTOA_deg)
-        self.assertEquals(microscopeParametersRef.detectorPitch_deg, microscopeParameters.detectorPitch_deg)
+        self.assertEqual(microscopeParametersRef.detectorSurfaceQuality, microscopeParameters.detectorSurfaceQuality)
+        self.assertEqual(microscopeParametersRef.detectorNoise_eV, microscopeParameters.detectorNoise_eV)
+        self.assertEqual(microscopeParametersRef.detectorTOA_deg, microscopeParameters.detectorTOA_deg)
+        self.assertEqual(microscopeParametersRef.detectorPitch_deg, microscopeParameters.detectorPitch_deg)
 
-        self.assertEquals(microscopeParametersRef.detectorBFLow_rad, microscopeParameters.detectorBFLow_rad)
-        self.assertEquals(microscopeParametersRef.detectorBFHigh_rad, microscopeParameters.detectorBFHigh_rad)
-        self.assertEquals(microscopeParametersRef.detectorDFLow_rad, microscopeParameters.detectorDFLow_rad)
-        self.assertEquals(microscopeParametersRef.detectorDFHigh_rad, microscopeParameters.detectorDFHigh_rad)
-        self.assertEquals(microscopeParametersRef.detectorHAADFLow_rad, microscopeParameters.detectorHAADFLow_rad)
-        self.assertEquals(microscopeParametersRef.detectorHAADFHigh_rad, microscopeParameters.detectorHAADFHigh_rad)
+        self.assertEqual(microscopeParametersRef.detectorBFLow_rad, microscopeParameters.detectorBFLow_rad)
+        self.assertEqual(microscopeParametersRef.detectorBFHigh_rad, microscopeParameters.detectorBFHigh_rad)
+        self.assertEqual(microscopeParametersRef.detectorDFLow_rad, microscopeParameters.detectorDFLow_rad)
+        self.assertEqual(microscopeParametersRef.detectorDFHigh_rad, microscopeParameters.detectorDFHigh_rad)
+        self.assertEqual(microscopeParametersRef.detectorHAADFLow_rad, microscopeParameters.detectorHAADFLow_rad)
+        self.assertEqual(microscopeParametersRef.detectorHAADFHigh_rad, microscopeParameters.detectorHAADFHigh_rad)
 
         # .. todo:: Make the lines comparison work.
         # filepathReference = os.path.abspath(os.path.join(self.testDataPath, "inputs", "{}.mic".format(title)))
@@ -540,37 +540,37 @@ class TestMicroscopeParameters(unittest.TestCase):
 
         microscopeParameters.write(filepath)
 
-        self.assertEquals(microscopeParametersRef.beamEnergy_keV, microscopeParameters.beamEnergy_keV)
-        self.assertEquals(microscopeParametersRef.beamCurrent_A, microscopeParameters.beamCurrent_A)
-        self.assertEquals(microscopeParametersRef.beamDiameter_A, microscopeParameters.beamDiameter_A)
-        self.assertEquals(microscopeParametersRef.beamPositionX_A, microscopeParameters.beamPositionX_A)
-        self.assertEquals(microscopeParametersRef.beamPositionY_A, microscopeParameters.beamPositionY_A)
-        self.assertEquals(microscopeParametersRef.beamTilt_deg, microscopeParameters.beamTilt_deg)
-        self.assertEquals(microscopeParametersRef.beamStandardDeviation_A, microscopeParameters.beamStandardDeviation_A)
+        self.assertEqual(microscopeParametersRef.beamEnergy_keV, microscopeParameters.beamEnergy_keV)
+        self.assertEqual(microscopeParametersRef.beamCurrent_A, microscopeParameters.beamCurrent_A)
+        self.assertEqual(microscopeParametersRef.beamDiameter_A, microscopeParameters.beamDiameter_A)
+        self.assertEqual(microscopeParametersRef.beamPositionX_A, microscopeParameters.beamPositionX_A)
+        self.assertEqual(microscopeParametersRef.beamPositionY_A, microscopeParameters.beamPositionY_A)
+        self.assertEqual(microscopeParametersRef.beamTilt_deg, microscopeParameters.beamTilt_deg)
+        self.assertEqual(microscopeParametersRef.beamStandardDeviation_A, microscopeParameters.beamStandardDeviation_A)
 
-        self.assertEquals(microscopeParametersRef.detectorCrystalAtomSymbol,
+        self.assertEqual(microscopeParametersRef.detectorCrystalAtomSymbol,
                           microscopeParameters.detectorCrystalAtomSymbol)
-        self.assertEquals(microscopeParametersRef.detectorCrystalThickness_cm,
+        self.assertEqual(microscopeParametersRef.detectorCrystalThickness_cm,
                           microscopeParameters.detectorCrystalThickness_cm)
-        self.assertEquals(microscopeParametersRef.detectorCrystalRadius_cm,
+        self.assertEqual(microscopeParametersRef.detectorCrystalRadius_cm,
                           microscopeParameters.detectorCrystalRadius_cm)
-        self.assertEquals(microscopeParametersRef.detectorCrystalDistance_cm,
+        self.assertEqual(microscopeParametersRef.detectorCrystalDistance_cm,
                           microscopeParameters.detectorCrystalDistance_cm)
 
-        self.assertEquals(microscopeParametersRef.detectorDeadLayer_A, microscopeParameters.detectorDeadLayer_A)
-        self.assertEquals(microscopeParametersRef.detectorDiffusionLenght_A,
+        self.assertEqual(microscopeParametersRef.detectorDeadLayer_A, microscopeParameters.detectorDeadLayer_A)
+        self.assertEqual(microscopeParametersRef.detectorDiffusionLenght_A,
                           microscopeParameters.detectorDiffusionLenght_A)
-        self.assertEquals(microscopeParametersRef.detectorSurfaceQuality, microscopeParameters.detectorSurfaceQuality)
-        self.assertEquals(microscopeParametersRef.detectorNoise_eV, microscopeParameters.detectorNoise_eV)
-        self.assertEquals(microscopeParametersRef.detectorTOA_deg, microscopeParameters.detectorTOA_deg)
-        self.assertEquals(microscopeParametersRef.detectorPitch_deg, microscopeParameters.detectorPitch_deg)
+        self.assertEqual(microscopeParametersRef.detectorSurfaceQuality, microscopeParameters.detectorSurfaceQuality)
+        self.assertEqual(microscopeParametersRef.detectorNoise_eV, microscopeParameters.detectorNoise_eV)
+        self.assertEqual(microscopeParametersRef.detectorTOA_deg, microscopeParameters.detectorTOA_deg)
+        self.assertEqual(microscopeParametersRef.detectorPitch_deg, microscopeParameters.detectorPitch_deg)
 
-        self.assertEquals(microscopeParametersRef.detectorBFLow_rad, microscopeParameters.detectorBFLow_rad)
-        self.assertEquals(microscopeParametersRef.detectorBFHigh_rad, microscopeParameters.detectorBFHigh_rad)
-        self.assertEquals(microscopeParametersRef.detectorDFLow_rad, microscopeParameters.detectorDFLow_rad)
-        self.assertEquals(microscopeParametersRef.detectorDFHigh_rad, microscopeParameters.detectorDFHigh_rad)
-        self.assertEquals(microscopeParametersRef.detectorHAADFLow_rad, microscopeParameters.detectorHAADFLow_rad)
-        self.assertEquals(microscopeParametersRef.detectorHAADFHigh_rad, microscopeParameters.detectorHAADFHigh_rad)
+        self.assertEqual(microscopeParametersRef.detectorBFLow_rad, microscopeParameters.detectorBFLow_rad)
+        self.assertEqual(microscopeParametersRef.detectorBFHigh_rad, microscopeParameters.detectorBFHigh_rad)
+        self.assertEqual(microscopeParametersRef.detectorDFLow_rad, microscopeParameters.detectorDFLow_rad)
+        self.assertEqual(microscopeParametersRef.detectorDFHigh_rad, microscopeParameters.detectorDFHigh_rad)
+        self.assertEqual(microscopeParametersRef.detectorHAADFLow_rad, microscopeParameters.detectorHAADFLow_rad)
+        self.assertEqual(microscopeParametersRef.detectorHAADFHigh_rad, microscopeParameters.detectorHAADFHigh_rad)
 
         # .. todo:: Make the lines comparison work.
         # filepathReference = os.path.abspath(os.path.join(self.testDataPath, "inputs", "{}.mic".format(title)))
@@ -597,42 +597,42 @@ class TestMicroscopeParameters(unittest.TestCase):
 
         microscopeParameters.write(filepath)
 
-        self.assertEquals(microscopeParametersRef.beamEnergy_keV, microscopeParameters.beamEnergy_keV)
-        self.assertEquals(microscopeParametersRef.beamCurrent_A, microscopeParameters.beamCurrent_A)
-        self.assertEquals(microscopeParametersRef.beamDiameter_A, microscopeParameters.beamDiameter_A)
-        self.assertEquals(microscopeParametersRef.beamPositionX_A, microscopeParameters.beamPositionX_A)
-        self.assertEquals(microscopeParametersRef.beamPositionY_A, microscopeParameters.beamPositionY_A)
-        self.assertEquals(microscopeParametersRef.beamTilt_deg, microscopeParameters.beamTilt_deg)
-        self.assertEquals(microscopeParametersRef.beamStandardDeviation_A, microscopeParameters.beamStandardDeviation_A)
+        self.assertEqual(microscopeParametersRef.beamEnergy_keV, microscopeParameters.beamEnergy_keV)
+        self.assertEqual(microscopeParametersRef.beamCurrent_A, microscopeParameters.beamCurrent_A)
+        self.assertEqual(microscopeParametersRef.beamDiameter_A, microscopeParameters.beamDiameter_A)
+        self.assertEqual(microscopeParametersRef.beamPositionX_A, microscopeParameters.beamPositionX_A)
+        self.assertEqual(microscopeParametersRef.beamPositionY_A, microscopeParameters.beamPositionY_A)
+        self.assertEqual(microscopeParametersRef.beamTilt_deg, microscopeParameters.beamTilt_deg)
+        self.assertEqual(microscopeParametersRef.beamStandardDeviation_A, microscopeParameters.beamStandardDeviation_A)
 
-        self.assertEquals(microscopeParametersRef.detectorCrystalAtomSymbol,
+        self.assertEqual(microscopeParametersRef.detectorCrystalAtomSymbol,
                           microscopeParameters.detectorCrystalAtomSymbol)
-        self.assertEquals(microscopeParametersRef.detectorCrystalThickness_cm,
+        self.assertEqual(microscopeParametersRef.detectorCrystalThickness_cm,
                           microscopeParameters.detectorCrystalThickness_cm)
-        self.assertEquals(microscopeParametersRef.detectorCrystalRadius_cm,
+        self.assertEqual(microscopeParametersRef.detectorCrystalRadius_cm,
                           microscopeParameters.detectorCrystalRadius_cm)
-        self.assertEquals(microscopeParametersRef.detectorCrystalDistance_cm,
+        self.assertEqual(microscopeParametersRef.detectorCrystalDistance_cm,
                           microscopeParameters.detectorCrystalDistance_cm)
 
-        self.assertEquals(microscopeParametersRef.detectorDeadLayer_A, microscopeParameters.detectorDeadLayer_A)
-        self.assertEquals(microscopeParametersRef.detectorDiffusionLenght_A,
+        self.assertEqual(microscopeParametersRef.detectorDeadLayer_A, microscopeParameters.detectorDeadLayer_A)
+        self.assertEqual(microscopeParametersRef.detectorDiffusionLenght_A,
                           microscopeParameters.detectorDiffusionLenght_A)
-        self.assertEquals(microscopeParametersRef.detectorSurfaceQuality, microscopeParameters.detectorSurfaceQuality)
-        self.assertEquals(microscopeParametersRef.detectorNoise_eV, microscopeParameters.detectorNoise_eV)
-        self.assertEquals(microscopeParametersRef.detectorTOA_deg, microscopeParameters.detectorTOA_deg)
-        self.assertEquals(microscopeParametersRef.detectorPitch_deg, microscopeParameters.detectorPitch_deg)
+        self.assertEqual(microscopeParametersRef.detectorSurfaceQuality, microscopeParameters.detectorSurfaceQuality)
+        self.assertEqual(microscopeParametersRef.detectorNoise_eV, microscopeParameters.detectorNoise_eV)
+        self.assertEqual(microscopeParametersRef.detectorTOA_deg, microscopeParameters.detectorTOA_deg)
+        self.assertEqual(microscopeParametersRef.detectorPitch_deg, microscopeParameters.detectorPitch_deg)
 
-        self.assertEquals(microscopeParametersRef.detectorBFLow_rad, microscopeParameters.detectorBFLow_rad)
-        self.assertEquals(microscopeParametersRef.detectorBFHigh_rad, microscopeParameters.detectorBFHigh_rad)
-        self.assertEquals(microscopeParametersRef.detectorDFLow_rad, microscopeParameters.detectorDFLow_rad)
-        self.assertEquals(microscopeParametersRef.detectorDFHigh_rad, microscopeParameters.detectorDFHigh_rad)
-        self.assertEquals(microscopeParametersRef.detectorHAADFLow_rad, microscopeParameters.detectorHAADFLow_rad)
-        self.assertEquals(microscopeParametersRef.detectorHAADFHigh_rad, microscopeParameters.detectorHAADFHigh_rad)
+        self.assertEqual(microscopeParametersRef.detectorBFLow_rad, microscopeParameters.detectorBFLow_rad)
+        self.assertEqual(microscopeParametersRef.detectorBFHigh_rad, microscopeParameters.detectorBFHigh_rad)
+        self.assertEqual(microscopeParametersRef.detectorDFLow_rad, microscopeParameters.detectorDFLow_rad)
+        self.assertEqual(microscopeParametersRef.detectorDFHigh_rad, microscopeParameters.detectorDFHigh_rad)
+        self.assertEqual(microscopeParametersRef.detectorHAADFLow_rad, microscopeParameters.detectorHAADFLow_rad)
+        self.assertEqual(microscopeParametersRef.detectorHAADFHigh_rad, microscopeParameters.detectorHAADFHigh_rad)
 
         linesRef = open(filepathReference, 'r').readlines()
         lines = open(filepath, 'r').readlines()
 
-        self.assertEquals(len(linesRef), len(lines))
+        self.assertEqual(len(linesRef), len(lines))
         # .. todo:: make this assert pass.
         # self.assertListEqual(linesRef, lines)
 

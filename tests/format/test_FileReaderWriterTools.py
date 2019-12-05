@@ -51,7 +51,7 @@ class TestFileReaderWriterTools(unittest.TestCase):
         """
 
         #self.fail("Test if the testcase is working.")
-        self.assert_(True)
+        self.assertTrue(True)
 
     def test__reduceAfterDot(self):
         """
@@ -60,23 +60,23 @@ class TestFileReaderWriterTools(unittest.TestCase):
 
         value = 23.0
         valueStr = FileReaderWriterTools.reduceAfterDot(value)
-        self.assertEquals("23", valueStr)
+        self.assertEqual("23", valueStr)
 
         value = 67.80
         valueStr = FileReaderWriterTools.reduceAfterDot(value)
-        self.assertEquals("67.8", valueStr)
+        self.assertEqual("67.8", valueStr)
 
         value = 2.34000
         valueStr = FileReaderWriterTools.reduceAfterDot(value)
-        self.assertEquals("2.34", valueStr)
+        self.assertEqual("2.34", valueStr)
 
         value = 2.070
         valueStr = FileReaderWriterTools.reduceAfterDot(value)
-        self.assertEquals("2.07", valueStr)
+        self.assertEqual("2.07", valueStr)
 
         value = 0.070
         valueStr = FileReaderWriterTools.reduceAfterDot(value)
-        self.assertEquals("0.07", valueStr)
+        self.assertEqual("0.07", valueStr)
 
         #self.fail("Test if the testcase is working.")
 

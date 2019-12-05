@@ -67,7 +67,7 @@ class TestExportedSpectrum(unittest.TestCase):
         """
 
         #self.fail("Test if the testcase is working.")
-        self.assert_(True)
+        self.assertTrue(True)
 
     def test_read(self):
         """
@@ -75,16 +75,16 @@ class TestExportedSpectrum(unittest.TestCase):
         """
 
         exportedSpectrum = ExportedSpectrum.ExportedSpectrum()
-        self.assertEquals(None, exportedSpectrum.getSpectrumType())
-        self.assertEquals(0, len(exportedSpectrum._energies_keV))
-        self.assertEquals(0, len(exportedSpectrum._intensities))
+        self.assertEqual(None, exportedSpectrum.getSpectrumType())
+        self.assertEqual(0, len(exportedSpectrum._energies_keV))
+        self.assertEqual(0, len(exportedSpectrum._intensities))
 
         filepath = os.path.join(self.testDataPath, "bulkC_E20keV_w64BW.txt")
         exportedSpectrum.read(filepath)
 
-        self.assertEquals("Specimen Spectra", exportedSpectrum.getSpectrumType())
-        self.assertEquals(1024, len(exportedSpectrum._energies_keV))
-        self.assertEquals(1024, len(exportedSpectrum._intensities))
+        self.assertEqual("Specimen Spectra", exportedSpectrum.getSpectrumType())
+        self.assertEqual(1024, len(exportedSpectrum._energies_keV))
+        self.assertEqual(1024, len(exportedSpectrum._intensities))
 
         #self.fail("Test if the testcase is working.")
 

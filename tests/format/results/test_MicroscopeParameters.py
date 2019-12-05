@@ -58,7 +58,7 @@ class TestMicroscopeParameters(unittest.TestCase):
         """
 
         #self.fail("Test if the testcase is working.")
-        self.assert_(True)
+        self.assertTrue(True)
 
     def test_readFromLines(self):
         """
@@ -73,38 +73,38 @@ class TestMicroscopeParameters(unittest.TestCase):
         beamParametersRef = microscopeParametersRef.beamParameters
         beamParameters = microscopeParameters.beamParameters
 
-        self.assertAlmostEquals(beamParametersRef.incidentEnergy_keV, beamParameters.incidentEnergy_keV)
-        self.assertAlmostEquals(beamParametersRef.current_A, beamParameters.current_A)
-        self.assertAlmostEquals(beamParametersRef.acquisitionTime_s, beamParameters.acquisitionTime_s)
-        self.assertAlmostEquals(beamParametersRef.diameter90_A, beamParameters.diameter90_A)
-        self.assertAlmostEquals(beamParametersRef.tiltAngle_deg, beamParameters.tiltAngle_deg)
-        self.assertAlmostEquals(beamParametersRef.gaussianMean, beamParameters.gaussianMean)
-        self.assertAlmostEquals(beamParametersRef.gaussianSigma, beamParameters.gaussianSigma)
+        self.assertAlmostEqual(beamParametersRef.incidentEnergy_keV, beamParameters.incidentEnergy_keV)
+        self.assertAlmostEqual(beamParametersRef.current_A, beamParameters.current_A)
+        self.assertAlmostEqual(beamParametersRef.acquisitionTime_s, beamParameters.acquisitionTime_s)
+        self.assertAlmostEqual(beamParametersRef.diameter90_A, beamParameters.diameter90_A)
+        self.assertAlmostEqual(beamParametersRef.tiltAngle_deg, beamParameters.tiltAngle_deg)
+        self.assertAlmostEqual(beamParametersRef.gaussianMean, beamParameters.gaussianMean)
+        self.assertAlmostEqual(beamParametersRef.gaussianSigma, beamParameters.gaussianSigma)
 
         detectorParametersRef = microscopeParametersRef.detectorParameters
         detectorParameters = microscopeParameters.detectorParameters
 
-        self.assertEquals(detectorParametersRef.crystalName, detectorParameters.crystalName)
-        self.assertAlmostEquals(detectorParametersRef.crystalDensity_g_cm3, detectorParameters.crystalDensity_g_cm3)
-        self.assertAlmostEquals(detectorParametersRef.crystalThickness_cm, detectorParameters.crystalThickness_cm)
-        self.assertAlmostEquals(detectorParametersRef.crystalRadius_cm, detectorParameters.crystalRadius_cm)
-        self.assertAlmostEquals(detectorParametersRef.beamDetectorDistance_cm, detectorParameters.beamDetectorDistance_cm)
-        self.assertAlmostEquals(detectorParametersRef.deadLayerThickness_A, detectorParameters.deadLayerThickness_A)
-        self.assertAlmostEquals(detectorParametersRef.diffusionLength_A, detectorParameters.diffusionLength_A)
-        self.assertAlmostEquals(detectorParametersRef.surfaceQualityFactor, detectorParameters.surfaceQualityFactor)
-        self.assertAlmostEquals(detectorParametersRef.noiseEdsDetector_eV, detectorParameters.noiseEdsDetector_eV)
-        self.assertAlmostEquals(detectorParametersRef.thicknessBeWindow_um, detectorParameters.thicknessBeWindow_um)
-        self.assertAlmostEquals(detectorParametersRef.thicknessAlWindow_um, detectorParameters.thicknessAlWindow_um)
-        self.assertAlmostEquals(detectorParametersRef.thicknessTiWindow_um, detectorParameters.thicknessTiWindow_um)
-        self.assertAlmostEquals(detectorParametersRef.thicknessOil_um, detectorParameters.thicknessOil_um)
-        self.assertAlmostEquals(detectorParametersRef.thicknessH2O_um, detectorParameters.thicknessH2O_um)
-        self.assertAlmostEquals(detectorParametersRef.thicknessMoxtek_um, detectorParameters.thicknessMoxtek_um)
-        self.assertAlmostEquals(detectorParametersRef.thicknessAir_um, detectorParameters.thicknessAir_um)
-        self.assertAlmostEquals(detectorParametersRef.angleBetweenDetectorSpecimenNormal_deg, detectorParameters.angleBetweenDetectorSpecimenNormal_deg)
-        self.assertAlmostEquals(detectorParametersRef.angleBetweenDetectorXAxis_deg, detectorParameters.angleBetweenDetectorXAxis_deg)
-        self.assertAlmostEquals(detectorParametersRef.takeoffAngleNormalIncidence_deg, detectorParameters.takeoffAngleNormalIncidence_deg)
-        self.assertAlmostEquals(detectorParametersRef.takeoffAngleEffective_deg, detectorParameters.takeoffAngleEffective_deg)
-        self.assertAlmostEquals(detectorParametersRef.solidAngle_deg, detectorParameters.solidAngle_deg)
+        self.assertEqual(detectorParametersRef.crystalName, detectorParameters.crystalName)
+        self.assertAlmostEqual(detectorParametersRef.crystalDensity_g_cm3, detectorParameters.crystalDensity_g_cm3)
+        self.assertAlmostEqual(detectorParametersRef.crystalThickness_cm, detectorParameters.crystalThickness_cm)
+        self.assertAlmostEqual(detectorParametersRef.crystalRadius_cm, detectorParameters.crystalRadius_cm)
+        self.assertAlmostEqual(detectorParametersRef.beamDetectorDistance_cm, detectorParameters.beamDetectorDistance_cm)
+        self.assertAlmostEqual(detectorParametersRef.deadLayerThickness_A, detectorParameters.deadLayerThickness_A)
+        self.assertAlmostEqual(detectorParametersRef.diffusionLength_A, detectorParameters.diffusionLength_A)
+        self.assertAlmostEqual(detectorParametersRef.surfaceQualityFactor, detectorParameters.surfaceQualityFactor)
+        self.assertAlmostEqual(detectorParametersRef.noiseEdsDetector_eV, detectorParameters.noiseEdsDetector_eV)
+        self.assertAlmostEqual(detectorParametersRef.thicknessBeWindow_um, detectorParameters.thicknessBeWindow_um)
+        self.assertAlmostEqual(detectorParametersRef.thicknessAlWindow_um, detectorParameters.thicknessAlWindow_um)
+        self.assertAlmostEqual(detectorParametersRef.thicknessTiWindow_um, detectorParameters.thicknessTiWindow_um)
+        self.assertAlmostEqual(detectorParametersRef.thicknessOil_um, detectorParameters.thicknessOil_um)
+        self.assertAlmostEqual(detectorParametersRef.thicknessH2O_um, detectorParameters.thicknessH2O_um)
+        self.assertAlmostEqual(detectorParametersRef.thicknessMoxtek_um, detectorParameters.thicknessMoxtek_um)
+        self.assertAlmostEqual(detectorParametersRef.thicknessAir_um, detectorParameters.thicknessAir_um)
+        self.assertAlmostEqual(detectorParametersRef.angleBetweenDetectorSpecimenNormal_deg, detectorParameters.angleBetweenDetectorSpecimenNormal_deg)
+        self.assertAlmostEqual(detectorParametersRef.angleBetweenDetectorXAxis_deg, detectorParameters.angleBetweenDetectorXAxis_deg)
+        self.assertAlmostEqual(detectorParametersRef.takeoffAngleNormalIncidence_deg, detectorParameters.takeoffAngleNormalIncidence_deg)
+        self.assertAlmostEqual(detectorParametersRef.takeoffAngleEffective_deg, detectorParameters.takeoffAngleEffective_deg)
+        self.assertAlmostEqual(detectorParametersRef.solidAngle_deg, detectorParameters.solidAngle_deg)
 
         #self.fail("Test if the testcase is working.")
 

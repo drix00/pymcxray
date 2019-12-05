@@ -50,26 +50,26 @@ class TestAtomData(unittest.TestCase):
         """
 
         #self.fail("Test if the testcase is working.")
-        self.assert_(True)
+        self.assertTrue(True)
 
     def testConstants(self):
         """
         First test to check if the testcase is working with the testing framework.
         """
 
-        self.assertEquals(AtomData._NUMBER_SHELLS, len(AtomData.ATOM_SHELL_NAMES))
-        self.assertEquals(AtomData._NUMBER_LINES, len(AtomData.ATOM_LINE_NAMES))
+        self.assertEqual(AtomData._NUMBER_SHELLS, len(AtomData.ATOM_SHELL_NAMES))
+        self.assertEqual(AtomData._NUMBER_LINES, len(AtomData.ATOM_LINE_NAMES))
 
-        self.assertEquals(AtomData._NUMBER_ATOMS, len(AtomData.ATOM_NAMES))
-        self.assertEquals(AtomData._NUMBER_ATOMS, len(AtomData.ATOM_SYMBOLS))
-        self.assertEquals(AtomData._NUMBER_ATOMS, len(AtomData.ATOM_WEIGHTS))
-        self.assertEquals(AtomData._NUMBER_ATOMS, len(AtomData.ATOM_MASS_DENSITY_g_cm3))
-        self.assertEquals(AtomData._NUMBER_ATOMS, len(AtomData.ATOM_ION_ENERGY_SHELL_K_keV))
-        self.assertEquals(AtomData._NUMBER_ATOMS, len(AtomData.ATOM_ION_ENERGY_SHELL_L3_keV))
-        self.assertEquals(AtomData._NUMBER_ATOMS, len(AtomData.ATOM_ION_ENERGY_SHELL_M5_keV))
+        self.assertEqual(AtomData._NUMBER_ATOMS, len(AtomData.ATOM_NAMES))
+        self.assertEqual(AtomData._NUMBER_ATOMS, len(AtomData.ATOM_SYMBOLS))
+        self.assertEqual(AtomData._NUMBER_ATOMS, len(AtomData.ATOM_WEIGHTS))
+        self.assertEqual(AtomData._NUMBER_ATOMS, len(AtomData.ATOM_MASS_DENSITY_g_cm3))
+        self.assertEqual(AtomData._NUMBER_ATOMS, len(AtomData.ATOM_ION_ENERGY_SHELL_K_keV))
+        self.assertEqual(AtomData._NUMBER_ATOMS, len(AtomData.ATOM_ION_ENERGY_SHELL_L3_keV))
+        self.assertEqual(AtomData._NUMBER_ATOMS, len(AtomData.ATOM_ION_ENERGY_SHELL_M5_keV))
 
         #self.fail("Test if the testcase is working.")
-        self.assert_(True)
+        self.assertTrue(True)
 
 if __name__ == '__main__':  #pragma: no cover
     logging.getLogger().setLevel(logging.DEBUG)

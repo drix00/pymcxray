@@ -52,7 +52,7 @@ class TestXraySimulatedSpectraRegion(unittest.TestCase):
         """
 
         #self.fail("Test if the testcase is working.")
-        self.assert_(True)
+        self.assertTrue(True)
 
     def test_read(self):
         """
@@ -65,14 +65,14 @@ class TestXraySimulatedSpectraRegion(unittest.TestCase):
 
         spectrumFile.read()
 
-        self.assertEquals(1024, len(spectrumFile.channelNumbers))
-        self.assertEquals(1024, len(spectrumFile.energiesReference_keV))
-        self.assertEquals(1024, len(spectrumFile.energies_keV))
-        self.assertEquals(1024, len(spectrumFile.simulatedIntensities))
-        self.assertEquals(1024, len(spectrumFile.detectedIntensities))
-        self.assertEquals(1024, len(spectrumFile.eNetPeak[0]))
-        self.assertEquals(1024, len(spectrumFile.peakToBackgrpound))
-        self.assertEquals(1024, len(spectrumFile.peakToBackgrpoundAverage))
+        self.assertEqual(1024, len(spectrumFile.channelNumbers))
+        self.assertEqual(1024, len(spectrumFile.energiesReference_keV))
+        self.assertEqual(1024, len(spectrumFile.energies_keV))
+        self.assertEqual(1024, len(spectrumFile.simulatedIntensities))
+        self.assertEqual(1024, len(spectrumFile.detectedIntensities))
+        self.assertEqual(1024, len(spectrumFile.eNetPeak[0]))
+        self.assertEqual(1024, len(spectrumFile.peakToBackgrpound))
+        self.assertEqual(1024, len(spectrumFile.peakToBackgrpoundAverage))
 
         #self.fail("Test if the testcase is working.")
 

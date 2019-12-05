@@ -72,7 +72,7 @@ class TestSimulationParameters(unittest.TestCase):
         """
 
         # self.fail("Test if the testcase is working.")
-        self.assert_(True)
+        self.assertTrue(True)
 
     def test_read(self):
         """
@@ -86,18 +86,18 @@ class TestSimulationParameters(unittest.TestCase):
             simulationParameters.read(filepath)
 
             simulationParametersRef = get_simulation_parameters_reference(title)
-            self.assertEquals(simulationParametersRef.baseFilename, simulationParameters.baseFilename)
-            self.assertEquals(simulationParametersRef.numberElectrons, simulationParameters.numberElectrons)
-            self.assertEquals(simulationParametersRef.numberPhotons, simulationParameters.numberPhotons)
-            self.assertEquals(simulationParametersRef.numberWindows, simulationParameters.numberWindows)
-            self.assertEquals(simulationParametersRef.numberFilmsX, simulationParameters.numberFilmsX)
-            self.assertEquals(simulationParametersRef.numberFilmsY, simulationParameters.numberFilmsY)
-            self.assertEquals(simulationParametersRef.numberFilmsZ, simulationParameters.numberFilmsZ)
-            self.assertEquals(simulationParametersRef.numberChannels, simulationParameters.numberChannels)
-            self.assertEquals(simulationParametersRef.energyChannelWidth_eV, simulationParameters.energyChannelWidth_eV)
-            self.assertEquals(simulationParametersRef.spectrumInterpolationModel,
+            self.assertEqual(simulationParametersRef.baseFilename, simulationParameters.baseFilename)
+            self.assertEqual(simulationParametersRef.numberElectrons, simulationParameters.numberElectrons)
+            self.assertEqual(simulationParametersRef.numberPhotons, simulationParameters.numberPhotons)
+            self.assertEqual(simulationParametersRef.numberWindows, simulationParameters.numberWindows)
+            self.assertEqual(simulationParametersRef.numberFilmsX, simulationParameters.numberFilmsX)
+            self.assertEqual(simulationParametersRef.numberFilmsY, simulationParameters.numberFilmsY)
+            self.assertEqual(simulationParametersRef.numberFilmsZ, simulationParameters.numberFilmsZ)
+            self.assertEqual(simulationParametersRef.numberChannels, simulationParameters.numberChannels)
+            self.assertEqual(simulationParametersRef.energyChannelWidth_eV, simulationParameters.energyChannelWidth_eV)
+            self.assertEqual(simulationParametersRef.spectrumInterpolationModel,
                               simulationParameters.spectrumInterpolationModel)
-            self.assertEquals(simulationParametersRef.voxelSimplification, simulationParameters.voxelSimplification,
+            self.assertEqual(simulationParametersRef.voxelSimplification, simulationParameters.voxelSimplification,
                               title)
 
         # self.fail("Test if the testcase is working.")
@@ -113,29 +113,29 @@ class TestSimulationParameters(unittest.TestCase):
         filepath = os.path.abspath(os.path.join(self.testDataPath, "inputs", "{}.par".format(title)))
         simulationParameters.read(filepath)
 
-        self.assertEquals(version.VERSION_1_1_1.major, simulationParameters.version.major)
-        self.assertEquals(version.VERSION_1_1_1.minor, simulationParameters.version.minor)
-        self.assertEquals(version.VERSION_1_1_1.revision, simulationParameters.version.revision)
-        self.assertEquals(version.VERSION_1_1_1, simulationParameters.version)
+        self.assertEqual(version.VERSION_1_1_1.major, simulationParameters.version.major)
+        self.assertEqual(version.VERSION_1_1_1.minor, simulationParameters.version.minor)
+        self.assertEqual(version.VERSION_1_1_1.revision, simulationParameters.version.revision)
+        self.assertEqual(version.VERSION_1_1_1, simulationParameters.version)
 
         simulationParametersRef = get_simulation_parameters_reference(title)
-        self.assertEquals(simulationParametersRef.version.major, simulationParameters.version.major)
-        self.assertEquals(simulationParametersRef.version.minor, simulationParameters.version.minor)
-        self.assertEquals(simulationParametersRef.version.revision, simulationParameters.version.revision)
-        self.assertEquals(simulationParametersRef.version, simulationParameters.version)
+        self.assertEqual(simulationParametersRef.version.major, simulationParameters.version.major)
+        self.assertEqual(simulationParametersRef.version.minor, simulationParameters.version.minor)
+        self.assertEqual(simulationParametersRef.version.revision, simulationParameters.version.revision)
+        self.assertEqual(simulationParametersRef.version, simulationParameters.version)
 
-        self.assertEquals(simulationParametersRef.baseFilename, simulationParameters.baseFilename)
-        self.assertEquals(simulationParametersRef.numberElectrons, simulationParameters.numberElectrons)
-        self.assertEquals(simulationParametersRef.numberPhotons, simulationParameters.numberPhotons)
-        self.assertEquals(simulationParametersRef.numberWindows, simulationParameters.numberWindows)
-        self.assertEquals(simulationParametersRef.numberFilmsX, simulationParameters.numberFilmsX)
-        self.assertEquals(simulationParametersRef.numberFilmsY, simulationParameters.numberFilmsY)
-        self.assertEquals(simulationParametersRef.numberFilmsZ, simulationParameters.numberFilmsZ)
-        self.assertEquals(simulationParametersRef.numberChannels, simulationParameters.numberChannels)
-        self.assertEquals(simulationParametersRef.energyChannelWidth_eV, simulationParameters.energyChannelWidth_eV)
-        self.assertEquals(simulationParametersRef.spectrumInterpolationModel,
+        self.assertEqual(simulationParametersRef.baseFilename, simulationParameters.baseFilename)
+        self.assertEqual(simulationParametersRef.numberElectrons, simulationParameters.numberElectrons)
+        self.assertEqual(simulationParametersRef.numberPhotons, simulationParameters.numberPhotons)
+        self.assertEqual(simulationParametersRef.numberWindows, simulationParameters.numberWindows)
+        self.assertEqual(simulationParametersRef.numberFilmsX, simulationParameters.numberFilmsX)
+        self.assertEqual(simulationParametersRef.numberFilmsY, simulationParameters.numberFilmsY)
+        self.assertEqual(simulationParametersRef.numberFilmsZ, simulationParameters.numberFilmsZ)
+        self.assertEqual(simulationParametersRef.numberChannels, simulationParameters.numberChannels)
+        self.assertEqual(simulationParametersRef.energyChannelWidth_eV, simulationParameters.energyChannelWidth_eV)
+        self.assertEqual(simulationParametersRef.spectrumInterpolationModel,
                           simulationParameters.spectrumInterpolationModel)
-        self.assertEquals(simulationParametersRef.voxelSimplification, simulationParameters.voxelSimplification, title)
+        self.assertEqual(simulationParametersRef.voxelSimplification, simulationParameters.voxelSimplification, title)
 
         # self.fail("Test if the testcase is working.")
 
@@ -150,29 +150,29 @@ class TestSimulationParameters(unittest.TestCase):
         filepath = os.path.abspath(os.path.join(self.testDataPath, "inputs", "{}.par".format(title)))
         simulationParameters.read(filepath)
 
-        self.assertEquals(version.VERSION_1_2_0.major, simulationParameters.version.major)
-        self.assertEquals(version.VERSION_1_2_0.minor, simulationParameters.version.minor)
-        self.assertEquals(version.VERSION_1_2_0.revision, simulationParameters.version.revision)
-        self.assertEquals(version.VERSION_1_2_0, simulationParameters.version)
+        self.assertEqual(version.VERSION_1_2_0.major, simulationParameters.version.major)
+        self.assertEqual(version.VERSION_1_2_0.minor, simulationParameters.version.minor)
+        self.assertEqual(version.VERSION_1_2_0.revision, simulationParameters.version.revision)
+        self.assertEqual(version.VERSION_1_2_0, simulationParameters.version)
 
         simulationParametersRef = get_simulation_parameters_reference(title)
-        self.assertEquals(simulationParametersRef.version.major, simulationParameters.version.major)
-        self.assertEquals(simulationParametersRef.version.minor, simulationParameters.version.minor)
-        self.assertEquals(simulationParametersRef.version.revision, simulationParameters.version.revision)
-        self.assertEquals(simulationParametersRef.version, simulationParameters.version)
+        self.assertEqual(simulationParametersRef.version.major, simulationParameters.version.major)
+        self.assertEqual(simulationParametersRef.version.minor, simulationParameters.version.minor)
+        self.assertEqual(simulationParametersRef.version.revision, simulationParameters.version.revision)
+        self.assertEqual(simulationParametersRef.version, simulationParameters.version)
 
-        self.assertEquals(simulationParametersRef.baseFilename, simulationParameters.baseFilename)
-        self.assertEquals(simulationParametersRef.numberElectrons, simulationParameters.numberElectrons)
-        self.assertEquals(simulationParametersRef.numberPhotons, simulationParameters.numberPhotons)
-        self.assertEquals(simulationParametersRef.numberWindows, simulationParameters.numberWindows)
-        self.assertEquals(simulationParametersRef.numberFilmsX, simulationParameters.numberFilmsX)
-        self.assertEquals(simulationParametersRef.numberFilmsY, simulationParameters.numberFilmsY)
-        self.assertEquals(simulationParametersRef.numberFilmsZ, simulationParameters.numberFilmsZ)
-        self.assertEquals(simulationParametersRef.numberChannels, simulationParameters.numberChannels)
-        self.assertEquals(simulationParametersRef.energyChannelWidth_eV, simulationParameters.energyChannelWidth_eV)
-        self.assertEquals(simulationParametersRef.spectrumInterpolationModel,
+        self.assertEqual(simulationParametersRef.baseFilename, simulationParameters.baseFilename)
+        self.assertEqual(simulationParametersRef.numberElectrons, simulationParameters.numberElectrons)
+        self.assertEqual(simulationParametersRef.numberPhotons, simulationParameters.numberPhotons)
+        self.assertEqual(simulationParametersRef.numberWindows, simulationParameters.numberWindows)
+        self.assertEqual(simulationParametersRef.numberFilmsX, simulationParameters.numberFilmsX)
+        self.assertEqual(simulationParametersRef.numberFilmsY, simulationParameters.numberFilmsY)
+        self.assertEqual(simulationParametersRef.numberFilmsZ, simulationParameters.numberFilmsZ)
+        self.assertEqual(simulationParametersRef.numberChannels, simulationParameters.numberChannels)
+        self.assertEqual(simulationParametersRef.energyChannelWidth_eV, simulationParameters.energyChannelWidth_eV)
+        self.assertEqual(simulationParametersRef.spectrumInterpolationModel,
                           simulationParameters.spectrumInterpolationModel)
-        self.assertEquals(simulationParametersRef.voxelSimplification, simulationParameters.voxelSimplification, title)
+        self.assertEqual(simulationParametersRef.voxelSimplification, simulationParameters.voxelSimplification, title)
 
         # self.fail("Test if the testcase is working.")
 
@@ -187,29 +187,29 @@ class TestSimulationParameters(unittest.TestCase):
         filepath = os.path.abspath(os.path.join(self.testDataPath, "inputs", "{}.par".format(title)))
         simulationParameters.read(filepath)
 
-        self.assertEquals(version.VERSION_1_2_1.major, simulationParameters.version.major)
-        self.assertEquals(version.VERSION_1_2_1.minor, simulationParameters.version.minor)
-        self.assertEquals(version.VERSION_1_2_1.revision, simulationParameters.version.revision)
-        self.assertEquals(version.VERSION_1_2_1, simulationParameters.version)
+        self.assertEqual(version.VERSION_1_2_1.major, simulationParameters.version.major)
+        self.assertEqual(version.VERSION_1_2_1.minor, simulationParameters.version.minor)
+        self.assertEqual(version.VERSION_1_2_1.revision, simulationParameters.version.revision)
+        self.assertEqual(version.VERSION_1_2_1, simulationParameters.version)
 
         simulationParametersRef = get_simulation_parameters_reference(title)
-        self.assertEquals(simulationParametersRef.version.major, simulationParameters.version.major)
-        self.assertEquals(simulationParametersRef.version.minor, simulationParameters.version.minor)
-        self.assertEquals(simulationParametersRef.version.revision, simulationParameters.version.revision)
-        self.assertEquals(simulationParametersRef.version, simulationParameters.version)
+        self.assertEqual(simulationParametersRef.version.major, simulationParameters.version.major)
+        self.assertEqual(simulationParametersRef.version.minor, simulationParameters.version.minor)
+        self.assertEqual(simulationParametersRef.version.revision, simulationParameters.version.revision)
+        self.assertEqual(simulationParametersRef.version, simulationParameters.version)
 
-        self.assertEquals(simulationParametersRef.baseFilename, simulationParameters.baseFilename)
-        self.assertEquals(simulationParametersRef.numberElectrons, simulationParameters.numberElectrons)
-        self.assertEquals(simulationParametersRef.numberPhotons, simulationParameters.numberPhotons)
-        self.assertEquals(simulationParametersRef.numberWindows, simulationParameters.numberWindows)
-        self.assertEquals(simulationParametersRef.numberFilmsX, simulationParameters.numberFilmsX)
-        self.assertEquals(simulationParametersRef.numberFilmsY, simulationParameters.numberFilmsY)
-        self.assertEquals(simulationParametersRef.numberFilmsZ, simulationParameters.numberFilmsZ)
-        self.assertEquals(simulationParametersRef.numberChannels, simulationParameters.numberChannels)
-        self.assertEquals(simulationParametersRef.energyChannelWidth_eV, simulationParameters.energyChannelWidth_eV)
-        self.assertEquals(simulationParametersRef.spectrumInterpolationModel,
+        self.assertEqual(simulationParametersRef.baseFilename, simulationParameters.baseFilename)
+        self.assertEqual(simulationParametersRef.numberElectrons, simulationParameters.numberElectrons)
+        self.assertEqual(simulationParametersRef.numberPhotons, simulationParameters.numberPhotons)
+        self.assertEqual(simulationParametersRef.numberWindows, simulationParameters.numberWindows)
+        self.assertEqual(simulationParametersRef.numberFilmsX, simulationParameters.numberFilmsX)
+        self.assertEqual(simulationParametersRef.numberFilmsY, simulationParameters.numberFilmsY)
+        self.assertEqual(simulationParametersRef.numberFilmsZ, simulationParameters.numberFilmsZ)
+        self.assertEqual(simulationParametersRef.numberChannels, simulationParameters.numberChannels)
+        self.assertEqual(simulationParametersRef.energyChannelWidth_eV, simulationParameters.energyChannelWidth_eV)
+        self.assertEqual(simulationParametersRef.spectrumInterpolationModel,
                           simulationParameters.spectrumInterpolationModel)
-        self.assertEquals(simulationParametersRef.voxelSimplification, simulationParameters.voxelSimplification, title)
+        self.assertEqual(simulationParametersRef.voxelSimplification, simulationParameters.voxelSimplification, title)
 
         # self.fail("Test if the testcase is working.")
 
@@ -224,29 +224,29 @@ class TestSimulationParameters(unittest.TestCase):
         filepath = os.path.abspath(os.path.join(self.testDataPath, "inputs", "{}.par".format(title)))
         simulationParameters.read(filepath)
 
-        self.assertEquals(version.VERSION_1_4_1.major, simulationParameters.version.major)
-        self.assertEquals(version.VERSION_1_4_1.minor, simulationParameters.version.minor)
-        self.assertEquals(version.VERSION_1_4_1.revision, simulationParameters.version.revision)
-        self.assertEquals(version.VERSION_1_4_1, simulationParameters.version)
+        self.assertEqual(version.VERSION_1_4_1.major, simulationParameters.version.major)
+        self.assertEqual(version.VERSION_1_4_1.minor, simulationParameters.version.minor)
+        self.assertEqual(version.VERSION_1_4_1.revision, simulationParameters.version.revision)
+        self.assertEqual(version.VERSION_1_4_1, simulationParameters.version)
 
         simulationParametersRef = get_simulation_parameters_reference(title)
-        self.assertEquals(simulationParametersRef.version.major, simulationParameters.version.major)
-        self.assertEquals(simulationParametersRef.version.minor, simulationParameters.version.minor)
-        self.assertEquals(simulationParametersRef.version.revision, simulationParameters.version.revision)
-        self.assertEquals(simulationParametersRef.version, simulationParameters.version)
+        self.assertEqual(simulationParametersRef.version.major, simulationParameters.version.major)
+        self.assertEqual(simulationParametersRef.version.minor, simulationParameters.version.minor)
+        self.assertEqual(simulationParametersRef.version.revision, simulationParameters.version.revision)
+        self.assertEqual(simulationParametersRef.version, simulationParameters.version)
 
-        self.assertEquals(simulationParametersRef.baseFilename, simulationParameters.baseFilename)
-        self.assertEquals(simulationParametersRef.numberElectrons, simulationParameters.numberElectrons)
-        self.assertEquals(simulationParametersRef.numberPhotons, simulationParameters.numberPhotons)
-        self.assertEquals(simulationParametersRef.numberWindows, simulationParameters.numberWindows)
-        self.assertEquals(simulationParametersRef.numberFilmsX, simulationParameters.numberFilmsX)
-        self.assertEquals(simulationParametersRef.numberFilmsY, simulationParameters.numberFilmsY)
-        self.assertEquals(simulationParametersRef.numberFilmsZ, simulationParameters.numberFilmsZ)
-        self.assertEquals(simulationParametersRef.numberChannels, simulationParameters.numberChannels)
-        self.assertEquals(simulationParametersRef.energyChannelWidth_eV, simulationParameters.energyChannelWidth_eV)
-        self.assertEquals(simulationParametersRef.spectrumInterpolationModel,
+        self.assertEqual(simulationParametersRef.baseFilename, simulationParameters.baseFilename)
+        self.assertEqual(simulationParametersRef.numberElectrons, simulationParameters.numberElectrons)
+        self.assertEqual(simulationParametersRef.numberPhotons, simulationParameters.numberPhotons)
+        self.assertEqual(simulationParametersRef.numberWindows, simulationParameters.numberWindows)
+        self.assertEqual(simulationParametersRef.numberFilmsX, simulationParameters.numberFilmsX)
+        self.assertEqual(simulationParametersRef.numberFilmsY, simulationParameters.numberFilmsY)
+        self.assertEqual(simulationParametersRef.numberFilmsZ, simulationParameters.numberFilmsZ)
+        self.assertEqual(simulationParametersRef.numberChannels, simulationParameters.numberChannels)
+        self.assertEqual(simulationParametersRef.energyChannelWidth_eV, simulationParameters.energyChannelWidth_eV)
+        self.assertEqual(simulationParametersRef.spectrumInterpolationModel,
                           simulationParameters.spectrumInterpolationModel)
-        self.assertEquals(simulationParametersRef.voxelSimplification, simulationParameters.voxelSimplification, title)
+        self.assertEqual(simulationParametersRef.voxelSimplification, simulationParameters.voxelSimplification, title)
 
         # self.fail("Test if the testcase is working.")
 
@@ -261,32 +261,32 @@ class TestSimulationParameters(unittest.TestCase):
         filepath = os.path.abspath(os.path.join(self.testDataPath, "inputs", "{}.par".format(title)))
         simulationParameters.read(filepath)
 
-        self.assertEquals(version.VERSION_1_4_4.major, simulationParameters.version.major)
-        self.assertEquals(version.VERSION_1_4_4.minor, simulationParameters.version.minor)
-        self.assertEquals(version.VERSION_1_4_4.revision, simulationParameters.version.revision)
-        self.assertEquals(version.VERSION_1_4_4, simulationParameters.version)
+        self.assertEqual(version.VERSION_1_4_4.major, simulationParameters.version.major)
+        self.assertEqual(version.VERSION_1_4_4.minor, simulationParameters.version.minor)
+        self.assertEqual(version.VERSION_1_4_4.revision, simulationParameters.version.revision)
+        self.assertEqual(version.VERSION_1_4_4, simulationParameters.version)
 
         simulationParametersRef = get_simulation_parameters_reference(title)
-        self.assertEquals(simulationParametersRef.version.major, simulationParameters.version.major)
-        self.assertEquals(simulationParametersRef.version.minor, simulationParameters.version.minor)
-        self.assertEquals(simulationParametersRef.version.revision, simulationParameters.version.revision)
-        self.assertEquals(simulationParametersRef.version, simulationParameters.version)
+        self.assertEqual(simulationParametersRef.version.major, simulationParameters.version.major)
+        self.assertEqual(simulationParametersRef.version.minor, simulationParameters.version.minor)
+        self.assertEqual(simulationParametersRef.version.revision, simulationParameters.version.revision)
+        self.assertEqual(simulationParametersRef.version, simulationParameters.version)
 
-        self.assertEquals(simulationParametersRef.baseFilename, simulationParameters.baseFilename)
-        self.assertEquals(simulationParametersRef.numberElectrons, simulationParameters.numberElectrons)
-        self.assertEquals(simulationParametersRef.numberPhotons, simulationParameters.numberPhotons)
-        self.assertEquals(simulationParametersRef.numberWindows, simulationParameters.numberWindows)
-        self.assertEquals(simulationParametersRef.numberFilmsX, simulationParameters.numberFilmsX)
-        self.assertEquals(simulationParametersRef.numberFilmsY, simulationParameters.numberFilmsY)
-        self.assertEquals(simulationParametersRef.numberFilmsZ, simulationParameters.numberFilmsZ)
-        self.assertEquals(simulationParametersRef.numberChannels, simulationParameters.numberChannels)
-        self.assertEquals(simulationParametersRef.energyChannelWidth_eV, simulationParameters.energyChannelWidth_eV)
-        self.assertEquals(simulationParametersRef.spectrumInterpolationModel,
+        self.assertEqual(simulationParametersRef.baseFilename, simulationParameters.baseFilename)
+        self.assertEqual(simulationParametersRef.numberElectrons, simulationParameters.numberElectrons)
+        self.assertEqual(simulationParametersRef.numberPhotons, simulationParameters.numberPhotons)
+        self.assertEqual(simulationParametersRef.numberWindows, simulationParameters.numberWindows)
+        self.assertEqual(simulationParametersRef.numberFilmsX, simulationParameters.numberFilmsX)
+        self.assertEqual(simulationParametersRef.numberFilmsY, simulationParameters.numberFilmsY)
+        self.assertEqual(simulationParametersRef.numberFilmsZ, simulationParameters.numberFilmsZ)
+        self.assertEqual(simulationParametersRef.numberChannels, simulationParameters.numberChannels)
+        self.assertEqual(simulationParametersRef.energyChannelWidth_eV, simulationParameters.energyChannelWidth_eV)
+        self.assertEqual(simulationParametersRef.spectrumInterpolationModel,
                           simulationParameters.spectrumInterpolationModel)
-        self.assertEquals(simulationParametersRef.voxelSimplification, simulationParameters.voxelSimplification, title)
-        self.assertEquals(simulationParametersRef.elasticCrossSectionScalingFactor,
+        self.assertEqual(simulationParametersRef.voxelSimplification, simulationParameters.voxelSimplification, title)
+        self.assertEqual(simulationParametersRef.elasticCrossSectionScalingFactor,
                           simulationParameters.elasticCrossSectionScalingFactor)
-        self.assertEquals(simulationParametersRef.energyLossScalingFactor, simulationParameters.energyLossScalingFactor)
+        self.assertEqual(simulationParametersRef.energyLossScalingFactor, simulationParameters.energyLossScalingFactor)
 
         # self.fail("Test if the testcase is working.")
 
@@ -300,12 +300,12 @@ class TestSimulationParameters(unittest.TestCase):
         simulationParameters.version = copy.deepcopy(version.VERSION_1_4_3)
         numberKeys = 10
         keys = simulationParameters._createKeys()
-        self.assertEquals(numberKeys, len(keys))
+        self.assertEqual(numberKeys, len(keys))
 
         simulationParameters.version = copy.deepcopy(version.VERSION_1_4_4)
         numberKeys = 12
         keys = simulationParameters._createKeys()
-        self.assertEquals(numberKeys, len(keys))
+        self.assertEqual(numberKeys, len(keys))
 
         # self.fail("Test if the testcase is working.")
 
@@ -324,18 +324,18 @@ class TestSimulationParameters(unittest.TestCase):
 
             simulationParameters.write(filepath)
 
-            self.assertEquals(simulationParametersRef.baseFilename, simulationParameters.baseFilename)
-            self.assertEquals(simulationParametersRef.numberElectrons, simulationParameters.numberElectrons)
-            self.assertEquals(simulationParametersRef.numberPhotons, simulationParameters.numberPhotons)
-            self.assertEquals(simulationParametersRef.numberWindows, simulationParameters.numberWindows)
-            self.assertEquals(simulationParametersRef.numberFilmsX, simulationParameters.numberFilmsX)
-            self.assertEquals(simulationParametersRef.numberFilmsY, simulationParameters.numberFilmsY)
-            self.assertEquals(simulationParametersRef.numberFilmsZ, simulationParameters.numberFilmsZ)
-            self.assertEquals(simulationParametersRef.numberChannels, simulationParameters.numberChannels)
-            self.assertEquals(simulationParametersRef.energyChannelWidth_eV, simulationParameters.energyChannelWidth_eV)
-            self.assertEquals(simulationParametersRef.spectrumInterpolationModel,
+            self.assertEqual(simulationParametersRef.baseFilename, simulationParameters.baseFilename)
+            self.assertEqual(simulationParametersRef.numberElectrons, simulationParameters.numberElectrons)
+            self.assertEqual(simulationParametersRef.numberPhotons, simulationParameters.numberPhotons)
+            self.assertEqual(simulationParametersRef.numberWindows, simulationParameters.numberWindows)
+            self.assertEqual(simulationParametersRef.numberFilmsX, simulationParameters.numberFilmsX)
+            self.assertEqual(simulationParametersRef.numberFilmsY, simulationParameters.numberFilmsY)
+            self.assertEqual(simulationParametersRef.numberFilmsZ, simulationParameters.numberFilmsZ)
+            self.assertEqual(simulationParametersRef.numberChannels, simulationParameters.numberChannels)
+            self.assertEqual(simulationParametersRef.energyChannelWidth_eV, simulationParameters.energyChannelWidth_eV)
+            self.assertEqual(simulationParametersRef.spectrumInterpolationModel,
                               simulationParameters.spectrumInterpolationModel)
-            self.assertEquals(simulationParametersRef.voxelSimplification, simulationParameters.voxelSimplification,
+            self.assertEqual(simulationParametersRef.voxelSimplification, simulationParameters.voxelSimplification,
                               title)
 
             # .. todo:: Make the lines comparison work.
@@ -360,23 +360,23 @@ class TestSimulationParameters(unittest.TestCase):
 
         simulationParameters.write(filepath)
 
-        self.assertEquals(simulationParametersRef.baseFilename, simulationParameters.baseFilename)
-        self.assertEquals(simulationParametersRef.numberElectrons, simulationParameters.numberElectrons)
-        self.assertEquals(simulationParametersRef.numberPhotons, simulationParameters.numberPhotons)
-        self.assertEquals(simulationParametersRef.numberWindows, simulationParameters.numberWindows)
-        self.assertEquals(simulationParametersRef.numberFilmsX, simulationParameters.numberFilmsX)
-        self.assertEquals(simulationParametersRef.numberFilmsY, simulationParameters.numberFilmsY)
-        self.assertEquals(simulationParametersRef.numberFilmsZ, simulationParameters.numberFilmsZ)
-        self.assertEquals(simulationParametersRef.numberChannels, simulationParameters.numberChannels)
-        self.assertEquals(simulationParametersRef.energyChannelWidth_eV, simulationParameters.energyChannelWidth_eV)
-        self.assertEquals(simulationParametersRef.spectrumInterpolationModel,
+        self.assertEqual(simulationParametersRef.baseFilename, simulationParameters.baseFilename)
+        self.assertEqual(simulationParametersRef.numberElectrons, simulationParameters.numberElectrons)
+        self.assertEqual(simulationParametersRef.numberPhotons, simulationParameters.numberPhotons)
+        self.assertEqual(simulationParametersRef.numberWindows, simulationParameters.numberWindows)
+        self.assertEqual(simulationParametersRef.numberFilmsX, simulationParameters.numberFilmsX)
+        self.assertEqual(simulationParametersRef.numberFilmsY, simulationParameters.numberFilmsY)
+        self.assertEqual(simulationParametersRef.numberFilmsZ, simulationParameters.numberFilmsZ)
+        self.assertEqual(simulationParametersRef.numberChannels, simulationParameters.numberChannels)
+        self.assertEqual(simulationParametersRef.energyChannelWidth_eV, simulationParameters.energyChannelWidth_eV)
+        self.assertEqual(simulationParametersRef.spectrumInterpolationModel,
                           simulationParameters.spectrumInterpolationModel)
-        self.assertEquals(simulationParametersRef.voxelSimplification, simulationParameters.voxelSimplification, title)
+        self.assertEqual(simulationParametersRef.voxelSimplification, simulationParameters.voxelSimplification, title)
 
-        self.assertEquals(simulationParametersRef.version.major, simulationParameters.version.major)
-        self.assertEquals(simulationParametersRef.version.minor, simulationParameters.version.minor)
-        self.assertEquals(simulationParametersRef.version.revision, simulationParameters.version.revision)
-        self.assertEquals(simulationParametersRef.version, simulationParameters.version)
+        self.assertEqual(simulationParametersRef.version.major, simulationParameters.version.major)
+        self.assertEqual(simulationParametersRef.version.minor, simulationParameters.version.minor)
+        self.assertEqual(simulationParametersRef.version.revision, simulationParameters.version.revision)
+        self.assertEqual(simulationParametersRef.version, simulationParameters.version)
 
         # .. todo:: Make the lines comparison work.
         # filepathReference = os.path.abspath(os.path.join(self.testDataPath, "inputs", "{}.par".format(title)))
@@ -402,23 +402,23 @@ class TestSimulationParameters(unittest.TestCase):
         simulationParameters.version = copy.deepcopy(version.VERSION_1_2_0)
         simulationParameters.write(filepath)
 
-        self.assertEquals(simulationParametersRef.baseFilename, simulationParameters.baseFilename)
-        self.assertEquals(simulationParametersRef.numberElectrons, simulationParameters.numberElectrons)
-        self.assertEquals(simulationParametersRef.numberPhotons, simulationParameters.numberPhotons)
-        self.assertEquals(simulationParametersRef.numberWindows, simulationParameters.numberWindows)
-        self.assertEquals(simulationParametersRef.numberFilmsX, simulationParameters.numberFilmsX)
-        self.assertEquals(simulationParametersRef.numberFilmsY, simulationParameters.numberFilmsY)
-        self.assertEquals(simulationParametersRef.numberFilmsZ, simulationParameters.numberFilmsZ)
-        self.assertEquals(simulationParametersRef.numberChannels, simulationParameters.numberChannels)
-        self.assertEquals(simulationParametersRef.energyChannelWidth_eV, simulationParameters.energyChannelWidth_eV)
-        self.assertEquals(simulationParametersRef.spectrumInterpolationModel,
+        self.assertEqual(simulationParametersRef.baseFilename, simulationParameters.baseFilename)
+        self.assertEqual(simulationParametersRef.numberElectrons, simulationParameters.numberElectrons)
+        self.assertEqual(simulationParametersRef.numberPhotons, simulationParameters.numberPhotons)
+        self.assertEqual(simulationParametersRef.numberWindows, simulationParameters.numberWindows)
+        self.assertEqual(simulationParametersRef.numberFilmsX, simulationParameters.numberFilmsX)
+        self.assertEqual(simulationParametersRef.numberFilmsY, simulationParameters.numberFilmsY)
+        self.assertEqual(simulationParametersRef.numberFilmsZ, simulationParameters.numberFilmsZ)
+        self.assertEqual(simulationParametersRef.numberChannels, simulationParameters.numberChannels)
+        self.assertEqual(simulationParametersRef.energyChannelWidth_eV, simulationParameters.energyChannelWidth_eV)
+        self.assertEqual(simulationParametersRef.spectrumInterpolationModel,
                           simulationParameters.spectrumInterpolationModel)
-        self.assertEquals(simulationParametersRef.voxelSimplification, simulationParameters.voxelSimplification, title)
+        self.assertEqual(simulationParametersRef.voxelSimplification, simulationParameters.voxelSimplification, title)
 
-        self.assertEquals(simulationParametersRef.version.major, simulationParameters.version.major)
-        self.assertEquals(simulationParametersRef.version.minor, simulationParameters.version.minor)
-        self.assertEquals(simulationParametersRef.version.revision, simulationParameters.version.revision)
-        self.assertEquals(simulationParametersRef.version, simulationParameters.version)
+        self.assertEqual(simulationParametersRef.version.major, simulationParameters.version.major)
+        self.assertEqual(simulationParametersRef.version.minor, simulationParameters.version.minor)
+        self.assertEqual(simulationParametersRef.version.revision, simulationParameters.version.revision)
+        self.assertEqual(simulationParametersRef.version, simulationParameters.version)
 
         linesRef = open(filepathReference, 'r').readlines()
         lines = open(filepath, 'r').readlines()
@@ -444,23 +444,23 @@ class TestSimulationParameters(unittest.TestCase):
 
         simulationParameters.write(filepath)
 
-        self.assertEquals(simulationParametersRef.baseFilename, simulationParameters.baseFilename)
-        self.assertEquals(simulationParametersRef.numberElectrons, simulationParameters.numberElectrons)
-        self.assertEquals(simulationParametersRef.numberPhotons, simulationParameters.numberPhotons)
-        self.assertEquals(simulationParametersRef.numberWindows, simulationParameters.numberWindows)
-        self.assertEquals(simulationParametersRef.numberFilmsX, simulationParameters.numberFilmsX)
-        self.assertEquals(simulationParametersRef.numberFilmsY, simulationParameters.numberFilmsY)
-        self.assertEquals(simulationParametersRef.numberFilmsZ, simulationParameters.numberFilmsZ)
-        self.assertEquals(simulationParametersRef.numberChannels, simulationParameters.numberChannels)
-        self.assertEquals(simulationParametersRef.energyChannelWidth_eV, simulationParameters.energyChannelWidth_eV)
-        self.assertEquals(simulationParametersRef.spectrumInterpolationModel,
+        self.assertEqual(simulationParametersRef.baseFilename, simulationParameters.baseFilename)
+        self.assertEqual(simulationParametersRef.numberElectrons, simulationParameters.numberElectrons)
+        self.assertEqual(simulationParametersRef.numberPhotons, simulationParameters.numberPhotons)
+        self.assertEqual(simulationParametersRef.numberWindows, simulationParameters.numberWindows)
+        self.assertEqual(simulationParametersRef.numberFilmsX, simulationParameters.numberFilmsX)
+        self.assertEqual(simulationParametersRef.numberFilmsY, simulationParameters.numberFilmsY)
+        self.assertEqual(simulationParametersRef.numberFilmsZ, simulationParameters.numberFilmsZ)
+        self.assertEqual(simulationParametersRef.numberChannels, simulationParameters.numberChannels)
+        self.assertEqual(simulationParametersRef.energyChannelWidth_eV, simulationParameters.energyChannelWidth_eV)
+        self.assertEqual(simulationParametersRef.spectrumInterpolationModel,
                           simulationParameters.spectrumInterpolationModel)
-        self.assertEquals(simulationParametersRef.voxelSimplification, simulationParameters.voxelSimplification, title)
+        self.assertEqual(simulationParametersRef.voxelSimplification, simulationParameters.voxelSimplification, title)
 
-        self.assertEquals(simulationParametersRef.version.major, simulationParameters.version.major)
-        self.assertEquals(simulationParametersRef.version.minor, simulationParameters.version.minor)
-        self.assertEquals(simulationParametersRef.version.revision, simulationParameters.version.revision)
-        self.assertEquals(simulationParametersRef.version, simulationParameters.version)
+        self.assertEqual(simulationParametersRef.version.major, simulationParameters.version.major)
+        self.assertEqual(simulationParametersRef.version.minor, simulationParameters.version.minor)
+        self.assertEqual(simulationParametersRef.version.revision, simulationParameters.version.revision)
+        self.assertEqual(simulationParametersRef.version, simulationParameters.version)
 
         linesRef = open(filepathReference, 'r').readlines()
         lines = open(filepath, 'r').readlines()
@@ -486,23 +486,23 @@ class TestSimulationParameters(unittest.TestCase):
 
         simulationParameters.write(filepath)
 
-        self.assertEquals(simulationParametersRef.baseFilename, simulationParameters.baseFilename)
-        self.assertEquals(simulationParametersRef.numberElectrons, simulationParameters.numberElectrons)
-        self.assertEquals(simulationParametersRef.numberPhotons, simulationParameters.numberPhotons)
-        self.assertEquals(simulationParametersRef.numberWindows, simulationParameters.numberWindows)
-        self.assertEquals(simulationParametersRef.numberFilmsX, simulationParameters.numberFilmsX)
-        self.assertEquals(simulationParametersRef.numberFilmsY, simulationParameters.numberFilmsY)
-        self.assertEquals(simulationParametersRef.numberFilmsZ, simulationParameters.numberFilmsZ)
-        self.assertEquals(simulationParametersRef.numberChannels, simulationParameters.numberChannels)
-        self.assertEquals(simulationParametersRef.energyChannelWidth_eV, simulationParameters.energyChannelWidth_eV)
-        self.assertEquals(simulationParametersRef.spectrumInterpolationModel,
+        self.assertEqual(simulationParametersRef.baseFilename, simulationParameters.baseFilename)
+        self.assertEqual(simulationParametersRef.numberElectrons, simulationParameters.numberElectrons)
+        self.assertEqual(simulationParametersRef.numberPhotons, simulationParameters.numberPhotons)
+        self.assertEqual(simulationParametersRef.numberWindows, simulationParameters.numberWindows)
+        self.assertEqual(simulationParametersRef.numberFilmsX, simulationParameters.numberFilmsX)
+        self.assertEqual(simulationParametersRef.numberFilmsY, simulationParameters.numberFilmsY)
+        self.assertEqual(simulationParametersRef.numberFilmsZ, simulationParameters.numberFilmsZ)
+        self.assertEqual(simulationParametersRef.numberChannels, simulationParameters.numberChannels)
+        self.assertEqual(simulationParametersRef.energyChannelWidth_eV, simulationParameters.energyChannelWidth_eV)
+        self.assertEqual(simulationParametersRef.spectrumInterpolationModel,
                           simulationParameters.spectrumInterpolationModel)
-        self.assertEquals(simulationParametersRef.voxelSimplification, simulationParameters.voxelSimplification, title)
+        self.assertEqual(simulationParametersRef.voxelSimplification, simulationParameters.voxelSimplification, title)
 
-        self.assertEquals(simulationParametersRef.version.major, simulationParameters.version.major)
-        self.assertEquals(simulationParametersRef.version.minor, simulationParameters.version.minor)
-        self.assertEquals(simulationParametersRef.version.revision, simulationParameters.version.revision)
-        self.assertEquals(simulationParametersRef.version, simulationParameters.version)
+        self.assertEqual(simulationParametersRef.version.major, simulationParameters.version.major)
+        self.assertEqual(simulationParametersRef.version.minor, simulationParameters.version.minor)
+        self.assertEqual(simulationParametersRef.version.revision, simulationParameters.version.revision)
+        self.assertEqual(simulationParametersRef.version, simulationParameters.version)
 
         linesRef = open(filepathReference, 'r').readlines()
         lines = open(filepath, 'r').readlines()
@@ -528,26 +528,26 @@ class TestSimulationParameters(unittest.TestCase):
 
         simulationParameters.write(filepath)
 
-        self.assertEquals(simulationParametersRef.baseFilename, simulationParameters.baseFilename)
-        self.assertEquals(simulationParametersRef.numberElectrons, simulationParameters.numberElectrons)
-        self.assertEquals(simulationParametersRef.numberPhotons, simulationParameters.numberPhotons)
-        self.assertEquals(simulationParametersRef.numberWindows, simulationParameters.numberWindows)
-        self.assertEquals(simulationParametersRef.numberFilmsX, simulationParameters.numberFilmsX)
-        self.assertEquals(simulationParametersRef.numberFilmsY, simulationParameters.numberFilmsY)
-        self.assertEquals(simulationParametersRef.numberFilmsZ, simulationParameters.numberFilmsZ)
-        self.assertEquals(simulationParametersRef.numberChannels, simulationParameters.numberChannels)
-        self.assertEquals(simulationParametersRef.energyChannelWidth_eV, simulationParameters.energyChannelWidth_eV)
-        self.assertEquals(simulationParametersRef.spectrumInterpolationModel,
+        self.assertEqual(simulationParametersRef.baseFilename, simulationParameters.baseFilename)
+        self.assertEqual(simulationParametersRef.numberElectrons, simulationParameters.numberElectrons)
+        self.assertEqual(simulationParametersRef.numberPhotons, simulationParameters.numberPhotons)
+        self.assertEqual(simulationParametersRef.numberWindows, simulationParameters.numberWindows)
+        self.assertEqual(simulationParametersRef.numberFilmsX, simulationParameters.numberFilmsX)
+        self.assertEqual(simulationParametersRef.numberFilmsY, simulationParameters.numberFilmsY)
+        self.assertEqual(simulationParametersRef.numberFilmsZ, simulationParameters.numberFilmsZ)
+        self.assertEqual(simulationParametersRef.numberChannels, simulationParameters.numberChannels)
+        self.assertEqual(simulationParametersRef.energyChannelWidth_eV, simulationParameters.energyChannelWidth_eV)
+        self.assertEqual(simulationParametersRef.spectrumInterpolationModel,
                           simulationParameters.spectrumInterpolationModel)
-        self.assertEquals(simulationParametersRef.voxelSimplification, simulationParameters.voxelSimplification, title)
-        self.assertEquals(simulationParametersRef.elasticCrossSectionScalingFactor,
+        self.assertEqual(simulationParametersRef.voxelSimplification, simulationParameters.voxelSimplification, title)
+        self.assertEqual(simulationParametersRef.elasticCrossSectionScalingFactor,
                           simulationParameters.elasticCrossSectionScalingFactor)
-        self.assertEquals(simulationParametersRef.energyLossScalingFactor, simulationParameters.energyLossScalingFactor)
+        self.assertEqual(simulationParametersRef.energyLossScalingFactor, simulationParameters.energyLossScalingFactor)
 
-        self.assertEquals(simulationParametersRef.version.major, simulationParameters.version.major)
-        self.assertEquals(simulationParametersRef.version.minor, simulationParameters.version.minor)
-        self.assertEquals(simulationParametersRef.version.revision, simulationParameters.version.revision)
-        self.assertEquals(simulationParametersRef.version, simulationParameters.version)
+        self.assertEqual(simulationParametersRef.version.major, simulationParameters.version.major)
+        self.assertEqual(simulationParametersRef.version.minor, simulationParameters.version.minor)
+        self.assertEqual(simulationParametersRef.version.revision, simulationParameters.version.revision)
+        self.assertEqual(simulationParametersRef.version, simulationParameters.version)
 
         linesRef = open(filepathReference, 'r').readlines()
         lines = open(filepath, 'r').readlines()

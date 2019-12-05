@@ -73,7 +73,7 @@ class TestVersion(unittest.TestCase):
         """
 
         # self.fail("Test if the testcase is working.")
-        self.assert_(True)
+        self.assertTrue(True)
 
     def test_to_string(self):
         """
@@ -83,7 +83,7 @@ class TestVersion(unittest.TestCase):
         version = Version(1, 2, 3)
         string_ref = "1.2.3"
         version_string = version.to_string()
-        self.assertEquals(string_ref, version_string)
+        self.assertEqual(string_ref, version_string)
 
         # self.fail("Test if the testcase is working.")
 
@@ -96,17 +96,17 @@ class TestVersion(unittest.TestCase):
         string_ref = "4.5.6"
         version.from_string(string_ref)
         version_string = version.to_string()
-        self.assertEquals(string_ref, version_string)
+        self.assertEqual(string_ref, version_string)
 
-        self.assertEquals(4, version.major)
-        self.assertEquals(5, version.minor)
-        self.assertEquals(6, version.revision)
+        self.assertEqual(4, version.major)
+        self.assertEqual(5, version.minor)
+        self.assertEqual(6, version.revision)
 
         # Test function
         version_ref = Version(1, 2, 3)
         version_string = "1.2.3"
         version = from_string(version_string)
-        self.assertEquals(version_ref, version)
+        self.assertEqual(version_ref, version)
 
         # self.fail("Test if the testcase is working.")
 
@@ -117,107 +117,107 @@ class TestVersion(unittest.TestCase):
 
         string_ref = "1.1.1"
         version_string = VERSION_1_1_1.to_string()
-        self.assertEquals(string_ref, version_string)
-        self.assertEquals(1, VERSION_1_1_1.major)
-        self.assertEquals(1, VERSION_1_1_1.minor)
-        self.assertEquals(1, VERSION_1_1_1.revision)
+        self.assertEqual(string_ref, version_string)
+        self.assertEqual(1, VERSION_1_1_1.major)
+        self.assertEqual(1, VERSION_1_1_1.minor)
+        self.assertEqual(1, VERSION_1_1_1.revision)
 
         string_ref = "1.2.0"
         version_string = VERSION_1_2_0.to_string()
-        self.assertEquals(string_ref, version_string)
-        self.assertEquals(1, VERSION_1_2_0.major)
-        self.assertEquals(2, VERSION_1_2_0.minor)
-        self.assertEquals(0, VERSION_1_2_0.revision)
+        self.assertEqual(string_ref, version_string)
+        self.assertEqual(1, VERSION_1_2_0.major)
+        self.assertEqual(2, VERSION_1_2_0.minor)
+        self.assertEqual(0, VERSION_1_2_0.revision)
 
         string_ref = "1.2.1"
         version_string = VERSION_1_2_1.to_string()
-        self.assertEquals(string_ref, version_string)
-        self.assertEquals(1, VERSION_1_2_1.major)
-        self.assertEquals(2, VERSION_1_2_1.minor)
-        self.assertEquals(1, VERSION_1_2_1.revision)
+        self.assertEqual(string_ref, version_string)
+        self.assertEqual(1, VERSION_1_2_1.major)
+        self.assertEqual(2, VERSION_1_2_1.minor)
+        self.assertEqual(1, VERSION_1_2_1.revision)
 
         string_ref = "1.2.2"
         version_string = VERSION_1_2_2.to_string()
-        self.assertEquals(string_ref, version_string)
-        self.assertEquals(1, VERSION_1_2_2.major)
-        self.assertEquals(2, VERSION_1_2_2.minor)
-        self.assertEquals(2, VERSION_1_2_2.revision)
+        self.assertEqual(string_ref, version_string)
+        self.assertEqual(1, VERSION_1_2_2.major)
+        self.assertEqual(2, VERSION_1_2_2.minor)
+        self.assertEqual(2, VERSION_1_2_2.revision)
 
         string_ref = "1.2.3"
         version_string = VERSION_1_2_3.to_string()
-        self.assertEquals(string_ref, version_string)
-        self.assertEquals(1, VERSION_1_2_3.major)
-        self.assertEquals(2, VERSION_1_2_3.minor)
-        self.assertEquals(3, VERSION_1_2_3.revision)
+        self.assertEqual(string_ref, version_string)
+        self.assertEqual(1, VERSION_1_2_3.major)
+        self.assertEqual(2, VERSION_1_2_3.minor)
+        self.assertEqual(3, VERSION_1_2_3.revision)
 
         string_ref = "1.2.4"
         version_string = VERSION_1_2_4.to_string()
-        self.assertEquals(string_ref, version_string)
-        self.assertEquals(1, VERSION_1_2_4.major)
-        self.assertEquals(2, VERSION_1_2_4.minor)
-        self.assertEquals(4, VERSION_1_2_4.revision)
+        self.assertEqual(string_ref, version_string)
+        self.assertEqual(1, VERSION_1_2_4.major)
+        self.assertEqual(2, VERSION_1_2_4.minor)
+        self.assertEqual(4, VERSION_1_2_4.revision)
 
         string_ref = "1.2.5"
         version_string = VERSION_1_2_5.to_string()
-        self.assertEquals(string_ref, version_string)
-        self.assertEquals(1, VERSION_1_2_5.major)
-        self.assertEquals(2, VERSION_1_2_5.minor)
-        self.assertEquals(5, VERSION_1_2_5.revision)
+        self.assertEqual(string_ref, version_string)
+        self.assertEqual(1, VERSION_1_2_5.major)
+        self.assertEqual(2, VERSION_1_2_5.minor)
+        self.assertEqual(5, VERSION_1_2_5.revision)
 
         string_ref = "1.3.0"
         version_string = VERSION_1_3_0.to_string()
-        self.assertEquals(string_ref, version_string)
-        self.assertEquals(1, VERSION_1_3_0.major)
-        self.assertEquals(3, VERSION_1_3_0.minor)
-        self.assertEquals(0, VERSION_1_3_0.revision)
+        self.assertEqual(string_ref, version_string)
+        self.assertEqual(1, VERSION_1_3_0.major)
+        self.assertEqual(3, VERSION_1_3_0.minor)
+        self.assertEqual(0, VERSION_1_3_0.revision)
 
         string_ref = "1.4.0"
         version_string = VERSION_1_4_0.to_string()
-        self.assertEquals(string_ref, version_string)
-        self.assertEquals(1, VERSION_1_4_0.major)
-        self.assertEquals(4, VERSION_1_4_0.minor)
-        self.assertEquals(0, VERSION_1_4_0.revision)
+        self.assertEqual(string_ref, version_string)
+        self.assertEqual(1, VERSION_1_4_0.major)
+        self.assertEqual(4, VERSION_1_4_0.minor)
+        self.assertEqual(0, VERSION_1_4_0.revision)
 
         string_ref = "1.4.1"
         version_string = VERSION_1_4_1.to_string()
-        self.assertEquals(string_ref, version_string)
-        self.assertEquals(1, VERSION_1_4_1.major)
-        self.assertEquals(4, VERSION_1_4_1.minor)
-        self.assertEquals(1, VERSION_1_4_1.revision)
+        self.assertEqual(string_ref, version_string)
+        self.assertEqual(1, VERSION_1_4_1.major)
+        self.assertEqual(4, VERSION_1_4_1.minor)
+        self.assertEqual(1, VERSION_1_4_1.revision)
 
         string_ref = "1.4.2"
         version_string = VERSION_1_4_2.to_string()
-        self.assertEquals(string_ref, version_string)
-        self.assertEquals(1, VERSION_1_4_2.major)
-        self.assertEquals(4, VERSION_1_4_2.minor)
-        self.assertEquals(2, VERSION_1_4_2.revision)
+        self.assertEqual(string_ref, version_string)
+        self.assertEqual(1, VERSION_1_4_2.major)
+        self.assertEqual(4, VERSION_1_4_2.minor)
+        self.assertEqual(2, VERSION_1_4_2.revision)
 
         string_ref = "2.1.1"
         version_string = VERSION_2_1_1.to_string()
-        self.assertEquals(string_ref, version_string)
-        self.assertEquals(2, VERSION_2_1_1.major)
-        self.assertEquals(1, VERSION_2_1_1.minor)
-        self.assertEquals(1, VERSION_2_1_1.revision)
+        self.assertEqual(string_ref, version_string)
+        self.assertEqual(2, VERSION_2_1_1.major)
+        self.assertEqual(1, VERSION_2_1_1.minor)
+        self.assertEqual(1, VERSION_2_1_1.revision)
 
         string_ref = "1.1.1"
         version_string = BEFORE_VERSION.to_string()
-        self.assertEquals(string_ref, version_string)
-        self.assertEquals(1, BEFORE_VERSION.major)
-        self.assertEquals(1, BEFORE_VERSION.minor)
-        self.assertEquals(1, BEFORE_VERSION.revision)
+        self.assertEqual(string_ref, version_string)
+        self.assertEqual(1, BEFORE_VERSION.major)
+        self.assertEqual(1, BEFORE_VERSION.minor)
+        self.assertEqual(1, BEFORE_VERSION.revision)
 
-        self.assertEquals(VERSION_1_1_1, BEFORE_VERSION)
-        self.assertNotEquals(VERSION_1_1_1, CURRENT_VERSION)
+        self.assertEqual(VERSION_1_1_1, BEFORE_VERSION)
+        self.assertNotEqual(VERSION_1_1_1, CURRENT_VERSION)
 
         string_ref = "2.2.0"
         version_string = CURRENT_VERSION.to_string()
-        self.assertEquals(string_ref, version_string)
-        self.assertEquals(2, CURRENT_VERSION.major)
-        self.assertEquals(2, CURRENT_VERSION.minor)
-        self.assertEquals(0, CURRENT_VERSION.revision)
+        self.assertEqual(string_ref, version_string)
+        self.assertEqual(2, CURRENT_VERSION.major)
+        self.assertEqual(2, CURRENT_VERSION.minor)
+        self.assertEqual(0, CURRENT_VERSION.revision)
 
-        self.assertEquals(VERSION_2_2_0, CURRENT_VERSION)
-        self.assertNotEquals(VERSION_1_5_2, BEFORE_VERSION)
+        self.assertEqual(VERSION_2_2_0, CURRENT_VERSION)
+        self.assertNotEqual(VERSION_1_5_2, BEFORE_VERSION)
         self.assertFalse(VERSION_1_5_2 == BEFORE_VERSION)
 
         # self.fail("Test if the testcase is working.")
@@ -245,8 +245,3 @@ class TestVersion(unittest.TestCase):
         self.assertTrue(VERSION_1_2_1 >= VERSION_1_2_0)
 
         # self.fail("Test if the testcase is working.")
-
-
-if __name__ == '__main__':  # pragma: no cover
-    import nose
-    nose.runmodule()

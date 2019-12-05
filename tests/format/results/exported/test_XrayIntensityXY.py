@@ -52,7 +52,7 @@ class TestXrayIntensityXY(unittest.TestCase):
         """
 
         #self.fail("Test if the testcase is working.")
-        self.assert_(True)
+        self.assertTrue(True)
 
     def testOpenFile(self):
         """
@@ -69,7 +69,7 @@ class TestXrayIntensityXY(unittest.TestCase):
         xrayIntensityXY.readData(filepath)
 
         #self.fail("Test if the testcase is working.")
-        self.assert_(True)
+        self.assertTrue(True)
 
 if __name__ == '__main__':  #pragma: no cover
     logging.getLogger().setLevel(logging.DEBUG)

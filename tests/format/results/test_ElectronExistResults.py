@@ -71,7 +71,7 @@ class TestElectronExistResults(unittest.TestCase):
         """
 
         # self.fail("Test if the testcase is working.")
-        self.assert_(True)
+        self.assertTrue(True)
 
     def test_dataFileExist(self):
         """
@@ -87,16 +87,16 @@ class TestElectronExistResults(unittest.TestCase):
         self.assertTrue(os.path.isfile(self.results.filepath))
 
         # self.fail("Test if the testcase is working.")
-        self.assert_(True)
+        self.assertTrue(True)
 
     def test_read(self):
         """
         Tests for method `read`.
         """
 
-        self.assertEquals(0, self.results.numberData)
+        self.assertEqual(0, self.results.numberData)
         self.results.read()
-        self.assertEquals(4036, self.results.numberData)
+        self.assertEqual(4036, self.results.numberData)
 
         # self.fail("Test if the testcase is working.")
 
@@ -108,26 +108,26 @@ class TestElectronExistResults(unittest.TestCase):
         """
         energies_keV, histogram = self.results.getEnergyDistribution()
 
-        self.assertEquals(10, len(energies_keV))
-        self.assertEquals(10, len(histogram))
+        self.assertEqual(10, len(energies_keV))
+        self.assertEqual(10, len(histogram))
 
-        self.assertAlmostEquals(0.0505063517, energies_keV[0])
-        self.assertAlmostEquals(0.15039168310000001, energies_keV[1])
-        self.assertAlmostEquals(0.94947433429999994, energies_keV[-1])
+        self.assertAlmostEqual(0.0505063517, energies_keV[0])
+        self.assertAlmostEqual(0.15039168310000001, energies_keV[1])
+        self.assertAlmostEqual(0.94947433429999994, energies_keV[-1])
 
-        self.assertEquals(123, histogram[0])
-        self.assertEquals(897, histogram[-1])
+        self.assertEqual(123, histogram[0])
+        self.assertEqual(897, histogram[-1])
 
         energies_keV, histogram = self.results.getEnergyDistribution(numberBins=20)
 
-        self.assertEquals(20, len(energies_keV))
-        self.assertEquals(20, len(histogram))
+        self.assertEqual(20, len(energies_keV))
+        self.assertEqual(20, len(histogram))
 
-        self.assertAlmostEquals(0.025535018850000001, energies_keV[0])
-        self.assertAlmostEquals(0.075477684550000007, energies_keV[1])
-        self.assertAlmostEquals(0.97444566715000003, energies_keV[-1])
+        self.assertAlmostEqual(0.025535018850000001, energies_keV[0])
+        self.assertAlmostEqual(0.075477684550000007, energies_keV[1])
+        self.assertAlmostEqual(0.97444566715000003, energies_keV[-1])
 
-        self.assertEquals(67, histogram[0])
-        self.assertEquals(461, histogram[-1])
+        self.assertEqual(67, histogram[0])
+        self.assertEqual(461, histogram[-1])
 
         # self.fail("Test if the testcase is working.")

@@ -58,7 +58,7 @@ class TestRegionVolume(unittest.TestCase):
         """
 
         #self.fail("Test if the testcase is working.")
-        self.assert_(True)
+        self.assertTrue(True)
 
     def NOtest_readFromLines(self):
         """
@@ -70,15 +70,15 @@ class TestRegionVolume(unittest.TestCase):
         regionVolume = RegionVolume.RegionVolume()
         regionVolume.readFromLines(lines)
 
-        self.assertEquals(regionVolumeRef.regionID, regionVolume.regionID)
-        self.assertEquals(regionVolumeRef.volumeSize, regionVolume.volumeSize)
-        self.assertEquals(regionVolumeRef.volumeMinimum_A, regionVolume.volumeMinimum_A)
-        self.assertEquals(regionVolumeRef.volumeMaximum_A, regionVolume.volumeMaximum_A)
-        self.assertEquals(regionVolumeRef.volumeType, regionVolume.volumeType)
-        self.assertEquals(regionVolumeRef.volumeParameters, regionVolume.volumeParameters)
-        self.assertEquals(regionVolumeRef.isExclusion, regionVolume.isExclusion)
-        self.assertEquals(regionVolumeRef.isCompact, regionVolume.isCompact)
-        self.assertEquals(regionVolumeRef.isEmpty, regionVolume.isEmpty)
+        self.assertEqual(regionVolumeRef.regionID, regionVolume.regionID)
+        self.assertEqual(regionVolumeRef.volumeSize, regionVolume.volumeSize)
+        self.assertEqual(regionVolumeRef.volumeMinimum_A, regionVolume.volumeMinimum_A)
+        self.assertEqual(regionVolumeRef.volumeMaximum_A, regionVolume.volumeMaximum_A)
+        self.assertEqual(regionVolumeRef.volumeType, regionVolume.volumeType)
+        self.assertEqual(regionVolumeRef.volumeParameters, regionVolume.volumeParameters)
+        self.assertEqual(regionVolumeRef.isExclusion, regionVolume.isExclusion)
+        self.assertEqual(regionVolumeRef.isCompact, regionVolume.isCompact)
+        self.assertEqual(regionVolumeRef.isEmpty, regionVolume.isEmpty)
 
         self.fail("Test if the testcase is working.")
 

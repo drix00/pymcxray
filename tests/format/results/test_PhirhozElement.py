@@ -56,7 +56,7 @@ class TestPhirhozElement(unittest.TestCase):
         """
 
         #self.fail("Test if the testcase is working.")
-        self.assert_(True)
+        self.assertTrue(True)
 
     def test_readFromLine(self):
         """
@@ -68,11 +68,11 @@ class TestPhirhozElement(unittest.TestCase):
         phirhozElement = PhirhozElement.PhirhozElement()
         phirhozElement.readFromLine(line)
 
-        self.assertEquals(phirhozElementRef.symbol, phirhozElement.symbol)
-        self.assertEquals(phirhozElementRef.weightFraction, phirhozElement.weightFraction)
-        self.assertEquals(phirhozElementRef.isIonizationShell_K, phirhozElement.isIonizationShell_K)
-        self.assertEquals(phirhozElementRef.isIonizationShell_L, phirhozElement.isIonizationShell_L)
-        self.assertEquals(phirhozElementRef.isIonizationShell_M, phirhozElement.isIonizationShell_M)
+        self.assertEqual(phirhozElementRef.symbol, phirhozElement.symbol)
+        self.assertEqual(phirhozElementRef.weightFraction, phirhozElement.weightFraction)
+        self.assertEqual(phirhozElementRef.isIonizationShell_K, phirhozElement.isIonizationShell_K)
+        self.assertEqual(phirhozElementRef.isIonizationShell_L, phirhozElement.isIonizationShell_L)
+        self.assertEqual(phirhozElementRef.isIonizationShell_M, phirhozElement.isIonizationShell_M)
 
         #self.fail("Test if the testcase is working.")
 

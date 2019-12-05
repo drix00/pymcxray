@@ -71,7 +71,7 @@ class TestResultsParameters(unittest.TestCase):
         """
 
         # self.fail("Test if the testcase is working.")
-        self.assert_(True)
+        self.assertTrue(True)
 
     def test_read_1_4_1(self):
         """
@@ -84,22 +84,22 @@ class TestResultsParameters(unittest.TestCase):
         filepath = os.path.abspath(os.path.join(self.testDataPath, "inputs", "{}.rp".format(title)))
         resultsParameters.read(filepath)
 
-        self.assertEquals(version.VERSION_1_4_1.major, resultsParameters.version.major)
-        self.assertEquals(version.VERSION_1_4_1.minor, resultsParameters.version.minor)
-        self.assertEquals(version.VERSION_1_4_1.revision, resultsParameters.version.revision)
-        self.assertEquals(version.VERSION_1_4_1, resultsParameters.version)
+        self.assertEqual(version.VERSION_1_4_1.major, resultsParameters.version.major)
+        self.assertEqual(version.VERSION_1_4_1.minor, resultsParameters.version.minor)
+        self.assertEqual(version.VERSION_1_4_1.revision, resultsParameters.version.revision)
+        self.assertEqual(version.VERSION_1_4_1, resultsParameters.version)
 
         resultsParametersRef = get_simulation_parameters_reference(title)
-        self.assertEquals(resultsParametersRef.version.major, resultsParameters.version.major)
-        self.assertEquals(resultsParametersRef.version.minor, resultsParameters.version.minor)
-        self.assertEquals(resultsParametersRef.version.revision, resultsParameters.version.revision)
-        self.assertEquals(resultsParametersRef.version, resultsParameters.version)
+        self.assertEqual(resultsParametersRef.version.major, resultsParameters.version.major)
+        self.assertEqual(resultsParametersRef.version.minor, resultsParameters.version.minor)
+        self.assertEqual(resultsParametersRef.version.revision, resultsParameters.version.revision)
+        self.assertEqual(resultsParametersRef.version, resultsParameters.version)
 
-        self.assertEquals(resultsParametersRef.isComputeXrayCharacteristic,
+        self.assertEqual(resultsParametersRef.isComputeXrayCharacteristic,
                           resultsParameters.isComputeXrayCharacteristic)
-        self.assertEquals(resultsParametersRef.isComputeXrayBremsstrahlung,
+        self.assertEqual(resultsParametersRef.isComputeXrayBremsstrahlung,
                           resultsParameters.isComputeXrayBremsstrahlung)
-        self.assertEquals(resultsParametersRef.isComputeXrayPhirhoz, resultsParameters.isComputeXrayPhirhoz)
+        self.assertEqual(resultsParametersRef.isComputeXrayPhirhoz, resultsParameters.isComputeXrayPhirhoz)
 
         # self.fail("Test if the testcase is working.")
 
@@ -114,23 +114,23 @@ class TestResultsParameters(unittest.TestCase):
         filepath = os.path.abspath(os.path.join(self.testDataPath, "inputs", "{}.rp".format(title)))
         resultsParameters.read(filepath)
 
-        self.assertEquals(version.VERSION_1_4_3.major, resultsParameters.version.major)
-        self.assertEquals(version.VERSION_1_4_3.minor, resultsParameters.version.minor)
-        self.assertEquals(version.VERSION_1_4_3.revision, resultsParameters.version.revision)
-        self.assertEquals(version.VERSION_1_4_3, resultsParameters.version)
+        self.assertEqual(version.VERSION_1_4_3.major, resultsParameters.version.major)
+        self.assertEqual(version.VERSION_1_4_3.minor, resultsParameters.version.minor)
+        self.assertEqual(version.VERSION_1_4_3.revision, resultsParameters.version.revision)
+        self.assertEqual(version.VERSION_1_4_3, resultsParameters.version)
 
         resultsParametersRef = get_simulation_parameters_reference(title)
-        self.assertEquals(resultsParametersRef.version.major, resultsParameters.version.major)
-        self.assertEquals(resultsParametersRef.version.minor, resultsParameters.version.minor)
-        self.assertEquals(resultsParametersRef.version.revision, resultsParameters.version.revision)
-        self.assertEquals(resultsParametersRef.version, resultsParameters.version)
+        self.assertEqual(resultsParametersRef.version.major, resultsParameters.version.major)
+        self.assertEqual(resultsParametersRef.version.minor, resultsParameters.version.minor)
+        self.assertEqual(resultsParametersRef.version.revision, resultsParameters.version.revision)
+        self.assertEqual(resultsParametersRef.version, resultsParameters.version)
 
-        self.assertEquals(resultsParametersRef.isComputeXrayCharacteristic,
+        self.assertEqual(resultsParametersRef.isComputeXrayCharacteristic,
                           resultsParameters.isComputeXrayCharacteristic)
-        self.assertEquals(resultsParametersRef.isComputeXrayBremsstrahlung,
+        self.assertEqual(resultsParametersRef.isComputeXrayBremsstrahlung,
                           resultsParameters.isComputeXrayBremsstrahlung)
-        self.assertEquals(resultsParametersRef.isComputeXrayPhirhoz, resultsParameters.isComputeXrayPhirhoz)
-        self.assertEquals(resultsParametersRef.isComputeXraySimulatedSpectrum,
+        self.assertEqual(resultsParametersRef.isComputeXrayPhirhoz, resultsParameters.isComputeXrayPhirhoz)
+        self.assertEqual(resultsParametersRef.isComputeXraySimulatedSpectrum,
                           resultsParameters.isComputeXraySimulatedSpectrum)
 
         # self.fail("Test if the testcase is working.")
@@ -152,16 +152,16 @@ class TestResultsParameters(unittest.TestCase):
 
         resultsParameters.write(filepath)
 
-        self.assertEquals(resultsParametersRef.isComputeXrayCharacteristic,
+        self.assertEqual(resultsParametersRef.isComputeXrayCharacteristic,
                           resultsParameters.isComputeXrayCharacteristic)
-        self.assertEquals(resultsParametersRef.isComputeXrayBremsstrahlung,
+        self.assertEqual(resultsParametersRef.isComputeXrayBremsstrahlung,
                           resultsParameters.isComputeXrayBremsstrahlung)
-        self.assertEquals(resultsParametersRef.isComputeXrayPhirhoz, resultsParameters.isComputeXrayPhirhoz)
+        self.assertEqual(resultsParametersRef.isComputeXrayPhirhoz, resultsParameters.isComputeXrayPhirhoz)
 
-        self.assertEquals(resultsParametersRef.version.major, resultsParameters.version.major)
-        self.assertEquals(resultsParametersRef.version.minor, resultsParameters.version.minor)
-        self.assertEquals(resultsParametersRef.version.revision, resultsParameters.version.revision)
-        self.assertEquals(resultsParametersRef.version, resultsParameters.version)
+        self.assertEqual(resultsParametersRef.version.major, resultsParameters.version.major)
+        self.assertEqual(resultsParametersRef.version.minor, resultsParameters.version.minor)
+        self.assertEqual(resultsParametersRef.version.revision, resultsParameters.version.revision)
+        self.assertEqual(resultsParametersRef.version, resultsParameters.version)
 
         linesRef = open(filepathReference, 'r').readlines()
         lines = open(filepath, 'r').readlines()
@@ -187,18 +187,18 @@ class TestResultsParameters(unittest.TestCase):
 
         resultsParameters.write(filepath)
 
-        self.assertEquals(resultsParametersRef.isComputeXrayCharacteristic,
+        self.assertEqual(resultsParametersRef.isComputeXrayCharacteristic,
                           resultsParameters.isComputeXrayCharacteristic)
-        self.assertEquals(resultsParametersRef.isComputeXrayBremsstrahlung,
+        self.assertEqual(resultsParametersRef.isComputeXrayBremsstrahlung,
                           resultsParameters.isComputeXrayBremsstrahlung)
-        self.assertEquals(resultsParametersRef.isComputeXrayPhirhoz, resultsParameters.isComputeXrayPhirhoz)
-        self.assertEquals(resultsParametersRef.isComputeXraySimulatedSpectrum,
+        self.assertEqual(resultsParametersRef.isComputeXrayPhirhoz, resultsParameters.isComputeXrayPhirhoz)
+        self.assertEqual(resultsParametersRef.isComputeXraySimulatedSpectrum,
                           resultsParameters.isComputeXraySimulatedSpectrum)
 
-        self.assertEquals(resultsParametersRef.version.major, resultsParameters.version.major)
-        self.assertEquals(resultsParametersRef.version.minor, resultsParameters.version.minor)
-        self.assertEquals(resultsParametersRef.version.revision, resultsParameters.version.revision)
-        self.assertEquals(resultsParametersRef.version, resultsParameters.version)
+        self.assertEqual(resultsParametersRef.version.major, resultsParameters.version.major)
+        self.assertEqual(resultsParametersRef.version.minor, resultsParameters.version.minor)
+        self.assertEqual(resultsParametersRef.version.revision, resultsParameters.version.revision)
+        self.assertEqual(resultsParametersRef.version, resultsParameters.version)
 
         linesRef = open(filepathReference, 'r').readlines()
         lines = open(filepath, 'r').readlines()

@@ -56,7 +56,7 @@ class TestSimulationParameters(unittest.TestCase):
         """
 
         #self.fail("Test if the testcase is working.")
-        self.assert_(True)
+        self.assertTrue(True)
 
     def test_readFromLines(self):
         """
@@ -68,18 +68,18 @@ class TestSimulationParameters(unittest.TestCase):
         simulationParameters = SimulationParameters.SimulationParameters()
         simulationParameters.readFromLines(lines)
 
-        self.assertEquals(simulationParametersRef.numberElectrons, simulationParameters.numberElectrons)
-        self.assertEquals(simulationParametersRef.numberPhotons, simulationParameters.numberPhotons)
-        self.assertEquals(simulationParametersRef.numberEnergyWindows, simulationParameters.numberEnergyWindows)
-        self.assertEquals(simulationParametersRef.numberLayersX, simulationParameters.numberLayersX)
-        self.assertEquals(simulationParametersRef.numberLayersY, simulationParameters.numberLayersY)
-        self.assertEquals(simulationParametersRef.numberLayersZ, simulationParameters.numberLayersZ)
-        self.assertEquals(simulationParametersRef.numberChannels, simulationParameters.numberChannels)
-        self.assertEquals(simulationParametersRef.interpolationType, simulationParameters.interpolationType)
-        self.assertEquals(simulationParametersRef.edsMaximumEnergy_keV, simulationParameters.edsMaximumEnergy_keV)
-        self.assertEquals(simulationParametersRef.generalizedWalk, simulationParameters.generalizedWalk)
-        self.assertEquals(simulationParametersRef.useLiveTime_s, simulationParameters.useLiveTime_s)
-        self.assertEquals(simulationParametersRef.maximumLiveTime_s, simulationParameters.maximumLiveTime_s)
+        self.assertEqual(simulationParametersRef.numberElectrons, simulationParameters.numberElectrons)
+        self.assertEqual(simulationParametersRef.numberPhotons, simulationParameters.numberPhotons)
+        self.assertEqual(simulationParametersRef.numberEnergyWindows, simulationParameters.numberEnergyWindows)
+        self.assertEqual(simulationParametersRef.numberLayersX, simulationParameters.numberLayersX)
+        self.assertEqual(simulationParametersRef.numberLayersY, simulationParameters.numberLayersY)
+        self.assertEqual(simulationParametersRef.numberLayersZ, simulationParameters.numberLayersZ)
+        self.assertEqual(simulationParametersRef.numberChannels, simulationParameters.numberChannels)
+        self.assertEqual(simulationParametersRef.interpolationType, simulationParameters.interpolationType)
+        self.assertEqual(simulationParametersRef.edsMaximumEnergy_keV, simulationParameters.edsMaximumEnergy_keV)
+        self.assertEqual(simulationParametersRef.generalizedWalk, simulationParameters.generalizedWalk)
+        self.assertEqual(simulationParametersRef.useLiveTime_s, simulationParameters.useLiveTime_s)
+        self.assertEqual(simulationParametersRef.maximumLiveTime_s, simulationParameters.maximumLiveTime_s)
 
         #self.fail("Test if the testcase is working.")
 

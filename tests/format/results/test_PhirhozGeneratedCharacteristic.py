@@ -52,7 +52,7 @@ class TestPhirhozGeneratedCharacteristic(unittest.TestCase):
         """
 
         #self.fail("Test if the testcase is working.")
-        self.assert_(True)
+        self.assertTrue(True)
 
     def test_read(self):
         """
@@ -67,10 +67,10 @@ class TestPhirhozGeneratedCharacteristic(unittest.TestCase):
         regionID = 0
         spectrumFile.read(regionID)
 
-        self.assertEquals(2, len(spectrumFile.fieldNames))
-        self.assertEquals(128, len(spectrumFile.depth_A))
-        self.assertEquals(1, len(spectrumFile.phirhozs))
-        self.assertEquals(128, len(spectrumFile.phirhozs[("Ag", "L")]))
+        self.assertEqual(2, len(spectrumFile.fieldNames))
+        self.assertEqual(128, len(spectrumFile.depth_A))
+        self.assertEqual(1, len(spectrumFile.phirhozs))
+        self.assertEqual(128, len(spectrumFile.phirhozs[("Ag", "L")]))
 
         #self.fail("Test if the testcase is working.")
 

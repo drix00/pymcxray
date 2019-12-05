@@ -64,7 +64,7 @@ class TestSimulation(unittest.TestCase):
         """
 
         # self.fail("Test if the testcase is working.")
-        self.assert_(True)
+        self.assertTrue(True)
 
     def test_create_weight_fractions(self):
         """
@@ -269,8 +269,3 @@ class TestSimulation(unittest.TestCase):
         self.assertEqual("Si100_Al100_T100.0nm_Mg50_Cu50_T1502.0nm", specimen.name)
 
         # self.fail("Test if the testcase is working.")
-
-
-if __name__ == '__main__':  # pragma: no cover
-    import nose
-    nose.runmodule()

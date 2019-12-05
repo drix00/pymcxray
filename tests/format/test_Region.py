@@ -59,7 +59,7 @@ class TestRegion(unittest.TestCase):
         """
 
         #self.fail("Test if the testcase is working.")
-        self.assert_(True)
+        self.assertTrue(True)
 
     def test_extractFromLinesWithoutVersion(self):
         """
@@ -76,17 +76,17 @@ class TestRegion(unittest.TestCase):
                 lines, regionRef = self.getTestRegionLinesWithoutVersion(regionType, userMassDensity)
                 region.extractFromLinesWithoutVersion(lines)
 
-                self.assertEquals(regionRef.numberElements, region.numberElements)
+                self.assertEqual(regionRef.numberElements, region.numberElements)
 
                 elementsRef = regionRef.elements
                 elements = region.elements
 
                 for elementRef, element in zip(elementsRef, elements):
-                    self.assertEquals(elementRef.atomicNumber, element.atomicNumber)
-                    self.assertEquals(elementRef.massFraction, element.massFraction)
+                    self.assertEqual(elementRef.atomicNumber, element.atomicNumber)
+                    self.assertEqual(elementRef.massFraction, element.massFraction)
 
-                self.assertEquals(regionRef.regionMassDensity_g_cm3, region.regionMassDensity_g_cm3)
-                self.assertEquals(regionRef.regionType, region.regionType)
+                self.assertEqual(regionRef.regionMassDensity_g_cm3, region.regionMassDensity_g_cm3)
+                self.assertEqual(regionRef.regionType, region.regionType)
 
                 self.assertDictEqual(regionRef.regionDimensions._parameters, region.regionDimensions._parameters)
 
@@ -107,17 +107,17 @@ class TestRegion(unittest.TestCase):
                 lines, regionRef = self.getTestRegionLinesWithVersion(regionType, userMassDensity)
                 region.extractFromLinesWithVersion(lines)
 
-                self.assertEquals(regionRef.numberElements, region.numberElements)
+                self.assertEqual(regionRef.numberElements, region.numberElements)
 
                 elementsRef = regionRef.elements
                 elements = region.elements
 
                 for elementRef, element in zip(elementsRef, elements):
-                    self.assertEquals(elementRef.atomicNumber, element.atomicNumber)
-                    self.assertEquals(elementRef.massFraction, element.massFraction)
+                    self.assertEqual(elementRef.atomicNumber, element.atomicNumber)
+                    self.assertEqual(elementRef.massFraction, element.massFraction)
 
-                self.assertEquals(regionRef.regionMassDensity_g_cm3, region.regionMassDensity_g_cm3)
-                self.assertEquals(regionRef.regionType, region.regionType)
+                self.assertEqual(regionRef.regionMassDensity_g_cm3, region.regionMassDensity_g_cm3)
+                self.assertEqual(regionRef.regionType, region.regionType)
 
                 self.assertDictEqual(regionRef.regionDimensions._parameters, region.regionDimensions._parameters)
 
@@ -137,7 +137,7 @@ class TestRegion(unittest.TestCase):
 
                 lines = regionRef.createLinesWithoutVersion()
 
-                self.assertEquals(len(linesRef), len(lines))
+                self.assertEqual(len(linesRef), len(lines))
                 self.assertListEqual(linesRef, lines)
 
         #self.fail("Test if the testcase is working.")
@@ -156,7 +156,7 @@ class TestRegion(unittest.TestCase):
 
                 lines = regionRef.createLinesWithVersion()
 
-                self.assertEquals(len(linesRef), len(lines))
+                self.assertEqual(len(linesRef), len(lines))
                 self.assertListEqual(linesRef, lines)
 
         #self.fail("Test if the testcase is working.")

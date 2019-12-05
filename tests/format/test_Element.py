@@ -56,7 +56,7 @@ class TestElement(unittest.TestCase):
         """
 
         #self.fail("Test if the testcase is working.")
-        self.assert_(True)
+        self.assertTrue(True)
 
     def test_extractFromLineOldVersion(self):
         """
@@ -66,32 +66,32 @@ class TestElement(unittest.TestCase):
         line = "6 1.000000000000000"
         element = Element.Element()
         element.extractFromLineOldVersion(line)
-        self.assertEquals(6, element.atomicNumber)
-        self.assertEquals(1.0, element.massFraction)
+        self.assertEqual(6, element.atomicNumber)
+        self.assertEqual(1.0, element.massFraction)
 
         line = "79 1.000000000000000"
         element = Element.Element()
         element.extractFromLineOldVersion(line)
-        self.assertEquals(79, element.atomicNumber)
-        self.assertEquals(1.0, element.massFraction)
+        self.assertEqual(79, element.atomicNumber)
+        self.assertEqual(1.0, element.massFraction)
 
         line = "6 0.700000000000000"
         element = Element.Element()
         element.extractFromLineOldVersion(line)
-        self.assertEquals(6, element.atomicNumber)
-        self.assertEquals(0.7, element.massFraction)
+        self.assertEqual(6, element.atomicNumber)
+        self.assertEqual(0.7, element.massFraction)
 
         line = "8 0.280000000000000"
         element = Element.Element()
         element.extractFromLineOldVersion(line)
-        self.assertEquals(8, element.atomicNumber)
-        self.assertEquals(0.28, element.massFraction)
+        self.assertEqual(8, element.atomicNumber)
+        self.assertEqual(0.28, element.massFraction)
 
         line = "17 0.020000000000000"
         element = Element.Element()
         element.extractFromLineOldVersion(line)
-        self.assertEquals(17, element.atomicNumber)
-        self.assertEquals(0.02, element.massFraction)
+        self.assertEqual(17, element.atomicNumber)
+        self.assertEqual(0.02, element.massFraction)
 
         #self.fail("Test if the testcase is working.")
 
@@ -105,35 +105,35 @@ class TestElement(unittest.TestCase):
         element.atomicNumber = 6
         element.massFraction = 1.0
         line = element.createLineOldVersion()
-        self.assertEquals(lineRef, line)
+        self.assertEqual(lineRef, line)
 
         lineRef = "79 1.000000000000000"
         element = Element.Element()
         element.atomicNumber = 79
         element.massFraction = 1.0
         line = element.createLineOldVersion()
-        self.assertEquals(lineRef, line)
+        self.assertEqual(lineRef, line)
 
         lineRef = "6 0.700000000000000"
         element = Element.Element()
         element.atomicNumber = 6
         element.massFraction = 0.7
         line = element.createLineOldVersion()
-        self.assertEquals(lineRef, line)
+        self.assertEqual(lineRef, line)
 
         lineRef = "8 0.280000000000000"
         element = Element.Element()
         element.atomicNumber = 8
         element.massFraction = 0.28
         line = element.createLineOldVersion()
-        self.assertEquals(lineRef, line)
+        self.assertEqual(lineRef, line)
 
         lineRef = "17 0.020000000000000"
         element = Element.Element()
         element.atomicNumber = 17
         element.massFraction = 0.02
         line = element.createLineOldVersion()
-        self.assertEquals(lineRef, line)
+        self.assertEqual(lineRef, line)
 
         #self.fail("Test if the testcase is working.")
 
@@ -147,8 +147,8 @@ WeightFraction=0.400000000000000
 """.splitlines()
         element = Element.Element()
         element.extractFromLinesWithKey(lines)
-        self.assertEquals(14, element.atomicNumber)
-        self.assertEquals(0.4, element.massFraction)
+        self.assertEqual(14, element.atomicNumber)
+        self.assertEqual(0.4, element.massFraction)
 
         lines = \
 """AtomicNumber=15
@@ -156,8 +156,8 @@ WeightFraction=0.600000000000000
 """.splitlines()
         element = Element.Element()
         element.extractFromLinesWithKey(lines)
-        self.assertEquals(15, element.atomicNumber)
-        self.assertEquals(0.6, element.massFraction)
+        self.assertEqual(15, element.atomicNumber)
+        self.assertEqual(0.6, element.massFraction)
 
         lines = \
 """AtomicNumber=7
@@ -165,8 +165,8 @@ WeightFraction=1.000000000000000
 """.splitlines()
         element = Element.Element()
         element.extractFromLinesWithKey(lines)
-        self.assertEquals(7, element.atomicNumber)
-        self.assertEquals(1.0, element.massFraction)
+        self.assertEqual(7, element.atomicNumber)
+        self.assertEqual(1.0, element.massFraction)
 
         lines = \
 """AtomicNumber=56
@@ -174,8 +174,8 @@ WeightFraction=1.000000000000000
 """.splitlines()
         element = Element.Element()
         element.extractFromLinesWithKey(lines)
-        self.assertEquals(56, element.atomicNumber)
-        self.assertEquals(1.0, element.massFraction)
+        self.assertEqual(56, element.atomicNumber)
+        self.assertEqual(1.0, element.massFraction)
 
         #self.fail("Test if the testcase is working.")
 
@@ -192,7 +192,7 @@ WeightFraction=0.400000000000000
         element.atomicNumber = 14
         element.massFraction = 0.4
         lines = element.createLinesWithKey()
-        self.assertEquals(linesRef, lines)
+        self.assertEqual(linesRef, lines)
 
         linesRef = \
 """AtomicNumber=15
@@ -202,7 +202,7 @@ WeightFraction=0.600000000000000
         element.atomicNumber = 15
         element.massFraction = 0.6
         lines = element.createLinesWithKey()
-        self.assertEquals(linesRef, lines)
+        self.assertEqual(linesRef, lines)
 
         linesRef = \
 """AtomicNumber=7
@@ -212,7 +212,7 @@ WeightFraction=1.000000000000000
         element.atomicNumber = 7
         element.massFraction = 1.0
         lines = element.createLinesWithKey()
-        self.assertEquals(linesRef, lines)
+        self.assertEqual(linesRef, lines)
 
         linesRef = \
 """AtomicNumber=56
@@ -222,7 +222,7 @@ WeightFraction=1.000000000000000
         element.atomicNumber = 56
         element.massFraction = 1.0
         lines = element.createLinesWithKey()
-        self.assertEquals(linesRef, lines)
+        self.assertEqual(linesRef, lines)
 
         #self.fail("Test if the testcase is working.")
 

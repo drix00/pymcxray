@@ -52,7 +52,7 @@ class TestPhirhozEmittedCharacteristicThinFilm(unittest.TestCase):
         """
 
         #self.fail("Test if the testcase is working.")
-        self.assert_(True)
+        self.assertTrue(True)
 
     def test_read(self):
         """
@@ -65,21 +65,21 @@ class TestPhirhozEmittedCharacteristicThinFilm(unittest.TestCase):
 
         phirhozThinFilm.read()
 
-        self.assertEquals(1, phirhozThinFilm.numberRegions)
+        self.assertEqual(1, phirhozThinFilm.numberRegions)
 
         intensity  = phirhozThinFilm.intensities[0]
 
-        self.assertEquals("0", intensity[PhirhozEmittedCharacteristicThinFilm.INDEX_REGION])
-        self.assertEquals("Cu", intensity[PhirhozEmittedCharacteristicThinFilm.ATOM_SYMBOL])
-        self.assertEquals("0.00194507", intensity[PhirhozEmittedCharacteristicThinFilm.LINE_KA1])
-        self.assertEquals("0.00179503", intensity[PhirhozEmittedCharacteristicThinFilm.LINE_KA2])
-        self.assertEquals("0.0337762", intensity[PhirhozEmittedCharacteristicThinFilm.LINE_KB1])
-        self.assertEquals("0", intensity[PhirhozEmittedCharacteristicThinFilm.LINE_KB2])
-        self.assertEquals("8.20759e-158", intensity[PhirhozEmittedCharacteristicThinFilm.LINE_LA])
-        self.assertEquals("0", intensity[PhirhozEmittedCharacteristicThinFilm.LINE_LB1])
-        self.assertEquals("0", intensity[PhirhozEmittedCharacteristicThinFilm.LINE_LB2])
-        self.assertEquals("0", intensity[PhirhozEmittedCharacteristicThinFilm.LINE_LG])
-        self.assertEquals("0", intensity[PhirhozEmittedCharacteristicThinFilm.LINE_MA])
+        self.assertEqual("0", intensity[PhirhozEmittedCharacteristicThinFilm.INDEX_REGION])
+        self.assertEqual("Cu", intensity[PhirhozEmittedCharacteristicThinFilm.ATOM_SYMBOL])
+        self.assertEqual("0.00194507", intensity[PhirhozEmittedCharacteristicThinFilm.LINE_KA1])
+        self.assertEqual("0.00179503", intensity[PhirhozEmittedCharacteristicThinFilm.LINE_KA2])
+        self.assertEqual("0.0337762", intensity[PhirhozEmittedCharacteristicThinFilm.LINE_KB1])
+        self.assertEqual("0", intensity[PhirhozEmittedCharacteristicThinFilm.LINE_KB2])
+        self.assertEqual("8.20759e-158", intensity[PhirhozEmittedCharacteristicThinFilm.LINE_LA])
+        self.assertEqual("0", intensity[PhirhozEmittedCharacteristicThinFilm.LINE_LB1])
+        self.assertEqual("0", intensity[PhirhozEmittedCharacteristicThinFilm.LINE_LB2])
+        self.assertEqual("0", intensity[PhirhozEmittedCharacteristicThinFilm.LINE_LG])
+        self.assertEqual("0", intensity[PhirhozEmittedCharacteristicThinFilm.LINE_MA])
 
         #self.fail("Test if the testcase is working.")
 
@@ -94,28 +94,28 @@ class TestPhirhozEmittedCharacteristicThinFilm(unittest.TestCase):
 
         phirhozThinFilm.read()
 
-        self.assertEquals(1, phirhozThinFilm.numberRegions)
+        self.assertEqual(1, phirhozThinFilm.numberRegions)
 
         regionID = 0
         atomicSymbol = "Cu"
         intensity = phirhozThinFilm.getIntensity(regionID, atomicSymbol, PhirhozEmittedCharacteristicThinFilm.LINE_KA1)
-        self.assertAlmostEquals(0.00194507, intensity, 6)
+        self.assertAlmostEqual(0.00194507, intensity, 6)
         intensity = phirhozThinFilm.getIntensity(regionID, atomicSymbol, PhirhozEmittedCharacteristicThinFilm.LINE_KA2)
-        self.assertAlmostEquals(0.00179503, intensity, 6)
+        self.assertAlmostEqual(0.00179503, intensity, 6)
         intensity = phirhozThinFilm.getIntensity(regionID, atomicSymbol, PhirhozEmittedCharacteristicThinFilm.LINE_KB1)
-        self.assertAlmostEquals(0.0337762, intensity, 6)
+        self.assertAlmostEqual(0.0337762, intensity, 6)
         intensity = phirhozThinFilm.getIntensity(regionID, atomicSymbol, PhirhozEmittedCharacteristicThinFilm.LINE_KB2)
-        self.assertAlmostEquals(0.0, intensity, 6)
+        self.assertAlmostEqual(0.0, intensity, 6)
         intensity = phirhozThinFilm.getIntensity(regionID, atomicSymbol, PhirhozEmittedCharacteristicThinFilm.LINE_LA)
-        self.assertAlmostEquals(8.20759E-158, intensity, 6)
+        self.assertAlmostEqual(8.20759E-158, intensity, 6)
         intensity = phirhozThinFilm.getIntensity(regionID, atomicSymbol, PhirhozEmittedCharacteristicThinFilm.LINE_LB1)
-        self.assertAlmostEquals(0.0, intensity, 6)
+        self.assertAlmostEqual(0.0, intensity, 6)
         intensity = phirhozThinFilm.getIntensity(regionID, atomicSymbol, PhirhozEmittedCharacteristicThinFilm.LINE_LB2)
-        self.assertAlmostEquals(0.0, intensity, 6)
+        self.assertAlmostEqual(0.0, intensity, 6)
         intensity = phirhozThinFilm.getIntensity(regionID, atomicSymbol, PhirhozEmittedCharacteristicThinFilm.LINE_LG)
-        self.assertAlmostEquals(0.0, intensity, 6)
+        self.assertAlmostEqual(0.0, intensity, 6)
         intensity = phirhozThinFilm.getIntensity(regionID, atomicSymbol, PhirhozEmittedCharacteristicThinFilm.LINE_MA)
-        self.assertAlmostEquals(0.0, intensity, 6)
+        self.assertAlmostEqual(0.0, intensity, 6)
 
         #self.fail("Test if the testcase is working.")
 

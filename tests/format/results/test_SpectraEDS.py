@@ -61,7 +61,7 @@ class TestSpectraEDS(unittest.TestCase):
         """
 
         #self.fail("Test if the testcase is working.")
-        self.assert_(True)
+        self.assertTrue(True)
 
     def test_FindTestData(self):
         """
@@ -170,11 +170,11 @@ TEST INPUT - STOP
 
         lines = open(self.spectraEdsRegion0Filepath, 'r').readlines()
         lines =[line.strip() for line in lines]
-        self.assertEquals(2097, SpectraEDS.SpectraEDS().readPartialSpectraReferenceSection(lines))
+        self.assertEqual(2097, SpectraEDS.SpectraEDS().readPartialSpectraReferenceSection(lines))
 
         lines = open(self.spectraEdsRegion1Filepath, 'r').readlines()
         lines =[line.strip() for line in lines]
-        self.assertEquals(2097, SpectraEDS.SpectraEDS().readPartialSpectraReferenceSection(lines))
+        self.assertEqual(2097, SpectraEDS.SpectraEDS().readPartialSpectraReferenceSection(lines))
 
         #self.fail("Test if the testcase is working.")
 
@@ -188,18 +188,18 @@ TEST INPUT - STOP
         totalCountsInterpolatedRef = 4.04611496446304e+011
         totalCountsSyntheticRef = 3.83700037049714e+008
         totalCountsOriginal, totalCountsInterpolated, totalCountsSynthetic = SpectraEDS.SpectraEDS()._extractTotalCounts(line)
-        self.assertAlmostEquals(totalCountsOriginalRef, totalCountsOriginal, delta=1.0e4)
-        self.assertAlmostEquals(totalCountsInterpolatedRef, totalCountsInterpolated, delta=1.0e4)
-        self.assertAlmostEquals(totalCountsSyntheticRef, totalCountsSynthetic, delta=1.0e1)
+        self.assertAlmostEqual(totalCountsOriginalRef, totalCountsOriginal, delta=1.0e4)
+        self.assertAlmostEqual(totalCountsInterpolatedRef, totalCountsInterpolated, delta=1.0e4)
+        self.assertAlmostEqual(totalCountsSyntheticRef, totalCountsSynthetic, delta=1.0e1)
 
         line = "Counts original = 3.16018197208457e+007, Counts original inter = 3.16018197208457e+007, Counts syn = 2.70058535894877e+004"
         totalCountsOriginalRef = 3.16018197208457e+007
         totalCountsInterpolatedRef = 3.16018197208457e+007
         totalCountsSyntheticRef = 2.70058535894877e+004
         totalCountsOriginal, totalCountsInterpolated, totalCountsSynthetic = SpectraEDS.SpectraEDS()._extractTotalCounts(line)
-        self.assertAlmostEquals(totalCountsOriginalRef, totalCountsOriginal, delta=1.0)
-        self.assertAlmostEquals(totalCountsInterpolatedRef, totalCountsInterpolated, delta=1.0)
-        self.assertAlmostEquals(totalCountsSyntheticRef, totalCountsSynthetic)
+        self.assertAlmostEqual(totalCountsOriginalRef, totalCountsOriginal, delta=1.0)
+        self.assertAlmostEqual(totalCountsInterpolatedRef, totalCountsInterpolated, delta=1.0)
+        self.assertAlmostEqual(totalCountsSyntheticRef, totalCountsSynthetic)
 
         #self.fail("Test if the testcase is working.")
 
@@ -254,54 +254,50 @@ TEST INPUT - STOP
         lines = open(self.spectraEdsRegion0Filepath, 'r').readlines()
         lines =[line.strip() for line in lines]
 
-        self.assertEquals(6279, spectraEDS.readRegionSpectraSection(lines))
+        self.assertEqual(6279, spectraEDS.readRegionSpectraSection(lines))
 
-        self.assertEquals(0, spectraEDS.regionID)
-        self.assertEquals(1, spectraEDS.numberElements)
+        self.assertEqual(0, spectraEDS.regionID)
+        self.assertEqual(1, spectraEDS.numberElements)
         for symbol in spectraEDS.elements:
             weightFraction = spectraEDS.elements[symbol]
-            self.assertEquals("Au", symbol)
-            self.assertAlmostEquals(1.0, weightFraction)
+            self.assertEqual("Au", symbol)
+            self.assertAlmostEqual(1.0, weightFraction)
 
-        self.assertAlmostEquals(0.65211, spectraEDS.characteristicProbability)
-        self.assertEquals(1000, spectraEDS.numberSimulatedPhotons)
-        self.assertEquals(5, spectraEDS.numberCharateristicPeaks)
+        self.assertAlmostEqual(0.65211, spectraEDS.characteristicProbability)
+        self.assertEqual(1000, spectraEDS.numberSimulatedPhotons)
+        self.assertEqual(5, spectraEDS.numberCharateristicPeaks)
 
-        self.assertEquals(1024, len(spectraEDS.iOutSpectrumEDS.channels))
-        self.assertEquals(5, len(spectraEDS.eNetSpectrumEDS))
-        self.assertEquals(1024, len(spectraEDS.eNetSpectrumEDS[0].channels))
+        self.assertEqual(1024, len(spectraEDS.iOutSpectrumEDS.channels))
+        self.assertEqual(5, len(spectraEDS.eNetSpectrumEDS))
+        self.assertEqual(1024, len(spectraEDS.eNetSpectrumEDS[0].channels))
 
-        self.assertEquals(5, len(spectraEDS.pCharacteristic))
-        self.assertEquals(1024, len(spectraEDS.pBackground))
-        self.assertEquals(1024, len(spectraEDS.continuumCumulativeEquiprobableChannels))
+        self.assertEqual(5, len(spectraEDS.pCharacteristic))
+        self.assertEqual(1024, len(spectraEDS.pBackground))
+        self.assertEqual(1024, len(spectraEDS.continuumCumulativeEquiprobableChannels))
 
         # Region 1 file
         lines = open(self.spectraEdsRegion1Filepath, 'r').readlines()
         lines =[line.strip() for line in lines]
 
-        self.assertEquals(6263, spectraEDS.readRegionSpectraSection(lines))
+        self.assertEqual(6263, spectraEDS.readRegionSpectraSection(lines))
 
-        self.assertEquals(1, spectraEDS.regionID)
-        self.assertEquals(1, spectraEDS.numberElements)
+        self.assertEqual(1, spectraEDS.regionID)
+        self.assertEqual(1, spectraEDS.numberElements)
         for symbol in spectraEDS.elements:
             weightFraction = spectraEDS.elements[symbol]
-            self.assertEquals("C", symbol)
-            self.assertAlmostEquals(1.0, weightFraction)
+            self.assertEqual("C", symbol)
+            self.assertAlmostEqual(1.0, weightFraction)
 
-        self.assertAlmostEquals(0.825861, spectraEDS.characteristicProbability)
-        self.assertEquals(0, spectraEDS.numberSimulatedPhotons)
-        self.assertEquals(1, spectraEDS.numberCharateristicPeaks)
+        self.assertAlmostEqual(0.825861, spectraEDS.characteristicProbability)
+        self.assertEqual(0, spectraEDS.numberSimulatedPhotons)
+        self.assertEqual(1, spectraEDS.numberCharateristicPeaks)
 
-        self.assertEquals(1024, len(spectraEDS.iOutSpectrumEDS.channels))
-        self.assertEquals(1, len(spectraEDS.eNetSpectrumEDS))
-        self.assertEquals(1024, len(spectraEDS.eNetSpectrumEDS[0].channels))
+        self.assertEqual(1024, len(spectraEDS.iOutSpectrumEDS.channels))
+        self.assertEqual(1, len(spectraEDS.eNetSpectrumEDS))
+        self.assertEqual(1024, len(spectraEDS.eNetSpectrumEDS[0].channels))
 
-        self.assertEquals(1, len(spectraEDS.pCharacteristic))
-        self.assertEquals(1024, len(spectraEDS.pBackground))
-        self.assertEquals(1024, len(spectraEDS.continuumCumulativeEquiprobableChannels))
+        self.assertEqual(1, len(spectraEDS.pCharacteristic))
+        self.assertEqual(1024, len(spectraEDS.pBackground))
+        self.assertEqual(1024, len(spectraEDS.continuumCumulativeEquiprobableChannels))
 
         #self.fail("Test if the testcase is working.")
-
-if __name__ == '__main__':  #pragma: no cover
-    import nose
-    nose.runmodule()

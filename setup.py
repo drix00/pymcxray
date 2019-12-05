@@ -10,7 +10,7 @@ Setup script for the project mcxray.
 """
 
 ###############################################################################
-# Copyright 2017 Hendrix Demers
+# Copyright 2019 Hendrix Demers
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -26,14 +26,21 @@ Setup script for the project mcxray.
 ###############################################################################
 
 # Standard library modules.
+import os.path
+import io
+import sys
 
 # Third party modules.
 from setuptools import setup, find_packages
+from setuptools import setup, find_namespace_packages
+from setuptools.command.test import test as TestCommand
 
 # Local modules.
-from mcxray import __version__
+from mcxray import __author__, __email__, __version__, __copyright__, __project_name__
 
 # Globals and constants variables.
+here = os.path.abspath(os.path.dirname(__file__))
+
 with open('README.rst') as readme_file:
     readme = readme_file.read()
 
@@ -46,34 +53,57 @@ with open('requirements.txt') as requirements_file:
 with open('requirements_test.txt') as requirements_file:
     test_requirements = requirements_file.read()
 
-packages = find_packages()
 
-setup(name="pymcxray",
-      version=__version__,
-      description="Python scripts for using mcxray software",
-      long_description=readme + '\n\n' + history,
-      author="Hendrix Demers",
-      author_email="hendrix.demers@mail.mcgill.ca",
-      url='https://github.com/drix00/pymcxray',
-      packages=packages,
-      package_dir={'mcxray': 'mcxray'},
-      include_package_data=True,
-      install_requires=requirements,
-      license="Apache Software License 2.0",
-      zip_safe=False,
-      keywords='mcxray',
-      classifiers=['Development Status :: 4 - Beta',
-                   'Intended Audience :: Developers',
-                   'Intended Audience :: Science/Research',
-                   'Natural Language :: English',
-                   'License :: OSI Approved :: Apache Software License',
-                   'Programming Language :: Python',
-                   'Operating System :: OS Independent',
-                   'Topic :: Scientific/Engineering',
-                   'Topic :: Scientific/Engineering :: Physics'],
+class PyTest(TestCommand):
+    def finalize_options(self):
+        TestCommand.finalize_options(self)
+        self.test_args = []
+        self.test_suite = True
 
-      setup_requires=test_requirements,
+    def run_tests(self):
+        import pytest
+        errcode = pytest.main(self.test_args)
+        sys.exit(errcode)
 
-      test_suite='nose.collector',
-      tests_require=test_requirements
-      )
+
+setup(
+    name=__project_name__,
+    version=__version__,
+    author=__author__,
+    author_email=__email__,
+    maintainer=__author__,
+    maintainer_email=__email__,
+    description="Python scripts for using mcxray software",
+    long_description=readme + '\n\n' + history,
+    keywords='mcxray',
+    url='https://github.com/drix00/pymcxray',
+    project_urls={
+        "Bug Tracker": "https://github.com/pytrim/pytrim/issues",
+        "Documentation": "https://pytrim.readthedocs.io/",
+        "Source Code": "https://github.com/pytrim/pytrim",
+    },
+
+    packages=find_packages(),
+    package_dir={'mcxray': 'mcxray'},
+    platforms='any',
+    zip_safe=False,
+    cmdclass={'test': PyTest},
+    include_package_data=True,
+
+    install_requires=requirements,
+    setup_requires=test_requirements,
+    tests_require=test_requirements,
+
+    license="Apache Software License 2.0",
+    classifiers=[
+        'Development Status :: 4 - Beta',
+        'Intended Audience :: Developers',
+        'Intended Audience :: Science/Research',
+        'Natural Language :: English',
+        'License :: OSI Approved :: Apache Software License',
+        'Programming Language :: Python',
+        'Operating System :: OS Independent',
+        'Topic :: Scientific/Engineering',
+        'Topic :: Scientific/Engineering :: Physics'
+    ],
+)

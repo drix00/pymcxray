@@ -51,7 +51,7 @@ class TestBaseResults(unittest.TestCase):
         """
 
         #self.fail("Test if the testcase is working.")
-        self.assert_(True)
+        self.assertTrue(True)
 
     def test_init(self):
         """
@@ -60,8 +60,8 @@ class TestBaseResults(unittest.TestCase):
 
         baseResults = BaseResults.BaseResults()
 
-        self.assertEquals("", baseResults.path)
-        self.assertEquals("MCXRay", baseResults.basename)
+        self.assertEqual("", baseResults.path)
+        self.assertEqual("MCXRay", baseResults.basename)
 
         #self.fail("Test if the testcase is working.")
 
@@ -73,16 +73,16 @@ class TestBaseResults(unittest.TestCase):
         pathRef = r"J:\hdemers\work\mcgill2012\results\simulations\McXRay\SimulationsFRatioAlCu\MCXRay_v1_2_1\simulations\Results"
 
         baseResults = BaseResults.BaseResults()
-        self.assertEquals("", baseResults.path)
+        self.assertEqual("", baseResults.path)
 
         baseResults.path = pathRef
-        self.assertEquals(pathRef, baseResults.path)
+        self.assertEqual(pathRef, baseResults.path)
 
         BaseResults.BaseResults(path=pathRef)
-        self.assertEquals(pathRef, baseResults.path)
+        self.assertEqual(pathRef, baseResults.path)
 
         BaseResults.BaseResults(pathRef)
-        self.assertEquals(pathRef, baseResults.path)
+        self.assertEqual(pathRef, baseResults.path)
 
         #self.fail("Test if the testcase is working.")
 
@@ -94,17 +94,17 @@ class TestBaseResults(unittest.TestCase):
         basenameRef = "SimulationsFRatio_Al0d100000Cu0d900000_E10d0keV"
 
         baseResults = BaseResults.BaseResults()
-        self.assertEquals("MCXRay", baseResults.basename)
+        self.assertEqual("MCXRay", baseResults.basename)
 
         baseResults.basename = basenameRef
-        self.assertEquals(basenameRef, baseResults.basename)
+        self.assertEqual(basenameRef, baseResults.basename)
 
         baseResults = BaseResults.BaseResults(basename=basenameRef)
-        self.assertEquals(basenameRef, baseResults.basename)
+        self.assertEqual(basenameRef, baseResults.basename)
 
         baseResults = BaseResults.BaseResults(basenameRef)
-        self.assertNotEquals(basenameRef, baseResults.basename)
-        self.assertEquals(basenameRef, baseResults.path)
+        self.assertNotEqual(basenameRef, baseResults.basename)
+        self.assertEqual(basenameRef, baseResults.path)
 
         #self.fail("Test if the testcase is working.")
 

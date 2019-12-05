@@ -56,7 +56,7 @@ class TestBeamParameters(unittest.TestCase):
         """
 
         #self.fail("Test if the testcase is working.")
-        self.assert_(True)
+        self.assertTrue(True)
 
     def test_readFromLines(self):
         """
@@ -68,13 +68,13 @@ class TestBeamParameters(unittest.TestCase):
         beamParameters = BeamParameters.BeamParameters()
         beamParameters.readFromLines(lines)
 
-        self.assertAlmostEquals(beamParametersRef.incidentEnergy_keV, beamParameters.incidentEnergy_keV)
-        self.assertAlmostEquals(beamParametersRef.current_A, beamParameters.current_A)
-        self.assertAlmostEquals(beamParametersRef.acquisitionTime_s, beamParameters.acquisitionTime_s)
-        self.assertAlmostEquals(beamParametersRef.diameter90_A, beamParameters.diameter90_A)
-        self.assertAlmostEquals(beamParametersRef.tiltAngle_deg, beamParameters.tiltAngle_deg)
-        self.assertAlmostEquals(beamParametersRef.gaussianMean, beamParameters.gaussianMean)
-        self.assertAlmostEquals(beamParametersRef.gaussianSigma, beamParameters.gaussianSigma)
+        self.assertAlmostEqual(beamParametersRef.incidentEnergy_keV, beamParameters.incidentEnergy_keV)
+        self.assertAlmostEqual(beamParametersRef.current_A, beamParameters.current_A)
+        self.assertAlmostEqual(beamParametersRef.acquisitionTime_s, beamParameters.acquisitionTime_s)
+        self.assertAlmostEqual(beamParametersRef.diameter90_A, beamParameters.diameter90_A)
+        self.assertAlmostEqual(beamParametersRef.tiltAngle_deg, beamParameters.tiltAngle_deg)
+        self.assertAlmostEqual(beamParametersRef.gaussianMean, beamParameters.gaussianMean)
+        self.assertAlmostEqual(beamParametersRef.gaussianSigma, beamParameters.gaussianSigma)
 
         #self.fail("Test if the testcase is working.")
 

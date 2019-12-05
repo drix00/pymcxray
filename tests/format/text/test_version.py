@@ -71,7 +71,7 @@ class TestVersion(unittest.TestCase):
         """
 
         # self.fail("Test if the testcase is working.")
-        self.assert_(True)
+        self.assertTrue(True)
 
     def test_read_from_file(self):
         """
@@ -86,11 +86,11 @@ class TestVersion(unittest.TestCase):
 
         string_ref = "1.4.1"
         version_string = version.to_string()
-        self.assertEquals(string_ref, version_string)
+        self.assertEqual(string_ref, version_string)
 
-        self.assertEquals(1, version.major)
-        self.assertEquals(4, version.minor)
-        self.assertEquals(1, version.revision)
+        self.assertEqual(1, version.major)
+        self.assertEqual(4, version.minor)
+        self.assertEqual(1, version.revision)
 
         # self.fail("Test if the testcase is working.")
 
@@ -107,10 +107,10 @@ class TestVersion(unittest.TestCase):
 
         string_ref = "1.1.1"
         version_string = version.to_string()
-        self.assertEquals(string_ref, version_string)
-        self.assertEquals(1, version.major)
-        self.assertEquals(1, version.minor)
-        self.assertEquals(1, version.revision)
+        self.assertEqual(string_ref, version_string)
+        self.assertEqual(1, version.major)
+        self.assertEqual(1, version.minor)
+        self.assertEqual(1, version.revision)
 
         # self.fail("Test if the testcase is working.")
 
@@ -132,15 +132,10 @@ class TestVersion(unittest.TestCase):
 
         string_ref = "3.4.5"
         version_string = version.to_string()
-        self.assertEquals(string_ref, version_string)
+        self.assertEqual(string_ref, version_string)
 
-        self.assertEquals(3, version.major)
-        self.assertEquals(4, version.minor)
-        self.assertEquals(5, version.revision)
+        self.assertEqual(3, version.major)
+        self.assertEqual(4, version.minor)
+        self.assertEqual(5, version.revision)
 
         # self.fail("Test if the testcase is working.")
-
-
-if __name__ == '__main__':  # pragma: no cover
-    import nose
-    nose.runmodule()
