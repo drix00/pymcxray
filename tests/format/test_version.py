@@ -26,222 +26,163 @@ Tests for module :py:mod:`mcxray.format.version`.
 ###############################################################################
 
 # Standard library modules.
-import unittest
-import os.path
+import copy
 
 # Third party modules.
+import pytest
 
 # Local modules.
 
 # Project modules
 from mcxray.format.version import *
-import tests.format.testUtilities as testUtilities
 
 # Globals and constants variables.
 
 
-class TestVersion(unittest.TestCase):
+@pytest.fixture()
+def version_123_string():
+    version = Version(1, 2, 3)
+    string = "1.2.3"
+
+    return version, string, (1, 2, 3)
+
+
+@pytest.fixture()
+def version_456_string():
+    version = Version(4, 5, 6)
+    string = "4.5.6"
+
+    return version, string, (4, 5, 6)
+
+
+@pytest.fixture()
+def current_version_string():
+    version = copy.deepcopy(VERSION_2_2_0)
+    string = "2.2.0"
+
+    return version, string, (2, 2, 0)
+
+
+def test_module_is_working():
+    # assert False, "Verify if the test module is working."
+    assert True
+
+
+def test_to_string(version_123_string):
     """
-    TestCase class for the module :py:mod:`mcxray.format.version`.
+    Test for method `to_string`.
     """
+    version, version_string_ref, (major, minor, revision) = version_123_string
+    version_string = version.to_string()
 
-    def setUp(self):
-        """
-        Setup method.
-        """
+    assert version_string_ref == version_string
+    assert major == version.major
+    assert minor == version.minor
+    assert revision == version.revision
 
-        unittest.TestCase.setUp(self)
 
-        self.test_data_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../test_data"))
-        if not os.path.isdir(self.test_data_path):
-            raise unittest.SkipTest("Test file not found: {}".format(self.test_data_path))
+def test_from_string(version_456_string):
+    """
+    Test for method `from_string`.
+    """
+    version_ref, version_string_ref, (major, minor, revision) = version_456_string
 
-        self.tempDataPath = testUtilities.createTempDataPath(self.test_data_path)
+    version = copy.deepcopy(CURRENT_VERSION)
+    version.from_string(version_string_ref)
+    version_string = version.to_string()
 
-    def tearDown(self):
-        """
-        Teardown method.
-        """
+    assert version_string_ref == version_string
 
-        unittest.TestCase.tearDown(self)
+    assert major == version.major
+    assert minor == version.minor
+    assert revision == version.revision
 
-        testUtilities.removeTempDataPath(self.tempDataPath)
 
-    def testSkeleton(self):
-        """
-        First test to check if the testcase is working with the testing framework.
-        """
+def test_from_string_function(version_123_string):
+    """
+    Test for method `from_string`.
+    """
+    version_ref, version_string, (major, minor, revision) = version_123_string
 
-        # self.fail("Test if the testcase is working.")
-        self.assertTrue(True)
+    version_ref = Version(1, 2, 3)
+    version = from_string(version_string)
 
-    def test_to_string(self):
-        """
-        Tests for method `to_string`.
-        """
+    assert version_ref == version
+    assert major == version.major
+    assert minor == version.minor
+    assert revision == version.revision
 
-        version = Version(1, 2, 3)
-        string_ref = "1.2.3"
-        version_string = version.to_string()
-        self.assertEqual(string_ref, version_string)
 
-        # self.fail("Test if the testcase is working.")
+versions_to_try = (("1.1.1", VERSION_1_1_1, (1, 1, 1)),
+                   ("1.1.1", BEFORE_VERSION, (1, 1, 1)),
+                   ("1.2.0", VERSION_1_2_0, (1, 2, 0)),
+                   ("1.2.1", VERSION_1_2_1, (1, 2, 1)),
+                   ("1.2.3", VERSION_1_2_3, (1, 2, 3)),
+                   ("1.2.4", VERSION_1_2_4, (1, 2, 4)),
+                   ("1.2.5", VERSION_1_2_5, (1, 2, 5)),
+                   ("1.3.0", VERSION_1_3_0, (1, 3, 0)),
+                   ("1.4.0", VERSION_1_4_0, (1, 4, 0)),
+                   ("1.4.1", VERSION_1_4_1, (1, 4, 1)),
+                   ("1.4.2", VERSION_1_4_2, (1, 4, 2)),
+                   ("2.1.1", VERSION_2_1_1, (2, 1, 1)),
+                   ("2.2.0", VERSION_2_2_0, (2, 2, 0)),
+                   )
 
-    def test_from_string(self):
-        """
-        Tests for method `from_string`.
-        """
 
-        version = Version(1, 2, 3)
-        string_ref = "4.5.6"
-        version.from_string(string_ref)
-        version_string = version.to_string()
-        self.assertEqual(string_ref, version_string)
+@pytest.fixture(params=versions_to_try)
+def version_constant(request):
+    return request.param
 
-        self.assertEqual(4, version.major)
-        self.assertEqual(5, version.minor)
-        self.assertEqual(6, version.revision)
 
-        # Test function
-        version_ref = Version(1, 2, 3)
-        version_string = "1.2.3"
-        version = from_string(version_string)
-        self.assertEqual(version_ref, version)
+def test_version_constants(version_constant):
+    """
+    Tests for version constants.
+    """
+    string_ref, version, (major, minor, revision) = version_constant
+    version_string = version.to_string()
+    assert string_ref == version_string
+    assert major == version.major
+    assert minor == version.minor
+    assert revision == version.revision
 
-        # self.fail("Test if the testcase is working.")
 
-    def test_VersionConstants(self):
-        """
-        Tests for version constants.
-        """
+def test_before_version():
+    assert VERSION_1_1_1 == BEFORE_VERSION
+    assert VERSION_1_1_1 != CURRENT_VERSION
 
-        string_ref = "1.1.1"
-        version_string = VERSION_1_1_1.to_string()
-        self.assertEqual(string_ref, version_string)
-        self.assertEqual(1, VERSION_1_1_1.major)
-        self.assertEqual(1, VERSION_1_1_1.minor)
-        self.assertEqual(1, VERSION_1_1_1.revision)
 
-        string_ref = "1.2.0"
-        version_string = VERSION_1_2_0.to_string()
-        self.assertEqual(string_ref, version_string)
-        self.assertEqual(1, VERSION_1_2_0.major)
-        self.assertEqual(2, VERSION_1_2_0.minor)
-        self.assertEqual(0, VERSION_1_2_0.revision)
+def test_current_version(current_version_string):
+    current_version_ref, current_string_ref, (major, minor, revision) = current_version_string
+    assert current_version_ref == CURRENT_VERSION
 
-        string_ref = "1.2.1"
-        version_string = VERSION_1_2_1.to_string()
-        self.assertEqual(string_ref, version_string)
-        self.assertEqual(1, VERSION_1_2_1.major)
-        self.assertEqual(2, VERSION_1_2_1.minor)
-        self.assertEqual(1, VERSION_1_2_1.revision)
+    version_string = CURRENT_VERSION.to_string()
+    assert current_string_ref == version_string
+    assert major == CURRENT_VERSION.major
+    assert minor == CURRENT_VERSION.minor
+    assert revision == CURRENT_VERSION.revision
 
-        string_ref = "1.2.2"
-        version_string = VERSION_1_2_2.to_string()
-        self.assertEqual(string_ref, version_string)
-        self.assertEqual(1, VERSION_1_2_2.major)
-        self.assertEqual(2, VERSION_1_2_2.minor)
-        self.assertEqual(2, VERSION_1_2_2.revision)
+    assert current_version_ref == CURRENT_VERSION
+    assert current_version_ref != BEFORE_VERSION
 
-        string_ref = "1.2.3"
-        version_string = VERSION_1_2_3.to_string()
-        self.assertEqual(string_ref, version_string)
-        self.assertEqual(1, VERSION_1_2_3.major)
-        self.assertEqual(2, VERSION_1_2_3.minor)
-        self.assertEqual(3, VERSION_1_2_3.revision)
 
-        string_ref = "1.2.4"
-        version_string = VERSION_1_2_4.to_string()
-        self.assertEqual(string_ref, version_string)
-        self.assertEqual(1, VERSION_1_2_4.major)
-        self.assertEqual(2, VERSION_1_2_4.minor)
-        self.assertEqual(4, VERSION_1_2_4.revision)
+def test_comparison():
+    """
+    Test comparison operation on `Version` class.
+    """
+    assert VERSION_1_2_0 == VERSION_1_2_0
+    assert VERSION_1_2_0 != VERSION_1_1_1
+    assert VERSION_1_2_0 != VERSION_1_2_1
 
-        string_ref = "1.2.5"
-        version_string = VERSION_1_2_5.to_string()
-        self.assertEqual(string_ref, version_string)
-        self.assertEqual(1, VERSION_1_2_5.major)
-        self.assertEqual(2, VERSION_1_2_5.minor)
-        self.assertEqual(5, VERSION_1_2_5.revision)
+    assert VERSION_1_2_0 == VERSION_1_2_0
+    assert VERSION_1_2_0 != VERSION_1_1_1
+    assert VERSION_1_2_0 != VERSION_1_2_1
 
-        string_ref = "1.3.0"
-        version_string = VERSION_1_3_0.to_string()
-        self.assertEqual(string_ref, version_string)
-        self.assertEqual(1, VERSION_1_3_0.major)
-        self.assertEqual(3, VERSION_1_3_0.minor)
-        self.assertEqual(0, VERSION_1_3_0.revision)
+    assert VERSION_1_2_0 > VERSION_1_1_1
+    assert VERSION_1_2_0 < VERSION_1_2_1
+    assert VERSION_1_1_1 < VERSION_1_2_0
+    assert VERSION_1_2_1 > VERSION_1_2_0
 
-        string_ref = "1.4.0"
-        version_string = VERSION_1_4_0.to_string()
-        self.assertEqual(string_ref, version_string)
-        self.assertEqual(1, VERSION_1_4_0.major)
-        self.assertEqual(4, VERSION_1_4_0.minor)
-        self.assertEqual(0, VERSION_1_4_0.revision)
-
-        string_ref = "1.4.1"
-        version_string = VERSION_1_4_1.to_string()
-        self.assertEqual(string_ref, version_string)
-        self.assertEqual(1, VERSION_1_4_1.major)
-        self.assertEqual(4, VERSION_1_4_1.minor)
-        self.assertEqual(1, VERSION_1_4_1.revision)
-
-        string_ref = "1.4.2"
-        version_string = VERSION_1_4_2.to_string()
-        self.assertEqual(string_ref, version_string)
-        self.assertEqual(1, VERSION_1_4_2.major)
-        self.assertEqual(4, VERSION_1_4_2.minor)
-        self.assertEqual(2, VERSION_1_4_2.revision)
-
-        string_ref = "2.1.1"
-        version_string = VERSION_2_1_1.to_string()
-        self.assertEqual(string_ref, version_string)
-        self.assertEqual(2, VERSION_2_1_1.major)
-        self.assertEqual(1, VERSION_2_1_1.minor)
-        self.assertEqual(1, VERSION_2_1_1.revision)
-
-        string_ref = "1.1.1"
-        version_string = BEFORE_VERSION.to_string()
-        self.assertEqual(string_ref, version_string)
-        self.assertEqual(1, BEFORE_VERSION.major)
-        self.assertEqual(1, BEFORE_VERSION.minor)
-        self.assertEqual(1, BEFORE_VERSION.revision)
-
-        self.assertEqual(VERSION_1_1_1, BEFORE_VERSION)
-        self.assertNotEqual(VERSION_1_1_1, CURRENT_VERSION)
-
-        string_ref = "2.2.0"
-        version_string = CURRENT_VERSION.to_string()
-        self.assertEqual(string_ref, version_string)
-        self.assertEqual(2, CURRENT_VERSION.major)
-        self.assertEqual(2, CURRENT_VERSION.minor)
-        self.assertEqual(0, CURRENT_VERSION.revision)
-
-        self.assertEqual(VERSION_2_2_0, CURRENT_VERSION)
-        self.assertNotEqual(VERSION_1_5_2, BEFORE_VERSION)
-        self.assertFalse(VERSION_1_5_2 == BEFORE_VERSION)
-
-        # self.fail("Test if the testcase is working.")
-
-    def test_comparison(self):
-        """
-        Test comparison operation on `Version` class.
-        """
-        self.assertTrue(VERSION_1_2_0 == VERSION_1_2_0)
-        self.assertFalse(VERSION_1_2_0 == VERSION_1_1_1)
-        self.assertFalse(VERSION_1_2_0 == VERSION_1_2_1)
-
-        self.assertFalse(VERSION_1_2_0 != VERSION_1_2_0)
-        self.assertTrue(VERSION_1_2_0 != VERSION_1_1_1)
-        self.assertTrue(VERSION_1_2_0 != VERSION_1_2_1)
-
-        self.assertTrue(VERSION_1_2_0 > VERSION_1_1_1)
-        self.assertTrue(VERSION_1_2_0 < VERSION_1_2_1)
-        self.assertTrue(VERSION_1_1_1 < VERSION_1_2_0)
-        self.assertTrue(VERSION_1_2_1 > VERSION_1_2_0)
-
-        self.assertTrue(VERSION_1_2_0 >= VERSION_1_1_1)
-        self.assertTrue(VERSION_1_2_0 <= VERSION_1_2_1)
-        self.assertTrue(VERSION_1_1_1 <= VERSION_1_2_0)
-        self.assertTrue(VERSION_1_2_1 >= VERSION_1_2_0)
-
-        # self.fail("Test if the testcase is working.")
+    assert VERSION_1_2_0 >= VERSION_1_1_1
+    assert VERSION_1_2_0 <= VERSION_1_2_1
+    assert VERSION_1_1_1 <= VERSION_1_2_0
+    assert VERSION_1_2_1 >= VERSION_1_2_0
