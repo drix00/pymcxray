@@ -35,7 +35,7 @@ import matplotlib.pyplot as plt
 
 # Local modules.
 
-import mcxray.mcxray as mcxray
+import mcxray.analyze_mcxray as mcxray
 
 from mcxray.SimulationsParameters import SimulationsParameters, PARAMETER_INCIDENT_ENERGY_keV, \
     PARAMETER_NUMBER_ELECTRONS, PARAMETER_BEAM_POSITION_nm, PARAMETER_NUMBER_XRAYS

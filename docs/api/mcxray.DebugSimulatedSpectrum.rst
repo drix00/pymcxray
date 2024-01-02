@@ -2,6 +2,7 @@ mcxray.DebugSimulatedSpectrum module
 ====================================
 
 .. automodule:: mcxray.DebugSimulatedSpectrum
-    :members:
-    :undoc-members:
-    :show-inheritance:
+   :members:
+   :undoc-members:
+   :show-inheritance:
+   :private-members:

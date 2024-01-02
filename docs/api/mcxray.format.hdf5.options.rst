@@ -5,6 +5,7 @@ Module contents
 ---------------
 
 .. automodule:: mcxray.format.hdf5.options
-    :members:
-    :undoc-members:
-    :show-inheritance:
+   :members:
+   :undoc-members:
+   :show-inheritance:
+   :private-members:

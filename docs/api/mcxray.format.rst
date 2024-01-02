@@ -5,15 +5,17 @@ Subpackages
 -----------
 
 .. toctree::
+   :maxdepth: 4
 
-    mcxray.format.hdf5
-    mcxray.format.results
-    mcxray.format.text
+   mcxray.format.hdf5
+   mcxray.format.results
+   mcxray.format.text
 
 Submodules
 ----------
 
 .. toctree::
+   :maxdepth: 4
 
    mcxray.format.Element
    mcxray.format.ExportedSpectrum
@@ -37,6 +39,7 @@ Module contents
 ---------------
 
 .. automodule:: mcxray.format
-    :members:
-    :undoc-members:
-    :show-inheritance:
+   :members:
+   :undoc-members:
+   :show-inheritance:
+   :private-members:

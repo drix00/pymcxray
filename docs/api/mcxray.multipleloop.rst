@@ -2,6 +2,7 @@ mcxray.multipleloop module
 ==========================
 
 .. automodule:: mcxray.multipleloop
-    :members:
-    :undoc-members:
-    :show-inheritance:
+   :members:
+   :undoc-members:
+   :show-inheritance:
+   :private-members:

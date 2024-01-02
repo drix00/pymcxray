@@ -35,7 +35,7 @@ import numpy as np
 
 # Local modules.
 
-import mcxray.mcxray as mcxray
+import mcxray.analyze_mcxray as mcxray
 import mcxray.format.results.XrayIntensities as XrayIntensities
 import mcxray.format.results.XraySpectraSpecimenEmittedDetected as XraySpectraSpecimenEmittedDetected
 import mcxray.format.results.ElectronResults as ElectronResults

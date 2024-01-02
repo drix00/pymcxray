@@ -2,6 +2,7 @@ mcxray.ElementProperties module
 ===============================
 
 .. automodule:: mcxray.ElementProperties
-    :members:
-    :undoc-members:
-    :show-inheritance:
+   :members:
+   :undoc-members:
+   :show-inheritance:
+   :private-members:

@@ -5,13 +5,15 @@ Subpackages
 -----------
 
 .. toctree::
+   :maxdepth: 4
 
-    mcxray.format.results.exported
+   mcxray.format.results.exported
 
 Submodules
 ----------
 
 .. toctree::
+   :maxdepth: 4
 
    mcxray.format.results.BaseResults
    mcxray.format.results.BeamParameters
@@ -54,6 +56,7 @@ Module contents
 ---------------
 
 .. automodule:: mcxray.format.results
-    :members:
-    :undoc-members:
-    :show-inheritance:
+   :members:
+   :undoc-members:
+   :show-inheritance:
+   :private-members:

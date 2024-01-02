@@ -5,13 +5,15 @@ Subpackages
 -----------
 
 .. toctree::
+   :maxdepth: 4
 
-    mcxray.format
+   mcxray.format
 
 Submodules
 ----------
 
 .. toctree::
+   :maxdepth: 4
 
    mcxray.AnalyzeNumberBackgroundWindows
    mcxray.AtomData
@@ -22,13 +24,14 @@ Submodules
    mcxray.ElementProperties
    mcxray.SimulationOld
    mcxray.SimulationsParameters
-   mcxray.mcxray
+   mcxray.analyze_mcxray
    mcxray.multipleloop
 
 Module contents
 ---------------
 
 .. automodule:: mcxray
-    :members:
-    :undoc-members:
-    :show-inheritance:
+   :members:
+   :undoc-members:
+   :show-inheritance:
+   :private-members:

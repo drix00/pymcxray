@@ -1,7 +1,7 @@
-mcxray.format.Specimen module
+mcxray.analyze\_mcxray module
 =============================
 
-.. automodule:: mcxray.format.Specimen
+.. automodule:: mcxray.analyze_mcxray
    :members:
    :undoc-members:
    :show-inheritance:

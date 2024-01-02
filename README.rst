@@ -119,3 +119,49 @@ GitHub
 
 .. image:: https://img.shields.io/github/stars/drix00/pysemeels.svg
    :target: https://github.com/drix00/pysemeels/stargazers
+
+
+Development
+===========
+
+In the *mcxray folder*, run to install the project in develop mode
+
+.. code:: shell
+
+   pip install -e .
+
+Build the documentation:
+
+.. code-block:: console
+
+    $ cd docs
+    $ make html
+
+Add or modify the API documentation:
+
+.. code-block:: console
+
+    $ cd docs
+    $ sphinx-apidoc -o api -e -f -P ../mcxray
+    $ make html
+
+Before committing your modification.
+
+In the *mcxray folder*, run the tests:
+
+.. code-block:: console
+
+    $ pytest -v
+
+check the code style:
+
+.. code-block:: console
+
+    $ pycodestyle .
+    $ pyflakes .
+
+
+To do
+-----
+
+.. todolist::

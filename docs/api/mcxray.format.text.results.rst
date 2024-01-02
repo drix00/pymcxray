@@ -5,6 +5,7 @@ Module contents
 ---------------
 
 .. automodule:: mcxray.format.text.results
-    :members:
-    :undoc-members:
-    :show-inheritance:
+   :members:
+   :undoc-members:
+   :show-inheritance:
+   :private-members:

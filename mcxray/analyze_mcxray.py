@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 """
-.. py:currentmodule:: MCXRay.BackgroundProblem.mcxray
+.. py:currentmodule:: analyze_mcxray
 .. moduleauthor:: Hendrix Demers <hendrix.demers@mail.mcgill.ca>
 
-Base module to create and analuyze MCXRay simulations.
+Base module to create and analyze MCXRay simulations.
 """
 
 # Script information for the file.
