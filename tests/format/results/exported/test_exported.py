@@ -2,15 +2,14 @@
 # -*- coding: utf-8 -*-
 
 """
-.. py:currentmodule:: tests
-
+.. py:currentmodule:: tests.format.results.exported.test_exported
 .. moduleauthor:: Hendrix Demers <hendrix.demers@mail.mcgill.ca>
 
-Tests package for the project.
+Tests for the :py:mod:`mcxray.format.results.exported` package.
 """
 
-###############################################################################
-# Copyright 2024 Hendrix Demers
+
+# Copyright 2023 Hendrix Demers
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,19 +22,21 @@ Tests package for the project.
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-###############################################################################
 
 # Standard library modules.
 
 # Third party modules.
-import pytest
 
 # Local modules.
 
 # Project modules.
 
 # Globals and constants variables.
-# .. todo:: refactor test_data files.
 
 
-slow_test = pytest.mark.slow
+def test_is_discovered():
+    """
+    Test used to validate the file is included in the tests
+    by the test framework.
+    """
+    assert True

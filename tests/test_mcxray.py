@@ -1,58 +1,138 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 """
-.. py:currentmodule:: MCXRay.BackgroundProblem.test_mcxray
+.. py:currentmodule:: tests.test_mcxray
 .. moduleauthor:: Hendrix Demers <hendrix.demers@mail.mcgill.ca>
 
-Tests for the module `mcxray`.
+Tests for the :py:mod:`mcxray` package.
 """
 
-# Script information for the file.
-__author__ = "Hendrix Demers (hendrix.demers@mail.mcgill.ca)"
-__version__ = ""
-__date__ = ""
-__copyright__ = "Copyright (c) 2012 Hendrix Demers"
-__license__ = ""
+###############################################################################
+# Copyright 2024 Hendrix Demers
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+###############################################################################
 
 # Standard library modules.
-import unittest
-import logging
+from pathlib import Path
 
 # Third party modules.
 
 # Local modules.
 
-# Project modules
+# Project modules.
+from mcxray import get_current_module_path
+from mcxray import __project_package_name__ as project_name
 
 # Globals and constants variables.
 
-class Testmcxray(unittest.TestCase):
+
+def test_is_discovered():
     """
-    TestCase class for the module `mcxray`.
+    Test used to validate the file is included in the tests
+    by the test framework.
     """
+    assert True
 
-    def setUp(self):
-        """
-        Setup method.
-        """
 
-        unittest.TestCase.setUp(self)
+def test_tests_layout_matches_source():
+    # verify that this file is - itself - in tests/
+    this_files_path = Path(__file__)
+    tests_dir = this_files_path.parent
+    assert tests_dir.name == "tests"
 
-    def tearDown(self):
-        """
-        Teardown method.
-        """
+    # get a path to the project source directory
+    project_path = Path(tests_dir.parent, f"{project_name}")
 
-        unittest.TestCase.tearDown(self)
+    source_name = this_files_path.name.split("test_", maxsplit=1)[1]
+    assert source_name[:-3] == f"{project_name}"
 
-    def testSkeleton(self):
-        """
-        First test to check if the testcase is working with the testing framework.
-        """
+    # loop through all test_*.py files in tests/
+    # (and its subdirectories)
+    for test_file_path in tests_dir.glob("**/test_*.py"):
+        # skip this file: we don't expect there to be a
+        # corresponding source file for this layout enforcer
+        if test_file_path == this_files_path:
+            continue
 
-        #self.fail("Test if the testcase is working.")
-        self.assertTrue(True)
+        # construct the expected source_file_path
+        source_rel_dir = test_file_path.relative_to(tests_dir).parent
+        source_name = test_file_path.name.split("test_", maxsplit=1)[1]
+        source_file_path = Path(project_path, source_rel_dir, source_name)
+        source_path = source_rel_dir.stem
 
-if __name__ == '__main__':  #pragma: no cover
-    logging.getLogger().setLevel(logging.DEBUG)
-    from tests.testings import runTestModuleWithCoverage
-    runTestModuleWithCoverage(__file__)
+        error_msg = f"{test_file_path} found, but {source_file_path} missing."
+        assert source_file_path.is_file() or source_path == Path(source_name).stem, error_msg
+
+
+def test_source_layout_matches_tests():
+    # verify that this file is - itself - in tests/
+    this_files_path = Path(__file__)
+    source_path = this_files_path.parent.parent / f"{project_name}"
+    assert source_path.name == f"{project_name}"
+
+    # get a path to the j_park/ source directory
+    tests_path = Path(source_path.parent, "tests")
+
+    # loop through all test_*.py files in tests/
+    # (and its subdirectories)
+    for file_path in source_path.glob("**/*.py"):
+        # construct the expected source_file_path
+        tests_rel_dir = file_path.relative_to(source_path).parent
+        if file_path.name == '__init__.py':
+            tests_name = "test_" + file_path.parent.name + ".py"
+        else:
+            tests_name = "test_" + file_path.name
+        tests_file_path = Path(tests_path, tests_rel_dir, tests_name)
+
+        error_msg = f"{file_path} found, but {tests_file_path} missing."
+        assert tests_file_path.is_file(), error_msg
+
+
+def test_required_project_files():
+    required_files = [".gitignore", "AUTHORS.rst", "CONTRIBUTING.rst", "HISTORY.rst", "LICENSE", "MANIFEST.in",
+                      "pytest.ini", "README.rst", "requirements.txt", "setup.cfg", "setup.py"]
+
+    project_path = get_current_module_path(__file__, "../")
+
+    for required_file in required_files:
+        file_path = project_path / required_file
+        assert file_path.is_file()
+
+
+def test_required_tests_files():
+    required_files = ["__init__.py", "conftest.py"]
+
+    project_path = get_current_module_path(__file__, "../")
+
+    for required_file in required_files:
+        file_path = project_path / "tests" / required_file
+        assert file_path.is_file()
+
+
+def test_required_docs_files():
+    project_doc_path = get_current_module_path(__file__, "../") / "docs"
+    assert project_doc_path.is_dir()
+
+    required_files = ["readme.rst", "conf.py"]
+
+    for required_file in required_files:
+        file_path = project_doc_path / required_file
+        assert file_path.is_file()
+
+    required_paths = ["api"]
+
+    for required_path in required_paths:
+        path = project_doc_path / required_path
+        assert path.is_dir()

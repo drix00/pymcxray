@@ -2,15 +2,14 @@
 # -*- coding: utf-8 -*-
 
 """
-.. py:currentmodule:: tests.examples
-
+.. py:currentmodule:: tests.format.hdf5.options.test_options
 .. moduleauthor:: Hendrix Demers <hendrix.demers@mail.mcgill.ca>
 
-Tests package for the mcxray.examples package.
+Tests for the :py:mod:`mcxray.format.hdf5.options` package.
 """
 
-###############################################################################
-# Copyright 2017 Hendrix Demers
+
+# Copyright 2023 Hendrix Demers
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,7 +22,6 @@ Tests package for the mcxray.examples package.
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-###############################################################################
 
 # Standard library modules.
 
@@ -34,3 +32,11 @@ Tests package for the mcxray.examples package.
 # Project modules.
 
 # Globals and constants variables.
+
+
+def test_is_discovered():
+    """
+    Test used to validate the file is included in the tests
+    by the test framework.
+    """
+    assert True

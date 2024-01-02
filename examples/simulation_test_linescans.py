@@ -44,7 +44,7 @@ from mcxray.format.results.ElectronTrajectoriesResults import ElectronTrajectori
 
 # Project modules.
 from mcxray import get_current_module_path, get_mcxray_program_name
-from mcxray.examples.simulation_test_map import SimulationTestMapsMM2017
+from examples.simulation_test_map import SimulationTestMapsMM2017
 
 # Globals and constants variables.
 
