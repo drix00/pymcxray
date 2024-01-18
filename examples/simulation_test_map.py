@@ -69,14 +69,14 @@ class SimulationTestMapsMM2017(mcxray._Simulations):
         # number_xrays_list = [10, 20, 30, 50, 60, 100, 200, 500, 1000]
         number_xrays_list = [10]
         xs_nm = np.linspace(-5.0e3, 5.0e3, 3)
-        probePositions_nm = [tuple(position_nm) for position_nm in
-                             np.transpose([np.tile(xs_nm, len(xs_nm)), np.repeat(xs_nm, len(xs_nm))]).tolist()]
+        probe_positions_nm = [tuple(position_nm) for position_nm in
+                              np.transpose([np.tile(xs_nm, len(xs_nm)), np.repeat(xs_nm, len(xs_nm))]).tolist()]
 
         # Simulation parameters
         self._simulationsParameters = SimulationsParameters()
 
         self._simulationsParameters.addVaried(PARAMETER_NUMBER_XRAYS, number_xrays_list)
-        self._simulationsParameters.addVaried(PARAMETER_BEAM_POSITION_nm, probePositions_nm)
+        self._simulationsParameters.addVaried(PARAMETER_BEAM_POSITION_nm, probe_positions_nm)
 
         self._simulationsParameters.addFixed(PARAMETER_INCIDENT_ENERGY_keV, energy_keV)
         self._simulationsParameters.addFixed(PARAMETER_NUMBER_ELECTRONS, number_electrons)
@@ -102,7 +102,8 @@ class SimulationTestMapsMM2017(mcxray._Simulations):
         # Region 1
         region = Region.Region()
         region.numberElements = 2
-        region.elements = [Element.Element(27, massFraction=0.01), Element.Element(26, massFraction=0.99)]
+        region.elements = [Element.Element(27, massFraction=0.01),
+                           Element.Element(26, massFraction=0.99)]
         region.regionType = RegionType.REGION_TYPE_BOX
         parameters = [-7.5e4, -2.5e4, -7.5e4, -2.5e4, 0.0, 0.2e4]
         region.regionDimensions = RegionDimensions.RegionDimensionsBox(parameters)
@@ -111,7 +112,8 @@ class SimulationTestMapsMM2017(mcxray._Simulations):
         # Region 2
         region = Region.Region()
         region.numberElements = 2
-        region.elements = [Element.Element(27, massFraction=0.02), Element.Element(26, massFraction=0.98)]
+        region.elements = [Element.Element(27, massFraction=0.02),
+                           Element.Element(26, massFraction=0.98)]
         region.regionType = RegionType.REGION_TYPE_BOX
         parameters = [-2.5e4, 2.5e4, -7.5e4, -2.5e4, 0.0, 0.2e4]
         region.regionDimensions = RegionDimensions.RegionDimensionsBox(parameters)
@@ -120,7 +122,8 @@ class SimulationTestMapsMM2017(mcxray._Simulations):
         # Region 3
         region = Region.Region()
         region.numberElements = 2
-        region.elements = [Element.Element(27, massFraction=0.05), Element.Element(26, massFraction=0.95)]
+        region.elements = [Element.Element(27, massFraction=0.05),
+                           Element.Element(26, massFraction=0.95)]
         region.regionType = RegionType.REGION_TYPE_BOX
         parameters = [2.5e4, 7.5e4, -7.5e4, -2.5e4, 0.0, 0.2e4]
         region.regionDimensions = RegionDimensions.RegionDimensionsBox(parameters)
@@ -129,7 +132,8 @@ class SimulationTestMapsMM2017(mcxray._Simulations):
         # Region 4
         region = Region.Region()
         region.numberElements = 2
-        region.elements = [Element.Element(28, massFraction=0.01), Element.Element(27, massFraction=0.99)]
+        region.elements = [Element.Element(28, massFraction=0.01),
+                           Element.Element(27, massFraction=0.99)]
         region.regionType = RegionType.REGION_TYPE_BOX
         parameters = [-7.5e4, -2.5e4, -2.5e4, 2.5e4, 0.0, 0.2e4]
         region.regionDimensions = RegionDimensions.RegionDimensionsBox(parameters)
@@ -138,7 +142,8 @@ class SimulationTestMapsMM2017(mcxray._Simulations):
         # Region 5
         region = Region.Region()
         region.numberElements = 2
-        region.elements = [Element.Element(28, massFraction=0.02), Element.Element(27, massFraction=0.98)]
+        region.elements = [Element.Element(28, massFraction=0.02),
+                           Element.Element(27, massFraction=0.98)]
         region.regionType = RegionType.REGION_TYPE_BOX
         parameters = [-2.5e4, 2.5e4, -2.5e4, 2.5e4, 0.0, 0.2e4]
         region.regionDimensions = RegionDimensions.RegionDimensionsBox(parameters)
@@ -147,7 +152,8 @@ class SimulationTestMapsMM2017(mcxray._Simulations):
         # Region 6
         region = Region.Region()
         region.numberElements = 2
-        region.elements = [Element.Element(28, massFraction=0.05), Element.Element(27, massFraction=0.95)]
+        region.elements = [Element.Element(28, massFraction=0.05),
+                           Element.Element(27, massFraction=0.95)]
         region.regionType = RegionType.REGION_TYPE_BOX
         parameters = [2.5e4, 7.5e4, -2.5e4, 2.5e4, 0.0, 0.2e4]
         region.regionDimensions = RegionDimensions.RegionDimensionsBox(parameters)
@@ -156,7 +162,9 @@ class SimulationTestMapsMM2017(mcxray._Simulations):
         # Region 7
         region = Region.Region()
         region.numberElements = 3
-        region.elements = [Element.Element(27, massFraction=0.01), Element.Element(26, massFraction=0.495), Element.Element(28, massFraction=0.495)]
+        region.elements = [Element.Element(27, massFraction=0.01),
+                           Element.Element(26, massFraction=0.495),
+                           Element.Element(28, massFraction=0.495)]
         region.regionType = RegionType.REGION_TYPE_BOX
         parameters = [-7.5e4, -2.5e4, 2.5e4, 7.5e4, 0.0, 0.2e4]
         region.regionDimensions = RegionDimensions.RegionDimensionsBox(parameters)
@@ -165,7 +173,9 @@ class SimulationTestMapsMM2017(mcxray._Simulations):
         # Region 8
         region = Region.Region()
         region.numberElements = 3
-        region.elements = [Element.Element(27, massFraction=0.02), Element.Element(26, massFraction=0.49), Element.Element(28, massFraction=0.49)]
+        region.elements = [Element.Element(27, massFraction=0.02),
+                           Element.Element(26, massFraction=0.49),
+                           Element.Element(28, massFraction=0.49)]
         region.regionType = RegionType.REGION_TYPE_BOX
         parameters = [-2.5e4, 2.5e4, 2.5e4, 7.5e4, 0.0, 0.2e4]
         region.regionDimensions = RegionDimensions.RegionDimensionsBox(parameters)
@@ -174,7 +184,9 @@ class SimulationTestMapsMM2017(mcxray._Simulations):
         # Region 9
         region = Region.Region()
         region.numberElements = 3
-        region.elements = [Element.Element(27, massFraction=0.05), Element.Element(26, massFraction=0.475), Element.Element(28, massFraction=0.475)]
+        region.elements = [Element.Element(27, massFraction=0.05),
+                           Element.Element(26, massFraction=0.475),
+                           Element.Element(28, massFraction=0.475)]
         region.regionType = RegionType.REGION_TYPE_BOX
         parameters = [2.5e4, 7.5e4, 2.5e4, 7.5e4, 0.0, 0.2e4]
         region.regionDimensions = RegionDimensions.RegionDimensionsBox(parameters)
@@ -183,17 +195,17 @@ class SimulationTestMapsMM2017(mcxray._Simulations):
         return specimen
 
     def read_one_results_hdf5(self, simulation, hdf5_group):
-        electronResults = ElectronResults.ElectronResults()
-        electronResults.path = self.getSimulationsPath()
-        electronResults.basename = simulation.resultsBasename
-        electronResults.read()
-        electronResults.write_hdf5(hdf5_group)
+        electron_results = ElectronResults.ElectronResults()
+        electron_results.path = self.getSimulationsPath()
+        electron_results.basename = simulation.resultsBasename
+        electron_results.read()
+        electron_results.write_hdf5(hdf5_group)
 
-        xrayIntensities = XrayIntensities.XrayIntensities()
-        xrayIntensities.path = self.getSimulationsPath()
-        xrayIntensities.basename = simulation.resultsBasename
-        xrayIntensities.read()
-        xrayIntensities.write_hdf5(hdf5_group)
+        xray_intensities = XrayIntensities.XrayIntensities()
+        xray_intensities.path = self.getSimulationsPath()
+        xray_intensities.basename = simulation.resultsBasename
+        xray_intensities.read()
+        xray_intensities.write_hdf5(hdf5_group)
 
         spectrum = XraySpectraRegionsEmitted.XraySpectraRegionsEmitted()
         spectrum.path = self.getSimulationsPath()
@@ -222,7 +234,7 @@ def run():
 
     # Find the configuration file path
     configuration_file_path = get_current_module_path(__file__, "MCXRay_latest.cfg")
-    program_name = get_mcxray_program_name(configuration_file_path)
+    program_name = get_mcxray_program_name(str(configuration_file_path))
 
     # Create the batch file object.
     batch_file = BatchFileConsole("BatchSimulationTestMapsMM2017", program_name, numberFiles=6)
@@ -243,4 +255,3 @@ if __name__ == '__main__':  # pragma: no cover
         # sys.argv.append(mcxray.ANALYZE_TYPE_ANALYZE_RESULTS)
         # sys.argv.append(mcxray.ANALYZE_TYPE_ANALYZE_SCHEDULED_READ)
     run()
-

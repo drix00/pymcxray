@@ -57,25 +57,26 @@ class SimulationTestLinescansMM2017(SimulationTestMapsMM2017):
         self.read_interval_h = 2
         self.read_interval_m = 10
 
-        enegy_keV = 30.0
+        energy_keV = 30.0
         number_electrons = 10000
         # number_xrays_list = [10, 20, 30, 50, 60, 100, 200, 500, 1000]
         number_xrays_list = [10]
 
-        probePositions_nm = []
-        probePositions_nm.append((0.0, -2559.0))
-        probePositions_nm.append((0.0, -2480.0))
-        probePositions_nm.append((0.0, -2401.0))
-        probePositions_nm.append((0.0, 2401.0))
-        probePositions_nm.append((0.0, 2480.0))
-        probePositions_nm.append((0.0, 2559.0))
+        probe_positions_nm = [
+            (0.0, -2559.0),
+            (0.0, -2480.0),
+            (0.0, -2401.0),
+            (0.0, 2401.0),
+            (0.0, 2480.0),
+            (0.0, 2559.0)
+        ]
 
         self._simulationsParameters = SimulationsParameters()
 
         self._simulationsParameters.addVaried(PARAMETER_NUMBER_XRAYS, number_xrays_list)
-        self._simulationsParameters.addVaried(PARAMETER_BEAM_POSITION_nm, probePositions_nm)
+        self._simulationsParameters.addVaried(PARAMETER_BEAM_POSITION_nm, probe_positions_nm)
 
-        self._simulationsParameters.addFixed(PARAMETER_INCIDENT_ENERGY_keV, enegy_keV)
+        self._simulationsParameters.addFixed(PARAMETER_INCIDENT_ENERGY_keV, energy_keV)
         self._simulationsParameters.addFixed(PARAMETER_NUMBER_ELECTRONS, number_electrons)
 
     def getAnalysisName(self):
@@ -84,40 +85,40 @@ class SimulationTestLinescansMM2017(SimulationTestMapsMM2017):
     def readOneResults(self, simulation):
         filepath = os.path.join(self.getSimulationsPath(),
                                 simulation.resultsBasename + "_ElectronTrajectoriesResults.csv")
-        electronTrajectoriesResults = ElectronTrajectoriesResults(filepath)
+        electron_trajectories_results = ElectronTrajectoriesResults(filepath)
 
-        return electronTrajectoriesResults
+        return electron_trajectories_results
 
     def analyzeResultsFiles(self):  # pragma: no cover
         self.readResults()
 
-        allResults = self.getAllResults()
+        all_results = self.getAllResults()
 
         figure_path = self.getAnalyzesPath()
         x_limit = (-1000.0, 1000.0)
         z_limit = (-200.0, 400.0)
-        for key in allResults:
+        for key in all_results:
             position_y_nm = key[0][1]
             y_limit = (x_limit[0]+position_y_nm, x_limit[1]+position_y_nm)
-            electronTrajectoriesResults = allResults[key]
+            electron_trajectories_results = all_results[key]
 
             title = "Y = {} nm".format(int(position_y_nm))
-            electronTrajectoriesResults.drawXZ(title=title, x_limit=x_limit, y_limit=z_limit)
+            electron_trajectories_results.drawXZ(title=title, x_limit=x_limit, y_limit=z_limit)
             file_name = "trajectories_XZ_Y{}nm.png".format(int(position_y_nm))
             file_path = os.path.join(figure_path, file_name)
             plt.savefig(file_path)
             plt.close()
-            electronTrajectoriesResults.drawXZ(colorType=COLOR_REGION, title=title, x_limit=x_limit, y_limit=z_limit)
+            electron_trajectories_results.drawXZ(colorType=COLOR_REGION, title=title, x_limit=x_limit, y_limit=z_limit)
             file_name = "trajectories_XZ_Y{}nm_region.png".format(int(position_y_nm))
             file_path = os.path.join(figure_path, file_name)
             plt.savefig(file_path)
             plt.close()
-            electronTrajectoriesResults.drawXY(title=title, x_limit=x_limit, y_limit=y_limit)
+            electron_trajectories_results.drawXY(title=title, x_limit=x_limit, y_limit=y_limit)
             file_name = "trajectories_XY_Y{}nm.png".format(int(position_y_nm))
             file_path = os.path.join(figure_path, file_name)
             plt.savefig(file_path)
             plt.close()
-            electronTrajectoriesResults.drawYZ(title=title, x_limit=y_limit, y_limit=z_limit)
+            electron_trajectories_results.drawYZ(title=title, x_limit=y_limit, y_limit=z_limit)
             file_name = "trajectories_YZ_Y{}nm.png".format(int(position_y_nm))
             file_path = os.path.join(figure_path, file_name)
             plt.savefig(file_path)
@@ -127,15 +128,16 @@ class SimulationTestLinescansMM2017(SimulationTestMapsMM2017):
 def run():
     import mcxray.BatchFileConsole as BatchFileConsole
 
-    configurationFilepath = get_current_module_path(__file__, "../../MCXRay_latest.cfg")
+    configuration_filepath = get_current_module_path(__file__, "../../MCXRay_latest.cfg")
 
-    programName = get_mcxray_program_name(configurationFilepath)
+    program_name = get_mcxray_program_name(str(configuration_filepath))
 
-    batchFile = BatchFileConsole.BatchFileConsole("BatchSimulationTestLinescansMM2017", programName, numberFiles=10)
+    batch_file = BatchFileConsole.BatchFileConsole("BatchSimulationTestLinescansMM2017", program_name,
+                                                   numberFiles=10)
     analyze = SimulationTestLinescansMM2017(relativePath=r"mcxray/SimulationTestLinescansMM2017",
-                                            configurationFilepath=configurationFilepath)
+                                            configurationFilepath=configuration_filepath)
     analyze.overwrite = False
-    analyze.run(batchFile)
+    analyze.run(batch_file)
 
     plt.show()
 

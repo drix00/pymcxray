@@ -68,9 +68,10 @@ class SimulationTrainingMapsMM2017(mcxray._Simulations):
         number_electrons = 10000
         number_xrays = 10
 
-        xs_nm = np.linspace(-5.0e3, 5.0e3, 10) # Number of position acquired by side (# of pixel by side)
-        probe_positions_nm = [tuple(position_nm) for position_nm in
-                             np.transpose([np.tile(xs_nm, len(xs_nm)), np.repeat(xs_nm, len(xs_nm))]).tolist()]
+        xs_nm = np.linspace(-5.0e3, 5.0e3, 10)  # Number of position acquired by side (# of pixel by side)
+        probe_positions_nm = [tuple(position_nm) for position_nm in np.transpose([np.tile(xs_nm, len(xs_nm)),
+                                                                                  np.repeat(xs_nm, len(xs_nm))
+                                                                                  ]).tolist()]
 
         # Simulation parameters
         self._simulationsParameters = SimulationsParameters()
@@ -133,13 +134,14 @@ def run():
 
     # Find the configuration file path
     configuration_file_path = get_current_module_path(__file__, "MCXRay_latest.cfg")
-    program_name = get_mcxray_program_name(configuration_file_path)
+    program_name = get_mcxray_program_name(str(configuration_file_path))
 
     # Create the batch file object.
     batch_file = BatchFileConsole("BatchSimulationTrainingMapsMM2017", program_name, numberFiles=10)
 
     # Create the simulation object and add the batch file object to it.
-    analyze = SimulationTrainingMapsMM2017(simulation_name, elements, relativePath=r"mcxray/SimulationTrainingMapsMM2017",
+    analyze = SimulationTrainingMapsMM2017(simulation_name, elements,
+                                           relativePath=r"mcxray/SimulationTrainingMapsMM2017",
                                            configurationFilepath=configuration_file_path)
     analyze.run(batch_file)
 
@@ -155,4 +157,3 @@ if __name__ == '__main__':  # pragma: no cover
         # sys.argv.append(mcxray.ANALYZE_TYPE_ANALYZE_RESULTS)
         # sys.argv.append(mcxray.ANALYZE_TYPE_ANALYZE_SCHEDULED_READ)
     run()
-
