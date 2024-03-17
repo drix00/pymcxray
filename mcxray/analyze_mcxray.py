@@ -298,7 +298,7 @@ class _Simulations(object):
                 numberSimulationsTodo += 1
                 simulationTodoNames.append(simulation.name)
                 filename = os.path.join("input", simulation.filename)
-                batchFile.addSimulationName(filename)
+                batchFile.add_simulation_name(filename)
             numberSimulations += 1
 
         if self._verbose:

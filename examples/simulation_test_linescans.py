@@ -126,14 +126,14 @@ class SimulationTestLinescansMM2017(SimulationTestMapsMM2017):
 
 
 def run():
-    import mcxray.BatchFileConsole as BatchFileConsole
+    import mcxray.batch_file_console as BatchFileConsole
 
     configuration_filepath = get_current_module_path(__file__, "../../MCXRay_latest.cfg")
 
     program_name = get_mcxray_program_name(str(configuration_filepath))
 
     batch_file = BatchFileConsole.BatchFileConsole("BatchSimulationTestLinescansMM2017", program_name,
-                                                   numberFiles=10)
+                                                   number_files=10)
     analyze = SimulationTestLinescansMM2017(relativePath=r"mcxray/SimulationTestLinescansMM2017",
                                             configurationFilepath=configuration_filepath)
     analyze.overwrite = False

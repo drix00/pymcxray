@@ -130,14 +130,14 @@ def run():
     elements = [(26, 0.75), (27, 0.25)]
 
     # import the batch file class.
-    from mcxray.BatchFileConsole import BatchFileConsole
+    from mcxray.batch_file_console import BatchFileConsole
 
     # Find the configuration file path
     configuration_file_path = get_current_module_path(__file__, "MCXRay_latest.cfg")
     program_name = get_mcxray_program_name(str(configuration_file_path))
 
     # Create the batch file object.
-    batch_file = BatchFileConsole("BatchSimulationTrainingMapsMM2017", program_name, numberFiles=10)
+    batch_file = BatchFileConsole("BatchSimulationTrainingMapsMM2017", program_name, number_files=10)
 
     # Create the simulation object and add the batch file object to it.
     analyze = SimulationTrainingMapsMM2017(simulation_name, elements,
